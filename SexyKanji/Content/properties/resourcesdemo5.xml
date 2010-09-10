@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!-- 
+  All resources.xml files must contain the ResourceManifest section.
+
+  Use the ResourceGenerator tool to convert this XML into C++ code.
+  The variable names that you give to the resources below will then be
+  accessible by any file that includes your generated resource header file.
+
+  Resource groups can be loaded/deleted at any time. Thus, it's advantageous
+  to split your resources into groups if you don't need to have every single
+  resource in memory at the same time.
+-->
+<ResourceManifest>
+  
+  <!-- 
+    You create resource groups with the Resources tag. Specify the
+		group name in the "id" field. We tend to use "Init" to mean the resources that
+		must be loaded before ANYTHING displays. We put our main font in here instead
+		of in the TitleScreen group (below) because we want the font to stick around
+		for the duration of the game and not to be removed when we get rid of the
+		title screen. -->
+  <Resources id="Init">
+    <!-- 
+      You can set the default directory to look for the resources in, as
+			well as a standard prefix for the resource variable names when the C++
+			code is generated. -->
+		<SetDefaults path="fonts" idprefix="FONT_" />
+      <!-- 
+        The Font tag indicates that we want to load and initialize a font. Just
+			  give the font a name (in this case, FONT_DEFAULT) and tell the manager 
+        where to look for the data file. -->
+  		<Font id="DEFAULT"		          path="Huxtable20.xml"/>
+
+      <!-- 
+        The Image tag specifies that we want to load an image.
+			  There is also a Music tag for loading music. All the tags work exactly the same:
+			  you specify a variable name to use (if idprefix is specified it is prepended to
+			  that name) and the name of the file to load. -->
+		<SetDefaults path="images" idprefix="IMAGE_" />
+	  	<Image id="CUSTOM_POINTER"	    path="custom_pointer"/>
+		  <Image id="CUSTOM_HAND"			    path="custom_hand"/>
+		  <Image id="CUSTOM_DRAGGING"	    path="custom_dragging"/>
+		  <Image id="CUSTOM_TEXT"			    path="custom_text"/>
+
+		  <Image id="KANJI_LOGO"			    path="kanji_logo" />
+
+    <SetDefaults path="music" idprefix="MUSIC_" />
+      <Music id="GROOVE"	            path="juniorgroove.ogg"/>
+  </Resources>
+
+  <!--	
+    These are the resources that are going to be used solely by the title screen.
+		Again, we could have named this resource group anything we wanted.
+		These resources will be deleted after we are done using the title screen. -->
+  <Resources id="TitleScreen">
+		<SetDefaults path="images" idprefix="IMAGE_"/>			
+      <Image id="LOADER_BAR"		      path="loader_bar"/>
+      <Image id="LOADER_LOADINGTXT"		path="loader_loading"/>
+	</Resources>
+
+  <!-- 
+    And finally, we'll put all the resources that are needed for the main game
+		part of things in this group. -->
+  <Resources id="Game">
+		<SetDefaults path="images" idprefix="IMAGE_"/>
+      <Image id="BG0"								  path="layer0"/>
+      <Image id="BG1"								  path="layer1"/>
+      <Image id="BG2"								  path="layer2"/>
+
+      <Image id="BUTTON_DOWN"				  path="btn_down"/>
+      <Image id="BUTTON_OVER"				  path="btn_over"/>
+      <Image id="BUTTON_NORMAL"			  path="btn_up"/>
+  
+      <Image id="CHECKBOX"						path="checkbox"/>
+      <Image id="DIALOG_BOX"					path="dialog"/>
+      <Image id="DIALOG_BUTTON"				path="dialog_btn"/>
+      <Image id="SLIDER_TRACK"				path="slider"/>
+      <Image id="SLIDER_THUMB"				path="slider_thumb"/>
+
+    <SetDefaults path="sounds" idprefix="SOUND_"/>
+      <Sound id="TIMER"							  path="timer.ogg"/>
+
+  </Resources>
+
+</ResourceManifest>

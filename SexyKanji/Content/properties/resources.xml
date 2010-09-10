@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+
+<ResourceManifest>
+	<Resources id="Init">
+		<SetDefaults path="fonts" idprefix="FONT_" />
+		<Font id="DEFAULT"		path="Huxtable20.xml"/>
+		<Font id="HUNGARR"		path="MoldPapa28.xml"/>
+
+		<SetDefaults path="images" idprefix="IMAGE_" />
+		<Image id="CUSTOM_POINTER"		path="custom_pointer"/>
+		<Image id="CUSTOM_HAND"			path="custom_hand"/>
+		<Image id="CUSTOM_DRAGGING"		path="custom_dragging"/>
+		<Image id="CUSTOM_TEXT"			path="custom_text"/>
+		<Image id="HUNGARR_LOGO"		path="hungarr_logo"/>
+		
+		<Image id="KANJI_LOGO"			path="kanji_logo" />
+	</Resources>
+
+	<Resources id="TitleScreen">
+		<SetDefaults path="images" idprefix="IMAGE_"/>			
+		<Image id="LOADER_BAR"						path="loader_bar"/>
+		<Image id="LOADER_LOADINGTXT"				path="loader_loading"/>
+
+		<SetDefaults path="sounds" idprefix="SOUND_"/>
+		<Sound id="CONTINUE"						path="slowdown1.ogg"/>	
+	</Resources>
+
+	<Resources id="Game">
+		<SetDefaults path="sounds" idprefix="SOUND_"/>
+		<Sound id="MUTATOR"							path="mutator.ogg"/>
+		<Sound id="TIMER"							path="timer.ogg"/>
+	
+		<SetDefaults path="images" idprefix="IMAGE_"/>
+		<Image id="ROBOTROBOT"						path="robotrobot"/>
+		<Image id="CHECKBOX"						path="checkbox"/>
+		<Image id="BG0"								path="layer0"/>
+		<Image id="BG1"								path="layer1"/>
+		<Image id="BG2"								path="layer2"/>
+		<Image id="BUTTON_DOWN"						path="btn_down"/>
+		<Image id="BUTTON_OVER"						path="btn_over"/>
+		<Image id="BUTTON_NORMAL"					path="btn_up"/>
+
+		<Image id="DIALOG_BOX"						path="dialog"/>
+		<Image id="DIALOG_BUTTON"					path="dialog_btn"/>
+		<Image id="SLIDER_TRACK"					path="slider"/>
+		<Image id="SLIDER_THUMB"					path="slider_thumb"/>
+	</Resources>
+
+	<!-- Resources for the Hun-garr game -->
+	<Resources id="Hungarr">
+		<SetDefaults path="images" idprefix="IMAGE_"/>
+		<Image id="HUNGARR_SMALL"					path="unicron_baby"/>
+		<Image id="HUNGARR_BEAM_UP"					path="unicron_beam_up"/>
+		<Image id="HUNGARR_BEAM_DOWN"				path="unicron_beam_down"/>
+		<Image id="HUNGARR_BEAM_LEFT"				path="unicron_beam_left"/>
+		<Image id="HUNGARR_BEAM_RIGHT"				path="unicron_beam_right"/>
+		<Image id="HUNGARR_HORIZ"					path="unicron_horiz"/>
+		<Image id="HUNGARR_VERT"					path="unicron_vert"/>
+		<Image id="ATOMIC_EXPLOSION"				path="atomicexplosion" cols="15"/>
+		<Image id="BOMB_RADIAL_DEATH"				path="bomb_radial_death" cols="10"/>
+		<Image id="PLANETS"							path="planets_small" cols="11" rows="3"/>
+		<Image id="SPARK"							path="spark"/>
+		<Image id="PARTICLE_LIGHTNING"				path="particle_lightning" cols="19"/>
+		
+		<SetDefaults path="sounds" idprefix="SOUND_"/>
+		<Sound id="MAGZAP"							path="magzap1.ogg"/>
+		<Sound id="BUTTON"							path="mouseover.ogg"/>
+		<Sound id="PLANET"							path="planet.ogg"/>
+		<Sound id="LEVEL_UP1"						path="level_up.ogg"/>
+		<Sound id="LEVEL_UP2"						path="level_up2.ogg"/>
+		<Sound id="EXPLOSION"						path="explosion.ogg"/>
+		
+		<Sound id="BEAM_HIT"						path="robotlaser.ogg"/>		
+		<Sound id="PLANET_HIT"						path="click2.ogg"/>
+		<Sound id="BEAM_MOVING"						path="shorting.ogg"/>
+		<Sound id="LEVEL_UP4"						path="laserpowerup.ogg"/>
+		<Sound id="LEVEL_UP3"						path="killall_explode.ogg"/>
+		<Sound id="GAME_OVER_CLICK"					path="bad2.ogg"/>
+		<Sound id="GAME_OVER_STATS"					path="electro_start.ogg"/>
+		<Sound id="GAME_OVER_RESTART"				path="whirlpool1.ogg"/>
+		<Sound id="GAME_OVER_TEXT"					path="lament.ogg"/>
+		<Sound id="REGION_FILLED"					path="metal_loop.wav"/>
+		
+	</Resources>
+</ResourceManifest>

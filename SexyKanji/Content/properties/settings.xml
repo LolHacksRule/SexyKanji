@@ -1,0 +1,7 @@
+﻿<Properties>
+	<Integer id="MusicVolume">85</Integer>
+	<Integer id="SfxVolume">85</Integer>
+	<Boolean id="Muted">false</Boolean>
+	<Boolean id="IsWindowed">true</Boolean>
+	<Boolean id="WaitForVSync">true</Boolean>
+</Properties>

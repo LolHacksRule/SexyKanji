@@ -1,0 +1,84 @@
+﻿<Properties>
+	<String id="IDS_3D_NOT_RECOMMENDED">Warning</String>
+	<String id="IDS_3D_NOT_RECOMMENDED_MESSAGE">Your video card may not fully support this feature. If you experience slower performance, please disable Hardware Acceleration.</String>
+	<String id="IDS_3D_NOT_SUPPORTED">Not Supported</String>
+	<String id="IDS_3D_NOT_SUPPORTED_MESSAGE">Hardware acceleration can not be enabled on this computer. Your video card does not meet the minimum requirements for this game.</String>
+	<String id="IDS_CANCEL">Cancel</String>
+	<String id="IDS_CLICK_ANYWHERE">Click Anywhere to Continue.</String>
+	<String id="IDS_CLICK_PENALTY">Randomly clicking about the screen is a 30 second Penalty.&cr;Enjoy.</String>
+	<String id="IDS_CLICK_TO_CONTINUE">CLICK TO CONTINUE</String>
+	<String id="IDS_CONFIRM_BOX_HEADER">Confirm</String>
+	<String id="IDS_CONTINUE">Continue</String>
+	<String id="IDS_EXIT">Exit</String>
+	<String id="IDS_GAME_OVER">Game Over.</String>
+	<String id="IDS_GAME_OVER_WIN">Congratulations!</String>
+	<String id="IDS_GAME_OVER_WIN_MESSAGE">You Solved the Mystery!</String>
+	<String id="IDS_GET_READY">Get Ready!</String>
+	<String id="IDS_GO">Go!</String>
+	<String id="IDS_HIDDEN_ITEMS">Hidden Items:</String>
+	<String id="IDS_MESSAGE_BOX_HEADER">Message</String>
+	<String id="IDS_NEW">New</String>
+	<String id="IDS_NO">No</String>
+	<String id="IDS_NO_WINDOW_MODE">No Windowed Mode</String>
+	<String id="IDS_NO_WINDOW_MODE_MESSAGE">Windowed mode is only available if your desktop is running in either 16 bit or 32 bit color mode, which it is not.</String>
+	<String id="IDS_OK">OK</String>
+	<String id="IDS_PAUSED">Paused</String>
+	<String id="IDS_PLEASE_CHOOSE_PROFILE">Please Select/Create a User Profile to Save your Progress.</String>
+	<String id="IDS_POPCAP_FRAMEWORK">PopCap Framework</String>
+	<String id="IDS_PROFILE_CONFIRM_DELETE">Are you sure you want to delete %s and all progress %s has made?</String>
+	<String id="IDS_CONFIRM_NEWGAME">Are you sure you want to delete all your progress?</String>
+	<String id="IDS_PROFILE_EXISTS">User Profile Already Exists.</String>
+	<String id="IDS_PROFILE_NEW_NAME">Please Enter New Name:</String>
+	<String id="IDS_PROFILE_NO_USER_SELECTED">No User Selected.</String>
+	<String id="IDS_SAVE">Save</String>
+	<String id="IDS_START_GAME_OVER_WIN">You have Solved the Mystery. Would you like to Play Again from the beginning?</String>
+	<String id="IDS_YES">Yes</String>
+	<String id="IDS_YOU_WIN">You Win!</String>
+	<String id="IDS_TOO_MANY_PROFILES">Too many profiles!  Please delete a Profile to create a new one!</String>
+		
+	<String id="IDS_CONFIRM_EXIT_TO_MAIN_MENU">Are you sure you want to exit and return to the main menu?  Your progress will be saved.</String>
+	<String id="IDS_WELCOME_MAIN_MENU_SIGN">Welcome:&cr;^ffff00^%s</String>
+	<String id="IDS_WELCOME_MAIN_MENU_SIGN_NOCOLOR">Welcome:&cr;%s</String>
+	<String id="IDS_WELCOME_MAIN_MENU_SIGN_CLICK_HERE">Click here if this is not you.</String>
+	
+	<String id="IDS_MUSIC_VOLUME">MUSIC VOLUME</String>
+	<String id="IDS_SOUND_VOLUME">SOUND VOLUME</String>
+	<String id="IDS_FULL_SCREEN">FULL SCREEN</String>
+	<String id="IDS_HARDWARE_ACCELERATED">3D HARDWARE</String>
+	
+	<String id="IDS_COMPLETE"></String>
+	<String id="IDS_ITEMS">Items</String>
+	<String id="IDS_ITEM">Item</String>
+	
+	<String id="IDS_PUZZLE_RIGHT_CLICK_HELP">Right-Click Mouse or Use Mouse Wheel to ROTATE Puzzle Pieces.</String>
+	
+	<String id="IDS_NO_WINDOWED_MODE">No Windowed Mode</String>
+	<String id="IDS_NO_WINDOWED_MODE_RES">The window for Haunted Hotel 2 is too large for your&cr; current Desktop Resolution.</String>
+	<String id="IDS_NO_WINDOWED_MODE_RES_FORCE">Would you like to FORCE the game to WINDOWED MODE?</String>
+	<String id="IDS_NO_WINDOWED_MODE_UNKNOWN">Haunted Hotel 2 has encountered a problem while switching to windowed mode.&cr; Try resetting your desktop color depth to 16 or 32 bpp.</String>
+	
+	<String id="IDS_GAME_OVER_COMPLETED_TEXT">Congratulations!&cr;&cr; You have completed the game.  Would you like to play again?</String>
+	<String id="IDS_COPYRIGHT"></String>
+	<String id="IDS_COPYRIGHT_FULL"></String>
+	
+	<String id="IDS_SKIP_MINIGAME">Skip</String>
+	
+	<String id="GO_DIRECTIVE">Go</String>
+	<String id="USE_DIRECTIVE">Use</String>
+	<String id="ON_DIRECTIVE">On</String>
+	<String id="PICKUP_DIRECTIVE">Pickup</String>
+	
+	<String id="IDS_GAME_PRODUCER">Executive Producer</String>
+	<String id="IDS_GAME_DESIGN">Lead Designer</String>
+	<String id="IDS_GAME_ARTIST">Lead Artist</String>
+	<String id="IDS_GAME_PROGRAMMER">Lead Programmer</String>
+	<String id="IDS_GAME_TESTER">Lead Tester</String>
+	
+	<String id="IDS_CLOCK_BUTTON_OVER">Pause</String>
+	<String id="IDS_HINT_BUTTON_OVER">Hint</String>
+	<String id="IDS_MAP_BUTTON_OVER">Map</String>
+	<String id="IDS_MENU_BUTTON_OVER">Menu</String>
+	<String id="IDS_STORY_BUTTON_OVER">Story</String>
+	
+</Properties>
+
