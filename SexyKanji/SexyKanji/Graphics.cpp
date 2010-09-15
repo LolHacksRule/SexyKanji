@@ -1415,12 +1415,6 @@ void Graphics::DrawImageBox(const SexyRect& theSrc, const SexyRect& theDest, Sex
 		SexyVector2(dx,dy+dh),		SexyVector2(dx+cw,dy+dh),		SexyVector2(dx+dw-cw,dy+dh),	SexyVector2(dx+dw,dy+dh)
 	};
 
-	for (int i = 0; i < 16; i++)
-	{
-		// This is the best place to do other transformations at the same time.
-		aDVA[i] += SexyVector2(mTransX,mTransY);
-	}
-
 	float sx = (float)theSrc.mX;
 	float sy = (float)theSrc.mY;
 	float sw = (float)theSrc.mWidth;
