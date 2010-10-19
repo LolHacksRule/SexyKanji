@@ -71,6 +71,7 @@ namespace KanjiFontBuilder
             aTextureSizeList.Add(512);
             aTextureSizeList.Add(256);
             aTextureSizeList.Add(128);
+			aTextureSizeList.Add(64);
 
             mTextureSizeCombo.DataSource = aTextureSizeList;
             mTextureSizeCombo.SelectedIndex = 0;
@@ -90,6 +91,9 @@ namespace KanjiFontBuilder
                 case 2:
                     mTextureSize = 128;
                     break;
+				case 3:
+					mTextureSize = 64;
+					break;
             }
 
             InitImagePages();

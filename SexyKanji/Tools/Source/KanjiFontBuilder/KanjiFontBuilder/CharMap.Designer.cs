@@ -153,8 +153,10 @@ namespace KanjiFontBuilder
             // 
             // CharMap
             // 
+            this.AcceptButton = this.mOkButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.mCancelButton;
             this.ClientSize = new System.Drawing.Size(740, 367);
             this.Controls.Add(this.splitContainer1);
             this.Name = "CharMap";

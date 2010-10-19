@@ -108,11 +108,11 @@ namespace KanjiFontBuilder
 
             FillCharacterEditBox();
 
-            mTopPadding = 0;
-            mBottomPadding = 0;
-            mLeftPadding = 0;
-            mRightPadding = 0;
-            mGlobalKerning = 0;
+            mTopPadding = (int)mTopPaddingSpin.Value;
+            mBottomPadding = (int)mBottomPaddingSpin.Value;
+			mLeftPadding = (int)mLeftPaddingSpin.Value;
+            mRightPadding = (int)mRightPaddingSpin.Value;
+            mGlobalKerning = (int)mKerningSpin.Value;
 
             FillTextHintingDropDownCombo();
             mCharacterSpacing = 2;
@@ -149,7 +149,7 @@ namespace KanjiFontBuilder
             //////////////////////////////////////////////////////////////////////////
             Graphics canvas = Graphics.FromImage(mImagePages[0]);
             canvas.TextContrast = 0;
-            Font aDrawFont = new Font(mFontComboBox.Text, mCurrentFontSize, mCurrentStyle, GraphicsUnit.Pixel);
+			Font aDrawFont = new Font(mFontName, mCurrentFontSize, mCurrentStyle, GraphicsUnit.Pixel);
             canvas.TextRenderingHint = mTextHint;
 
             //////////////////////////////////////////////////////////////////////////
@@ -195,43 +195,55 @@ namespace KanjiFontBuilder
             float aTotalCount = (float)mCharaterSet.Length * 3;
             float aCurrentCount = 0;
 
+			Color aTestColor = Color.FromArgb(0xFF, 0, 0, 0);
+			uint color = 0xff000000;
+			SolidBrush blackBrush = new SolidBrush(Color.Black);
+			SolidBrush whiteBrush = new SolidBrush(Color.White);
+			RectangleF glyphTexRect = new RectangleF(0, 0, aGlyphTextureSize, aGlyphTextureSize);
+			Rectangle r = new Rectangle(0, 0, aGlyphImage.Width, aGlyphImage.Height);
+			aGlyphGraphic.TextRenderingHint = mTextHint;
+
             foreach (Char c in mCharaterSet)
             {
                 // Get an idea of character width/height 
-                float aCharacterWidth = TextRenderer.MeasureText(c.ToString(), aDrawFont, new Size(0, 0), TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter | TextFormatFlags.Internal | TextFormatFlags.NoPadding | TextFormatFlags.NoFullWidthCharacterBreak).Width;
+				float aCharacterWidth = 0;
                 float aCharacterHeight = aDrawFont.Height + mTopPadding + mBottomPadding;
+				float advanceXShift = 0;	// additional x correction fix for character
 
-                // Get a more precise idea of the width
-                RectangleF aTestRect2 = new RectangleF(0, 0, (float)aCharacterWidth, (float)aCharacterHeight);
-                // Warning: space character is zero width from this measurement, use '-' instead.
-                Region[] strRegions2 = canvas.MeasureCharacterRanges((c == ' ') ? "-" : c.ToString(), aDrawFont, aTestRect2, aStringFormat);
-                if (strRegions2.Length > 0)
-                {
-                    RectangleF measureRect1 = strRegions2[0].GetBounds(canvas);
-                    aCharacterWidth = measureRect1.Width + mRightPadding + mLeftPadding;
-                }
-
-                float advance = aCharacterWidth;
+                float advance = 0;
                 //////////////////////////////////////////////////////////////////////////
-                // This next section is very slow, but is necessary to get the best 
+                // This next section is necessary to get the best 
                 // advancing posible.  Basically, it measures the exact pixel widths of
                 // the glyph. (JPOAG)
+				// Speed optimized (dmbreaker)
                 //////////////////////////////////////////////////////////////////////////
                 {
                     Char aTestChar = (c == ' ') ? '-' : c;
                     aGlyphGraphic.Clear(Color.Black);
-                    aGlyphGraphic.FillRectangle(new SolidBrush(Color.Black), 0, 0, aGlyphTextureSize, aGlyphTextureSize);
-                    aGlyphGraphic.DrawString(aTestChar.ToString(), aDrawFont, new SolidBrush(Color.White), new RectangleF(0, 0, aGlyphTextureSize, aGlyphTextureSize), aStringFormat);
+                    //aGlyphGraphic.FillRectangle(blackBrush, 0, 0, aGlyphTextureSize, aGlyphTextureSize);
+                    aGlyphGraphic.DrawString(aTestChar.ToString(), aDrawFont, whiteBrush, glyphTexRect, aStringFormat);
 
                     int aLastX = 0;
                     int aFirstX = aGlyphTextureSize;
-                    Color aTestColor = Color.FromArgb(0xFF, 0, 0, 0);
 
+					BitmapData bmd = aGlyphImage.LockBits(r, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+					unsafe	// unsafe, but much faster
+					{
+						int stride = bmd.Stride;
+						uint alpha_mask = 0xff000000;
+						byte* ptr = (byte*)(void*)bmd.Scan0;
+						{
+							for (int aY = 0; aY < aGlyphTextureSize; aY++)
+							{
+								byte* row = ptr + (aY * stride);
+								uint* tmpP = (uint*)row;
                     for (int aX = 0; aX < aGlyphTextureSize; aX++)
                     {
-                        for (int aY = 0; aY < aGlyphTextureSize; aY++)
+									uint pixel = *tmpP;
+									if (color != pixel)
                         {
-                            if (aGlyphImage.GetPixel(aX, aY) != aTestColor)
+										uint alpha = (pixel & alpha_mask) >> 24;
+										if (alpha >= 16)
                             {
                                 if (aX > aLastX)
                                     aLastX = aX;
@@ -239,14 +251,22 @@ namespace KanjiFontBuilder
                                     aFirstX = aX;
                             }
                         }
+
+									++tmpP;
+								}
+							}
                     }
+					}
+					aGlyphImage.UnlockBits(bmd);
 
                     if ((aLastX - aFirstX) > 0)
                     {
                         advance = (aLastX - aFirstX + 1 > 0) ? aLastX - aFirstX + 1 : 0;
+						advanceXShift = aFirstX;
+                    }
                     }
 
-                }
+				aCharacterWidth = advance + mRightPadding + mLeftPadding;
 
                 if ((fX + aCharacterWidth) > fMaxWidth) // Row full, go to next line
                 {
@@ -263,7 +283,7 @@ namespace KanjiFontBuilder
                     {
                         /* Create another texture */
                         nTextures++;
-                        fX = 2;
+						fX = 2f;
                         fY = 2;
                         nMaxRowHeight = 0;
                     }
@@ -286,7 +306,8 @@ namespace KanjiFontBuilder
                 lpChar.sy2 = fY + (float)aCharacterHeight;
                 lpChar.fXOffset = (float)-mLeftPadding;
                 lpChar.fYOffset = (float)-mTopPadding;
-                lpChar.fWidth = (float)advance; // advancing width
+				lpChar.fWidth = (float)advance + mLeftPadding; // advancing width
+				lpChar.fXFix = advanceXShift;
                 nChars++;
 
                 emittedChars.Add(lpChar);
@@ -332,8 +353,16 @@ namespace KanjiFontBuilder
                     continue;
 
                 RectangleF aBoundsRect = new RectangleF(lpChar.sx1, lpChar.sy1, (lpChar.sx2 - lpChar.sx1), (lpChar.sy2 - lpChar.sy1));
-                RectangleF aDrawRect = new RectangleF(lpChar.sx1 + mLeftPadding, lpChar.sy1 + mTopPadding, (lpChar.sx2 - lpChar.sx1) - mLeftPadding - mRightPadding, (lpChar.sy2 - lpChar.sy1) - mTopPadding - mBottomPadding);
+				RectangleF aDrawRect = new RectangleF(lpChar.sx1 + mLeftPadding - lpChar.fXFix, lpChar.sy1 + mTopPadding, (lpChar.sx2 - lpChar.sx1) - mLeftPadding - mRightPadding, (lpChar.sy2 - lpChar.sy1) - mTopPadding - mBottomPadding);
                 aGraphicArray[lpChar.nGraphic].DrawString(lpChar.c.ToString(), aDrawFont, new SolidBrush(mTextColor), aDrawRect, aStringFormat);
+
+				/* */
+				if (mDebugRectsChecked)
+				{
+					RectangleF aAdvanceRect = new RectangleF(lpChar.sx1 + mLeftPadding, lpChar.sy1 + mTopPadding, (lpChar.sx2 - lpChar.sx1) - mLeftPadding - mRightPadding, (lpChar.sy2 - lpChar.sy1) - mTopPadding - mBottomPadding);
+					aGraphicArray[lpChar.nGraphic].DrawRectangle(Pens.Fuchsia, Rectangle.Round(aAdvanceRect));
+				}
+				/* */
 
                 aCurrentCount++;
                 backgroundWorker1.ReportProgress((int)(aCurrentCount / aTotalCount * 100.0f));
@@ -357,7 +386,7 @@ namespace KanjiFontBuilder
             String aFileExt = ".png";
             ImageFormat anImageFormat = ImageFormat.Png;
 
-            switch (mImageFormatComboBox.SelectedIndex)
+            switch (mImageFormatIndex)
             {
                 case 0:
                     aFileExt = ".png";
@@ -388,7 +417,7 @@ namespace KanjiFontBuilder
 
             ArrayList anImageFileNameArray = new ArrayList();
 
-            if (mWriteImagesCheckbox.Checked)
+			if (mWriteImagesChecked)
             {
                 for (int i = 0; i < nGeneratedPlanes; i++)
                 {
@@ -403,10 +432,10 @@ namespace KanjiFontBuilder
             /************************************************************************/
             /* Step the Last: Save Descriptor                                       */
             /************************************************************************/
-            if (mWriteDescriptorCheckBox.Checked)
+			if (mWriteDescriptorChecked)
             {
                 Encoding aTextEncoding = Encoding.UTF8;
-                switch (mDescriptorEncodingComboBox.SelectedIndex)
+				switch (mDescriptorEncodingIndex)
                 {
                     case 0:
                         aTextEncoding = Encoding.ASCII;
@@ -426,7 +455,7 @@ namespace KanjiFontBuilder
                 }
 
                 // Sexy XML Format
-                if(mDescriptorFormatComboBox.SelectedIndex == 0)
+				if (mDescriptorFormatIndex == 0)
                 {
                     String anXMLFileName = aSavePath + mDescriptorFileNameEditBox.Text + ".xml";
                     XmlTextWriter aWriter = new XmlTextWriter(anXMLFileName, aTextEncoding);
@@ -484,7 +513,7 @@ namespace KanjiFontBuilder
                     aWriter.Close();
                 }
                 // Kanji Binary format
-                else if (mDescriptorFormatComboBox.SelectedIndex == 1)
+				else if (mDescriptorFormatIndex == 1)
                 {
                     String aKFNTFileName = aSavePath + mDescriptorFileNameEditBox.Text + ".kfnt";
                     StreamWriter aWriter = new StreamWriter(aKFNTFileName, false, Encoding.ASCII);
@@ -587,6 +616,13 @@ namespace KanjiFontBuilder
             aStringFormat.LineAlignment = StringAlignment.Center;
             aStringFormat.Trimming = StringTrimming.None;
 
+			//////////////////////////////////////////////////////////////////////////
+			// Test Image to scan for pixel boundaries
+			//////////////////////////////////////////////////////////////////////////
+			const int aGlyphTextureSize = 128;
+			Bitmap aGlyphImage = new Bitmap(aGlyphTextureSize, aGlyphTextureSize, PixelFormat.Format32bppArgb);
+			Graphics aGlyphGraphic = Graphics.FromImage(aGlyphImage);
+
             CharacterRange[] characterRanges = { new CharacterRange(0, 1) };
             aStringFormat.SetMeasurableCharacterRanges(characterRanges);
             //////////////////////////////////////////////////////////////////////////
@@ -594,21 +630,80 @@ namespace KanjiFontBuilder
             // output array
             ArrayList emittedChars = new ArrayList();
             
+			Color aTestColor = Color.FromArgb(0xFF, 0, 0, 0);
+			uint color = 0xff000000;
+			SolidBrush blackBrush = new SolidBrush(Color.Black);
+			SolidBrush whiteBrush = new SolidBrush(Color.White);
+			RectangleF glyphTexRect = new RectangleF(0, 0, aGlyphTextureSize, aGlyphTextureSize);
+			Rectangle r = new Rectangle(0, 0, aGlyphImage.Width, aGlyphImage.Height);
+			aGlyphGraphic.TextRenderingHint = mTextHint;
+            
             foreach (Char c in mCharaterSet)
             {
                 // Get an idea of character width/height 
-                float aCharacterWidth = TextRenderer.MeasureText(c.ToString(), aDrawFont, new Size(0, 0), TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter | TextFormatFlags.Internal | TextFormatFlags.NoPadding | TextFormatFlags.NoFullWidthCharacterBreak).Width;
+				float aCharacterWidth = 0;// TextRenderer.MeasureText(c.ToString(), aDrawFont, new Size(0, 0), TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter | TextFormatFlags.Internal | TextFormatFlags.NoPadding | TextFormatFlags.NoFullWidthCharacterBreak).Width;
                 float aCharacterHeight = aDrawFont.Height + mTopPadding + mBottomPadding;
 
-                // Get a more precise idea of the width
-                RectangleF aTestRect2 = new RectangleF(0, 0, (float)aCharacterWidth, (float)aCharacterHeight);
-                // Warning: space character is zero width from this measurement, use '-' instead.
-                Region[] strRegions2 = canvas.MeasureCharacterRanges((c == ' ') ? "-" : c.ToString(), aDrawFont, aTestRect2, aStringFormat);
-                if (strRegions2.Length > 0)
+				float advanceXShift = 0;	// additional x correction fix for character
+
+				float advance = 0;
+				//////////////////////////////////////////////////////////////////////////
+				// This next section is necessary to get the best 
+				// advancing posible.  Basically, it measures the exact pixel widths of
+				// the glyph. (JPOAG)
+				// Speed optimized (dmbreaker)
+				//////////////////////////////////////////////////////////////////////////
+				{
+					Char aTestChar = (c == ' ') ? '-' : c;
+					aGlyphGraphic.Clear(Color.Black);
+					//aGlyphGraphic.FillRectangle(blackBrush, 0, 0, aGlyphTextureSize, aGlyphTextureSize);
+					aGlyphGraphic.DrawString(aTestChar.ToString(), aDrawFont, whiteBrush, glyphTexRect, aStringFormat);
+
+					int aLastX = 0;
+					int aFirstX = aGlyphTextureSize;
+
+					BitmapData bmd = aGlyphImage.LockBits(r, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+					unsafe	// unsafe, but much faster
+					{
+						int stride = bmd.Stride;
+						uint alpha_mask = 0xff000000;
+						byte* ptr = (byte*)(void*)bmd.Scan0;
                 {
-                    RectangleF measureRect1 = strRegions2[0].GetBounds(canvas);
-                    aCharacterWidth = measureRect1.Width + mRightPadding + mLeftPadding;
+							for (int aY = 0; aY < aGlyphTextureSize; aY++)
+							{
+								byte* row = ptr + (aY * stride);
+								uint* tmpP = (uint*)row;
+								for (int aX = 0; aX < aGlyphTextureSize; aX++)
+								{
+									//uint pixel = ((uint*)row)[aX];
+									uint pixel = *tmpP;
+									if (color != pixel)
+									{
+										uint alpha = (pixel & alpha_mask) >> 24;
+										if (alpha >= 16)
+										{
+											if (aX > aLastX)
+												aLastX = aX;
+											if (aX < aFirstX)
+												aFirstX = aX;
+										}
                 }
+
+									++tmpP;
+								}
+							}
+						}
+					}
+					aGlyphImage.UnlockBits(bmd);
+
+					if ((aLastX - aFirstX) > 0)
+					{
+						advance = (aLastX - aFirstX + 1 > 0) ? aLastX - aFirstX + 1 : 0;
+						advanceXShift = aFirstX;
+					}
+				}
+
+				aCharacterWidth = advance + mRightPadding + mLeftPadding;
 
                 if ((fX + aCharacterWidth) > fMaxWidth) // Row full, go to next line
                 {
@@ -648,7 +743,8 @@ namespace KanjiFontBuilder
                 lpChar.sy2 = fY + (float)aCharacterHeight;
                 lpChar.fXOffset = (float)-mLeftPadding;
                 lpChar.fYOffset = (float)- mTopPadding;
-                lpChar.fWidth = (float)aCharacterWidth - mLeftPadding - mRightPadding; // advancing width
+				lpChar.fWidth = (float)advance + mLeftPadding; // advancing width
+				lpChar.fXFix = advanceXShift;
                 nChars++;
 
                 emittedChars.Add(lpChar);
@@ -690,7 +786,7 @@ namespace KanjiFontBuilder
                     continue;
 
                 RectangleF aBoundsRect = new RectangleF(lpChar.sx1, lpChar.sy1, (lpChar.sx2 - lpChar.sx1), (lpChar.sy2 - lpChar.sy1));
-                RectangleF aDrawRect = new RectangleF(lpChar.sx1 + mLeftPadding, lpChar.sy1 + mTopPadding, (lpChar.sx2 - lpChar.sx1) - mLeftPadding - mRightPadding, (lpChar.sy2 - lpChar.sy1) - mTopPadding - mBottomPadding);
+				RectangleF aDrawRect = new RectangleF(lpChar.sx1 + mLeftPadding - lpChar.fXFix, lpChar.sy1 + mTopPadding, (lpChar.sx2 - lpChar.sx1) - mLeftPadding - mRightPadding, (lpChar.sy2 - lpChar.sy1) - mTopPadding - mBottomPadding);
                 aGraphicArray[lpChar.nGraphic].DrawString(lpChar.c.ToString(), aDrawFont, new SolidBrush(mTextColor), aDrawRect, aStringFormat);
 
                 // Pink Rectangle: DrawString Bounds
@@ -717,11 +813,29 @@ namespace KanjiFontBuilder
             mPictureBox7.Image = mImagePages[6];
             mPictureBox8.Image = mImagePages[7];
         }
+		// ============================================================
+		private string mFontName = "";
+		int mImageFormatIndex = -1;
+		bool mWriteImagesChecked = true;
+		bool mWriteDescriptorChecked = true;
+		int mDescriptorFormatIndex = -1;
+		int mDescriptorEncodingIndex = -1;
+		bool mDebugRectsChecked = false;
+		// ============================================================
  
         private void OnBuildFont(object sender, EventArgs e)
         {
             mProgressDlg.Show(this);
             mProgressDlg.progressBar1.Value = 0;
+			
+			mFontName = mFontComboBox.Text;
+			mImageFormatIndex = mImageFormatComboBox.SelectedIndex;
+			mWriteImagesChecked = mWriteImagesCheckbox.Checked;
+			mWriteDescriptorChecked = mWriteDescriptorCheckBox.Checked;
+			mDescriptorFormatIndex = mDescriptorFormatComboBox.SelectedIndex;
+			mDescriptorEncodingIndex = mDescriptorEncodingComboBox.SelectedIndex;
+			mDebugRectsChecked = mDebugRects.Checked;
+
             backgroundWorker1.RunWorkerAsync();
         }
         
@@ -781,6 +895,8 @@ namespace KanjiFontBuilder
        public long nGraphic;             /**< Index of graphic page that this character is on */
        public float fXOffset;            /**< Offset to be applied to screen X coordinate when drawing this character, in pixels */
        public float fYOffset;            /**< Offset to be applied to screen Y coordinate when drawing this character, in pixels */
+
+	   public float fXFix;            /**< X offset fix */
     } ;
 
 }

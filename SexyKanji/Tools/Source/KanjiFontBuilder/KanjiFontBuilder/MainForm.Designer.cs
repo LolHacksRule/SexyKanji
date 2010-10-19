@@ -235,6 +235,11 @@ namespace KanjiFontBuilder
             this.mKerningSpin.Name = "mKerningSpin";
             this.mKerningSpin.Size = new System.Drawing.Size(56, 20);
             this.mKerningSpin.TabIndex = 10;
+			this.mKerningSpin.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.mKerningSpin.ValueChanged += new System.EventHandler(this.mKerningSpin_ValueChanged);
             // 
             // groupBox3
@@ -285,6 +290,11 @@ namespace KanjiFontBuilder
             this.mRightPaddingSpin.Name = "mRightPaddingSpin";
             this.mRightPaddingSpin.Size = new System.Drawing.Size(56, 20);
             this.mRightPaddingSpin.TabIndex = 9;
+			this.mRightPaddingSpin.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.mRightPaddingSpin.ValueChanged += new System.EventHandler(this.mRightPaddingSpin_ValueChanged);
             // 
             // label11
@@ -307,6 +317,11 @@ namespace KanjiFontBuilder
             this.mBottomPaddingSpin.Name = "mBottomPaddingSpin";
             this.mBottomPaddingSpin.Size = new System.Drawing.Size(56, 20);
             this.mBottomPaddingSpin.TabIndex = 10;
+			this.mBottomPaddingSpin.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.mBottomPaddingSpin.ValueChanged += new System.EventHandler(this.mBottomPaddingSpin_ValueChanged);
             // 
             // mLeftPaddingSpin
@@ -320,6 +335,11 @@ namespace KanjiFontBuilder
             this.mLeftPaddingSpin.Name = "mLeftPaddingSpin";
             this.mLeftPaddingSpin.Size = new System.Drawing.Size(56, 20);
             this.mLeftPaddingSpin.TabIndex = 11;
+			this.mLeftPaddingSpin.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.mLeftPaddingSpin.ValueChanged += new System.EventHandler(this.mLeftPaddingSpin_ValueChanged);
             // 
             // label10
@@ -342,6 +362,11 @@ namespace KanjiFontBuilder
             this.mTopPaddingSpin.Name = "mTopPaddingSpin";
             this.mTopPaddingSpin.Size = new System.Drawing.Size(56, 20);
             this.mTopPaddingSpin.TabIndex = 12;
+			this.mTopPaddingSpin.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.mTopPaddingSpin.ValueChanged += new System.EventHandler(this.mTopPaddingSpin_ValueChanged);
             // 
             // label7
