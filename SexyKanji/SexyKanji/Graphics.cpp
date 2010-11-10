@@ -30,6 +30,8 @@ using namespace Sexy;
 const Sexy::SexyPoint* Graphics::mPFPoints = NULL;
 SexyImage* gCurrentRenderTarget = NULL;
 
+#define REV_255 (1.f/255.f)
+
 /*!***********************************
 // @return    	void
 // @param     	theState
@@ -453,8 +455,8 @@ void Graphics::DrawLine(int theStartX, int theStartY, int theEndX, int theEndY)
 
 	mLineGraphic->GetKanjiImage()->setTextureQuality(false);
 	mLineGraphic->GetKanjiImage()->drawLine(aStartX, aStartY, aEndX, aEndY, 
-		static_cast<float>(mColor.mRed) / 255.0f, static_cast<float>(mColor.mGreen) / 255.0f,
-		static_cast<float>(mColor.mBlue) / 255.0f, static_cast<float>(mColor.mAlpha) / 255.0f);
+		static_cast<float>(mColor.mRed) * REV_255, static_cast<float>(mColor.mGreen) * REV_255,
+		static_cast<float>(mColor.mBlue) * REV_255, static_cast<float>(mColor.mAlpha) * REV_255);
 }
 
 /*!***********************************
@@ -516,8 +518,8 @@ void Graphics::FillRect(int theX, int theY, int theWidth, int theHeight)
 		static_cast<float>(aDestRect.mY),
 		static_cast<float>(aDestRect.mX + aDestRect.mWidth),
 		static_cast<float>(aDestRect.mY + aDestRect.mHeight),
-		static_cast<float>(mColor.mRed) / 255.0f, static_cast<float>(mColor.mGreen) / 255.0f,
-		static_cast<float>(mColor.mBlue) / 255.0f, static_cast<float>(mColor.mAlpha) / 255.0f
+		static_cast<float>(mColor.mRed) * REV_255, static_cast<float>(mColor.mGreen) * REV_255,
+		static_cast<float>(mColor.mBlue) * REV_255, static_cast<float>(mColor.mAlpha) * REV_255
 		);
 }
 
@@ -758,8 +760,8 @@ void Graphics::PolyFill(const SexyPoint *theVertexList, int theNumVertices)
 	}
 
 	if(mColorizeImages)
-		mLineGraphic->GetKanjiImage()->setBlitColor(static_cast<float>(mColor.mRed) / 255.0f, static_cast<float>(mColor.mGreen) / 255.0f, 
-		static_cast<float>(mColor.mBlue) / 255.0f, static_cast<float>(mColor.mAlpha) / 255.0f);
+		mLineGraphic->GetKanjiImage()->setBlitColor(static_cast<float>(mColor.mRed) * REV_255, static_cast<float>(mColor.mGreen) * REV_255, 
+		static_cast<float>(mColor.mBlue) * REV_255, static_cast<float>(mColor.mAlpha) * REV_255);
 	else
 		mLineGraphic->GetKanjiImage()->setBlitColor(1, 1, 1, 1);
 	
@@ -791,8 +793,8 @@ void Graphics::DrawString(const SexyString& theString, int theX, int theY)
 	if (mFont == NULL || theString.empty() || mFont->GetKTextFace() == NULL) return;
 	PreDraw();
 
-	mFont->GetKTextFace()->setBlitColor(static_cast<float>(mColor.mRed) / 255.0f, static_cast<float>(mColor.mGreen) / 255.0f, 
-		static_cast<float>(mColor.mBlue) / 255.0f, static_cast<float>(mColor.mAlpha) / 255.0f);
+	mFont->GetKTextFace()->setBlitColor(static_cast<float>(mColor.mRed) * REV_255, static_cast<float>(mColor.mGreen) * REV_255, 
+		static_cast<float>(mColor.mBlue) * REV_255, static_cast<float>(mColor.mAlpha) * REV_255);
 
 	mFont->GetKTextFace()->setAlphaMode((mDrawMode == DRAWMODE_ADDITIVE) ? K_ALPHA_ADDITIVE : K_ALPHA_NORMAL);
 
@@ -847,8 +849,8 @@ void Graphics::DrawStringClipped(const SexyString& theString, int theX, int theY
 	if (mFont == NULL || theString.empty() || mFont->GetKTextFace() == NULL) return;
 	PreDraw();
 
-	mFont->GetKTextFace()->setBlitColor(static_cast<float>(mColor.mRed) / 255.0f, static_cast<float>(mColor.mGreen) / 255.0f, 
-		static_cast<float>(mColor.mBlue) / 255.0f, static_cast<float>(mColor.mAlpha) / 255.0f);
+	mFont->GetKTextFace()->setBlitColor(static_cast<float>(mColor.mRed) * REV_255, static_cast<float>(mColor.mGreen) * REV_255, 
+		static_cast<float>(mColor.mBlue) * REV_255, static_cast<float>(mColor.mAlpha) * REV_255);
 
 	mFont->GetKTextFace()->setAlphaMode((mDrawMode == DRAWMODE_ADDITIVE) ? K_ALPHA_ADDITIVE : K_ALPHA_NORMAL);
 
@@ -1210,8 +1212,8 @@ int Graphics::WriteWordWrapped(const SexyString& theString, int theX, int theY, 
 		aKTextFace->setYSpacing(static_cast<float>(mFont->GetAscent()));
 	}
 
-	aKTextFace->setBlitColor(static_cast<float>(mColor.mRed) / 255.0f, static_cast<float>(mColor.mGreen) / 255.0f, 
-		static_cast<float>(mColor.mBlue) / 255.0f, static_cast<float>(mColor.mAlpha) / 255.0f);
+	aKTextFace->setBlitColor(static_cast<float>(mColor.mRed) * REV_255, static_cast<float>(mColor.mGreen) * REV_255, 
+		static_cast<float>(mColor.mBlue) * REV_255, static_cast<float>(mColor.mAlpha) * REV_255);
 
 	aKTextFace->setAlphaMode((mDrawMode == DRAWMODE_ADDITIVE) ? K_ALPHA_ADDITIVE : K_ALPHA_NORMAL);
 
@@ -1980,6 +1982,8 @@ void Graphics::DrawImageMatrix(SexyImage* theImage, const SexyMatrix3 &theMatrix
 	SexyRect aSrcRect = theSrcRect;
 
 	// theSrcRect Clipped to image size (JSULLIVAN)
+	if( theImage->mWrappingMode == K_WRAP_CLAMP )
+	{
 	if ((aSrcRect.mX + aSrcRect.mWidth) > theImage->GetWidth())
 	{
 		aSrcRect.mWidth = theImage->GetWidth() - aSrcRect.mX;
@@ -1987,6 +1991,7 @@ void Graphics::DrawImageMatrix(SexyImage* theImage, const SexyMatrix3 &theMatrix
 	if ((aSrcRect.mY + aSrcRect.mHeight) > theImage->GetHeight())
 	{
 		aSrcRect.mHeight = theImage->GetHeight() - aSrcRect.mY;
+	}
 	}
 
 	x += mTransX;
@@ -1998,8 +2003,8 @@ void Graphics::DrawImageMatrix(SexyImage* theImage, const SexyMatrix3 &theMatrix
 	{
 		if(mColorizeImages)
 		{
-			aPTKImage->setBlitColor(static_cast<float>(mColor.mRed) / 255.0f, static_cast<float>(mColor.mGreen) / 255.0f, 
-				static_cast<float>(mColor.mBlue) / 255.0f, static_cast<float>(mColor.mAlpha) / 255.0f);
+			aPTKImage->setBlitColor(static_cast<float>(mColor.mRed) * REV_255, static_cast<float>(mColor.mGreen) * REV_255, 
+				static_cast<float>(mColor.mBlue) * REV_255, static_cast<float>(mColor.mAlpha) * REV_255);
 		}
 		else
 		{

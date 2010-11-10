@@ -658,6 +658,7 @@ void MusicManager::Update()
 			{
 				// fade out completed, volume is MIN_VOLUME, clear fade speed
 				aIterator->second.second = 0.0f;
+				mStreamsInfo[aIterator->first].mSoundInstance->stopStream();	// dmbreaker: fixes bug with "ghost-tracks" in fade
 				// remove the fading stream from the map
 				mFadingStreams.erase(aIterator);
 				break;

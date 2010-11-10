@@ -153,7 +153,7 @@ SexyString Sexy::GetAppDataFolder()
 			if (aMod != NULL)
 			{
 				TCHAR aPath[MAX_PATH];
-				aFunc(NULL, CSIDL_COMMON_APPDATA, NULL, SHGFP_TYPE_CURRENT, (LPTSTR)aPath);
+				aFunc(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, (LPTSTR)aPath);	// CSIDL_COMMON_APPDATA
 
 				SexyString aDataPath = StringToSexyStringFast(RemoveTrailingSlash(WStringToString(aPath))) 
 					+ _S("\\") + (DEFAULT_COMPANY) + _S("\\") + (DEFAULT_TITLE) + _S("\\");
@@ -311,11 +311,24 @@ std::wstring Sexy::StringToLower(const std::wstring& theString)
 //************************************/
 std::wstring Sexy::StringToWString(const std::string &theString)
 {
-	std::wstring aString;
-	aString.reserve(theString.length());
-	for(size_t i = 0; i < theString.length(); ++i)
-		aString += (unsigned char)theString[i];
-	return aString;
+	size_t aRequiredLength = mbstowcs( NULL, theString.c_str(), 0 );
+	if (aRequiredLength < 16384)
+	{
+		wchar_t aBuffer[16384];
+		mbstowcs( aBuffer, theString.c_str(), 16384 );
+		return std::wstring(aBuffer);
+	}
+	else
+	{
+		//DBG_ASSERTE(aRequiredLength != (size_t)-1);
+		if (aRequiredLength == (size_t)-1) return L"";
+
+		wchar_t* aBuffer = new wchar_t[aRequiredLength+1];
+		mbstowcs( aBuffer, theString.c_str(), aRequiredLength+1 );
+		std::wstring aStr = aBuffer;
+		delete[] aBuffer;
+		return aStr;
+	}
 }
 
 /*!***********************************

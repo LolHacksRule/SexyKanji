@@ -714,8 +714,11 @@ void SexyAppBase::DoUpdateFrames()
 	}
 	
 	if(HasFocus())KSound::resume(); // Potential bug
+	if( mLoaded && mLoadingThreadCompleted )	// dmbreaker: when sounds are loading - mSoundManager is blocked by loading-thread
+	{
 	mSoundManager->Update();
 	mMusicManager->Update();
+	}
 	mWidgetManager->UpdateFrame();
 
 	gUpdateFPSTimer.OnEvent();
@@ -1234,7 +1237,7 @@ void Sexy::SexyAppBase::StartLoadingThread()
 		mLoadingThreadStarted = true;
 		delete mLoadingThread;
 		mLoadingThread = new KSysThread(LoadingThreadProcStub,this, 0);
-		mLoadingThread->setThreadPriority(KSYSTHREAD_HIGH);
+		mLoadingThread->setThreadPriority(KSYSTHREAD_LOW);	// dmbreaker: impcrease cursor reaction on loading screen
 	}
 }
 
@@ -1927,6 +1930,8 @@ void Sexy::SexyAppBase::Mute(bool theAutoMute)
 	if (theAutoMute == true)
 		mAutoMuteCount++;
 
+	GetSoundManager()->MuteLoopingSamples(true);
+
 	SetMusicVolume(mMusicVolume);
 	SetSfxVolume(mSfxVolume);
 }
@@ -1948,6 +1953,7 @@ void Sexy::SexyAppBase::Unmute(bool theAutoMute)
 		if (theAutoMute == true)
 			mAutoMuteCount--;
 	}
+	GetSoundManager()->MuteLoopingSamples(false);
 
 	SetMusicVolume(mMusicVolume);
 	SetSfxVolume(mSfxVolume);
@@ -2043,7 +2049,7 @@ void SEHCatcher (bool bIsAssertion,
 				 long nStackDepth, void *lpStackReturnAddr[], char *lpszStackModule[])
 {
 	K_LOG("Sexy: EXCEPTION CAUGHT: \n\tIsAssert = %s\n\tException Code: %0X\n\t%s\n\tOccurred in %s\n\tOn Line: %i\n\t", 
-		(bIsAssertion)?"true":false,
+		(bIsAssertion)?"true":"false",
 		nExceptionCode,
 		(lpszExceptionName) ? lpszExceptionName : "(null)",
 		(lpszAssertionFileName) ? lpszAssertionFileName : "(null)",
@@ -2052,7 +2058,7 @@ void SEHCatcher (bool bIsAssertion,
 	K_LOG("Begin Stack Dump:");
 
 	for(long i = 0; i < nStackDepth; i++)
-		K_LOG("\n\t%s @ %s", lpszStackModule[i], lpStackReturnAddr[i]);
+		K_LOG("\n\t%s @ %08x", lpszStackModule[i], lpStackReturnAddr[i]);
 
 	void LoadPropertySettings();
 }
