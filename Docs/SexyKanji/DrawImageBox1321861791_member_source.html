@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DrawImageBox</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DrawImageBox</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Graphics809',this)" class="pathLink">Graphics</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DrawImageBox</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawImageBox1321861791','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DrawImageBox1321861791','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawImageBox1321861791','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1281</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','DrawImageBox3982572242',this); ">Sexy::Graphics::DrawImageBox</a>(const SexyRect &amp;theSrc, const SexyRect &amp;theDest, SexyImage *theComponentImage)
+{
+    if ((theSrc.mWidth &lt;= 0) || (theSrc.mHeight &lt;= 0) || (theComponentImage == NULL))
+        return;
+    <a href="#" onMouseOver="link('_member','PreDraw2295276211',this); ">PreDraw</a>();
+
+    float cw = (float)theSrc.mWidth / 3.0f;
+    float ch = (float)theSrc.mHeight / 3.0f;
+
+    float dx = (float)theDest.mX;
+    float dy = (float)theDest.mY;
+    float dw = (float)theDest.mWidth;
+    float dh = (float)theDest.mHeight;
+
+    SexyVector2 aDVA[] = //aDestVertArray
+    {
+        SexyVector2(dx,dy),         SexyVector2(dx+cw,dy),          SexyVector2(dx+dw-cw,dy),       SexyVector2(dx+dw,dy),
+        SexyVector2(dx,dy+ch),      SexyVector2(dx+cw,dy+ch),       SexyVector2(dx+dw-cw,dy+ch),    SexyVector2(dx+dw,dy+ch),
+        SexyVector2(dx,dy+dh-ch),   SexyVector2(dx+cw,dy+dh-ch),    SexyVector2(dx+dw-cw,dy+dh-ch), SexyVector2(dx+dw,dy+dh-ch),
+        SexyVector2(dx,dy+dh),      SexyVector2(dx+cw,dy+dh),       SexyVector2(dx+dw-cw,dy+dh),    SexyVector2(dx+dw,dy+dh)
+    };
+
+    for (int i = 0; i &lt; 16; i++)
+    {
+        // This is the best place to do other transformations at the same time.
+        aDVA[i] += <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(mTransX,mTransY);
+    }
+
+    float sx = (float)theSrc.mX;
+    float sy = (float)theSrc.mY;
+    float sw = (float)theSrc.mWidth;
+    float sh = (float)theSrc.mHeight;
+
+    SexyVector2 aSUVA[] = // aSrcUVArray
+    {
+        <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx,sy),            <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+cw,sy),         <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+sw-cw,sy),      <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+sw,sy),
+        <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx,sy+ch),     <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+cw,sy+ch),      <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+sw-cw,sy+ch),   <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+sw,sy+ch),
+        <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx,sy+sh-ch),  <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+cw,sy+sh-ch),   <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+sw-cw,sy+sh-ch),    <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+sw,sy+sh-ch),
+        <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx,sy+sh),     <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+cw,sy+sh),      <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+sw-cw,sy+sh),   <a href="#" onMouseOver="link('_class','SexyVector2809',this); ">SexyVector2</a>(sx+sw,sy+sh),
+    };
+
+    // Convert to UV [0.0 .. 1.0f]
+    for (int i = 0; i &lt; 16; i++)
+    {
+        aSUVA[i].x /= theComponentImage-&gt;GetWidth();
+        aSUVA[i].y /= theComponentImage-&gt;GetHeight();
+    }
+
+    // Build Triangles
+    <a href="#" onMouseOver="link('_class','SexyTriVertex809',this); ">Sexy::SexyTriVertex</a> theVertices[][3]=
+    {
+//Top Row/////////////////////////////////////////////////////////////////////////////
+/*0 1 2*/{SexyTriVertex(aDVA[0].x, aDVA[0].y, aSUVA[0].x, aSUVA[0].y), SexyTriVertex(aDVA[1].x, aDVA[1].y, aSUVA[1].x, aSUVA[1].y), SexyTriVertex(aDVA[4].x, aDVA[4].y, aSUVA[4].x, aSUVA[4].y)}, 
+/*2 1 3*/{SexyTriVertex(aDVA[4].x, aDVA[4].y, aSUVA[4].x, aSUVA[4].y), SexyTriVertex(aDVA[1].x, aDVA[1].y, aSUVA[1].x, aSUVA[1].y), SexyTriVertex(aDVA[5].x, aDVA[5].y, aSUVA[5].x, aSUVA[5].y)}, 
+
+/*0 1 2*/{SexyTriVertex(aDVA[1].x, aDVA[1].y, aSUVA[1].x, aSUVA[1].y), SexyTriVertex(aDVA[2].x, aDVA[2].y, aSUVA[2].x, aSUVA[2].y), SexyTriVertex(aDVA[5].x, aDVA[5].y, aSUVA[5].x, aSUVA[5].y)}, 
+/*2 1 3*/{SexyTriVertex(aDVA[5].x, aDVA[5].y, aSUVA[5].x, aSUVA[5].y), SexyTriVertex(aDVA[2].x, aDVA[2].y, aSUVA[2].x, aSUVA[2].y), SexyTriVertex(aDVA[6].x, aDVA[6].y, aSUVA[6].x, aSUVA[6].y)}, 
+
+/*0 1 2*/{SexyTriVertex(aDVA[2].x, aDVA[2].y, aSUVA[2].x, aSUVA[2].y), SexyTriVertex(aDVA[3].x, aDVA[3].y, aSUVA[3].x, aSUVA[3].y), SexyTriVertex(aDVA[6].x, aDVA[6].y, aSUVA[6].x, aSUVA[6].y)}, 
+/*2 1 3*/{<a href="#" onMouseOver="link('_class','SexyTriVertex809',this); ">SexyTriVertex</a>(aDVA[6].x, aDVA[6].y, aSUVA[6].x, aSUVA[6].y), <a href="#" onMouseOver="link('_class','SexyTriVertex809',this); ">SexyTriVertex</a>(aDVA[3].x, aDVA[3].y, aSUVA[3].x, aSUVA[3].y), <a href="#" onMouseOver="link('_class','SexyTriVertex809',this); ">SexyTriVertex</a>(aDVA[7].x, aDVA[7].y, aSUVA[7].x, aSUVA[7].y)}, 
+
+//Middle Row//////////////////////////////////////////////////////////////////////////
+/*0 1 2*/{SexyTriVertex(aDVA[4].x, aDVA[4].y, aSUVA[4].x, aSUVA[4].y), SexyTriVertex(aDVA[5].x, aDVA[5].y, aSUVA[5].x, aSUVA[5].y), SexyTriVertex(aDVA[8].x, aDVA[8].y, aSUVA[8].x, aSUVA[8].y)}, 
+/*2 1 3*/{SexyTriVertex(aDVA[8].x, aDVA[8].y, aSUVA[8].x, aSUVA[8].y), SexyTriVertex(aDVA[5].x, aDVA[5].y, aSUVA[5].x, aSUVA[5].y), SexyTriVertex(aDVA[9].x, aDVA[9].y, aSUVA[9].x, aSUVA[9].y)}, 
+
+/*0 1 2*/{SexyTriVertex(aDVA[5].x, aDVA[5].y, aSUVA[5].x, aSUVA[5].y), SexyTriVertex(aDVA[6].x, aDVA[6].y, aSUVA[6].x, aSUVA[6].y), SexyTriVertex(aDVA[9].x, aDVA[9].y, aSUVA[9].x, aSUVA[9].y)}, 
+/*2 1 3*/{SexyTriVertex(aDVA[9].x, aDVA[9].y, aSUVA[9].x, aSUVA[9].y), SexyTriVertex(aDVA[6].x, aDVA[6].y, aSUVA[6].x, aSUVA[6].y), SexyTriVertex(aDVA[10].x, aDVA[10].y, aSUVA[10].x, aSUVA[10].y)}, 
+
+/*0 1 2*/{SexyTriVertex(aDVA[6].x, aDVA[6].y, aSUVA[6].x, aSUVA[6].y), SexyTriVertex(aDVA[7].x, aDVA[7].y, aSUVA[7].x, aSUVA[7].y), SexyTriVertex(aDVA[10].x, aDVA[10].y, aSUVA[10].x, aSUVA[10].y)}, 
+/*2 1 3*/{SexyTriVertex(aDVA[10].x, aDVA[10].y, aSUVA[10].x, aSUVA[10].y), SexyTriVertex(aDVA[7].x, aDVA[7].y, aSUVA[7].x, aSUVA[7].y), SexyTriVertex(aDVA[11].x, aDVA[11].y, aSUVA[11].x, aSUVA[11].y)}, 
+
+//Bottom Row//////////////////////////////////////////////////////////////////////////
+/*0 1 2*/{SexyTriVertex(aDVA[8].x, aDVA[8].y, aSUVA[8].x, aSUVA[8].y), SexyTriVertex(aDVA[9].x, aDVA[9].y, aSUVA[9].x, aSUVA[9].y), SexyTriVertex(aDVA[12].x, aDVA[12].y, aSUVA[12].x, aSUVA[12].y)}, 
+/*2 1 3*/{SexyTriVertex(aDVA[12].x, aDVA[12].y, aSUVA[12].x, aSUVA[12].y), SexyTriVertex(aDVA[9].x, aDVA[9].y, aSUVA[9].x, aSUVA[9].y), SexyTriVertex(aDVA[13].x, aDVA[13].y, aSUVA[13].x, aSUVA[13].y)}, 
+
+/*0 1 2*/{SexyTriVertex(aDVA[9].x, aDVA[9].y, aSUVA[9].x, aSUVA[9].y), SexyTriVertex(aDVA[10].x, aDVA[10].y, aSUVA[10].x, aSUVA[10].y), SexyTriVertex(aDVA[13].x, aDVA[13].y, aSUVA[13].x, aSUVA[13].y)}, 
+/*2 1 3*/{<a href="#" onMouseOver="link('_class','SexyTriVertex809',this); ">SexyTriVertex</a>(aDVA[13].x, aDVA[13].y, aSUVA[13].x, aSUVA[13].y), <a href="#" onMouseOver="link('_class','SexyTriVertex809',this); ">SexyTriVertex</a>(aDVA[10].x, aDVA[10].y, aSUVA[10].x, aSUVA[10].y), <a href="#" onMouseOver="link('_class','SexyTriVertex809',this); ">SexyTriVertex</a>(aDVA[14].x, aDVA[14].y, aSUVA[14].x, aSUVA[14].y)}, 
+
+/*0 1 2*/{SexyTriVertex(aDVA[10].x, aDVA[10].y, aSUVA[10].x, aSUVA[10].y), SexyTriVertex(aDVA[11].x, aDVA[11].y, aSUVA[11].x, aSUVA[11].y), SexyTriVertex(aDVA[14].x, aDVA[14].y, aSUVA[14].x, aSUVA[14].y)}, 
+/*2 1 3*/{SexyTriVertex(aDVA[14].x, aDVA[14].y, aSUVA[14].x, aSUVA[14].y), SexyTriVertex(aDVA[11].x, aDVA[11].y, aSUVA[11].x, aSUVA[11].y), SexyTriVertex(aDVA[15].x, aDVA[15].y, aSUVA[15].x, aSUVA[15].y)}, 
+    };
+
+    // Re Color
+    for (int i = 0; i &lt; 18; i++)
+    {
+        theVertices[i][0].<a href="#" onMouseOver="link('_member','color1496037218',this); ">color</a> = 0xFFFFFFFF;
+        theVertices[i][1].<a href="#" onMouseOver="link('_member','color1496037218',this); ">color</a> = 0xFFFFFFFF;
+        theVertices[i][2].<a href="#" onMouseOver="link('_member','color1496037218',this); ">color</a> = 0xFFFFFFFF;
+    }
+
+    <a href="#" onMouseOver="link('_member','DrawTrianglesTex141117438',this); ">DrawTrianglesTex</a>(theComponentImage, theVertices, 18);
+    return;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

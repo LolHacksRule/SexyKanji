@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DumpCurResGroup</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DumpCurResGroup</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ResourceManager809',this)" class="pathLink">ResourceManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DumpCurResGroup</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DumpCurResGroup416595019','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DumpCurResGroup416595019','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DumpCurResGroup416595019','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 2199</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','DumpCurResGroup416595019',this); ">Sexy::ResourceManager::DumpCurResGroup</a>(SexyString &amp;theDestStr)
+{
+    const <a href="#" onMouseOver="link('_member','ResList288852731',this); ">ResList</a>* rl = &amp;<a href="#" onMouseOver="link('_member','mResGroupMap288852731',this); ">mResGroupMap</a>.find(mCurResGroup)-&gt;second;
+    ResList::const_iterator it = rl-&gt;begin();
+    theDestStr = <a href="#" onMouseOver="link('_member','StrFormat798802342',this); ">StrFormat</a>(_S("About to dump %d elements from current res group: "), rl-&gt;size());
+    theDestStr += <a href="#" onMouseOver="link('_member','mCurResGroup288852731',this); ">mCurResGroup</a> + _S("\r\n");
+
+    ResList::const_iterator rl_end = rl-&gt;end();
+    while (it != rl_end)
+    {
+        BaseRes* br = *it++;
+        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> prefix = br-&gt;mId + _S(": ") + br-&gt;mPath;
+        theDestStr += prefix;
+        if (br-&gt;mFromProgram)
+            theDestStr += _S(" res is from program\r\n");
+        else if (br-&gt;mType == <a href="#" onMouseOver="link('_member','ResType_Image288852731',this); ">ResType_Image</a>)
+            theDestStr += _S(" res is an image\r\n");
+        else if (br-&gt;mType == <a href="#" onMouseOver="link('_member','ResType_Sound288852731',this); ">ResType_Sound</a>)
+            theDestStr += _S(" res is a sound\r\n");
+        else if (br-&gt;mType == <a href="#" onMouseOver="link('_member','ResType_Music288852731',this); ">ResType_Music</a>)
+            theDestStr += _S(" res is a music\r\n");
+        else if (br-&gt;mType == <a href="#" onMouseOver="link('_member','ResType_Font288852731',this); ">ResType_Font</a>)
+            theDestStr += _S(" res is a font\r\n");
+        else if (br-&gt;mType == <a href="#" onMouseOver="link('_member','ResType_Movie288852731',this); ">ResType_Movie</a>)
+            theDestStr += _S(" res is a movie\r\n");
+
+        if (it == <a href="#" onMouseOver="link('_member','mCurResGroupListItr288852731',this); ">mCurResGroupListItr</a>)
+            theDestStr += _S("iterator has reached mCurResGroupItr\r\n");
+    }
+
+    theDestStr += _S("Done dumping resources\r\n");
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

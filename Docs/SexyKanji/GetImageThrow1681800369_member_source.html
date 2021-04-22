@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetImageThrow</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetImageThrow</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ResourceManager809',this)" class="pathLink">ResourceManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetImageThrow</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetImageThrow1681800369','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetImageThrow1681800369','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetImageThrow1681800369','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1848</div>
+<pre class="codeExamples">
+virtual SharedImageRef <a href="#" onMouseOver="link('_member','GetImageThrow1681800369',this); ">Sexy::ResourceManager::GetImageThrow</a>(const std::string &amp;theId)
+{
+    ResMap::iterator anItr = <a href="#" onMouseOver="link('_member','mImageMap288852731',this); ">mImageMap</a>.find(theId);
+
+    if (anItr != <a href="#" onMouseOver="link('_member','mImageMap288852731',this); ">mImageMap</a>.end())
+    {
+        ImageRes *aRes = (ImageRes*)anItr-&gt;second;
+
+        if ((SexyImage*)aRes-&gt;mImage != NULL)
+            return aRes-&gt;mImage;
+
+        if (<a href="#" onMouseOver="link('_member','mAllowMissingProgramResources288852731',this); ">mAllowMissingProgramResources</a> &amp;&amp; aRes-&gt;mFromProgram)
+            return NULL;
+    }
+
+    <a href="#" onMouseOver="link('_member','Fail1681800369',this); ">Fail</a>(<a href="#" onMouseOver="link('_member','StrFormat798802342',this); ">StrFormat</a>("Sexy::ResourceManager::GetImageThrow : ERROR : Image resource not found: %s.", theId.c_str()));
+    
+    throw ResourceManagerException(<a href="#" onMouseOver="link('_member','GetErrorText339024635',this); ">GetErrorText</a>());
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

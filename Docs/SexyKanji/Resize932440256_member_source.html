@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Resize</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Resize</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Widget809',this)" class="pathLink">Widget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Resize</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Resize932440256','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Resize932440256','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Resize932440256','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 259</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','Resize932440256',this); ">Sexy::Widget::Resize</a>(int theX, int theY, int theWidth, int theHeight)
+{
+    if ((<a href="#" onMouseOver="link('_member','mX564406879',this); ">mX</a> == theX) &amp;&amp; (<a href="#" onMouseOver="link('_member','mY564406879',this); ">mY</a> == theY) &amp;&amp; (<a href="#" onMouseOver="link('_member','mWidth564406879',this); ">mWidth</a> == theWidth) &amp;&amp; (<a href="#" onMouseOver="link('_member','mHeight564406879',this); ">mHeight</a> == theHeight))
+        return;
+
+    // Mark everything dirty that is over or under the old position
+    <a href="#" onMouseOver="link('_member','MarkDirtyFull614906463',this); ">MarkDirtyFull</a>();
+    
+    <a href="#" onMouseOver="link('_member','mX564406879',this); ">mX</a> = theX;
+    <a href="#" onMouseOver="link('_member','mY564406879',this); ">mY</a> = theY;
+    <a href="#" onMouseOver="link('_member','mWidth564406879',this); ">mWidth</a> = theWidth;
+    <a href="#" onMouseOver="link('_member','mHeight564406879',this); ">mHeight</a> = theHeight;
+        
+    // Mark things dirty that are over the new position
+    <a href="#" onMouseOver="link('_member','MarkDirty614906463',this); ">MarkDirty</a>();
+
+    if (<a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a> != NULL)
+        <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;RehupMouse();
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

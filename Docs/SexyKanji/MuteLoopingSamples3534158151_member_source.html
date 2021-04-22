@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - MuteLoopingSamples</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">MuteLoopingSamples</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SoundManager809',this)" class="pathLink">SoundManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">MuteLoopingSamples</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','MuteLoopingSamples3534158151','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','MuteLoopingSamples3534158151','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 609</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','MuteLoopingSamples3534158151',this); ">Sexy::SoundManager::MuteLoopingSamples</a>(bool theMute)
+{
+    <a href="#" onMouseOver="link('_member','mMuteCount457195144',this); ">mMuteCount</a> += theMute ? 1 : -1;
+    
+    if (<a href="#" onMouseOver="link('_member','mMuteCount457195144',this); ">mMuteCount</a> &lt; 0)
+        <a href="#" onMouseOver="link('_member','mMuteCount457195144',this); ">mMuteCount</a> = 0;
+
+    if ((!theMute &amp;&amp; (<a href="#" onMouseOver="link('_member','mMuteCount457195144',this); ">mMuteCount</a> == 0)) || theMute)
+    {
+        for (LoopingSampleMap::iterator aIterator = <a href="#" onMouseOver="link('_member','mLoopingSamples457195144',this); ">mLoopingSamples</a>.begin(); aIterator != <a href="#" onMouseOver="link('_member','mLoopingSamples457195144',this); ">mLoopingSamples</a>.end(); ++aIterator)
+        {
+            // mute or set current volume
+            aIterator-&gt;second.first-&gt;setVolume(theMute ? 0 : mSamplesInfo[aIterator-&gt;first].mCurrentVolume);
+        }
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

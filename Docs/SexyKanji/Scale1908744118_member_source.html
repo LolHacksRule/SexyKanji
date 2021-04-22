@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Scale</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Scale</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyKanjiTransform809',this)" class="pathLink">SexyKanjiTransform</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Scale</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Scale1908744118','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Scale1908744118','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Scale1908744118','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 569</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','Scale1908744118',this); ">Sexy::SexyKanjiTransform::Scale</a>(float sx, float sy)
+{
+    if (!<a href="#" onMouseOver="link('_member','mComplex3648728737',this); ">mComplex</a>)
+    {
+        if (<a href="#" onMouseOver="link('_member','mHaveRot3648728737',this); ">mHaveRot</a> || <a href="#" onMouseOver="link('_member','mTransX13648728737',this); ">mTransX1</a>!=0 || <a href="#" onMouseOver="link('_member','mTransY13648728737',this); ">mTransY1</a>!=0 || (sx&lt;0 &amp;&amp; <a href="#" onMouseOver="link('_member','mScaleX3648728737',this); ">mScaleX</a>*sx!=-1) || sy&lt;0)
+        {
+            <a href="#" onMouseOver="link('_member','MakeComplex557308875',this); ">MakeComplex</a>();
+            
+            KMatrix aMat;
+            aMat.scaling(sx,sy,1.0f);
+            <a href="#" onMouseOver="link('_member','mKMatrix1933040611',this); ">mKMatrix</a> = aMat * <a href="#" onMouseOver="link('_member','mKMatrix1933040611',this); ">mKMatrix</a>;
+        }
+        else
+        {
+            <a href="#" onMouseOver="link('_member','mNeedCalcMatrix3648728737',this); ">mNeedCalcMatrix</a> = true;
+            <a href="#" onMouseOver="link('_member','mHaveScale3648728737',this); ">mHaveScale</a> = true;
+            <a href="#" onMouseOver="link('_member','mScaleX3648728737',this); ">mScaleX</a> *= sx;
+            <a href="#" onMouseOver="link('_member','mScaleY3648728737',this); ">mScaleY</a> *= sy;
+        }
+    }
+    else
+    {
+        KMatrix aMat;
+        aMat.scaling(sx,sy,1.0f);
+        <a href="#" onMouseOver="link('_member','mKMatrix1933040611',this); ">mKMatrix</a> = aMat * <a href="#" onMouseOver="link('_member','mKMatrix1933040611',this); ">mKMatrix</a>;
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

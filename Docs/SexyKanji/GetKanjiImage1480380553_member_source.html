@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetKanjiImage</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetKanjiImage</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyImage809',this)" class="pathLink">SexyImage</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetKanjiImage</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetKanjiImage1480380553','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetKanjiImage1480380553','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetKanjiImage1480380553','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 593</div>
+<pre class="codeExamples">
+virtual KGraphic * <a href="#" onMouseOver="link('_member','GetKanjiImage1480380553',this); ">Sexy::SexyImage::GetKanjiImage</a>()
+{
+    if (<a href="#" onMouseOver="link('_member','mBitsDirty1480183968',this); ">mBitsDirty</a> || (!<a href="#" onMouseOver="link('_member','mUploaded1480183968',this); ">mUploaded</a> &amp;&amp; <a href="#" onMouseOver="link('_member','mBits1480183968',this); ">mBits</a>))
+    {
+        <a href="#" onMouseOver="link('_member','mUploaded1480183968',this); ">mUploaded</a> = <a href="#" onMouseOver="link('_member','CreateKGraphicFromBits1480380553',this); ">CreateKGraphicFromBits</a>();
+        <a href="#" onMouseOver="link('_member','mBitsDirty1480183968',this); ">mBitsDirty</a> = false;
+    }
+
+    // CreateKGraphicFromBits() sets mUploaded to true so we won't ever be 
+    // creating 2 graphics by calling one after the other. (JSullivan)
+    if (!<a href="#" onMouseOver="link('_member','mUploaded1480183968',this); ">mUploaded</a>)
+        // Load the mKGraphicImage with the image data.
+        <a href="#" onMouseOver="link('_member','mUploaded1480183968',this); ">mUploaded</a> = <a href="#" onMouseOver="link('_member','CreateKGraphicFromData182507401',this); ">CreateKGraphicFromData</a>(LOAD_STEP_UPLOAD_ONLY);
+
+    return <a href="#" onMouseOver="link('_member','mKGraphicImage1480183968',this); ">mKGraphicImage</a>;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

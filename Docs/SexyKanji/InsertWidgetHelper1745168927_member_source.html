@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - InsertWidgetHelper</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">InsertWidgetHelper</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','WidgetContainer809',this)" class="pathLink">WidgetContainer</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">InsertWidgetHelper</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','InsertWidgetHelper1745168927','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','InsertWidgetHelper1745168927','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 302</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','InsertWidgetHelper1745168927',this); ">Sexy::WidgetContainer::InsertWidgetHelper</a>(const WidgetList::iterator &amp;where, Widget *theWidget)
+{
+    // Search forwards
+    WidgetList::iterator anItr = where;
+    while (anItr!=<a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.end())
+    {
+        Widget *aWidget = *anItr;
+        if (aWidget-&gt;mZOrder &gt;= theWidget-&gt;mZOrder)
+        {
+            if (anItr!=<a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.begin())
+            {
+                WidgetList::iterator anItr2 = anItr;
+                anItr2--;
+                aWidget = *anItr;
+                if (aWidget-&gt;mZOrder&gt;theWidget-&gt;mZOrder) // need to search backwards
+                    break;
+            }
+                    
+            <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.insert(anItr,theWidget);
+            return;
+        }
+        ++anItr;
+    }
+
+    // Search backwards
+    while (anItr!=<a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.begin())
+    {
+        --anItr; 
+        Widget *aWidget = *anItr;
+        if (aWidget-&gt;mZOrder &lt;= theWidget-&gt;mZOrder)
+        {
+            <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.insert(++anItr,theWidget);
+            return;
+        }
+    }
+
+    // It goes at the beginning
+    <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.push_front(theWidget);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

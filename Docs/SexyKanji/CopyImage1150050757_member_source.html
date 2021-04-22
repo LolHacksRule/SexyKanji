@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - CopyImage</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">CopyImage</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ImageManager809',this)" class="pathLink">ImageManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">CopyImage</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CopyImage1150050757','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','CopyImage1150050757','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CopyImage1150050757','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 318</div>
+<pre class="codeExamples">
+SexyImage * <a href="#" onMouseOver="link('_member','CopyImage3740292454',this); ">Sexy::ImageManager::CopyImage</a>(SexyImage *theImage, const SexyRect &amp;theRect)
+{
+    if (theImage == NULL) return NULL;
+
+    // The passed rect is the same as the image size, so just do a standard copy.
+    if ((theRect.mX == 0) &amp;&amp; (theRect.mY == 0) &amp;&amp; 
+        (theRect.mWidth == theImage-&gt;GetWidth()) &amp;&amp; (theRect.mHeight == theImage-&gt;GetHeight()))
+    {
+        return <a href="#" onMouseOver="link('_member','CopyImage3740292454',this); ">CopyImage</a>(theImage);
+    }
+
+    if (theRect.mWidth &lt;= 0 || theRect.mHeight &lt;= 0) return NULL;
+
+    SexyImage* anImage = new SexyImage();
+
+    unsigned long* anOriginalBits = theImage-&gt;GetBits();
+    unsigned long* aNewBits = new unsigned long[theRect.mWidth * theRect.mHeight];
+    unsigned long* aNewBItsItr = aNewBits;
+
+    if(anImage == NULL || anOriginalBits == NULL || aNewBits == NULL)
+    {
+        delete anImage;
+        anImage = NULL;
+
+        delete aNewBits;
+        aNewBits = NULL;
+
+        return NULL;
+    }
+
+    int aWidth = theImage-&gt;GetWidth();
+    int aHeight = theImage-&gt;GetHeight();
+
+    for (int y = 0; y &lt; aHeight; y++)
+    {
+        for (int x = 0; x &lt; aWidth; x++)
+        {
+            if ((y &gt;= theRect.mY) &amp;&amp; (x &gt;= theRect.mX) &amp;&amp; 
+                (y &lt; (theRect.mY + theRect.mHeight)) &amp;&amp; (x &lt; (theRect.mX + theRect.mWidth)))
+            {
+                *aNewBItsItr++ = anOriginalBits[y * aWidth + x];
+            }
+        }
+    }
+
+    anImage-&gt;SetBits(aNewBits, theRect.mWidth, theRect.mHeight);
+
+    delete [] aNewBits;
+    aNewBits = aNewBItsItr = NULL;
+    return anImage;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

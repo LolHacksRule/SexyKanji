@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - WriteString</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">WriteString</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Graphics809',this)" class="pathLink">Graphics</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">WriteString</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WriteString373981104','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','WriteString373981104','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WriteString373981104','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 862</div>
+<pre class="codeExamples">
+virtual int <a href="#" onMouseOver="link('_member','WriteString373981104',this); ">Sexy::Graphics::WriteString</a>(const std::wstring &amp;theString, int theX, int theY, int theWidth=-1, int theJustification=0, bool drawString=true, int theOffset=0, int theLength=-1, int theOldColor=-1)
+{
+    if (<a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a> == NULL) return 0;
+    <a href="#" onMouseOver="link('_member','PreDraw2295276211',this); ">PreDraw</a>();
+
+    if (theOldColor == -1)
+        theOldColor = <a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.ToInt();
+    
+    if (drawString)
+    {
+        switch (theJustification)
+        {   
+        case <a href="#" onMouseOver="link('_member','CENTER_JUSTIFIED147456691',this); ">CENTER_JUSTIFIED</a> :
+            theX += (theWidth - <a href="#" onMouseOver="link('_member','WriteString373981104',this); ">WriteString</a>(theString, theX, theY, theWidth, -1, false, theOffset, theLength, theOldColor))/2;
+            break;
+        case <a href="#" onMouseOver="link('_member','RIGHT_JUSTIFIED147456691',this); ">RIGHT_JUSTIFIED</a>:
+            theX += theWidth - <a href="#" onMouseOver="link('_member','WriteString373981104',this); ">WriteString</a>(theString, theX, theY, theWidth, -1, false, theOffset, theLength, theOldColor);
+            break;
+        }
+    }
+
+    if(theLength &lt; 0 || theOffset + theLength &gt; (int)theString.length())
+        theLength = (int)theString.length();
+    else
+        theLength = theOffset + theLength;
+
+
+    std::wstring aString;
+    int aXOffset = 0;
+
+    for (int i = theOffset; i &lt; theLength; i++)
+    {
+        if ((theString[i] == '^') &amp;&amp; <a href="#" onMouseOver="link('_member','mWriteColoredString942441602',this); ">mWriteColoredString</a>)
+        {
+            if (i+1&lt;theLength &amp;&amp; theString[i+1] == '^') // literal '^'
+            {
+                aString += (L'^');
+                i++;
+            }
+            else if (i&gt;theLength-8) // badly formatted color specification
+                break;
+            else // change color instruction
+            {
+                DWORD aColor = 0;
+                if (theString[i+1]== (L'o'))
+                {
+                    if (std::wcsncmp(theString.c_str()+i+1, (L"oldclr"), 6) == 0)
+                        aColor = theOldColor;
+                }
+                else
+                {
+                    for (int aDigitNum = 0; aDigitNum &lt; 6; aDigitNum++)
+                    {
+                        wchar_t aChar = theString[i+aDigitNum+1];
+                        int aVal = 0;
+
+                        if ((aChar &gt;= (L'0')) &amp;&amp; (aChar &lt;= (L'9')))
+                            aVal = aChar - (L'0');
+                        else if ((aChar &gt;= (L'A')) &amp;&amp; (aChar &lt;= (L'F')))
+                            aVal = (aChar - (L'A')) + 10;
+                        else if ((aChar &gt;= (L'a')) &amp;&amp; (aChar &lt;= (L'f')))
+                            aVal = (aChar - (L'a')) + 10;
+
+                        aColor += (aVal &lt;&lt; ((5 - aDigitNum) * 4));
+                    }               
+                }
+
+                if (drawString)
+                {
+                    <a href="#" onMouseOver="link('_member','DrawString1569910929',this); ">DrawString</a>(aString, theX + aXOffset, theY);
+                    <a href="#" onMouseOver="link('_member','SetColor1858005701',this); ">SetColor</a>(SexyColor((aColor &gt;&gt; 16) &amp; 0xFF, (aColor &gt;&gt; 8) &amp; 0xFF, (aColor) &amp; 0xFF, <a href="#" onMouseOver="link('_member','GetColor2295276211',this); ">GetColor</a>().mAlpha));                   
+                }
+
+                i += 7;
+
+                aXOffset += <a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a>-&gt;<a href="#" onMouseOver="link('_member','StringWidth1853560416',this); ">StringWidth</a>(aString);
+
+                aString = (L"");
+            }
+        }
+        else
+            aString += theString[i];
+    }
+
+    if (drawString)
+    {
+        <a href="#" onMouseOver="link('_member','DrawString1569910929',this); ">DrawString</a>(aString, theX + aXOffset, theY);
+    }
+
+    aXOffset += <a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a>-&gt;StringWidth(aString);
+
+    return aXOffset;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

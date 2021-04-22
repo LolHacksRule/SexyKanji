@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - SetAppDataFolder</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">SetAppDataFolder</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">SetAppDataFolder</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SetAppDataFolder1193665090','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','SetAppDataFolder1193665090','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 180</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','SetAppDataFolder1193665090',this); ">SetAppDataFolder</a>(const SexyString &amp;thePath)
+{
+//  if (CheckForVista())
+    {
+        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aPath = thePath;
+        if (!aPath.empty())
+        {
+            if (aPath[aPath.length()-1] != _S('\\') &amp;&amp; aPath[aPath.length()-1] != _S('/'))
+                aPath += _S('\\');
+        }
+
+        Sexy::gAppDataFolder = aPath;
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

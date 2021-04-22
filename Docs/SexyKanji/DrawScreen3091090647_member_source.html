@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DrawScreen</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DrawScreen</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','WidgetManager809',this)" class="pathLink">WidgetManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DrawScreen</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawScreen3091090647','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DrawScreen3091090647','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawScreen3091090647','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 815</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','DrawScreen3091090647',this); ">Sexy::WidgetManager::DrawScreen</a>(<a href="#" onMouseOver="link('_class','Graphics809',this); ">Sexy::Graphics</a> *theGraphics)
+{
+    SEXY_AUTO_PERF("WidgetManager::DrawScreen");
+
+    ModalFlags aModalFlags;
+    <a href="#" onMouseOver="link('_member','InitModalFlags3004943750',this); ">InitModalFlags</a>(&amp;aModalFlags);
+
+    bool drewStuff = false; 
+    
+    int aDirtyCount = 0;
+    bool hasTransients = false;
+    bool hasDirtyTransients = false;
+
+    // Survey
+    WidgetList::iterator anItr = <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.begin();
+    while (anItr != <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.end())
+    {
+        Widget* aWidget = *anItr;
+        if (aWidget-&gt;mDirty)
+            aDirtyCount++;
+        ++anItr;
+    }
+    
+    <a href="#" onMouseOver="link('_member','mMinDeferredOverlayPriority3955182565',this); ">mMinDeferredOverlayPriority</a> = 0x7FFFFFFF;
+    <a href="#" onMouseOver="link('_member','mDeferredOverlayWidgets3955182565',this); ">mDeferredOverlayWidgets</a>.resize(0);
+
+    Graphics aScrG(*theGraphics);
+    <a href="#" onMouseOver="link('_member','mCurG3955182565',this); ">mCurG</a> = &amp;aScrG;
+
+    if (aDirtyCount &gt; 0)
+    {
+        Graphics g(aScrG);
+        g.Translate(-<a href="#" onMouseOver="link('_member','mMouseDestRect3955182565',this); ">mMouseDestRect</a>.mX, -<a href="#" onMouseOver="link('_member','mMouseDestRect3955182565',this); ">mMouseDestRect</a>.mY);
+        bool is3D = true; //mApp-&gt;Is3DAccelerated();
+
+        WidgetList::iterator anItr = <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.begin();
+        while (anItr != <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.end())
+        {
+            Widget* aWidget = *anItr;
+            
+            if (aWidget == <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;mBaseModalWidget)
+                aModalFlags.mIsOver = true;
+
+            if ((aWidget-&gt;mDirty) &amp;&amp; (aWidget-&gt;mVisible))
+            {
+                Graphics aClipG(g);
+                aClipG.SetLinearBlend(is3D);
+                aClipG.Translate(aWidget-&gt;mX, aWidget-&gt;mY);             
+                aWidget-&gt;DrawAll(&amp;aModalFlags, &amp;aClipG);
+                 
+                aDirtyCount++;
+                drewStuff = true;
+                aWidget-&gt;mDirty = false;
+            }
+
+            ++anItr;
+        }
+    }
+    
+    <a href="#" onMouseOver="link('_member','FlushDeferredOverlayWidgets3061321388',this); ">FlushDeferredOverlayWidgets</a>(0x7FFFFFFF);
+
+    <a href="#" onMouseOver="link('_member','mCurG3955182565',this); ">mCurG</a> = NULL;
+
+    return drewStuff;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

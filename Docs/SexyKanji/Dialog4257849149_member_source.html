@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Dialog</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Dialog</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Dialog809',this)" class="pathLink">Dialog</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Dialog</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Dialog4257849149','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Dialog4257849149','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Dialog4257849149','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 47</div>
+<pre class="codeExamples">
+ <a href="#" onMouseOver="link('_member','Dialog4257849149',this); ">Sexy::Dialog::Dialog</a>(SexyImage *theComponentImage, SexyImage *theButtonComponentImage, int theId, bool isModal, const SexyString &amp;theDialogHeader, const SexyString &amp;theDialogLines, const SexyString &amp;theDialogFooter, int theButtonMode)
+{
+    <a href="#" onMouseOver="link('_member','mId198470348',this); ">mId</a> = theId;
+    <a href="#" onMouseOver="link('_member','mResult198470348',this); ">mResult</a> = 0x7FFFFFFF;
+    <a href="#" onMouseOver="link('_member','mComponentImage198470348',this); ">mComponentImage</a> = theComponentImage;
+    <a href="#" onMouseOver="link('_member','mIsModal198470348',this); ">mIsModal</a> = isModal;
+    <a href="#" onMouseOver="link('_member','mContentInsets198470348',this); ">mContentInsets</a> = Insets(24, 24, 24, 24);
+    <a href="#" onMouseOver="link('_member','mTextAlign198470348',this); ">mTextAlign</a> = 0;
+    <a href="#" onMouseOver="link('_member','mLineSpacingOffset198470348',this); ">mLineSpacingOffset</a> = 0;
+    <a href="#" onMouseOver="link('_member','mSpaceAfterHeader198470348',this); ">mSpaceAfterHeader</a> = 10;
+    <a href="#" onMouseOver="link('_member','mButtonSidePadding198470348',this); ">mButtonSidePadding</a> = 0;
+    <a href="#" onMouseOver="link('_member','mButtonHorzSpacing198470348',this); ">mButtonHorzSpacing</a> = 8;
+
+    <a href="#" onMouseOver="link('_member','mDialogListener198470348',this); ">mDialogListener</a> = NULL; //gSexyAppBase;
+
+    <a href="#" onMouseOver="link('_member','mDialogHeader198470348',this); ">mDialogHeader</a> = theDialogHeader;
+    <a href="#" onMouseOver="link('_member','mDialogFooter198470348',this); ">mDialogFooter</a> = theDialogFooter;
+    <a href="#" onMouseOver="link('_member','mButtonMode198470348',this); ">mButtonMode</a> = theButtonMode;
+
+    if ((<a href="#" onMouseOver="link('_member','mButtonMode198470348',this); ">mButtonMode</a> == <a href="#" onMouseOver="link('_member','BUTTONS_YES_NO198470348',this); ">BUTTONS_YES_NO</a>) || (<a href="#" onMouseOver="link('_member','mButtonMode198470348',this); ">mButtonMode</a> == <a href="#" onMouseOver="link('_member','BUTTONS_OK_CANCEL198470348',this); ">BUTTONS_OK_CANCEL</a>))
+    {
+        <a href="#" onMouseOver="link('_member','mYesButton198470348',this); ">mYesButton</a> = new DialogButton(theButtonComponentImage, ID_YES, this);
+        <a href="#" onMouseOver="link('_member','mNoButton198470348',this); ">mNoButton</a> = new DialogButton(theButtonComponentImage, ID_NO, this);                      
+
+        if (<a href="#" onMouseOver="link('_member','mButtonMode198470348',this); ">mButtonMode</a> == <a href="#" onMouseOver="link('_member','BUTTONS_YES_NO198470348',this); ">BUTTONS_YES_NO</a>)
+        {
+            <a href="#" onMouseOver="link('_member','mYesButton198470348',this); ">mYesButton</a>-&gt;mLabel = <a href="#" onMouseOver="link('_member','DIALOG_YES_STRING62745',this); ">DIALOG_YES_STRING</a>;
+            <a href="#" onMouseOver="link('_member','mNoButton198470348',this); ">mNoButton</a>-&gt;mLabel = <a href="#" onMouseOver="link('_member','DIALOG_NO_STRING62745',this); ">DIALOG_NO_STRING</a>;
+        }
+        else
+        {
+            <a href="#" onMouseOver="link('_member','mYesButton198470348',this); ">mYesButton</a>-&gt;mLabel = <a href="#" onMouseOver="link('_member','DIALOG_OK_STRING62745',this); ">DIALOG_OK_STRING</a>;
+            <a href="#" onMouseOver="link('_member','mNoButton198470348',this); ">mNoButton</a>-&gt;mLabel = <a href="#" onMouseOver="link('_member','DIALOG_CANCEL_STRING62745',this); ">DIALOG_CANCEL_STRING</a>;
+        }
+    }
+    else if (<a href="#" onMouseOver="link('_member','mButtonMode198470348',this); ">mButtonMode</a> == <a href="#" onMouseOver="link('_member','BUTTONS_FOOTER198470348',this); ">BUTTONS_FOOTER</a>)
+    {
+        <a href="#" onMouseOver="link('_member','mYesButton198470348',this); ">mYesButton</a> = new DialogButton(theButtonComponentImage, ID_FOOTER, this);      
+        <a href="#" onMouseOver="link('_member','mYesButton198470348',this); ">mYesButton</a>-&gt;mLabel = <a href="#" onMouseOver="link('_member','mDialogFooter198470348',this); ">mDialogFooter</a>;
+        <a href="#" onMouseOver="link('_member','mNoButton198470348',this); ">mNoButton</a> = NULL;        
+    }
+    else
+    {
+        <a href="#" onMouseOver="link('_member','mYesButton198470348',this); ">mYesButton</a> = NULL;
+        <a href="#" onMouseOver="link('_member','mNoButton198470348',this); ">mNoButton</a> = NULL;
+        <a href="#" onMouseOver="link('_member','mNumButtons198470348',this); ">mNumButtons</a> = 0;
+    }
+
+    <a href="#" onMouseOver="link('_member','mDialogLines198470348',this); ">mDialogLines</a> = theDialogLines;
+
+    <a href="#" onMouseOver="link('_member','mButtonHeight198470348',this); ">mButtonHeight</a> = (theButtonComponentImage == NULL) ? 24 : theButtonComponentImage-&gt;GetHeight();
+
+    <a href="#" onMouseOver="link('_member','mHasTransparencies192236783',this); ">mHasTransparencies</a> = true;    
+    <a href="#" onMouseOver="link('_member','mHasAlpha564406879',this); ">mHasAlpha</a> = true;
+
+    <a href="#" onMouseOver="link('_member','mDragging198470348',this); ">mDragging</a> = false;   
+    <a href="#" onMouseOver="link('_member','mPriority564406879',this); ">mPriority</a> = 1;
+
+    if (theButtonComponentImage == NULL)
+    {
+        <a href="#" onMouseOver="link('_member','gDialogColors0',this); ">gDialogColors</a>[<a href="#" onMouseOver="link('_member','COLOR_BUTTON_TEXT198470348',this); ">COLOR_BUTTON_TEXT</a>][0] = 0;
+        <a href="#" onMouseOver="link('_member','gDialogColors0',this); ">gDialogColors</a>[<a href="#" onMouseOver="link('_member','COLOR_BUTTON_TEXT198470348',this); ">COLOR_BUTTON_TEXT</a>][1] = 0;
+        <a href="#" onMouseOver="link('_member','gDialogColors0',this); ">gDialogColors</a>[<a href="#" onMouseOver="link('_member','COLOR_BUTTON_TEXT198470348',this); ">COLOR_BUTTON_TEXT</a>][2] = 0;
+        <a href="#" onMouseOver="link('_member','gDialogColors0',this); ">gDialogColors</a>[<a href="#" onMouseOver="link('_member','COLOR_BUTTON_TEXT_HILITE198470348',this); ">COLOR_BUTTON_TEXT_HILITE</a>][0] = 0;
+        <a href="#" onMouseOver="link('_member','gDialogColors0',this); ">gDialogColors</a>[<a href="#" onMouseOver="link('_member','COLOR_BUTTON_TEXT_HILITE198470348',this); ">COLOR_BUTTON_TEXT_HILITE</a>][1] = 0;
+        <a href="#" onMouseOver="link('_member','gDialogColors0',this); ">gDialogColors</a>[<a href="#" onMouseOver="link('_member','COLOR_BUTTON_TEXT_HILITE198470348',this); ">COLOR_BUTTON_TEXT_HILITE</a>][2] = 0;
+    }
+
+    <a href="#" onMouseOver="link('_member','SetColors1658774591',this); ">SetColors</a>(gDialogColors, NUM_COLORS);
+}   
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

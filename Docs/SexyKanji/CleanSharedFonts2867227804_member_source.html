@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - CleanSharedFonts</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">CleanSharedFonts</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','FontManager809',this)" class="pathLink">FontManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">CleanSharedFonts</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CleanSharedFonts2867227804','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','CleanSharedFonts2867227804','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 135</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','CleanSharedFonts2867227804',this); ">Sexy::FontManager::CleanSharedFonts</a>(bool forceDeleteAll=false)
+{
+    // Delete shared images with reference counts of 0 or all if forced.
+    SharedFontMap::iterator aSharedFontItr = <a href="#" onMouseOver="link('_member','mSharedFontMap2033515219',this); ">mSharedFontMap</a>.begin();
+    while (aSharedFontItr != <a href="#" onMouseOver="link('_member','mSharedFontMap2033515219',this); ">mSharedFontMap</a>.end())
+    {
+        SharedFont* aSharedFont = &amp;aSharedFontItr-&gt;second;
+        if ((aSharedFont-&gt;mRefCount == 0) || forceDeleteAll)
+        {
+            delete aSharedFont-&gt;mFont; // This is probably redundant!
+            <a href="#" onMouseOver="link('_member','mSharedFontMap2033515219',this); ">mSharedFontMap</a>.erase(aSharedFontItr++);
+            // This might throw an error someday (JPOAG)
+        }
+        else
+        {
+            ++aSharedFontItr;
+        }
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

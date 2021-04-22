@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - MouseDown</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">MouseDown</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','TextWidget809',this)" class="pathLink">TextWidget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">MouseDown</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','MouseDown2768466379','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','MouseDown2768466379','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','MouseDown2768466379','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 365</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','MouseDown2768466379',this); ">Sexy::TextWidget::MouseDown</a>(int x, int y, int theClickCount)
+{
+    Widget::MouseDown(x, y, theClickCount);
+
+    <a href="#" onMouseOver="link('_member','GetTextIndexAt2957082466',this); ">GetTextIndexAt</a>(x-4, y-4, mHiliteArea[0]);
+    <a href="#" onMouseOver="link('_member','mHiliteArea1507277485',this); ">mHiliteArea</a>[1][0] = <a href="#" onMouseOver="link('_member','mHiliteArea1507277485',this); ">mHiliteArea</a>[0][0];
+    <a href="#" onMouseOver="link('_member','mHiliteArea1507277485',this); ">mHiliteArea</a>[1][1] = <a href="#" onMouseOver="link('_member','mHiliteArea1507277485',this); ">mHiliteArea</a>[0][1];
+    <a href="#" onMouseOver="link('_member','MarkDirty614906463',this); ">MarkDirty</a>();
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

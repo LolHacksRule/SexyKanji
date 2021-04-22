@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DrawStringClipped</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DrawStringClipped</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Graphics809',this)" class="pathLink">Graphics</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DrawStringClipped</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawStringClipped4272716617','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DrawStringClipped4272716617','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawStringClipped4272716617','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 842</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','DrawStringClipped4272716617',this); ">Sexy::Graphics::DrawStringClipped</a>(const SexyString &amp;theString, int theX, int theY)
+{
+    if (<a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a> == NULL || theString.empty() || <a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a>-&gt;GetKTextFace() == NULL) return;
+    <a href="#" onMouseOver="link('_member','PreDraw2295276211',this); ">PreDraw</a>();
+
+    <a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a>-&gt;GetKTextFace()-&gt;setBlitColor(static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mRed) / 255.0f, static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mGreen) / 255.0f, 
+        static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mBlue) / 255.0f, static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mAlpha) / 255.0f);
+
+    <a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a>-&gt;GetKTextFace()-&gt;setAlphaMode((mDrawMode == DRAWMODE_ADDITIVE) ? K_ALPHA_ADDITIVE : K_ALPHA_NORMAL);
+
+    <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a> aDestRect = <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(theX + static_cast&lt;int&gt;(mTransX), theY + static_cast&lt;int&gt;(mTransY),
+        <a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a>-&gt;StringWidth(theString), <a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a>-&gt;GetAscent()).Intersection(mClipRect);
+
+    <a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a>-&gt;GetKTextFace()-&gt;drawStringClippedF(reinterpret_cast&lt;const char*&gt;(theString.c_str()), 
+        (float)theX + (<a href="#" onMouseOver="link('_member','mTransX942441602',this); ">mTransX</a>),(float)theY + (<a href="#" onMouseOver="link('_member','mTransY942441602',this); ">mTransY</a>),
+        static_cast&lt;float&gt;(aDestRect.mX + aDestRect.mWidth), static_cast&lt;float&gt;(aDestRect.mY + aDestRect.mHeight), 0, 0, 
+        0, -1, 0, 0, SexyStrEncoding);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

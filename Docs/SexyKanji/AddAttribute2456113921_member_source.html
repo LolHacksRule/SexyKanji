@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - AddAttribute</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">AddAttribute</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','XMLParser809',this)" class="pathLink">XMLParser</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">AddAttribute</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','AddAttribute2456113921','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','AddAttribute2456113921','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 71</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','AddAttribute2456113921',this); ">Sexy::XMLParser::AddAttribute</a>(XMLElement *theElement, const SexyString &amp;aAttributeKey, const SexyString &amp;aAttributeValue)
+{
+    std::pair&lt;XMLParamMap::iterator,bool&gt; aRet;
+
+    aRet = theElement-&gt;mAttributes.insert(XMLParamMap::value_type(theAttributeKey, theAttributeValue));
+    if (!aRet.second)
+        aRet.first-&gt;second = theAttributeValue;
+
+    if (theAttributeKey != _S("/"))
+        theElement-&gt;mAttributeIteratorList.push_back(aRet.first);
+
+    return aRet.second;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

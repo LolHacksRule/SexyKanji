@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - MarkDirtyFull</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">MarkDirtyFull</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','WidgetContainer809',this)" class="pathLink">WidgetContainer</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">MarkDirtyFull</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','MarkDirtyFull2361829119','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','MarkDirtyFull2361829119','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','MarkDirtyFull2361829119','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 541</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','MarkDirtyFull614906463',this); ">Sexy::WidgetContainer::MarkDirtyFull</a>(WidgetContainer *theWidget)
+{
+    // Mark all things dirty that are under or over this widget
+
+    // Mark ourselves dirty
+    <a href="#" onMouseOver="link('_member','MarkDirtyFull614906463',this); ">MarkDirtyFull</a>();
+    
+    theWidget-&gt;mDirty = true;
+
+    // Top-level windows are treated differently, as marking a child dirty always
+    //  causes a parent redraw which always causes all children to redraw
+    if (<a href="#" onMouseOver="link('_member','mParent564406879',this); ">mParent</a> != NULL)
+        return;
+    
+    WidgetList::iterator aFoundWidgetItr = std::find(<a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.begin(), <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.end(), theWidget);
+    if (aFoundWidgetItr == <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.end())
+        return;
+    
+    WidgetList::iterator anItr = aFoundWidgetItr;
+    if (anItr != <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.begin())
+    {
+        anItr--;
+        
+        for (;;)
+        {
+            <a href="#" onMouseOver="link('_class','Widget809',this); ">Widget</a>* aWidget = *anItr;
+
+            if (aWidget-&gt;<a href="#" onMouseOver="link('_member','mVisible192236783',this); ">mVisible</a>)
+            {
+                if ((!aWidget-&gt;<a href="#" onMouseOver="link('_member','mHasTransparencies192236783',this); ">mHasTransparencies</a>) &amp;&amp; (!aWidget-&gt;<a href="#" onMouseOver="link('_member','mHasAlpha564406879',this); ">mHasAlpha</a>))
+                {
+                    // Clip the widget's bounds to the screen and check if it fully overlapped by this non-transparent widget underneath it
+                    // If it is fully overlapped then we can stop marking dirty underneath it since it's not transparent.
+                    <a href="#" onMouseOver="link('_class','TRect55767',this); ">SexyRect</a> aRect = <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(theWidget-&gt;mX,theWidget-&gt;mY,theWidget-&gt;mWidth,theWidget-&gt;mHeight).<a href="#" onMouseOver="link('_member','Intersection1190349963',this); ">Intersection</a>(<a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(0,0,<a href="#" onMouseOver="link('_member','mWidth564406879',this); ">mWidth</a>,<a href="#" onMouseOver="link('_member','mHeight564406879',this); ">mHeight</a>)); 
+                    if ((aWidget-&gt;<a href="#" onMouseOver="link('_member','Contains840362511',this); ">Contains</a>(aRect.<a href="#" onMouseOver="link('_member','mX218461190',this); ">mX</a>, aRect.<a href="#" onMouseOver="link('_member','mY218461190',this); ">mY</a>) &amp;&amp; 
+                        (aWidget-&gt;<a href="#" onMouseOver="link('_member','Contains840362511',this); ">Contains</a>(aRect.<a href="#" onMouseOver="link('_member','mX218461190',this); ">mX</a> + aRect.<a href="#" onMouseOver="link('_member','mWidth218461190',this); ">mWidth</a> - 1, aRect.<a href="#" onMouseOver="link('_member','mY218461190',this); ">mY</a> + aRect.<a href="#" onMouseOver="link('_member','mHeight218461190',this); ">mHeight</a> - 1))))
+                    {
+                        // If this widget is fully contained within a lower widget, there is no need to dig down
+                        // any deeper.
+                        aWidget-&gt;<a href="#" onMouseOver="link('_member','MarkDirty614906463',this); ">MarkDirty</a>();
+                        break;
+                    }
+                }
+
+                if (aWidget-&gt;<a href="#" onMouseOver="link('_member','Intersects2361829119',this); ">Intersects</a>(theWidget))
+                    <a href="#" onMouseOver="link('_member','MarkDirty614906463',this); ">MarkDirty</a>(aWidget);
+            }
+
+            if (anItr == <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.begin())
+                break;
+
+            --anItr;
+        }
+    }
+    
+    anItr = aFoundWidgetItr;
+    while (anItr != <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.end())
+    {
+        <a href="#" onMouseOver="link('_class','Widget809',this); ">Widget</a>* aWidget = *anItr;
+        if ((aWidget-&gt;<a href="#" onMouseOver="link('_member','mVisible192236783',this); ">mVisible</a>) &amp;&amp; (aWidget-&gt;<a href="#" onMouseOver="link('_member','Intersects2361829119',this); ">Intersects</a>(theWidget)))
+            <a href="#" onMouseOver="link('_member','MarkDirty614906463',this); ">MarkDirty</a>(aWidget);
+
+        ++anItr;
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

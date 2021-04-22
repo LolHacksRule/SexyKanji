@@ -1,0 +1,127 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Update</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Update</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SoundManager809',this)" class="pathLink">SoundManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Update</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Update1228946440','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Update1228946440','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Update1228946440','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 667</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','Update1228946440',this); ">Sexy::SoundManager::Update</a>()
+{
+    // increment update count to measure frames
+    <a href="#" onMouseOver="link('_member','mUpdateCnt457195144',this); ">mUpdateCnt</a>++;
+
+    // check the delayed list and play the sample if delay time is over
+    for (unsigned int i = 0; i &lt; <a href="#" onMouseOver="link('_member','mDelayedSFX457195144',this); ">mDelayedSFX</a>.size(); i++)
+    {
+        if (<a href="#" onMouseOver="link('_member','mDelayedSFX457195144',this); ">mDelayedSFX</a>[i].second-- &lt;= 0)
+        {
+            <a href="#" onMouseOver="link('_member','PlaySample4194413515',this); ">PlaySample</a>(mDelayedSFX[i].first);
+            <a href="#" onMouseOver="link('_member','mDelayedSFX457195144',this); ">mDelayedSFX</a>.erase(<a href="#" onMouseOver="link('_member','mDelayedSFX457195144',this); ">mDelayedSFX</a>.begin() + i);
+            i--;
+        }
+    }
+
+    // poll the samples and query whether or not they are done playing
+    // when one is done, trigger the next after the desired delay has elapsed
+    for (unsigned int i = 0; i &lt; <a href="#" onMouseOver="link('_member','mChainedSFX457195144',this); ">mChainedSFX</a>.size(); i++)
+    {           
+        if (!<a href="#" onMouseOver="link('_member','mChainedSFX457195144',this); ">mChainedSFX</a>[i].mFirstSoundInstance-&gt;isPlaying())
+        {
+            if (--<a href="#" onMouseOver="link('_member','mChainedSFX457195144',this); ">mChainedSFX</a>[i].mFramesDelay &lt;= 0)
+            {
+                <a href="#" onMouseOver="link('_member','PlaySample4194413515',this); ">PlaySample</a>(mChainedSFX[i].mNextSampleID);
+                <a href="#" onMouseOver="link('_member','mChainedSFX457195144',this); ">mChainedSFX</a>.erase(<a href="#" onMouseOver="link('_member','mChainedSFX457195144',this); ">mChainedSFX</a>.begin() + i);
+                --i;
+            }
+        }
+    }
+
+    // check/poll looping samples
+    for (LoopingSampleMap::iterator aIterator = <a href="#" onMouseOver="link('_member','mLoopingSamples457195144',this); ">mLoopingSamples</a>.begin(); aIterator != <a href="#" onMouseOver="link('_member','mLoopingSamples457195144',this); ">mLoopingSamples</a>.end(); )
+    {
+        // get the fade speed
+        float aFadeSpeed = aIterator-&gt;second.second;
+
+        // do we need to fade the sample?
+        if (aFadeSpeed != 0.0f)
+        {
+            // get the fade volume of the looping sample
+            float aVolume = <a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[aIterator-&gt;first].mFadeVolume;
+            // this is a helper, just to prevent: if (aVolume == 0.0f)
+            int aFadeEnded = 0;
+
+            // always add the fade speed, fade out speed values are &lt; 0
+            aVolume += aFadeSpeed;
+
+            // clamp
+            if (aVolume &lt; 0.0f)
+            {
+                aVolume = 0.0f;
+                aFadeEnded = -1;
+            }
+            if (static_cast&lt;int&gt;(aVolume) &gt; <a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[aIterator-&gt;first].mCurrentVolume) 
+            {
+                aVolume = static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[aIterator-&gt;first].mCurrentVolume);
+                aFadeEnded = 1;
+            }
+            
+            // save the fade volume
+            <a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[aIterator-&gt;first].mFadeVolume = aVolume;
+
+            // set the new volume
+            aIterator-&gt;second.first-&gt;setVolume(static_cast&lt;int&gt;(aVolume));
+
+            if (aFadeEnded == -1)
+            {
+                // fade out completed, volume is MIN_VOLUME, remove the looping sample from the map
+                <a href="#" onMouseOver="link('_member','mLoopingSamples457195144',this); ">mLoopingSamples</a>.erase(aIterator);
+                //continue;
+                break;
+            }
+            
+            if (aFadeEnded == 1)
+            {
+                // fade in completed, max volume reached, clear fade speed
+                aIterator-&gt;second.second = 0.0f;
+                break;
+            }
+        }
+        
+        // start another loop of the sample ?
+        if (!aIterator-&gt;second.first-&gt;isPlaying())
+        {
+            <a href="#" onMouseOver="link('_member','PlaySample4194413515',this); ">PlaySample</a>(aIterator-&gt;first);
+        }
+
+        ++aIterator;
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

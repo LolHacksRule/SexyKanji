@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>DefaultProjectName - GenerateCRCTable</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GenerateCRCTable</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GenerateCRCTable</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GenerateCRCTable53616','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GenerateCRCTable53616','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 41</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','GenerateCRCTable53616',this); ">GenerateCRCTable</a>(void)
+{
+    <a href="#" onMouseOver="link('_member','bCrcTableGenerated0',this); ">bCrcTableGenerated</a> = false;
+
+    register int i, j;
+    register unsigned long crc_accum;
+    for (i = 0;  i &lt; 256;  i++)
+    {
+        crc_accum = ((unsigned long) i &lt;&lt; 24);
+        for ( j = 0;  j &lt; 8;  j++ )
+        {
+            if (crc_accum &amp; 0x80000000L)
+                crc_accum = (crc_accum &lt;&lt; 1) ^ POLYNOMIAL;
+            else
+                crc_accum = (crc_accum &lt;&lt; 1);
+        }
+        <a href="#" onMouseOver="link('_member','crc_table0',this); ">crc_table</a>[i] = crc_accum;
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

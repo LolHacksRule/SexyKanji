@@ -1,0 +1,133 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetPathFrom</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetPathFrom</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetPathFrom</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetPathFrom1935030813','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetPathFrom1935030813','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 810</div>
+<pre class="codeExamples">
+std::string <a href="#" onMouseOver="link('_member','GetPathFrom1935030813',this); ">GetPathFrom</a>(const std::string &amp;theRelPath, const std::string &amp;theDir)
+{
+    std::string aDriveString;
+    std::string aNewPath = theDir;
+
+    if ((theRelPath.length() &gt;= 2) &amp;&amp; (theRelPath[1] == ':'))
+        return theRelPath;
+
+    char aSlashChar = '/';
+
+    if ((theRelPath.find('\\') != -1) || (theDir.find('\\') != -1))
+        aSlashChar = '\\';  
+
+    if ((aNewPath.length() &gt;= 2) &amp;&amp; (aNewPath[1] == ':'))
+    {
+        aDriveString = aNewPath.substr(0, 2);
+        aNewPath.erase(aNewPath.begin(), aNewPath.begin()+2);
+    }
+
+    // Append a trailing slash if necessary
+    if ((aNewPath.length() &gt; 0) &amp;&amp; (aNewPath[aNewPath.length()-1] != '\\') &amp;&amp; (aNewPath[aNewPath.length()-1] != '/'))
+        aNewPath += aSlashChar;
+
+    std::string aTempRelPath = theRelPath;
+
+    for (;;)
+    {
+        if (aNewPath.length() == 0)
+            break;
+
+        int aFirstSlash = aTempRelPath.find('\\');
+        int aFirstForwardSlash = aTempRelPath.find('/');
+
+        if ((aFirstSlash == -1) || ((aFirstForwardSlash != -1) &amp;&amp; (aFirstForwardSlash &lt; aFirstSlash)))
+            aFirstSlash = aFirstForwardSlash;
+
+        if (aFirstSlash == -1)
+            break;
+
+        std::string aChDir = aTempRelPath.substr(0, aFirstSlash);
+
+        aTempRelPath.erase(aTempRelPath.begin(), aTempRelPath.begin() + aFirstSlash + 1);                       
+
+        if (aChDir.compare("..") == 0)
+        {           
+            int aLastDirStart = aNewPath.length() - 1;
+            while ((aLastDirStart &gt; 0) &amp;&amp; (aNewPath[aLastDirStart-1] != '\\') &amp;&amp; (aNewPath[aLastDirStart-1] != '/'))
+                aLastDirStart--;
+
+            std::string aLastDir = aNewPath.substr(aLastDirStart, aNewPath.length() - aLastDirStart - 1);
+            if (aLastDir.compare("..") == 0)
+            {
+                aNewPath += "..";
+                aNewPath += aSlashChar;
+            }
+            else
+            {
+                aNewPath.erase(aNewPath.begin() + aLastDirStart, aNewPath.end());
+            }
+        }       
+        else if (aChDir.compare("") == 0)
+        {
+            aNewPath = aSlashChar;
+            break;
+        }
+        else if (aChDir.compare(".") != 0)
+        {
+            aNewPath += aChDir + aSlashChar;
+            break;
+        }
+    }
+
+    aNewPath = aDriveString + aNewPath + aTempRelPath;
+
+    if (aSlashChar == '/')
+    {
+        for (;;)
+        {
+            int aSlashPos = aNewPath.find('\\');
+            if (aSlashPos == -1)
+                break;
+            aNewPath[aSlashPos] = '/';
+        }
+    }
+    else
+    {
+        for (;;)
+        {
+            int aSlashPos = aNewPath.find('/');
+            if (aSlashPos == -1)
+                break;
+            aNewPath[aSlashPos] = '\\';
+        }
+    }
+
+    return aNewPath;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

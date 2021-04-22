@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ResizeScrollbar</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ResizeScrollbar</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ScrollbarWidget809',this)" class="pathLink">ScrollbarWidget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ResizeScrollbar</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ResizeScrollbar103556604','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ResizeScrollbar103556604','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ResizeScrollbar103556604','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 102</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','ResizeScrollbar103556604',this); ">Sexy::ScrollbarWidget::ResizeScrollbar</a>(int theX, int theY, int theWidth, int theHeight)
+{
+    <a href="#" onMouseOver="link('_member','Resize932440256',this); ">Resize</a>(theX, theY, theWidth, theHeight);
+    if (<a href="#" onMouseOver="link('_member','mHorizontal3765164742',this); ">mHorizontal</a>)
+    {
+        theX = theY = 0; // Use New Container Stuff
+        <a href="#" onMouseOver="link('_member','mUpButton3765164742',this); ">mUpButton</a>-&gt;Resize(theX, theY, theHeight, theHeight);
+        <a href="#" onMouseOver="link('_member','mDownButton3765164742',this); ">mDownButton</a>-&gt;Resize(theX + theWidth - theHeight, theY, theHeight, theHeight);
+    }
+    else
+    {
+        theX = theY = 0; // Use New Container Stuff
+        <a href="#" onMouseOver="link('_member','mUpButton3765164742',this); ">mUpButton</a>-&gt;Resize(theX, theY, theWidth, theWidth);
+        <a href="#" onMouseOver="link('_member','mDownButton3765164742',this); ">mDownButton</a>-&gt;Resize(theX, theY + theHeight - theWidth, theWidth, theWidth);
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

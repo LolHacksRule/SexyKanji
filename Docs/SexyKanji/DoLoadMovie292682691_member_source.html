@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DoLoadMovie</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DoLoadMovie</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ResourceManager809',this)" class="pathLink">ResourceManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DoLoadMovie</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DoLoadMovie292682691','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DoLoadMovie292682691','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DoLoadMovie292682691','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1431</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','DoLoadMovie292682691',this); ">Sexy::ResourceManager::DoLoadMovie</a>(MovieRes *theRes)
+{
+    theRes-&gt;mMovie = new SexyMovie();
+    
+    if (theRes-&gt;mMovie == NULL)
+        return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::DoLoadMovie : ERROR : Failed to load Movie: ") + theRes-&gt;mPath);
+
+    if (theRes-&gt;mMovie-&gt;OpenFile(theRes-&gt;mPath, theRes-&gt;mPreload) == false)
+    {
+        delete theRes-&gt;mMovie;
+        return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::DoLoadMovie : ERROR : Failed to load Movie: ") + theRes-&gt;mPath);
+    }
+
+    <a href="#" onMouseOver="link('_member','ResourceLoadedHook286379313',this); ">ResourceLoadedHook</a>(theRes);
+
+    return true; 
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

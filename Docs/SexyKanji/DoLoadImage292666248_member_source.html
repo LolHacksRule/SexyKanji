@@ -1,0 +1,194 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DoLoadImage</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DoLoadImage</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ResourceManager809',this)" class="pathLink">ResourceManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DoLoadImage</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DoLoadImage292666248','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DoLoadImage292666248','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DoLoadImage292666248','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1107</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','DoLoadImage292666248',this); ">Sexy::ResourceManager::DoLoadImage</a>(ImageRes *theRes)
+{
+    bool isNew;
+
+    SharedImageRef aSharedImageRef = <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;GetImageManager()-&gt;GetSharedImage(theRes-&gt;mPath, 
+                                                    theRes-&gt;mVariant, theRes-&gt;mLookForAlphaFile, &amp;isNew);
+
+    SexyImage* aImage = (SexyImage*)aSharedImageRef;
+
+    if (aImage == NULL)
+        return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Failed to load image: ") + theRes-&gt;mPath);
+
+    if (isNew == true)
+    {
+        if (theRes-&gt;mAlphaFile.empty() == false)
+        {
+            if (<a href="#" onMouseOver="link('_member','LoadAlphaImage3297197348',this); ">LoadAlphaImage</a>(theRes, aSharedImageRef) == false)
+                return false;
+        }
+
+        if (theRes-&gt;mAlphaGridFile.empty() == false)
+        {
+            if (<a href="#" onMouseOver="link('_member','LoadAlphaGridImage3297197348',this); ">LoadAlphaGridImage</a>(theRes, aSharedImageRef) == false)
+                return false;
+        }
+    }
+
+    aImage-&gt;CommitBits();
+    theRes-&gt;mImage = aSharedImageRef;
+    aImage-&gt;PurgeBits(theRes-&gt;mNoPurge);
+
+    if (theRes-&gt;mAnimInfo.mAnimType != <a href="#" onMouseOver="link('_member','AnimType_None62745',this); ">AnimType_None</a>)
+        aImage-&gt;SetAnimInfo(AnimInfo(theRes-&gt;mAnimInfo));
+
+    aImage-&gt;SetRows(theRes-&gt;mRows);
+    aImage-&gt;SetColumns(theRes-&gt;mCols);
+
+    // blending, wrapping mode
+    if(theRes-&gt;mNoBlend) aImage-&gt;SetNoBlendOverride();
+    if(theRes-&gt;mWrapMode != K_WRAP_CLAMP) 
+        aImage-&gt;SetTextureWrappingMode(theRes-&gt;mWrapMode);
+
+    // colorize
+    if (theRes-&gt;mColorizeColor.GetRed() != -1)
+        <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;GetImageManager()-&gt;ColorizeImage(aImage, theRes-&gt;mColorizeColor);
+
+    // rotation
+    if (theRes-&gt;mRotation != 0.0f)
+        <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;GetImageManager()-&gt;RotateImage(aImage, theRes-&gt;mRotation);
+
+    // mirror X
+    if (theRes-&gt;mMirrorX == true)
+        <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;GetImageManager()-&gt;MirrorImage(aImage);
+
+    // mirror Y
+    if (theRes-&gt;mMirrorY == true)
+        <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;GetImageManager()-&gt;FlipImage(aImage);
+
+    // hue
+    if (theRes-&gt;mDeltaHue != 0)
+        <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;GetImageManager()-&gt;RotateImageHue(aImage, theRes-&gt;mDeltaHue);
+
+    // scale (values can be: "50%" "300px" "0.65")
+    // the scale values are parsed here (and not in ParseImageResource()) 
+    // because we need the image dimension to calc the scale if the value is given in pixel
+    // disadvantage: no line numbers from XML reader here...
+    float aScaleX = 1.0f;
+
+    if (theRes-&gt;mScaleX != _S(""))
+    {
+        SexyString::size_type aPos;
+        int aRet;
+
+        // find suffix
+        if ((aPos = theRes-&gt;mScaleX.find('%')) != SexyString::npos)
+        {
+            // percentage
+            aRet = sexyatoi(theRes-&gt;mScaleX.substr(0, aPos).c_str());
+
+            if (aRet == 0 /*|| errno == ERANGE*/)
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::DoLoadImage : ERROR : Scale X out of range: ") + theRes-&gt;mId);
+            else
+            {
+                aScaleX = static_cast&lt;float&gt;(aRet);
+                aScaleX /= 100.0f;
+            }
+        }
+        else if ((aPos = theRes-&gt;mScaleX.find(_S("px"))) != SexyString::npos)
+        {
+            // pixel
+            aRet = sexyatoi(theRes-&gt;mScaleX.substr(0, aPos).c_str());
+
+            if (aRet == 0 || errno == ERANGE)
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::DoLoadImage : ERROR : Scale X out of range: ") + theRes-&gt;mId);
+            else
+            {
+                aScaleX = static_cast&lt;float&gt;(aRet);
+                aScaleX /= aImage-&gt;GetWidth();
+            }
+        }
+        else
+        {
+            // scalar value
+            if ((aRet = sexysscanf(theRes-&gt;mScaleX.c_str(), _S("%f"), &amp;aScaleX)) == EOF || aRet != 1)
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::DoLoadImage : ERROR : Scale X out of range: ") + theRes-&gt;mId);
+        }
+    }
+
+    float aScaleY = 1.0f;
+
+    if (theRes-&gt;mScaleY != _S(""))
+    {
+        SexyString::size_type aPos;
+        int aRet;
+
+        // find suffix
+        if ((aPos = theRes-&gt;mScaleY.find('%')) != SexyString::npos)
+        {
+            // percentage
+            aRet = sexyatoi(theRes-&gt;mScaleY.substr(0, aPos).c_str());
+
+            if (aRet == 0 || errno == ERANGE)
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::DoLoadImage : ERROR : Scale Y out of range: ") + theRes-&gt;mId);
+            else
+            {
+                aScaleY = static_cast&lt;float&gt;(aRet);
+                aScaleY /= 100.0f;
+            }
+        }
+        else if ((aPos = theRes-&gt;mScaleY.find(_S("px"))) != SexyString::npos)
+        {
+            // pixel
+            aRet = sexyatoi(theRes-&gt;mScaleY.substr(0, aPos).c_str());
+
+            if (aRet == 0 || errno == ERANGE)
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::DoLoadImage : ERROR : Scale Y out of range: ") + theRes-&gt;mId);
+            else
+            {
+                aScaleY = static_cast&lt;float&gt;(aRet);
+                aScaleY /= aImage-&gt;GetHeight();
+            }
+        }
+        else
+        {
+            // scalar value
+            if ((aRet = sexysscanf(theRes-&gt;mScaleY.c_str(), _S("%f"), &amp;aScaleY)) == EOF || aRet != 1)
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::DoLoadImage : ERROR : Scale Y out of range: ") + theRes-&gt;mId);
+        }
+    }
+
+    // call scale
+    if (aScaleX != 1.0f || aScaleY != 1.0f)
+        <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;GetImageManager()-&gt;ScaleImage(aImage, aScaleX, aScaleY);
+
+    <a href="#" onMouseOver="link('_member','ResourceLoadedHook286379313',this); ">ResourceLoadedHook</a>(theRes);
+
+    return true;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

@@ -1,0 +1,102 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Draw</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Draw</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','DialogButton809',this)" class="pathLink">DialogButton</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Draw</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Draw3912172198','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Draw3912172198','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Draw3912172198','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 47</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','Draw3912172198',this); ">Sexy::DialogButton::Draw</a>(Graphics *g)
+{
+    if (<a href="#" onMouseOver="link('_member','mBtnNoDraw1220410105',this); ">mBtnNoDraw</a>)
+        return;
+
+    if (<a href="#" onMouseOver="link('_member','mComponentImage1258834657',this); ">mComponentImage</a>==NULL)
+    {
+        ButtonWidget::Draw(g);
+        return;
+    }
+
+    if ((<a href="#" onMouseOver="link('_member','mFont1220410105',this); ">mFont</a> == NULL) &amp;&amp; (<a href="#" onMouseOver="link('_member','mLabel1220410105',this); ">mLabel</a>.length() &gt; 0)) return;
+        //mFont = new SysFont(mWidgetManager-&gt;mApp, "Arial Unicode MS", 12, true);
+
+    bool doTranslate = <a href="#" onMouseOver="link('_member','IsButtonDown448657529',this); ">IsButtonDown</a>();
+
+    if (<a href="#" onMouseOver="link('_member','mNormalRect1220410105',this); ">mNormalRect</a>.mWidth==0)
+    {
+        if (doTranslate)
+            g-&gt;Translate(mTranslateX, mTranslateY);
+
+        g-&gt;DrawImageBox(<a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(0, 0, mWidth, mHeight), mComponentImage);
+    }
+    else
+    {
+        if (<a href="#" onMouseOver="link('_member','mDisabled192236783',this); ">mDisabled</a> &amp;&amp; (<a href="#" onMouseOver="link('_member','mDisabledRect1220410105',this); ">mDisabledRect</a>.mWidth &gt; 0) &amp;&amp; (<a href="#" onMouseOver="link('_member','mDisabledRect1220410105',this); ">mDisabledRect</a>.mHeight &gt; 0))
+            g-&gt;DrawImageBox(mDisabledRect, <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(0, 0, mWidth, mHeight), mComponentImage);
+        else if (<a href="#" onMouseOver="link('_member','IsButtonDown448657529',this); ">IsButtonDown</a>())    
+            g-&gt;DrawImageBox(mDownRect, <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(0, 0, mWidth, mHeight), mComponentImage);
+        else if ((<a href="#" onMouseOver="link('_member','mOverAlpha1220410105',this); ">mOverAlpha</a> &gt; 0))
+        {
+            if (<a href="#" onMouseOver="link('_member','mOverAlpha1220410105',this); ">mOverAlpha</a>&lt;1)
+                g-&gt;DrawImageBox(mNormalRect, <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(0, 0, mWidth, mHeight), mComponentImage);
+
+            g-&gt;SetColorizeImages(true);
+            g-&gt;SetColor(<a href="#" onMouseOver="link('_class','SexyColor809',this); ">SexyColor</a>(255,255,255,(int)(mOverAlpha * 255)));
+            g-&gt;DrawImageBox(mOverRect, <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(0, 0, mWidth, mHeight), mComponentImage);
+            g-&gt;SetColorizeImages(false);
+        }
+        else if(<a href="#" onMouseOver="link('_member','mIsOver192236783',this); ">mIsOver</a>)
+            g-&gt;DrawImageBox(mOverRect, <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(0, 0, mWidth, mHeight), mComponentImage);
+        else
+            g-&gt;DrawImageBox(mNormalRect, <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(0, 0, mWidth, mHeight), mComponentImage);
+        
+        if (doTranslate)
+            g-&gt;Translate(mTranslateX, mTranslateY);
+    }
+
+    if (<a href="#" onMouseOver="link('_member','mFont1220410105',this); ">mFont</a> != NULL)
+    {
+        g-&gt;SetFont(mFont);      
+
+        if (<a href="#" onMouseOver="link('_member','mIsOver192236783',this); ">mIsOver</a>)
+            g-&gt;SetColor(mColors[COLOR_LABEL_HILITE]);
+        else
+            g-&gt;SetColor(mColors[COLOR_LABEL]);
+        
+        int aFontX = (<a href="#" onMouseOver="link('_member','mWidth564406879',this); ">mWidth</a> - <a href="#" onMouseOver="link('_member','mFont1220410105',this); ">mFont</a>-&gt;StringWidth(mLabel))/2;
+        int aFontY = ((<a href="#" onMouseOver="link('_member','mHeight564406879',this); ">mHeight</a> / 2) - (<a href="#" onMouseOver="link('_member','mFont1220410105',this); ">mFont</a>-&gt;GetHeight() / 2));
+
+        g-&gt;DrawString(mLabel, aFontX + mTextOffsetX, aFontY + mTextOffsetY);
+    }
+
+    if (doTranslate)
+        g-&gt;Translate(-mTranslateX, -mTranslateY);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

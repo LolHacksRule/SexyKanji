@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - RGBToHSL</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">RGBToHSL</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyColor809',this)" class="pathLink">SexyColor</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">RGBToHSL</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','RGBToHSL1567089576','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','RGBToHSL1567089576','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 313</div>
+<pre class="codeExamples">
+unsigned long <a href="#" onMouseOver="link('_member','RGBToHSL1567089576',this); ">Sexy::SexyColor::RGBToHSL</a>(int r, int g, int b)
+{                   
+    int maxval = K_MAX(r, K_MAX(g, b));
+    int minval = K_MIN(r, K_MIN(g, b));
+    int hue = 0;
+    int saturation = 0;
+    int luminosity = (minval+maxval)/2;
+    int delta = maxval - minval;
+
+    if (delta != 0)
+    {           
+        saturation = (delta * 256) / ((luminosity &lt;= 128) ? (minval + maxval) : (512 - maxval - minval));
+        
+        if (r == maxval)
+            hue = (g == minval ? 1280 + (((maxval-b) * 256) / delta) :  256 - (((maxval - g) * 256) / delta));
+        else if (g == maxval)
+            hue = (b == minval ?  256 + (((maxval-r) * 256) / delta) :  768 - (((maxval - b) * 256) / delta));
+        else
+            hue = (r == minval ?  768 + (((maxval-g) * 256) / delta) : 1280 - (((maxval - r) * 256) / delta));
+        
+        hue /= 6;
+    }
+
+    return 0xFF000000 | (hue) | (saturation &lt;&lt; 8) | (luminosity &lt;&lt; 16);  
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

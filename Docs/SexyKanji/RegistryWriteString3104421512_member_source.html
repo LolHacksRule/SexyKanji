@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - RegistryWriteString</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">RegistryWriteString</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">RegistryWriteString</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','RegistryWriteString3104421512','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','RegistryWriteString3104421512','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','RegistryWriteString3104421512','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1349</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','RegistryWriteString3104421512',this); ">Sexy::SexyAppBase::RegistryWriteString</a>(const SexyString &amp;theValueName, const SexyString &amp;theString, bool bWriteImmediately=false)
+{
+    if (<a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>)
+    {
+        <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>-&gt;SetString(theValueName, theString);
+
+        if(bWriteImmediately)
+        {
+            SexyPropertiesWriter aPropWriter(mSettings);
+            aPropWriter.WritePropertiesFile(<a href="#" onMouseOver="link('_member','GetAppDataFolder61457',this); ">GetAppDataFolder</a>() + _S("settings.xml"));
+        }
+        return true;
+    }
+    return false;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

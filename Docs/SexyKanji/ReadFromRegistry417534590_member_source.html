@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ReadFromRegistry</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ReadFromRegistry</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ReadFromRegistry</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ReadFromRegistry417534590','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ReadFromRegistry417534590','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ReadFromRegistry417534590','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1461</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','ReadFromRegistry417534590',this); ">Sexy::SexyAppBase::ReadFromRegistry</a>()
+{
+    if(<a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a> == NULL)
+        <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a> = new SexyProperties();
+
+    SexyPropertiesParser aPropParser(mSettings);
+    aPropParser.ParsePropertiesFile(DEFAULT_SETTINGS_PATH); // parse the settings that ship with the game
+
+    // Doesn't matter if this fails.  In fact, it should fail on first run!
+    aPropParser.ParsePropertiesFile(<a href="#" onMouseOver="link('_member','GetAppDataFolder61457',this); ">GetAppDataFolder</a>() + _S("settings.xml"));
+
+    // Now Load System Settings
+
+    if (<a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>-&gt;HasBoolean(_S("IsWindowed")))
+        <a href="#" onMouseOver="link('_member','mIsWindowed414388462',this); ">mIsWindowed</a> = <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>-&gt;GetBoolean(_S("IsWindowed"), mIsWindowed);
+
+    if (<a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>-&gt;HasInteger(_S("MusicVolume")))
+        <a href="#" onMouseOver="link('_member','mMusicVolume414388462',this); ">mMusicVolume</a> = <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>-&gt;GetInteger(_S("MusicVolume"), DEFAULT_MUSIC_VOLUME);
+
+    if (<a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>-&gt;HasInteger(_S("SfxVolume")))
+        <a href="#" onMouseOver="link('_member','mSfxVolume414388462',this); ">mSfxVolume</a> = <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>-&gt;GetInteger(_S("SfxVolume"), DEFAULT_SOUND_VOLUME);
+
+    if (<a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>-&gt;HasBoolean(_S("Muted")))
+    {
+        bool aMute = <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>-&gt;GetBoolean(_S("Muted"), false);
+        <a href="#" onMouseOver="link('_member','mMuteCount414388462',this); ">mMuteCount</a> = aMute ? 1 : 0;
+    }
+
+    if (<a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>-&gt;HasBoolean(_S("WaitForVSync")))
+        <a href="#" onMouseOver="link('_member','mVSyncEnabled414388462',this); ">mVSyncEnabled</a> = <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>-&gt;GetBoolean(_S("WaitForVSync"), true);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

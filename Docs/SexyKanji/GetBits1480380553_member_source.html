@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetBits</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetBits</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyImage809',this)" class="pathLink">SexyImage</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetBits</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetBits1480380553','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetBits1480380553','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 401</div>
+<pre class="codeExamples">
+virtual unsigned long * <a href="#" onMouseOver="link('_member','GetBits1480380553',this); ">Sexy::SexyImage::GetBits</a>()
+{
+    if (!<a href="#" onMouseOver="link('_member','mBits1480183968',this); ">mBits</a>)
+    {
+        // Load the image bits.
+        KImage aTempKImage;
+        bool haveImageBits = false;
+        if (<a href="#" onMouseOver="link('_member','mCompressedDataBuffer1480183968',this); ">mCompressedDataBuffer</a> &amp;&amp; <a href="#" onMouseOver="link('_member','mCompressedDataSize1480183968',this); ">mCompressedDataSize</a> &amp;&amp; <a href="#" onMouseOver="link('_member','mFilePath1480183968',this); ">mFilePath</a> != _S(""))
+        {
+            // Convert wstring to string.
+            std::string aFilePath = SexyStringToStringFast(mFilePath).c_str();
+            haveImageBits = aTempKImage.decodeImage(KImage::detectFormat(aFilePath.c_str()), <a href="#" onMouseOver="link('_member','mCompressedDataBuffer1480183968',this); ">mCompressedDataBuffer</a>, <a href="#" onMouseOver="link('_member','mCompressedDataSize1480183968',this); ">mCompressedDataSize</a>);
+            if (haveImageBits)
+            {
+                delete [] <a href="#" onMouseOver="link('_member','mCompressedDataBuffer1480183968',this); ">mCompressedDataBuffer</a>;
+                <a href="#" onMouseOver="link('_member','mCompressedDataBuffer1480183968',this); ">mCompressedDataBuffer</a> = NULL;
+                <a href="#" onMouseOver="link('_member','mCompressedDataSize1480183968',this); ">mCompressedDataSize</a> = 0;
+            }
+        }
+
+
+        // Load the alpha image bits.
+        KImage anAlphaTempKImage;
+        bool haveAlphaImageBits = false;
+        if (<a href="#" onMouseOver="link('_member','mAlphaCompressedDataBuffer1480183968',this); ">mAlphaCompressedDataBuffer</a> &amp;&amp; <a href="#" onMouseOver="link('_member','mAlphaCompressedDataSize1480183968',this); ">mAlphaCompressedDataSize</a> &amp;&amp; <a href="#" onMouseOver="link('_member','mAlphaFilePath1480183968',this); ">mAlphaFilePath</a> != _S(""))
+        {
+            // Convert wstring to string.
+            std::string aFilePath = SexyStringToStringFast(mAlphaFilePath).c_str();
+            haveAlphaImageBits = anAlphaTempKImage.decodeImage(KImage::detectFormat(aFilePath.c_str()), 
+                <a href="#" onMouseOver="link('_member','mAlphaCompressedDataBuffer1480183968',this); ">mAlphaCompressedDataBuffer</a>, <a href="#" onMouseOver="link('_member','mAlphaCompressedDataSize1480183968',this); ">mAlphaCompressedDataSize</a>);
+            
+            if (haveAlphaImageBits)
+            {
+                delete [] <a href="#" onMouseOver="link('_member','mAlphaCompressedDataBuffer1480183968',this); ">mAlphaCompressedDataBuffer</a>;
+                <a href="#" onMouseOver="link('_member','mAlphaCompressedDataBuffer1480183968',this); ">mAlphaCompressedDataBuffer</a> = NULL;
+                <a href="#" onMouseOver="link('_member','mAlphaCompressedDataSize1480183968',this); ">mAlphaCompressedDataSize</a> = 0;
+            }
+        }
+
+
+        // Compose alpha channel with image
+        if (haveImageBits &amp;&amp; haveAlphaImageBits) 
+        {
+            int width = aTempKImage.getImageWidth();
+            int height = aTempKImage.getImageHeight();
+
+            if ((width == anAlphaTempKImage.getImageWidth()) &amp;&amp;
+                (height == anAlphaTempKImage.getImageHeight()))
+            {
+                unsigned long* aBits1 = aTempKImage.getPixels();
+                unsigned long* aBits2 = anAlphaTempKImage.getPixels();
+                int aSize = width * height;
+                <a href="#" onMouseOver="link('_member','mBits1480183968',this); ">mBits</a> = new unsigned long [aSize];
+                memset(mBits, 0, aSize * sizeof(unsigned long));
+
+                for (int i = 0; i &lt; aSize; i++)
+                {
+#ifdef __ppc__ // may not be necessary
+                    <a href="#" onMouseOver="link('_member','mBits1480183968',this); ">mBits</a>[i] = (aBits1[i] &amp; 0xFFFFFF00) | ((aBits2[i] &amp; 0xFF000000)&gt;&gt;24);
+#else
+                    <a href="#" onMouseOver="link('_member','mBits1480183968',this); ">mBits</a>[i] = (aBits1[i] &amp; 0x00FFFFFF) | ((aBits2[i] &amp; 0xFF) &lt;&lt; 24);
+#endif
+                }
+            }
+        }
+        else if (haveImageBits)
+        {
+            int width = aTempKImage.getImageWidth();
+            int height = aTempKImage.getImageHeight();
+
+            <a href="#" onMouseOver="link('_member','mBits1480183968',this); ">mBits</a> = new unsigned long [width * height];
+            memcpy(mBits, aTempKImage.getPixels(), width * height * sizeof(unsigned long));
+        }
+        else if (haveAlphaImageBits)
+        {
+            int width = anAlphaTempKImage.getImageWidth();
+            int height = anAlphaTempKImage.getImageHeight();
+
+            unsigned long* aBits1 = anAlphaTempKImage.getPixels();
+            int aSize = width * height;
+            <a href="#" onMouseOver="link('_member','mBits1480183968',this); ">mBits</a> = new unsigned long [aSize];
+            memset(mBits, 0, aSize * sizeof(unsigned long));
+
+            for (int i = 0; i &lt; aSize; i++)
+            {
+                <a href="#" onMouseOver="link('_member','mBits1480183968',this); ">mBits</a>[i] = (0x00FFFFFF) | ((aBits1[i] &amp; 0xFF) &lt;&lt; 24);
+            }
+        }
+
+        <a href="#" onMouseOver="link('_member','mBitsDirty1480183968',this); ">mBitsDirty</a> = true; // never been uploaded?
+    }
+    
+    if (<a href="#" onMouseOver="link('_member','mBits1480183968',this); ">mBits</a>)
+    {
+        <a href="#" onMouseOver="link('_member','mPurgeBits1480183968',this); ">mPurgeBits</a> = false;
+        return <a href="#" onMouseOver="link('_member','mBits1480183968',this); ">mBits</a>;
+    }
+
+
+    return NULL;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

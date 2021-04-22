@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - _Render</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">_Render</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">_Render</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','_Render3179329419','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','_Render3179329419','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','_Render3179329419','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 821</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','_Render3179329419',this); ">Sexy::SexyAppBase::_Render</a>(unsigned long &amp;aLastTimeCheck, double &amp;anUpdateFrameTimeAccum)
+{
+    if(<a href="#" onMouseOver="link('_member','g_buffered_rendering0',this); ">g_buffered_rendering</a>)
+    {
+        <a href="#" onMouseOver="link('_member','mGraphics414388462',this); ">mGraphics</a>-&gt;Finalize(); // stop RTT drawing
+        <a href="#" onMouseOver="link('_member','gScreenGraphic0',this); ">gScreenGraphic</a>-&gt;GetKanjiImage()-&gt;endRenderToTarget(); // in case we weren't the last graphics Render Target or if the screen lost focus
+        <a href="#" onMouseOver="link('_member','gScreenGraphic0',this); ">gScreenGraphic</a>-&gt;GetKanjiImage()-&gt;setTextureQuality(true);
+        <a href="#" onMouseOver="link('_member','gScreenGraphic0',this); ">gScreenGraphic</a>-&gt;GetKanjiImage()-&gt;allowTextureWrap(K_WRAP_MIRROR);
+        <a href="#" onMouseOver="link('_member','gScreenGraphic0',this); ">gScreenGraphic</a>-&gt;GetKanjiImage()-&gt;blitRect(0,0,(float)mWidth,(float)mHeight,0,0);
+    }
+
+    // Blit Custom Mouse Image
+    if(<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;canDisplayMouse() &amp;&amp; <a href="#" onMouseOver="link('_member','mCurrentCursor414388462',this); ">mCurrentCursor</a> != <a href="#" onMouseOver="link('_member','SEXY_CURSOR_NONE62745',this); ">SEXY_CURSOR_NONE</a> &amp;&amp; <a href="#" onMouseOver="link('_member','mCursorMap414388462',this); ">mCursorMap</a>[<a href="#" onMouseOver="link('_member','mCurrentCursor414388462',this); ">mCurrentCursor</a>] != NULL &amp;&amp; <a href="#" onMouseOver="link('_member','mCustomCursorsEnabled414388462',this); ">mCustomCursorsEnabled</a>)
+    {
+        if (<a href="#" onMouseOver="link('_member','mCursorMap414388462',this); ">mCursorMap</a>[<a href="#" onMouseOver="link('_member','mCurrentCursor414388462',this); ">mCurrentCursor</a>]-&gt;GetKanjiImage())
+        {
+            float aCursorWidth = <a href="#" onMouseOver="link('_member','mCursorMap414388462',this); ">mCursorMap</a>[<a href="#" onMouseOver="link('_member','mCurrentCursor414388462',this); ">mCurrentCursor</a>]-&gt;GetKanjiImage()-&gt;getWidth();
+            float aCursorHeight = <a href="#" onMouseOver="link('_member','mCursorMap414388462',this); ">mCursorMap</a>[<a href="#" onMouseOver="link('_member','mCurrentCursor414388462',this); ">mCurrentCursor</a>]-&gt;GetKanjiImage()-&gt;getHeight();
+
+            // For Now, the cursor image hotspot is in the center of the image.
+            <a href="#" onMouseOver="link('_member','mCursorMap414388462',this); ">mCursorMap</a>[<a href="#" onMouseOver="link('_member','mCurrentCursor414388462',this); ">mCurrentCursor</a>]-&gt;GetKanjiImage()-&gt;blitAlphaRect (0, 0, aCursorWidth, aCursorHeight, 
+                short(KInput::getMouseX () - 1 - aCursorWidth/2.0f), short(KInput::getMouseY () - 1 - aCursorHeight/2.0f), 
+                false, false);
+        }
+    }
+
+    // Debug Drawing performed Directly to the BackBuffer
+    <a href="#" onMouseOver="link('_member','DrawFPS417534590',this); ">DrawFPS</a>();
+    <a href="#" onMouseOver="link('_member','DrawStats417534590',this); ">DrawStats</a>();
+
+    /* Flip buffers, present the frame we've just drawn */
+    <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;flipBackBuffer(true); <a href="#" onMouseOver="link('_member','gDrawFPSTimer182931648',this); ">gDrawFPSTimer</a>.OnEvent();
+
+    unsigned long aPostScreenBltTime = <a href="#" onMouseOver="link('_member','GetClock417534590',this); ">GetClock</a>();
+
+    if(<a href="#" onMouseOver="link('_member','g_buffered_rendering0',this); ">g_buffered_rendering</a>)
+/*      gScreenGraphic-&gt;GetKanjiImage()-&gt;beginRenderToTarget();*/
+        <a href="#" onMouseOver="link('_member','mGraphics414388462',this); ">mGraphics</a>-&gt;PreDraw();
+
+    // DoUpdateFrames the Frame Time Accumulator
+    // if (isVSynched) then this is the only update
+    {
+        unsigned long aCurTime = <a href="#" onMouseOver="link('_member','GetClock417534590',this); ">GetClock</a>();
+
+        if (aLastTimeCheck != 0)
+        {               
+            int aDeltaTime = aCurTime - aLastTimeCheck;     
+            anUpdateFrameTimeAccum = (anUpdateFrameTimeAccum + aDeltaTime &lt; 200.0) ? anUpdateFrameTimeAccum + aDeltaTime : 200.0f;  // Min
+            anUpdateFrameTimeAccum = (anUpdateFrameTimeAccum &gt; 0.0f) ? anUpdateFrameTimeAccum : 0.0f; // Max
+
+        }
+
+        aLastTimeCheck = aCurTime;
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

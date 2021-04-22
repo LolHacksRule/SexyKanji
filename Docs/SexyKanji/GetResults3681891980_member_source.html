@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetResults</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetResults</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyPerf809',this)" class="pathLink">SexyPerf</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetResults</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetResults3681891980','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetResults3681891980','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 314</div>
+<pre class="codeExamples">
+std::string <a href="#" onMouseOver="link('_member','GetResults3681891980',this); ">Sexy::SexyPerf::GetResults</a>(void)
+{
+    std::string aResult;
+    char aBuf[512];
+
+    sprintf(aBuf,"Total Time: %u ms\n", gDuration);
+    aResult += aBuf;
+
+    for (PerfInfoSet::iterator anItr = <a href="#" onMouseOver="link('_member','gPerfInfoSet0',this); ">gPerfInfoSet</a>.begin(); anItr != <a href="#" onMouseOver="link('_member','gPerfInfoSet0',this); ">gPerfInfoSet</a>.end(); ++anItr)
+    {
+        const <a href="#" onMouseOver="link('_class','PerfInfo0',this); ">PerfInfo</a> &amp;anInfo = *anItr;
+        
+        sprintf(aBuf, "%s (%d calls, %%%.2f time): %u ms (%.2f avg, %u longest)\n", 
+                    anInfo.<a href="#" onMouseOver="link('_member','mPerfName233219635',this); ">mPerfName</a>,                                            // name
+                    anInfo.<a href="#" onMouseOver="link('_member','mCallCount233219635',this); ">mCallCount</a>,                                            // number of calls
+                    static_cast&lt;float&gt;(anInfo.<a href="#" onMouseOver="link('_member','mDuration233219635',this); ">mDuration</a>) / gDuration * 100.0f,   // percentage of total time
+                    anInfo.<a href="#" onMouseOver="link('_member','mDuration233219635',this); ">mDuration</a>,                                            // total duration in ms
+                    static_cast&lt;float&gt;(anInfo.<a href="#" onMouseOver="link('_member','mDuration233219635',this); ">mDuration</a>) / anInfo.<a href="#" onMouseOver="link('_member','mCallCount233219635',this); ">mCallCount</a>,  // average duration in ms
+                    anInfo.<a href="#" onMouseOver="link('_member','mLongestCall233219635',this); ">mLongestCall</a>);                                       // longest duration in ms
+        
+        aResult += aBuf;
+    }
+
+    return aResult;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

@@ -1,0 +1,149 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Init</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Init</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Init</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Init417534590','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Init417534590','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Init417534590','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 233</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','Init417534590',this); ">Sexy::SexyAppBase::Init</a>()
+{
+    // UUID Generated at: http://www.famkruithof.net/uuid/uuidgen
+    if(KPTK::checkGameInstance(<a href="#" onMouseOver="link('_member','StrFormat798802342',this); ">StrFormat</a>("%s-%s",SexyStringToStringFast(mTitle).c_str(), "88d106b0-1fc6-11df").c_str()))
+        return false; // Don't Start Up!
+
+    /* Read data files from application bundle (for Mac) */
+    KMiscTools::setFileSource(true);
+#ifdef K_WIN32
+    _chdir( KMiscTools::makeFilePath( "" ) );
+#else
+    chdir( KMiscTools::makeFilePath( "" ) );
+#endif
+
+    <a href="#" onMouseOver="link('_member','StartAppLog417534590',this); ">StartAppLog</a>();
+    <a href="#" onMouseOver="link('_member','ReadFromRegistry417534590',this); ">ReadFromRegistry</a>();
+    <a href="#" onMouseOver="link('_member','LoadProperties417534590',this); ">LoadProperties</a>();
+
+    std::queue&lt;Erenderer&gt; aRenderDeviceQueue;
+    aRenderDeviceQueue.push(K_DIRECTX9);
+    aRenderDeviceQueue.push(K_DIRECTX);
+    aRenderDeviceQueue.push(K_OPENGL); // This is the only one to work on Mac and iDevices (JPOAG)
+
+    /* Create game window */
+    while(<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a> == NULL &amp;&amp; !aRenderDeviceQueue.empty())
+    {
+        <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a> = KPTK::createKWindow(aRenderDeviceQueue.front());
+        <a href="#" onMouseOver="link('_member','mCurrentRendererType414388462',this); ">mCurrentRendererType</a> = aRenderDeviceQueue.front();
+        aRenderDeviceQueue.pop();
+
+        if (<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a> != NULL)
+        {
+            <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;setFixedAspectRatio(true); /* Keep 4:3 ratio when going fullscreen */
+            if(!<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;createGameWindow(mWidth, mHeight, mFullscreenBits, mIsWindowed, SexyStringToStringFast(mTitle).c_str()))
+            {
+                delete <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>;
+                <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a> = NULL;
+            }
+        }
+    }
+
+    if(<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a> == NULL)
+    {
+        K_LOG("Sexy:SexyAppBase::Init :Error: Creating Render Device!");
+        <a href="#" onMouseOver="link('_member','Shutdown417534590',this); ">Shutdown</a>();
+        return false;
+    }
+
+    // This makes sure the icon is loaded properly to display in the window title 
+    // bar and the task switcher
+#if defined(WIN32) || defined (WIN64)
+    HICON anIcon = ::LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(K_APPICON));
+    HRESULT aResult = SendMessage((HWND)<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;getWindowHandle(), WM_SETICON, (LPARAM)ICON_SMALL, (WPARAM)anIcon);
+    aResult = SendMessage((HWND)<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;getWindowHandle(), WM_SETICON, (LPARAM)ICON_BIG, (WPARAM)anIcon);
+
+    // This is so custom cursors work
+    SetClassLong((HWND)<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;getWindowHandle(), GCL_HCURSOR, NULL);
+    <a href="#" onMouseOver="link('_member','SetCursor3250787850',this); ">SetCursor</a>(SEXY_CURSOR_POINTER);
+
+    mDraggingCursor = CreateCursor(GetModuleHandle(NULL), 15, 10, 32, 32, gDraggingCursorData, gDraggingCursorData+sizeof(gDraggingCursorData)/2);
+#endif
+
+    <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;setMaxFrameRate(0); // enable VSync Drawing
+    <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;setPTKCallBack(EventHandler);
+
+    // init Drawing Target
+    if (<a href="#" onMouseOver="link('_member','g_buffered_rendering0',this); ">g_buffered_rendering</a>)
+    {
+        <a href="#" onMouseOver="link('_member','gScreenGraphic0',this); ">gScreenGraphic</a> = new SexyImage();
+        <a href="#" onMouseOver="link('_member','g_buffered_rendering0',this); ">g_buffered_rendering</a> = <a href="#" onMouseOver="link('_member','gScreenGraphic0',this); ">gScreenGraphic</a>-&gt;GetKanjiImage()-&gt;makeRenderTarget(<a href="#" onMouseOver="link('_member','mWidth414388462',this); ">mWidth</a>, <a href="#" onMouseOver="link('_member','mHeight414388462',this); ">mHeight</a>, true);
+
+        if(!<a href="#" onMouseOver="link('_member','g_buffered_rendering0',this); ">g_buffered_rendering</a>)
+        {
+            delete <a href="#" onMouseOver="link('_member','gScreenGraphic0',this); ">gScreenGraphic</a>;
+            <a href="#" onMouseOver="link('_member','gScreenGraphic0',this); ">gScreenGraphic</a> = NULL;
+        }
+        else
+            <a href="#" onMouseOver="link('_member','gScreenGraphic0',this); ">gScreenGraphic</a>-&gt;GetKanjiImage()-&gt;clearRenderTarget();
+    }
+
+    /* Use software mouse cursor */
+//  KInput::hidePointer();
+//  mKWindow-&gt;displayMouse(true);
+
+    <a href="#" onMouseOver="link('_member','mResourceManager414388462',this); ">mResourceManager</a>    = new ResourceManager();
+    <a href="#" onMouseOver="link('_member','mImageManager414388462',this); ">mImageManager</a>        = new ImageManager();
+    <a href="#" onMouseOver="link('_member','mFontManager414388462',this); ">mFontManager</a>        = new FontManager();
+    <a href="#" onMouseOver="link('_member','mMusicManager414388462',this); ">mMusicManager</a>        = new MusicManager();
+    <a href="#" onMouseOver="link('_member','mSoundManager414388462',this); ">mSoundManager</a>        = new SoundManager();
+    <a href="#" onMouseOver="link('_member','mGraphics414388462',this); ">mGraphics</a>            = new Graphics(gScreenGraphic);
+
+    <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>        = new WidgetManager(this);
+
+    // Set volumes (and mute)
+    <a href="#" onMouseOver="link('_member','SetMusicVolume3250787850',this); ">SetMusicVolume</a>(mMusicVolume);
+    <a href="#" onMouseOver="link('_member','SetSfxVolume3250787850',this); ">SetSfxVolume</a>(mSfxVolume);
+
+    <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a> aRect = <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(0, 0, <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;getWindowWidth(), <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;getWindowHeight());
+    //mKWindow-&gt;getActualWindowWidth();
+    //mKWindow-&gt;getActualWindowHeight();
+
+    <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;Resize(aRect, aRect);
+
+    // Tell Fonts to use Unicode
+    KText::initializeAsUnicode(K_WCHAR);
+    const char* aTable[1];
+    aTable[0] = (char*)<a href="#" onMouseOver="link('_member','gUnicodeDefaultInitStr0',this); ">gUnicodeDefaultInitStr</a>.c_str();
+    KTrueText::initializeAsUnicode(1, (aTable), K_WCHAR);
+
+    <a href="#" onMouseOver="link('_member','InitHook417534590',this); ">InitHook</a>();
+
+    return true;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

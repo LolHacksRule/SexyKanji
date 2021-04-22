@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - SRand</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">SRand</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','MTRand809',this)" class="pathLink">MTRand</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">SRand</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SRand3996969906','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','SRand3996969906','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 106</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','SRand315374730',this); ">Sexy::MTRand::SRand</a>(unsigned long seed)
+{
+    if (seed == 0)
+        seed = 4357;
+
+    /* setting initial seeds to mt[MTRAND_N] using         */
+    /* the generator Line 25 of Table 1 in          */
+    /* [KNUTH 1981, The Art of Computer Programming */
+    /*    Vol. 2 (2nd Ed.), pp102]                  */
+    <a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[0]= seed &amp; 0xffffffffUL;
+    for (<a href="#" onMouseOver="link('_member','mti207937785',this); ">mti</a>=1; <a href="#" onMouseOver="link('_member','mti207937785',this); ">mti</a>&lt; MTRAND_N; <a href="#" onMouseOver="link('_member','mti207937785',this); ">mti</a>++) 
+    {
+        <a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[<a href="#" onMouseOver="link('_member','mti207937785',this); ">mti</a>] = 
+            (1812433253UL * (<a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[<a href="#" onMouseOver="link('_member','mti207937785',this); ">mti</a>-1] ^ (<a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[<a href="#" onMouseOver="link('_member','mti207937785',this); ">mti</a>-1] &gt;&gt; 30)) + <a href="#" onMouseOver="link('_member','mti207937785',this); ">mti</a>); 
+        /* See Knuth TAOCP Vol2. 3rd Ed. P.106 for multiplier. */
+        /* In the previous versions, MSBs of the seed affect   */
+        /* only MSBs of the array mt[].                        */
+        /* 2002/01/09 modified by Makoto Matsumoto             */
+        <a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[<a href="#" onMouseOver="link('_member','mti207937785',this); ">mti</a>] &amp;= 0xffffffffUL;
+        /* for &gt;32 bit machines */
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

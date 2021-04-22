@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - SharedFontRef</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">SharedFontRef</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SharedFontRef809',this)" class="pathLink">SharedFontRef</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">SharedFontRef</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SharedFontRef3017312935','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','SharedFontRef3017312935','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 61</div>
+<pre class="codeExamples">
+ <a href="#" onMouseOver="link('_member','SharedFontRef3147579543',this); ">Sexy::SharedFontRef::SharedFontRef</a>(SharedFont *theSharedFont)
+{
+    <a href="#" onMouseOver="link('_member','mSharedFont3952885950',this); ">mSharedFont</a> = theSharedFont;
+    if (theSharedFont != NULL)
+        <a href="#" onMouseOver="link('_member','mSharedFont3952885950',this); ">mSharedFont</a>-&gt;mRefCount++;
+
+    <a href="#" onMouseOver="link('_member','mUnSharedFont3952885950',this); ">mUnSharedFont</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mOwnsUnshared3952885950',this); ">mOwnsUnshared</a> = false;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

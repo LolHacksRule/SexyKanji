@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - HSLToRGB</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">HSLToRGB</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyColor809',this)" class="pathLink">SexyColor</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">HSLToRGB</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','HSLToRGB1567089576','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','HSLToRGB1567089576','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 270</div>
+<pre class="codeExamples">
+unsigned long <a href="#" onMouseOver="link('_member','HSLToRGB1567089576',this); ">Sexy::SexyColor::HSLToRGB</a>(int h, int s, int l)
+{
+    int r;
+    int g;
+    int b;
+
+    double v= (l &lt; 128) ? (l * (255+s))/255 :
+            (l+s-l*s/255);
+    
+    int y = (int) (2*l-v);
+
+    int aColorDiv = (6 * h) / 256;
+    int x = (int)(y+(v-y)*((h - (aColorDiv * 256 / 6)) * 6)/255);
+    if (x &gt; 255)
+        x = 255;
+
+    int z = (int) (v-(v-y)*((h - (aColorDiv * 256 / 6)) * 6)/255);
+    if (z &lt; 0)
+        z = 0;
+    
+    switch (aColorDiv)
+    {
+        case 0: r = (int) v; g = x; b = y; break;
+        case 1: r = z; g= (int) v; b = y; break;
+        case 2: r = y; g= (int) v; b = x; break;
+        case 3: r = y; g = z; b = (int) v; break;
+        case 4: r = x; g = y; b = (int) v; break;
+        case 5: r = (int) v; g = y; b = z; break;
+        default: r = (int) v; g = x; b = y; break;
+    }
+
+    return 0xFF000000 | (r &lt;&lt; 16) | (g &lt;&lt; 8) | (b);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - determinantOfMinor</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">determinantOfMinor</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyTransform2D809',this)" class="pathLink">SexyTransform2D</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">determinantOfMinor</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','determinantOfMinor1524906902','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','determinantOfMinor1524906902','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 437</div>
+<pre class="codeExamples">
+double <a href="#" onMouseOver="link('_member','determinantOfMinor1524906902',this); ">Sexy::SexyTransform2D::determinantOfMinor</a>(int theRowHeightY, int theColumnWidthX) const
+{
+    int x1 = theColumnWidthX == 0 ? 1 : 0;  /* always either 0 or 1 */
+    int x2 = theColumnWidthX == 2 ? 1 : 2;  /* always either 1 or 2 */
+    int y1 = theRowHeightY   == 0 ? 1 : 0;  /* always either 0 or 1 */
+    int y2 = theRowHeightY   == 2 ? 1 : 2;  /* always either 1 or 2 */
+
+    return ( m [y1] [x1]  *  m [y2] [x2] )
+        -  ( m [y1] [x2]  *  m [y2] [x1] );
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

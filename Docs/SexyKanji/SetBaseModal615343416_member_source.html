@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - SetBaseModal</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">SetBaseModal</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','WidgetManager809',this)" class="pathLink">WidgetManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">SetBaseModal</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SetBaseModal615343416','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','SetBaseModal615343416','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SetBaseModal615343416','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 565</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','SetBaseModal615343416',this); ">Sexy::WidgetManager::SetBaseModal</a>(Widget *theWidget, const FlagsMod &amp;theBelowFlagsMod)
+{
+    <a href="#" onMouseOver="link('_member','mBaseModalWidget3955182565',this); ">mBaseModalWidget</a> = theWidget;
+    <a href="#" onMouseOver="link('_member','mBelowModalFlagsMod3955182565',this); ">mBelowModalFlagsMod</a> = theBelowFlagsMod;
+    
+    if ((<a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a> != NULL) &amp;&amp; (<a href="#" onMouseOver="link('_member','mBelowModalFlagsMod3955182565',this); ">mBelowModalFlagsMod</a>.mRemoveFlags &amp; <a href="#" onMouseOver="link('_member','WIDGETFLAGS_ALLOW_MOUSE62745',this); ">WIDGETFLAGS_ALLOW_MOUSE</a>) &amp;&amp; 
+        (<a href="#" onMouseOver="link('_member','IsBelow652766768',this); ">IsBelow</a>(mOverWidget, mBaseModalWidget)))
+    {
+        Widget* aWidget = <a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a>;
+        <a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a> = NULL;
+        <a href="#" onMouseOver="link('_member','MouseLeave3063501302',this); ">MouseLeave</a>(aWidget);      
+    }
+    
+    if ((<a href="#" onMouseOver="link('_member','mLastDownWidget3955182565',this); ">mLastDownWidget</a> != NULL) &amp;&amp; (<a href="#" onMouseOver="link('_member','mBelowModalFlagsMod3955182565',this); ">mBelowModalFlagsMod</a>.mRemoveFlags &amp; <a href="#" onMouseOver="link('_member','WIDGETFLAGS_ALLOW_MOUSE62745',this); ">WIDGETFLAGS_ALLOW_MOUSE</a>) &amp;&amp; 
+        (<a href="#" onMouseOver="link('_member','IsBelow652766768',this); ">IsBelow</a>(mLastDownWidget, mBaseModalWidget)))
+    {
+        Widget* aWidget = <a href="#" onMouseOver="link('_member','mLastDownWidget3955182565',this); ">mLastDownWidget</a>;
+        int aDownButtons = <a href="#" onMouseOver="link('_member','mDownButtons3955182565',this); ">mDownButtons</a>;
+        <a href="#" onMouseOver="link('_member','mDownButtons3955182565',this); ">mDownButtons</a> = 0;       
+        <a href="#" onMouseOver="link('_member','mLastDownWidget3955182565',this); ">mLastDownWidget</a> = NULL;
+        <a href="#" onMouseOver="link('_member','DoMouseUps3149876172',this); ">DoMouseUps</a>(aWidget, aDownButtons);        
+    }
+    
+    if ((<a href="#" onMouseOver="link('_member','mFocusWidget3955182565',this); ">mFocusWidget</a> != NULL) &amp;&amp; (<a href="#" onMouseOver="link('_member','mBelowModalFlagsMod3955182565',this); ">mBelowModalFlagsMod</a>.mRemoveFlags &amp; <a href="#" onMouseOver="link('_member','WIDGETFLAGS_ALLOW_FOCUS62745',this); ">WIDGETFLAGS_ALLOW_FOCUS</a>) &amp;&amp; 
+        (<a href="#" onMouseOver="link('_member','IsBelow652766768',this); ">IsBelow</a>(mFocusWidget, mBaseModalWidget)))
+    {
+        Widget* aWidget = <a href="#" onMouseOver="link('_member','mFocusWidget3955182565',this); ">mFocusWidget</a>;
+        <a href="#" onMouseOver="link('_member','mFocusWidget3955182565',this); ">mFocusWidget</a> = NULL;
+        aWidget-&gt;LostFocus();       
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

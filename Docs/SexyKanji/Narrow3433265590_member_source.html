@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Narrow</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Narrow</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','StringUtility809',this)" class="pathLink">StringUtility</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Narrow</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Narrow3433265590','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Narrow3433265590','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 27</div>
+<pre class="codeExamples">
+std::string <a href="#" onMouseOver="link('_member','Narrow3433265590',this); ">Sexy::StringUtility::Narrow</a>(const std::wstring &amp;str)
+{
+    std::ostringstream stm;
+    const std::ctype&lt;wchar_t&gt;&amp; ctfacet = std::use_facet&lt;std::ctype&lt;wchar_t&gt;&gt;(stm.getloc());
+
+    for (size_t i = 0; i &lt; str.size(); i++)
+    {
+        stm &lt;&lt; ctfacet.narrow(str[i], 0);
+    }
+
+    return stm.str();
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

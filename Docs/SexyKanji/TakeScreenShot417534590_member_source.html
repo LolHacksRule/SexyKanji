@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - TakeScreenShot</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">TakeScreenShot</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">TakeScreenShot</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','TakeScreenShot417534590','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','TakeScreenShot417534590','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','TakeScreenShot417534590','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1950</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','TakeScreenShot417534590',this); ">Sexy::SexyAppBase::TakeScreenShot</a>()
+{
+    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aScreenShotDir = <a href="#" onMouseOver="link('_member','GetAppDataFolder61457',this); ">GetAppDataFolder</a>() + _S("_screenshots");
+    int aMaxID = 0;
+    KMiscTools::enumerateFolder(SexyStringToStringFast(aScreenShotDir).c_str(), EnumScreenShots, &amp;aMaxID);
+
+    <a href="#" onMouseOver="link('_member','MkDir1908875876',this); ">MkDir</a>(SexyStringToStringFast(<a href="#" onMouseOver="link('_member','GetAppDataFolder61457',this); ">GetAppDataFolder</a>() + _S("_screenshots")));
+
+    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aFileName = <a href="#" onMouseOver="link('_member','StrFormat798802342',this); ">StrFormat</a>(_S("%s_screenshots\\image%d.png"), <a href="#" onMouseOver="link('_member','GetAppDataFolder61457',this); ">GetAppDataFolder</a>().c_str(), aMaxID);
+    if (<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>)
+        <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;saveBackBuffer(SexyStringToStringFast(aFileName).c_str(), K_IMAGE_PNG);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Inverse</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Inverse</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyTransform2D809',this)" class="pathLink">SexyTransform2D</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Inverse</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Inverse1476543052','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Inverse1476543052','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Inverse1476543052','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 467</div>
+<pre class="codeExamples">
+<a href="#" onMouseOver="link('_member','SexyTransform2D1476568677',this); ">SexyTransform2D</a> <a href="#" onMouseOver="link('_member','Inverse1476543052',this); ">Sexy::SexyTransform2D::Inverse</a>() const
+{
+    <a href="#" onMouseOver="link('_member','SexyTransform2D1476568677',this); ">SexyTransform2D</a> aRetTrans(true);
+    double det = <a href="#" onMouseOver="link('_member','GetDeterminant1476543052',this); ">GetDeterminant</a>();
+
+    if ( fabs(det) &lt; 1e-2 )
+        return aRetTrans;
+    
+    double oneOverDeterminant = 1.0 / det;
+
+    for (   int y = 0;  y &lt; 3;  y ++ )
+    {
+        for ( int x = 0;  x &lt; 3;  x ++   )
+        {
+            /* Rule is Inverse = 1/det * minor of the TRANSPOSE matrix.  *
+            * Note (y,x) becomes (x,y) INTENTIONALLY here!              */
+            aRetTrans.m[y][x] = (float)(<a href="#" onMouseOver="link('_member','determinantOfMinor1524906902',this); ">determinantOfMinor</a>( x, y ) * oneOverDeterminant);
+
+            /* (y0,x1)  (y1,x0)  (y1,x2)  and (y2,x1)  all need to be negated. */
+            if( 1 == ((x + y) % 2) )
+                aRetTrans.m[y][x] = - aRetTrans.m[y][x];
+        }
+    }
+
+    return aRetTrans;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

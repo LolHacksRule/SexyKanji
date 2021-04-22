@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetMovieThrow</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetMovieThrow</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ResourceManager809',this)" class="pathLink">ResourceManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetMovieThrow</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetMovieThrow473871590','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetMovieThrow473871590','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetMovieThrow473871590','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1980</div>
+<pre class="codeExamples">
+virtual SexyMovie * <a href="#" onMouseOver="link('_member','GetMovieThrow473871590',this); ">Sexy::ResourceManager::GetMovieThrow</a>(const SexyString &amp;theId)
+{
+    ResMap::iterator anItr = <a href="#" onMouseOver="link('_member','mMovieMap288852731',this); ">mMovieMap</a>.find(theId);
+
+    if (anItr != <a href="#" onMouseOver="link('_member','mMovieMap288852731',this); ">mMovieMap</a>.end())
+    {
+        MovieRes *aRes = (MovieRes*)anItr-&gt;second;
+
+        if (aRes-&gt;mMovie != NULL)
+            return aRes-&gt;mMovie;
+
+        if (<a href="#" onMouseOver="link('_member','mAllowMissingProgramResources288852731',this); ">mAllowMissingProgramResources</a> &amp;&amp; aRes-&gt;mFromProgram)
+            return NULL;
+    }
+
+    <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::GetMovieThrow : ERROR : Movie resource not found: ") + theId);
+    
+    throw ResourceManagerException(<a href="#" onMouseOver="link('_member','GetErrorText339024635',this); ">GetErrorText</a>());
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

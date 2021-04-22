@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DrawLine</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DrawLine</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Graphics809',this)" class="pathLink">Graphics</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DrawLine</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawLine3358465818','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DrawLine3358465818','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawLine3358465818','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 437</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','DrawLine3358465818',this); ">Sexy::Graphics::DrawLine</a>(int theStartX, int theStartY, int theEndX, int theEndY)
+{
+    if (<a href="#" onMouseOver="link('_member','mLineGraphic942441602',this); ">mLineGraphic</a> == NULL || <a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mAlpha &lt;= 0) return;
+
+    <a href="#" onMouseOver="link('_member','PreDraw2295276211',this); ">PreDraw</a>();
+
+    float aStartX = theStartX + <a href="#" onMouseOver="link('_member','mTransX942441602',this); ">mTransX</a>;
+    float aStartY = theStartY + <a href="#" onMouseOver="link('_member','mTransY942441602',this); ">mTransY</a>;
+    float aEndX = theEndX + <a href="#" onMouseOver="link('_member','mTransX942441602',this); ">mTransX</a>;
+    float aEndY = theEndY + <a href="#" onMouseOver="link('_member','mTransY942441602',this); ">mTransY</a>;
+
+    if (!<a href="#" onMouseOver="link('_member','DrawLineClipHelper2999987779',this); ">DrawLineClipHelper</a>(&amp;aStartX, &amp;aStartY, &amp;aEndX, &amp;aEndY))
+        return;
+
+    <a href="#" onMouseOver="link('_member','mLineGraphic942441602',this); ">mLineGraphic</a>-&gt;GetKanjiImage()-&gt;setTextureQuality(false);
+    <a href="#" onMouseOver="link('_member','mLineGraphic942441602',this); ">mLineGraphic</a>-&gt;GetKanjiImage()-&gt;drawLine(aStartX, aStartY, aEndX, aEndY, 
+        static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mRed) / 255.0f, static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mGreen) / 255.0f,
+        static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mBlue) / 255.0f, static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mAlpha) / 255.0f);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

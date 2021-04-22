@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - PFInsert</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">PFInsert</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Graphics809',this)" class="pathLink">Graphics</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">PFInsert</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','PFInsert3320341844','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','PFInsert3320341844','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 2036</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','PFInsert3320341844',this); ">Sexy::Graphics::PFInsert</a>(int i, int y)
+{
+    int j;
+    double dx;
+    const <a href="#" onMouseOver="link('_member','SexyPoint62745',this); ">SexyPoint</a> *p, *q;
+
+    j = i&lt;<a href="#" onMouseOver="link('_member','mPFNumVertices147456691',this); ">mPFNumVertices</a>-1 ? i+1 : 0;
+    if (<a href="#" onMouseOver="link('_member','mPFPoints147456691',this); ">mPFPoints</a>[i].mY &lt; <a href="#" onMouseOver="link('_member','mPFPoints147456691',this); ">mPFPoints</a>[j].mY) 
+    {
+        p = &amp;<a href="#" onMouseOver="link('_member','mPFPoints147456691',this); ">mPFPoints</a>[i]; 
+        q = &amp;<a href="#" onMouseOver="link('_member','mPFPoints147456691',this); ">mPFPoints</a>[j];
+    }
+    else           
+    {
+        p = &amp;<a href="#" onMouseOver="link('_member','mPFPoints147456691',this); ">mPFPoints</a>[j]; 
+        q = &amp;<a href="#" onMouseOver="link('_member','mPFPoints147456691',this); ">mPFPoints</a>[i];
+    }
+    /* initialize x position at intersection of edge with scanline y */
+    <a href="#" onMouseOver="link('_member','mPFActiveEdgeList147456691',this); ">mPFActiveEdgeList</a>[<a href="#" onMouseOver="link('_member','mPFNumActiveEdges147456691',this); ">mPFNumActiveEdges</a>].mDX = dx = (q-&gt;mX - p-&gt;mX)/(double) (q-&gt;mY - p-&gt;mY);
+    <a href="#" onMouseOver="link('_member','mPFActiveEdgeList147456691',this); ">mPFActiveEdgeList</a>[<a href="#" onMouseOver="link('_member','mPFNumActiveEdges147456691',this); ">mPFNumActiveEdges</a>].mX = dx*(y+0.5 - p-&gt;mY - <a href="#" onMouseOver="link('_member','mTransY942441602',this); ">mTransY</a>) + p-&gt;mX + <a href="#" onMouseOver="link('_member','mTransX942441602',this); ">mTransX</a>;
+    <a href="#" onMouseOver="link('_member','mPFActiveEdgeList147456691',this); ">mPFActiveEdgeList</a>[<a href="#" onMouseOver="link('_member','mPFNumActiveEdges147456691',this); ">mPFNumActiveEdges</a>].i = i;
+    <a href="#" onMouseOver="link('_member','mPFActiveEdgeList147456691',this); ">mPFActiveEdgeList</a>[<a href="#" onMouseOver="link('_member','mPFNumActiveEdges147456691',this); ">mPFNumActiveEdges</a>].b = p-&gt;mY - 1.0/dx * p-&gt;mX;
+    <a href="#" onMouseOver="link('_member','mPFNumActiveEdges147456691',this); ">mPFNumActiveEdges</a>++;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

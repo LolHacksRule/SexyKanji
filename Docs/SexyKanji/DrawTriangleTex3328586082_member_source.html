@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DrawTriangleTex</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DrawTriangleTex</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Graphics809',this)" class="pathLink">Graphics</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DrawTriangleTex</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawTriangleTex3328586082','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DrawTriangleTex3328586082','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawTriangleTex3328586082','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1674</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','DrawTriangleTex3328586082',this); ">Sexy::Graphics::DrawTriangleTex</a>(SexyImage *theTexture, const <a href="#" onMouseOver="link('_class','SexyTriVertex809',this); ">Sexy::SexyTriVertex</a> &amp;v1, const <a href="#" onMouseOver="link('_class','SexyTriVertex809',this); ">Sexy::SexyTriVertex</a> &amp;v2, const <a href="#" onMouseOver="link('_class','SexyTriVertex809',this); ">Sexy::SexyTriVertex</a> &amp;v3)
+{
+    if (theTexture == NULL) return;
+    <a href="#" onMouseOver="link('_member','PreDraw2295276211',this); ">PreDraw</a>();
+
+    KGraphic* aPTKImage = theTexture-&gt;GetKanjiImage();
+    if(<a href="#" onMouseOver="link('_member','mColorizeImages942441602',this); ">mColorizeImages</a>)
+        aPTKImage-&gt;setBlitColor((float)<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mRed/255.0f, (float)<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mGreen/255.0f, (float)<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mBlue/255.0f, (float)<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mAlpha/255.0f);
+    else
+        aPTKImage-&gt;setBlitColor(1, 1, 1, 1);
+
+    aPTKImage-&gt;setAlphaMode((mDrawMode == DRAWMODE_ADDITIVE) ? K_ALPHA_ADDITIVE : K_ALPHA_NORMAL);
+    aPTKImage-&gt;setTextureQuality(mLinearBlend &amp;&amp; !theTexture-&gt;GetNoBlendOverride());
+
+    float src1_x = v1.<a href="#" onMouseOver="link('_member','u1496037218',this); ">u</a> * theTexture-&gt;GetWidth();
+    float src1_y = v1.<a href="#" onMouseOver="link('_member','v1496037218',this); ">v</a> * theTexture-&gt;GetHeight();
+    float src2_x = v2.u * theTexture-&gt;GetWidth();
+    float src2_y = v2.v * theTexture-&gt;GetHeight();
+    float src3_x = v3.u * theTexture-&gt;GetWidth();
+    float src3_y = v3.v * theTexture-&gt;GetHeight();
+
+    SexyColor color_v1(v1.<a href="#" onMouseOver="link('_member','color1496037218',this); ">color</a>);
+    SexyColor color_v2(v2.color);
+    SexyColor color_v3(v3.color);
+
+    float z = 0.0f;
+    float w = 1.0f;
+
+    // Begin drawing to batch.
+    <a href="#" onMouseOver="link('_member','mBatch147456691',this); ">mBatch</a>-&gt;beginBatch(aPTKImage);
+
+    //mBatch-&gt;blitPerspectiveTriangle(src1_x, src2_y, src2_x, src1_y, src3_x, src3_y, v1.x, v1.y, 0.0f, 1.0f, v2.x, v2.y, 0.0f, 1.0f, v3.x, v3.y, 0.0f, 1.0f);
+    <a href="#" onMouseOver="link('_member','mBatch147456691',this); ">mBatch</a>-&gt;blitPerspectiveTriangleColor (src1_x, src1_y, src2_x, src2_y, src3_x, src3_y,
+        v1.<a href="#" onMouseOver="link('_member','x1496037218',this); ">x</a>, v1.<a href="#" onMouseOver="link('_member','y1496037218',this); ">y</a>, z, w, (float)color_v1.mRed/255.0f, (float) color_v1.mGreen/255.0f, (float) color_v1.mBlue/255.0f,
+        v2.x, v2.y, z, w, (float)color_v2.mRed/255.0f, (float) color_v2.mGreen/255.0f, (float) color_v2.mBlue/255.0f,
+        v3.x, v3.y, z, w, (float)color_v3.mRed/255.0f, (float) color_v3.mGreen/255.0f, (float) color_v3.mBlue/255.0f);
+
+
+    // End drawing to batch.
+    <a href="#" onMouseOver="link('_member','mBatch147456691',this); ">mBatch</a>-&gt;endBatch();
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

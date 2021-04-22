@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - URLEncode</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">URLEncode</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">URLEncode</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','URLEncode1908875876','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','URLEncode1908875876','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 202</div>
+<pre class="codeExamples">
+std::string <a href="#" onMouseOver="link('_member','URLEncode1908875876',this); ">URLEncode</a>(const std::string &amp;theString)
+{
+    char* aHexChars = "0123456789ABCDEF";
+
+    std::string aString;
+
+    for (unsigned i = 0; i &lt; theString.length(); i++)
+    {
+        switch (theString[i])
+        {
+        case ' ':
+            aString.insert(aString.end(), '+');
+            break;
+        case '?':
+        case '&amp;':
+        case '%':
+        case '+':
+        case '\r':
+        case '\n':
+        case '\t':
+            aString.insert(aString.end(), '%');
+            aString.insert(aString.end(), aHexChars[(theString[i] &gt;&gt; 4) &amp; 0xF]);
+            aString.insert(aString.end(), aHexChars[(theString[i]     ) &amp; 0xF]);
+            break;
+        default:
+            aString.insert(aString.end(), theString[i]);
+        }
+    }
+
+    return aString;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

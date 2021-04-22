@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - IncStreamVolume</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">IncStreamVolume</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','MusicManager809',this)" class="pathLink">MusicManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">IncStreamVolume</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','IncStreamVolume4285568812','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','IncStreamVolume4285568812','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 300</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','IncStreamVolume4285568812',this); ">Sexy::MusicManager::IncStreamVolume</a>(unsigned int theStreamID, int theVolumeInc)
+{
+    if ((theStreamID &lt; 0) || (theStreamID &gt;= <a href="#" onMouseOver="link('_member','MAX_MUSIC_STREAMS0',this); ">MAX_MUSIC_STREAMS</a>))
+    {
+        K_LOG("Sexy::MusicManager::IncStreamVolume: WARNING : Invalid stream ID.");
+        return;
+    }
+    
+    KSound* aSoundInstance = <a href="#" onMouseOver="link('_member','mStreamsInfo410112142',this); ">mStreamsInfo</a>[theStreamID].mSoundInstance;
+
+    if (aSoundInstance != NULL)
+    {
+        // get, increment and clamp the volume
+        int aVolume = <a href="#" onMouseOver="link('_member','mStreamsInfo410112142',this); ">mStreamsInfo</a>[theStreamID].mCurrentVolume + theVolumeInc;
+        if (aVolume &lt; MIN_VOLUME) aVolume = MIN_VOLUME;
+        if (aVolume &gt; MAX_VOLUME) aVolume = MAX_VOLUME;
+        
+        // set the volume
+        <a href="#" onMouseOver="link('_member','mStreamsInfo410112142',this); ">mStreamsInfo</a>[theStreamID].mCurrentVolume = aVolume;
+        aSoundInstance-&gt;setVolume(aVolume);
+    }
+    else
+    {
+        K_LOG("Sexy::MusicManager::IncStreamVolume: WARNING : No sound instance for specified stream ID.");
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

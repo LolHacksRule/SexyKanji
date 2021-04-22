@@ -1,0 +1,213 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ParseXMLFile</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ParseXMLFile</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyFont809',this)" class="pathLink">SexyFont</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ParseXMLFile</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParseXMLFile1920420493','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ParseXMLFile1920420493','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParseXMLFile1920420493','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 142</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','ParseXMLFile1920420493',this); ">Sexy::SexyFont::ParseXMLFile</a>(SexyString theFilePath)
+{
+    XMLParser aParser;
+
+    if (aParser.OpenFile(theFilePath) &amp;&amp; !aParser.HasFailed())
+    {
+        XMLElement aNode;
+
+        while(aParser.NextElement(&amp;aNode))
+        {
+            switch (aNode.mType)
+            {
+            case XMLElement::TYPE_START:
+                {
+                    if (aNode.mValue == _S("KanjiFont"))
+                    {
+                        if(XMLParser::HasAttribute(&amp;aNode, _S("ascent")))
+                        {
+                            sexysscanf(aNode.mAttributes[_S("ascent")].c_str(), _S("%d"), &amp;mAscent);
+                            <a href="#" onMouseOver="link('_member','mAscent147566763',this); ">mAscent</a> += 2;
+                        }
+
+                        if(XMLParser::HasAttribute(&amp;aNode, _S("descent")))
+                            sexysscanf(aNode.mAttributes[_S("descent")].c_str(), _S("%d"), &amp;mDescent);
+
+                        if(XMLParser::HasAttribute(&amp;aNode, _S("kerning")))
+                            sexysscanf(aNode.mAttributes[_S("kerning")].c_str(), _S("%d"), &amp;mGlobalKerning);
+
+//                      if(XMLParser::HasAttribute(&amp;aNode, L"line_spacing"))
+//                          mLineSpacingOffset = aNode.mAttributes[L"line_spacing"];
+
+                        if(XMLParser::HasAttribute(&amp;aNode, _S("size")))
+                            sexysscanf(aNode.mAttributes[_S("size")].c_str(), _S("%d"), &amp;mFontSize);
+
+                        if(XMLParser::HasAttribute(&amp;aNode, _S("style")))
+                            <a href="#" onMouseOver="link('_member','mFontStyle147566763',this); ">mFontStyle</a> = aNode.mAttributes[_S("style")];
+
+                        if(XMLParser::HasAttribute(&amp;aNode, _S("name")))
+                            <a href="#" onMouseOver="link('_member','mFontFamilyName147566763',this); ">mFontFamilyName</a> = aNode.mAttributes[_S("name")];
+
+                        if(XMLParser::HasAttribute(&amp;aNode, _S("height")))
+                            sexysscanf(aNode.mAttributes[_S("height")].c_str(), _S("%d"), &amp;mHeight);
+
+                        <a href="#" onMouseOver="link('_member','mAscentPadding147566763',this); ">mAscentPadding</a> = <a href="#" onMouseOver="link('_member','mHeight147566763',this); ">mHeight</a> - <a href="#" onMouseOver="link('_member','mAscent147566763',this); ">mAscent</a> - <a href="#" onMouseOver="link('_member','mDescent147566763',this); ">mDescent</a>;
+                    }
+                    else if (aNode.mValue == _S("ImagePlanes"))
+                    {
+                        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aFontPathDir = <a href="#" onMouseOver="link('_member','GetFileDir1640495726',this); ">GetFileDir</a>(theFilePath, true);
+                        bool bParsingGlyphPlanes = true;
+                        while (bParsingGlyphPlanes &amp;&amp; aParser.NextElement(&amp;aNode))
+                        {
+                            switch (aNode.mType)
+                            {
+                            case XMLElement::TYPE_START:
+                                {
+                                    if (aNode.mValue == _S("Plane"))
+                                    {
+                                        if (XMLParser::HasAttribute(&amp;aNode, _S("id")))
+                                        {
+                                            int anID = 0;
+                                            sexysscanf(aNode.mAttributes[_S("id")].c_str(), _S("%d"), &amp;anID);
+                                            if (anID &gt;= 0 &amp;&amp; anID &lt; MAX_KTEXT_GLYPH_PAGES)
+                                            {
+                                                if (XMLParser::HasAttribute(&amp;aNode, _S("path") )
+                                                    &amp;&amp; <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a> &amp;&amp; <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;<a href="#" onMouseOver="link('_member','GetImageManager1426455561',this); ">GetImageManager</a>())
+                                                {
+                                                    // TODO: Figure out the directory situation.  We should get the directory
+                                                    // of the descriptor file and prepend it to the image file. (JPOAG)
+                                                    delete <a href="#" onMouseOver="link('_member','mGlyphPages147566763',this); ">mGlyphPages</a>[anID];
+                                                    <a href="#" onMouseOver="link('_member','mGlyphPages147566763',this); ">mGlyphPages</a>[anID] = <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;<a href="#" onMouseOver="link('_member','GetImageManager1426455561',this); ">GetImageManager</a>()-&gt;<a href="#" onMouseOver="link('_member','GetSharedImage918743780',this); ">GetSharedImage</a>(aNode.mAttributes[_S("path")]);
+
+                                                    if(((<a href="#" onMouseOver="link('_class','SexyImage809',this); ">SexyImage</a>*)<a href="#" onMouseOver="link('_member','mGlyphPages147566763',this); ">mGlyphPages</a>[anID]) == NULL) // attempt to look in a different directory
+                                                        <a href="#" onMouseOver="link('_member','mGlyphPages147566763',this); ">mGlyphPages</a>[anID] = <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;<a href="#" onMouseOver="link('_member','GetImageManager1426455561',this); ">GetImageManager</a>()-&gt;<a href="#" onMouseOver="link('_member','GetSharedImage918743780',this); ">GetSharedImage</a>(aFontPathDir + aNode.mAttributes[_S("path")]);
+
+                                                    if (((<a href="#" onMouseOver="link('_class','SexyImage809',this); ">SexyImage</a>*)<a href="#" onMouseOver="link('_member','mGlyphPages147566763',this); ">mGlyphPages</a>[anID]) == NULL)
+                                                    {
+                                                        K_LOG("Sexy::SexyFont::ParseXMLFile :XML Font Loading Error:", <a href="#" onMouseOver="link('_member','StrFormat798802342',this); ">StrFormat</a>("Could not load Glyph Page: %s", SexyStringToStringFast(aNode.mAttributes[_S("path")]).c_str()).c_str());
+                                                        return false;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                            case XMLElement::TYPE_END:
+                                {
+                                    if(aNode.mValue == _S("ImagePlanes"))
+                                        bParsingGlyphPlanes = false;
+                                    break;
+                                }
+                            }
+                        }
+                    } // end: else if(Image Planes)
+                    else if (aNode.mValue == _S("FontTable"))
+                    {
+                        bool bParsingFontTable = true;
+                        while (bParsingFontTable &amp;&amp; aParser.NextElement(&amp;aNode))
+                        {
+                            switch (aNode.mType)
+                            {
+                            case XMLElement::TYPE_START:
+                                {
+                                    if (aNode.mValue == _S("Char"))
+                                    {
+                                        KFont aChar;
+                                        memset(&amp;aChar, 0, sizeof(KFont));
+
+                                        if (XMLParser::HasAttribute(&amp;aNode, _S("code")))
+                                            aChar._c = (unsigned long)aNode.mAttributes[_S("code")][0];
+                                        if (XMLParser::HasAttribute(&amp;aNode, _S("graphic_id")))
+                                            sexysscanf(aNode.mAttributes[_S("graphic_id")].c_str(), _S("%d"), &amp;aChar._nGraphic);
+
+                                        float aReadFloat = 0;
+
+                                        if (XMLParser::HasAttribute(&amp;aNode, _S("sx1")))
+                                        {
+                                            if(sexysscanf(aNode.mAttributes[_S("sx1")].c_str(), _S("%f"), &amp;aReadFloat) == 1)
+                                                aChar._x1 = (short)floor(aReadFloat);
+                                        }
+                                        if (XMLParser::HasAttribute(&amp;aNode, _S("sy1")))
+                                        {
+                                            if(sexysscanf(aNode.mAttributes[_S("sy1")].c_str(), _S("%f"), &amp;aReadFloat) == 1)
+                                                aChar._y1 = (short)floor(aReadFloat);
+                                        }
+                                        if (XMLParser::HasAttribute(&amp;aNode, _S("sx2")))
+                                        {
+                                            if(sexysscanf(aNode.mAttributes[_S("sx2")].c_str(), _S("%f"), &amp;aReadFloat) == 1)
+                                                aChar._x2 = (short)ceil(aReadFloat);
+                                        }
+                                        if (XMLParser::HasAttribute(&amp;aNode, _S("sy2")))
+                                        {
+                                            if(sexysscanf(aNode.mAttributes[_S("sy2")].c_str(), _S("%f"), &amp;aReadFloat) == 1)
+                                                aChar._y2 = (short)ceil(aReadFloat);
+                                        }
+                                        if (XMLParser::HasAttribute(&amp;aNode, _S("advance")))
+                                        {
+                                            if(sexysscanf(aNode.mAttributes[_S("advance")].c_str(), _S("%f"), &amp;aReadFloat) == 1)
+                                                aChar._w = (short)ceil(aReadFloat);
+                                        }
+                                        if (XMLParser::HasAttribute(&amp;aNode, _S("x_offset")))
+                                        {
+                                            if(sexysscanf(aNode.mAttributes[_S("x_offset")].c_str(), _S("%f"), &amp;aReadFloat) == 1)
+                                                aChar._xOffset = (short)ceil(aReadFloat);
+                                        }
+                                        if (XMLParser::HasAttribute(&amp;aNode, _S("y_offset")))
+                                        {
+                                            if(sexysscanf(aNode.mAttributes[_S("y_offset")].c_str(), _S("%f"), &amp;aReadFloat) == 1)
+                                                aChar._yOffset = (short)ceil(aReadFloat);
+                                        }
+
+                                        <a href="#" onMouseOver="link('_member','mGlyphs147566763',this); ">mGlyphs</a>.push_back(aChar);
+                                    }
+                                    break;
+                                }
+                            case XMLElement::TYPE_END:
+                                {
+                                    if(aNode.mValue == _S("FontTable"))
+                                        bParsingFontTable = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
+            case XMLElement::TYPE_END:
+                {
+                    break;
+                }
+            }
+        }
+
+        return true;
+    }
+    return false;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

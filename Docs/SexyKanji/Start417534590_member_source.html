@@ -1,0 +1,307 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Start</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Start</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Start</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Start417534590','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Start417534590','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Start417534590','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 361</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','Start417534590',this); ">Sexy::SexyAppBase::Start</a>()
+{
+    if (<a href="#" onMouseOver="link('_member','mShutdown414388462',this); ">mShutdown</a>)
+        return;
+
+    KSysDebug::catchExceptions(SEHCatcher);
+
+    if (<a href="#" onMouseOver="link('_member','mAutoStartLoadingThread414388462',this); ">mAutoStartLoadingThread</a>)
+        <a href="#" onMouseOver="link('_member','StartLoadingThread417534590',this); ">StartLoadingThread</a>();
+
+    int aSleepCount = 0;
+    unsigned long aLastTimeCheck = 0;
+    unsigned long aVSyncBrokenTestStartTick = 0;
+    int aVSyncBrokenCount = 0;
+    double anUpdateFrameTimeAccum = 0.0f;
+    int aNonDrawCount = 0;
+    bool bHasPendingDraw = true;
+    double aPendingUpdatesAccum = 0;
+
+    <a href="#" onMouseOver="link('_member','mRunning414388462',this); ">mRunning</a> = true;
+
+    int anUpdateAppState = <a href="#" onMouseOver="link('_member','UPDATESTATE_MESSAGES62745',this); ">UPDATESTATE_MESSAGES</a>;
+
+    // DO MAIN LOOP
+    while (!<a href="#" onMouseOver="link('_member','mShutdown414388462',this); ">mShutdown</a> &amp;&amp; <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>!= NULL &amp;&amp; !<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;isQuit())
+    {
+        if (anUpdateAppState == <a href="#" onMouseOver="link('_member','UPDATESTATE_PROCESS_DONE62745',this); ">UPDATESTATE_PROCESS_DONE</a>)
+            anUpdateAppState = <a href="#" onMouseOver="link('_member','UPDATESTATE_MESSAGES62745',this); ">UPDATESTATE_MESSAGES</a>;
+
+        if (<a href="#" onMouseOver="link('_member','mLoadingFailed414388462',this); ">mLoadingFailed</a>)
+            <a href="#" onMouseOver="link('_member','Shutdown417534590',this); ">Shutdown</a>();
+
+        // Used in mYieldMainThread Calculations
+        unsigned long aStartTime = <a href="#" onMouseOver="link('_member','GetClock417534590',this); ">GetClock</a>();  
+        int aCumSleepTime = 0;
+
+        bool didUpdate = false;
+        <a href="#" onMouseOver="link('_member','mUpdateAppDepth414388462',this); ">mUpdateAppDepth</a>++;
+
+        bool isVSynched = (<a href="#" onMouseOver="link('_member','mVSyncEnabled414388462',this); ">mVSyncEnabled</a>) &amp;&amp; (!<a href="#" onMouseOver="link('_member','mLastDrawWasEmpty414388462',this); ">mLastDrawWasEmpty</a>) &amp;&amp; (!<a href="#" onMouseOver="link('_member','mVSyncBroken414388462',this); ">mVSyncBroken</a>);
+        double aFrameFTime = 10.0f; // 100 Hz
+        double anUpdatesPerUpdateF = 1.0f;
+        int aSyncRefreshRate = (<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;getDesktopDisplayFrequency()) ? <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;getDesktopDisplayFrequency() : 60;
+
+        if (<a href="#" onMouseOver="link('_member','mVSyncEnabled414388462',this); ">mVSyncEnabled</a>)
+        {
+            aFrameFTime = (1000.0 / aSyncRefreshRate);
+            anUpdatesPerUpdateF = (float) (1000.0 / (10.0f * aSyncRefreshRate));
+        }
+
+        // This looks a little scary, but it works like this:
+        // The update is done in phases.  After each phase of the update
+        // we break away and make sure we haven't received a QUIT message
+        switch (anUpdateAppState)
+        {
+        case <a href="#" onMouseOver="link('_member','UPDATESTATE_MESSAGES62745',this); ">UPDATESTATE_MESSAGES</a>: // Phase 1: process messages from OS
+            {
+                // In Sexy, all Messages are sent to a deferred queue to 
+                // wait for processing
+                <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;processEvents();
+
+                // The deferred queue is processed one message at a time:
+                // in case one message is quit, which then we immediately stop.
+                if (!<a href="#" onMouseOver="link('_member','ProcessDeferredMessages3412166305',this); ">ProcessDeferredMessages</a>()) // returns false when queue is empty
+                    anUpdateAppState = <a href="#" onMouseOver="link('_member','UPDATESTATE_PROCESS_162745',this); ">UPDATESTATE_PROCESS_1</a>;
+                break;
+            }
+        case <a href="#" onMouseOver="link('_member','UPDATESTATE_PROCESS_162745',this); ">UPDATESTATE_PROCESS_1</a>: // Phase II: DoUpdateFrames() at 100Hz
+            {
+                if(<a href="#" onMouseOver="link('_member','mLoadingFailed414388462',this); ">mLoadingFailed</a>)
+                    break;
+
+                if (!<a href="#" onMouseOver="link('_member','mPaused414388462',this); ">mPaused</a> &amp;&amp; !<a href="#" onMouseOver="link('_member','mShutdown414388462',this); ">mShutdown</a>)
+                {
+                    // DoUpdateFrames the Frame Time Accumulator
+                    if (!isVSynched) // When we are VSynching, only calculate this FTimeAcc right after drawing
+                    {
+                        unsigned long aCurTime = <a href="#" onMouseOver="link('_member','GetClock417534590',this); ">GetClock</a>();
+
+                        if (aLastTimeCheck != 0)
+                        {               
+                            int aDeltaTime = aCurTime - aLastTimeCheck;     
+                            anUpdateFrameTimeAccum = (anUpdateFrameTimeAccum + aDeltaTime &lt; 200.0) ? anUpdateFrameTimeAccum + aDeltaTime : 200.0f;  // Min
+                            anUpdateFrameTimeAccum = (anUpdateFrameTimeAccum &gt; 0.0f) ? anUpdateFrameTimeAccum : 0.0f; // Max
+
+                        }
+
+                        aLastTimeCheck = aCurTime;
+                    }
+
+                    // Check to see if it's time to do an update
+                    if ((++aNonDrawCount &lt; 10) || (!<a href="#" onMouseOver="link('_member','mLoaded414388462',this); ">mLoaded</a>))
+                    {
+                        bool doUpdate = false;
+
+                        if (isVSynched)// Synch'ed to vertical refresh, so update as soon as possible after draw
+                            doUpdate = (!bHasPendingDraw) || (anUpdateFrameTimeAccum &gt;= (int) (aFrameFTime * 0.75));
+                        else if (anUpdateFrameTimeAccum &gt;= aFrameFTime)
+                            doUpdate = true;
+
+                        if (doUpdate)
+                        {
+                            // Do VSyncBroken test.  This test fails if we're in fullscreen and
+                            // "don't vsync" has been forced in Advanced settings up Display Properties
+                            {
+                                <a href="#" onMouseOver="link('_member','mVSyncBrokenTestUpdates414388462',this); ">mVSyncBrokenTestUpdates</a>++;
+                                if (<a href="#" onMouseOver="link('_member','mVSyncBrokenTestUpdates414388462',this); ">mVSyncBrokenTestUpdates</a> &gt;= (unsigned long) ((1000+10-1)/10))
+                                {
+                                    // It has to be running 33% fast to be "broken" (25% = 1/0.800)
+                                    if (aStartTime - aVSyncBrokenTestStartTick &lt;= 800)
+                                    {
+                                        // The test has to fail 3 times in a row before we decide that
+                                        //  vsync is broken overall
+                                        aVSyncBrokenCount++;
+                                        if (aVSyncBrokenCount &gt;= 3)
+                                            <a href="#" onMouseOver="link('_member','mVSyncBroken414388462',this); ">mVSyncBroken</a> = true;
+                                    }
+                                    else
+                                        aVSyncBrokenCount = 0;
+
+                                    aVSyncBrokenTestStartTick = aStartTime;
+                                    <a href="#" onMouseOver="link('_member','mVSyncBrokenTestUpdates414388462',this); ">mVSyncBrokenTestUpdates</a> = 0;
+                                }
+                            }
+
+                            <a href="#" onMouseOver="link('_member','DoUpdateFrames417534590',this); ">DoUpdateFrames</a>();
+
+                            anUpdateAppState = <a href="#" onMouseOver="link('_member','UPDATESTATE_PROCESS_262745',this); ">UPDATESTATE_PROCESS_2</a>;                    
+
+                            bHasPendingDraw = true;
+                            didUpdate = true;
+                        }
+                    }
+
+
+                    // Draw
+                    if (!didUpdate &amp;&amp; !<a href="#" onMouseOver="link('_member','mShutdown414388462',this); ">mShutdown</a>)
+                    {           
+                        anUpdateAppState = <a href="#" onMouseOver="link('_member','UPDATESTATE_PROCESS_DONE62745',this); ">UPDATESTATE_PROCESS_DONE</a>;
+
+                        aNonDrawCount = 0;
+
+                        if (bHasPendingDraw &amp;&amp; !<a href="#" onMouseOver="link('_member','mShutdown414388462',this); ">mShutdown</a>)
+                        {
+                            unsigned long aDrawStart = <a href="#" onMouseOver="link('_member','GetClock417534590',this); ">GetClock</a>();
+                            <a href="#" onMouseOver="link('_member','DrawDirtyStuff4075147123',this); ">DrawDirtyStuff</a>(mGraphics);
+                            unsigned long aPreScreenBltTime = <a href="#" onMouseOver="link('_member','GetClock417534590',this); ">GetClock</a>();
+
+                            <a href="#" onMouseOver="link('_member','_Render3179329419',this); ">_Render</a>(aLastTimeCheck, anUpdateFrameTimeAccum);
+
+
+                            bHasPendingDraw = false;
+                            <a href="#" onMouseOver="link('_member','mLastDrawWasEmpty414388462',this); ">mLastDrawWasEmpty</a> = false;
+                        }
+                        else
+                        {
+                            // Let us take into account the time it took to draw dirty stuff            
+                            int aTimeToNextFrame = (int) (aFrameFTime - anUpdateFrameTimeAccum);
+                            if (aTimeToNextFrame &gt; 0)
+                            {
+                                // Wait till next processing cycle
+                                ++aSleepCount;
+                                KMiscTools::pause(aTimeToNextFrame);
+
+                                aCumSleepTime += aTimeToNextFrame;                  
+                            }
+                        }
+                    }                   
+                }
+                break;
+            }
+        case <a href="#" onMouseOver="link('_member','UPDATESTATE_PROCESS_262745',this); ">UPDATESTATE_PROCESS_2</a>: // Phase C: UpdateF() at Monitor Refresh Rate
+            {
+                anUpdateAppState = <a href="#" onMouseOver="link('_member','UPDATESTATE_PROCESS_DONE62745',this); ">UPDATESTATE_PROCESS_DONE</a>;
+
+                aPendingUpdatesAccum += anUpdatesPerUpdateF;
+                aPendingUpdatesAccum -= 1.0;
+
+                // Process any extra updates
+                // This is to keep DoUpdateFrames() running at 100Hz while the rest of the
+                // loop is running at the Monitor Refresh Rate. (JPOAG)
+                while (aPendingUpdatesAccum &gt;= 1.0 &amp;&amp; !<a href="#" onMouseOver="link('_member','mShutdown414388462',this); ">mShutdown</a>)
+                {   
+                    ++aNonDrawCount;
+                    <a href="#" onMouseOver="link('_member','DoUpdateFrames417534590',this); ">DoUpdateFrames</a>();
+                    
+                    aPendingUpdatesAccum -= 1.0;
+                }                   
+
+                if(<a href="#" onMouseOver="link('_member','mShutdown414388462',this); ">mShutdown</a>)break;
+
+                <a href="#" onMouseOver="link('_member','DoUpdateFramesF3435418561',this); ">DoUpdateFramesF</a>((float)anUpdatesPerUpdateF);
+
+                // Don't let mUpdateFTimeAcc dip below 0
+                //  Subtract an extra 0.2ms, because sometimes refresh rates have some
+                //  fractional component that gets truncated, and it's better to take off
+                //  too much to keep our timing tending toward occuring right after 
+                //  redraws
+                if (isVSynched)
+                    anUpdateFrameTimeAccum = (anUpdateFrameTimeAccum - aFrameFTime - 0.2f &gt; 0.0) ? anUpdateFrameTimeAccum - aFrameFTime - 0.2f : 0.0;
+                else
+                    anUpdateFrameTimeAccum -= aFrameFTime;
+
+                break;
+            }
+        case <a href="#" onMouseOver="link('_member','UPDATESTATE_PROCESS_DONE62745',this); ">UPDATESTATE_PROCESS_DONE</a>:
+        default:
+                anUpdateAppState = <a href="#" onMouseOver="link('_member','UPDATESTATE_MESSAGES62745',this); ">UPDATESTATE_MESSAGES</a>;
+        }
+
+        <a href="#" onMouseOver="link('_member','mUpdateAppDepth414388462',this); ">mUpdateAppDepth</a>--;
+        <a href="#" onMouseOver="link('_member','ProcessSafeDeleteList417534590',this); ">ProcessSafeDeleteList</a>();
+        if(<a href="#" onMouseOver="link('_member','GetFontManager1426455561',this); ">GetFontManager</a>())<a href="#" onMouseOver="link('_member','mFontManager414388462',this); ">mFontManager</a>-&gt;CleanSharedFonts();
+        if(<a href="#" onMouseOver="link('_member','GetImageManager1426455561',this); ">GetImageManager</a>())<a href="#" onMouseOver="link('_member','mImageManager414388462',this); ">mImageManager</a>-&gt;CleanSharedImages();
+
+        if (<a href="#" onMouseOver="link('_member','mYieldMainThread414388462',this); ">mYieldMainThread</a> &amp;&amp; !<a href="#" onMouseOver="link('_member','mShutdown414388462',this); ">mShutdown</a>)
+        {
+            // This is to make sure that the title screen doesn't take up any more than 
+            // 1/3 of the processor time
+
+            unsigned long anEndTime = <a href="#" onMouseOver="link('_member','GetClock417534590',this); ">GetClock</a>();
+            int anElapsedTime = (anEndTime - aStartTime) - aCumSleepTime;
+            int aLoadingYieldSleepTime = K_MIN(250, (anElapsedTime * 2) - aCumSleepTime);
+
+            if (aLoadingYieldSleepTime &gt;= 0)
+                KMiscTools::pause(aLoadingYieldSleepTime);
+        }
+    }
+
+    <a href="#" onMouseOver="link('_member','ProcessSafeDeleteList417534590',this); ">ProcessSafeDeleteList</a>();
+
+    <a href="#" onMouseOver="link('_member','mRunning414388462',this); ">mRunning</a> = false;
+
+    <a href="#" onMouseOver="link('_member','WaitForLoadingThread417534590',this); ">WaitForLoadingThread</a>();
+
+    char aString[256];
+    sprintf(aString, "Seconds       = %g\r\n", <a href="#" onMouseOver="link('_member','GetClock417534590',this); ">GetClock</a>() / 1000.0);
+    K_LOG(aString);
+
+//  WriteToRegistry();
+
+    <a href="#" onMouseOver="link('_member','ShutdownHook417534590',this); ">ShutdownHook</a>();
+
+    // IMPORTANT: delete ResourceManager first, it uses Sound/MusicManager
+    // to release samples/streams
+    delete <a href="#" onMouseOver="link('_member','mResourceManager414388462',this); ">mResourceManager</a>;
+    <a href="#" onMouseOver="link('_member','mResourceManager414388462',this); ">mResourceManager</a> = NULL;
+
+    // delete Font manager before image manager, fonts use images!
+    if(<a href="#" onMouseOver="link('_member','GetFontManager1426455561',this); ">GetFontManager</a>())<a href="#" onMouseOver="link('_member','mFontManager414388462',this); ">mFontManager</a>-&gt;CleanSharedFonts(true);
+    delete <a href="#" onMouseOver="link('_member','mFontManager414388462',this); ">mFontManager</a>;
+    <a href="#" onMouseOver="link('_member','mFontManager414388462',this); ">mFontManager</a> = NULL;
+
+    if(<a href="#" onMouseOver="link('_member','GetImageManager1426455561',this); ">GetImageManager</a>())<a href="#" onMouseOver="link('_member','mImageManager414388462',this); ">mImageManager</a>-&gt;CleanSharedImages(true);
+    delete <a href="#" onMouseOver="link('_member','mImageManager414388462',this); ">mImageManager</a>;
+    <a href="#" onMouseOver="link('_member','mImageManager414388462',this); ">mImageManager</a> = NULL;
+
+    delete <a href="#" onMouseOver="link('_member','mSoundManager414388462',this); ">mSoundManager</a>;
+    <a href="#" onMouseOver="link('_member','mSoundManager414388462',this); ">mSoundManager</a> = NULL;
+    delete <a href="#" onMouseOver="link('_member','mMusicManager414388462',this); ">mMusicManager</a>;
+    <a href="#" onMouseOver="link('_member','mMusicManager414388462',this); ">mMusicManager</a> = NULL;
+
+    <a href="#" onMouseOver="link('_member','WriteToRegistry417534590',this); ">WriteToRegistry</a>();
+
+    delete <a href="#" onMouseOver="link('_member','mProperties414388462',this); ">mProperties</a>;
+    <a href="#" onMouseOver="link('_member','mProperties414388462',this); ">mProperties</a> = NULL;
+    delete <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>;
+    <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a> = NULL;
+
+    if(<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>) <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;terminate();
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

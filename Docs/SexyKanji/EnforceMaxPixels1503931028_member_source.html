@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - EnforceMaxPixels</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">EnforceMaxPixels</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','EditWidget809',this)" class="pathLink">EditWidget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">EnforceMaxPixels</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','EnforceMaxPixels1503931028','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','EnforceMaxPixels1503931028','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','EnforceMaxPixels1503931028','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 341</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','EnforceMaxPixels1503931028',this); ">Sexy::EditWidget::EnforceMaxPixels</a>()
+{
+    if (<a href="#" onMouseOver="link('_member','mMaxPixels1509305020',this); ">mMaxPixels</a>&lt;=0 &amp;&amp; <a href="#" onMouseOver="link('_member','mWidthCheckList1509305020',this); ">mWidthCheckList</a>.empty()) // no width checking in effect
+        return;
+
+    if (<a href="#" onMouseOver="link('_member','mWidthCheckList1509305020',this); ">mWidthCheckList</a>.empty())
+    {
+        while (<a href="#" onMouseOver="link('_member','mFont1509305020',this); ">mFont</a>-&gt;StringWidth(mString) &gt; <a href="#" onMouseOver="link('_member','mMaxPixels1509305020',this); ">mMaxPixels</a>)
+            <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0, <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.length()-1);
+
+        return;
+    }
+        
+    for (WidthCheckList::iterator anItr = <a href="#" onMouseOver="link('_member','mWidthCheckList1509305020',this); ">mWidthCheckList</a>.begin(); anItr != <a href="#" onMouseOver="link('_member','mWidthCheckList1509305020',this); ">mWidthCheckList</a>.end(); ++anItr)
+    {
+        int aWidth = anItr-&gt;mWidth;
+        if (aWidth&lt;=0)
+        {
+            aWidth = <a href="#" onMouseOver="link('_member','mMaxPixels1509305020',this); ">mMaxPixels</a>;
+            if (aWidth&lt;=0)
+                continue;
+        }
+
+        while (anItr-&gt;mFont-&gt;StringWidth(mString) &gt; aWidth)
+            <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0,<a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.length()-1);
+    } 
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

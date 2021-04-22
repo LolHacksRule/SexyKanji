@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - NextNoAssert</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">NextNoAssert</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','MTRand809',this)" class="pathLink">MTRand</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">NextNoAssert</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','NextNoAssert207732945','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','NextNoAssert207732945','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 135</div>
+<pre class="codeExamples">
+unsigned long <a href="#" onMouseOver="link('_member','NextNoAssert207732945',this); ">Sexy::MTRand::NextNoAssert</a>()
+{
+    unsigned long y;
+    static unsigned long mag01[2]={0x0, MATRIX_A};
+    /* mag01[x] = x * MATRIX_A  for x=0,1 */
+
+    if (<a href="#" onMouseOver="link('_member','mti207937785',this); ">mti</a> &gt;= MTRAND_N) { /* generate MTRAND_N words at one time */
+        int kk;
+
+        for (kk=0;kk&lt;MTRAND_N-MTRAND_M;kk++) {
+            y = (<a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[kk]&amp;UPPER_MASK)|(<a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[kk+1]&amp;LOWER_MASK);
+            <a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[kk] = <a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[kk+MTRAND_M] ^ (y &gt;&gt; 1) ^ mag01[y &amp; 0x1UL];
+        }
+        for (;kk&lt;MTRAND_N-1;kk++) {
+            y = (<a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[kk]&amp;UPPER_MASK)|(<a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[kk+1]&amp;LOWER_MASK);
+            <a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[kk] = <a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[kk+(MTRAND_M-MTRAND_N)] ^ (y &gt;&gt; 1) ^ mag01[y &amp; 0x1UL];
+        }
+        y = (<a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[MTRAND_N-1]&amp;UPPER_MASK)|(<a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[0]&amp;LOWER_MASK);
+        <a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[MTRAND_N-1] = <a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[MTRAND_M-1] ^ (y &gt;&gt; 1) ^ mag01[y &amp; 0x1UL];
+
+        <a href="#" onMouseOver="link('_member','mti207937785',this); ">mti</a> = 0;
+    }
+  
+    y = <a href="#" onMouseOver="link('_member','mt207937785',this); ">mt</a>[<a href="#" onMouseOver="link('_member','mti207937785',this); ">mti</a>++];
+    y ^= TEMPERING_SHIFT_U(y);
+    y ^= TEMPERING_SHIFT_S(y) &amp; TEMPERING_MASK_B;
+    y ^= TEMPERING_SHIFT_T(y) &amp; TEMPERING_MASK_C;
+    y ^= TEMPERING_SHIFT_L(y);
+
+    y &amp;= 0x7FFFFFFF;        
+
+    /*char aStr[256];
+    sprintf(aStr, "Rand=%d\r\n", y);
+    OutputDebugString(aStr);*/
+
+    return y; 
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

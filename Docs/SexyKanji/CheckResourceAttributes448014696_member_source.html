@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - CheckResourceAttributes</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">CheckResourceAttributes</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ResourceManager809',this)" class="pathLink">ResourceManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">CheckResourceAttributes</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CheckResourceAttributes448014696','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','CheckResourceAttributes448014696','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CheckResourceAttributes448014696','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 810</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','CheckResourceAttributes448014696',this); ">Sexy::ResourceManager::CheckResourceAttributes</a>(XMLElement &amp;theElement)
+{
+    for (XMLParamMap::iterator anItr = theElement.mAttributes.begin(); anItr != theElement.mAttributes.end(); ++anItr)
+    {
+        if (theElement.mValue == _S("SetDefaults"))
+        {
+            if (<a href="#" onMouseOver="link('_member','MODIFIERS_SETDEFAULTS288852731',this); ">MODIFIERS_SETDEFAULTS</a>.find(anItr-&gt;first) == <a href="#" onMouseOver="link('_member','MODIFIERS_SETDEFAULTS288852731',this); ">MODIFIERS_SETDEFAULTS</a>.end())
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::CheckResourceAttributes : ERROR : Unknown SetDefaults modifier: '") + anItr-&gt;first + _S("'."));
+
+        }
+        else if (theElement.mValue == _S("Image"))
+        {
+            if (<a href="#" onMouseOver="link('_member','MODIFIERS_IMAGE288852731',this); ">MODIFIERS_IMAGE</a>.find(anItr-&gt;first) == <a href="#" onMouseOver="link('_member','MODIFIERS_IMAGE288852731',this); ">MODIFIERS_IMAGE</a>.end())
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::CheckResourceAttributes : ERROR : Unknown image modifier: '") + anItr-&gt;first + _S("'."));
+        }
+        else if (theElement.mValue == _S("Font"))
+        {
+            if (<a href="#" onMouseOver="link('_member','MODIFIERS_FONT288852731',this); ">MODIFIERS_FONT</a>.find(anItr-&gt;first) == <a href="#" onMouseOver="link('_member','MODIFIERS_FONT288852731',this); ">MODIFIERS_FONT</a>.end())
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::CheckResourceAttributes : ERROR : Unknown font modifier: '") + anItr-&gt;first + _S("'."));
+        }
+        else if (theElement.mValue == _S("Sound"))
+        {
+            if (<a href="#" onMouseOver="link('_member','MODIFIERS_SOUND288852731',this); ">MODIFIERS_SOUND</a>.find(anItr-&gt;first) == <a href="#" onMouseOver="link('_member','MODIFIERS_SOUND288852731',this); ">MODIFIERS_SOUND</a>.end())
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::CheckResourceAttributes : ERROR : Unknown sound modifier: '") + anItr-&gt;first + _S("'."));
+        }
+        else if (theElement.mValue == _S("Music"))
+        {
+            if (<a href="#" onMouseOver="link('_member','MODIFIERS_MUSIC288852731',this); ">MODIFIERS_MUSIC</a>.find(anItr-&gt;first) == <a href="#" onMouseOver="link('_member','MODIFIERS_MUSIC288852731',this); ">MODIFIERS_MUSIC</a>.end())
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::CheckResourceAttributes : ERROR : Unknown music modifier: '") + anItr-&gt;first + _S("'."));
+        }
+        else if (theElement.mValue == _S("Movie"))
+        {
+            if (<a href="#" onMouseOver="link('_member','MODIFIERS_MOVIE288852731',this); ">MODIFIERS_MOVIE</a>.find(anItr-&gt;first) == <a href="#" onMouseOver="link('_member','MODIFIERS_MOVIE288852731',this); ">MODIFIERS_MOVIE</a>.end())
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::CheckResourceAttributes : ERROR : Unknown movie modifier: '") + anItr-&gt;first + _S("'."));
+        }
+    }
+
+    return true;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

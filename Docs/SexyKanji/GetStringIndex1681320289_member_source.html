@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetStringIndex</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetStringIndex</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','TextWidget809',this)" class="pathLink">TextWidget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetStringIndex</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetStringIndex1681320289','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetStringIndex1681320289','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetStringIndex1681320289','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 88</div>
+<pre class="codeExamples">
+virtual int <a href="#" onMouseOver="link('_member','GetStringIndex1681320289',this); ">Sexy::TextWidget::GetStringIndex</a>(const SexyString &amp;theString, int thePixel)
+{
+    int aPos = 0;
+    
+    for (int i = 0; i &lt; (int)theString.length(); i++)
+    {
+        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aLoSubStr = theString.substr(0, i);
+        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aHiSubStr = theString.substr(0, i+1);
+            
+        int aLoLen = <a href="#" onMouseOver="link('_member','GetColorStringWidth2218084706',this); ">GetColorStringWidth</a>(aLoSubStr);
+        int aHiLen = <a href="#" onMouseOver="link('_member','GetColorStringWidth2218084706',this); ">GetColorStringWidth</a>(aHiSubStr);
+        if (thePixel &gt;= (aLoLen+aHiLen)/2)
+            aPos = i+1;
+    }
+    
+    return aPos;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

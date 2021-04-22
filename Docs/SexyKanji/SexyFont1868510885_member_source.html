@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - SexyFont</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">SexyFont</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyFont809',this)" class="pathLink">SexyFont</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">SexyFont</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SexyFont1868510885','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','SexyFont1868510885','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SexyFont1868510885','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 74</div>
+<pre class="codeExamples">
+ <a href="#" onMouseOver="link('_member','SexyFont3658970756',this); ">Sexy::SexyFont::SexyFont</a>(const SexyFont &amp;theFont)
+{
+    // perform a deep copy
+    <a href="#" onMouseOver="link('_member','mAscent147566763',this); ">mAscent</a> = theFont.mAscent;
+    <a href="#" onMouseOver="link('_member','mLineSpacingOffset147566763',this); ">mLineSpacingOffset</a> = theFont.mLineSpacingOffset;
+    <a href="#" onMouseOver="link('_member','mAscentPadding147566763',this); ">mAscentPadding</a> = theFont.mAscentPadding;
+    <a href="#" onMouseOver="link('_member','mHeight147566763',this); ">mHeight</a> = theFont.mHeight;
+    <a href="#" onMouseOver="link('_member','mDescent147566763',this); ">mDescent</a> = theFont.mDescent;
+    <a href="#" onMouseOver="link('_member','mGlobalKerning147566763',this); ">mGlobalKerning</a> = theFont.mGlobalKerning;
+
+    <a href="#" onMouseOver="link('_member','mFontSize147566763',this); ">mFontSize</a> = theFont.mFontSize; // default size in KTrueText
+    <a href="#" onMouseOver="link('_member','mFontFamilyName147566763',this); ">mFontFamilyName</a> = theFont.mFontFamilyName; // default size in KTrueText
+    <a href="#" onMouseOver="link('_member','mFontStyle147566763',this); ">mFontStyle</a> = theFont.mFontStyle; // default size in KTrueText
+
+    <a href="#" onMouseOver="link('_member','mFontTable147566763',this); ">mFontTable</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mKTextFace147566763',this); ">mKTextFace</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mUpLoaded147566763',this); ">mUpLoaded</a> = false;
+    <a href="#" onMouseOver="link('_member','mFontFilePath147566763',this); ">mFontFilePath</a> = theFont.mFontFilePath;
+
+    if (dynamic_cast&lt;KText*&gt;(theFont.mKTextFace))
+    {
+        for (int i = 0; i &lt; MAX_KTEXT_GLYPH_PAGES; i++)
+            <a href="#" onMouseOver="link('_member','mGlyphPages147566763',this); ">mGlyphPages</a>[i] = theFont.mGlyphPages[i];
+
+        <a href="#" onMouseOver="link('_member','mGlyphs147566763',this); ">mGlyphs</a>.resize(theFont.mGlyphs.size());
+        std::copy(theFont.mGlyphs.begin(), theFont.mGlyphs.end(), <a href="#" onMouseOver="link('_member','mGlyphs147566763',this); ">mGlyphs</a>.begin());
+
+        <a href="#" onMouseOver="link('_member','mKTextFace147566763',this); ">mKTextFace</a> = new KText();
+
+    }
+    else
+        <a href="#" onMouseOver="link('_member','OpenFontFile4067084685',this); ">OpenFontFile</a>(theFont.mFontFilePath); // probably a TTF font (no appropriate copy ctor) (JPOAG)
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

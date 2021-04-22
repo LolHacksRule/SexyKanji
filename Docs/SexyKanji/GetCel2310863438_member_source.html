@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetCel</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetCel</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','AnimInfo809',this)" class="pathLink">AnimInfo</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetCel</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetCel2310863438','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetCel2310863438','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetCel2310863438','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 958</div>
+<pre class="codeExamples">
+int <a href="#" onMouseOver="link('_member','GetCel2310863438',this); ">Sexy::AnimInfo::GetCel</a>(int theTime)
+{
+    if (<a href="#" onMouseOver="link('_member','mAnimType156883120',this); ">mAnimType</a> == <a href="#" onMouseOver="link('_member','AnimType_Once62745',this); ">AnimType_Once</a> &amp;&amp; theTime &gt;= <a href="#" onMouseOver="link('_member','mTotalAnimTime156883120',this); ">mTotalAnimTime</a>)
+    {
+        if (!<a href="#" onMouseOver="link('_member','mFrameMap156883120',this); ">mFrameMap</a>.empty())
+        {
+            return <a href="#" onMouseOver="link('_member','mFrameMap156883120',this); ">mFrameMap</a>[<a href="#" onMouseOver="link('_member','mFrameMap156883120',this); ">mFrameMap</a>.size() - 1];
+        }
+        else
+        {
+            return <a href="#" onMouseOver="link('_member','mNumCels156883120',this); ">mNumCels</a> - 1;
+        }
+    }
+
+    theTime = theTime % <a href="#" onMouseOver="link('_member','mTotalAnimTime156883120',this); ">mTotalAnimTime</a>;
+
+    int aFrame;
+    if (!<a href="#" onMouseOver="link('_member','mPerFrameDelay156883120',this); ">mPerFrameDelay</a>.empty())
+    {
+        aFrame = <a href="#" onMouseOver="link('_member','GetPerFrameCel2310863438',this); ">GetPerFrameCel</a>(theTime);
+    }
+    else
+    {
+        aFrame = (theTime / <a href="#" onMouseOver="link('_member','mFrameDelay156883120',this); ">mFrameDelay</a>) % <a href="#" onMouseOver="link('_member','mNumCels156883120',this); ">mNumCels</a>;
+    }
+
+    if (<a href="#" onMouseOver="link('_member','mFrameMap156883120',this); ">mFrameMap</a>.empty())
+    {
+        return aFrame;
+    }
+    else
+    {
+        return <a href="#" onMouseOver="link('_member','mFrameMap156883120',this); ">mFrameMap</a>[aFrame];
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

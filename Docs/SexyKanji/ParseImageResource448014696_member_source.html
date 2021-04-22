@@ -1,0 +1,235 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ParseImageResource</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ParseImageResource</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ResourceManager809',this)" class="pathLink">ResourceManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ParseImageResource</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParseImageResource448014696','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ParseImageResource448014696','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParseImageResource448014696','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 380</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','ParseImageResource448014696',this); ">Sexy::ResourceManager::ParseImageResource</a>(XMLElement &amp;theElement)
+{
+    ImageRes *aRes = new ImageRes;
+
+    if (<a href="#" onMouseOver="link('_member','ParseCommonResource1746813081',this); ">ParseCommonResource</a>(theElement, aRes, mImageMap) == false)
+    {
+        if (<a href="#" onMouseOver="link('_member','mHadAlreadyDefinedError288852731',this); ">mHadAlreadyDefinedError</a> &amp;&amp; <a href="#" onMouseOver="link('_member','mAllowAlreadyDefinedResources288852731',this); ">mAllowAlreadyDefinedResources</a>)
+        {
+            <a href="#" onMouseOver="link('_member','mErrorString288852731',this); ">mErrorString</a> = _S("");
+            <a href="#" onMouseOver="link('_member','mHasFailed288852731',this); ">mHasFailed</a> = false;
+            ImageRes *oldRes = aRes;
+            aRes = (ImageRes*)<a href="#" onMouseOver="link('_member','mImageMap288852731',this); ">mImageMap</a>[oldRes-&gt;mId];
+            aRes-&gt;mPath = oldRes-&gt;mPath;
+            aRes-&gt;mXMLAttributes = oldRes-&gt;mXMLAttributes;
+            delete oldRes;
+        }
+        else            
+        {
+            delete aRes;
+            return false;
+        }
+    }
+    
+    // get the modifiers
+
+    // (image bits are purged by default)
+    aRes-&gt;mNoPurge = theElement.mAttributes.find(_S("nopurge")) == theElement.mAttributes.end();
+
+    aRes-&gt;mLookForAlphaFile = theElement.mAttributes.find(_S("noalpha")) == theElement.mAttributes.end();   
+
+    aRes-&gt;mNoBlend = false;
+    aRes-&gt;mNoBlend = theElement.mAttributes.find(_S("noblend")) == theElement.mAttributes.end();
+
+    aRes-&gt;mWrapMode = K_WRAP_CLAMP;
+    if (theElement.mAttributes.find(_S("wrapmode")) != theElement.mAttributes.end())
+    {
+        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aWrapMode = <a href="#" onMouseOver="link('_member','Lower1908875876',this); ">Lower</a>(theElement.mAttributes[_S("wrapmode")]);
+
+        if      (aWrapMode == _S("mirror")) aRes-&gt;mWrapMode = K_WRAP_MIRROR;
+        else if (aWrapMode == _S("repeat")) aRes-&gt;mWrapMode = K_WRAP_REPEAT;
+        else 
+        {
+            return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseImageResource : ERROR : Invalid wrap mode: '") + theElement.mAttributes[_S("wrapmode")] + _S("'"));
+        }
+    }
+
+    XMLParamMap::iterator anItr;
+
+    anItr = theElement.mAttributes.find(_S("variant"));
+    if (anItr != theElement.mAttributes.end())
+        aRes-&gt;mVariant = anItr-&gt;second;
+
+    anItr = theElement.mAttributes.find(_S("alphaimage"));
+    if (anItr != theElement.mAttributes.end())
+    {
+        aRes-&gt;mAlphaFile = anItr-&gt;second;
+        // if alphaimage is specified, noalpha is assumed
+        aRes-&gt;mLookForAlphaFile = false;
+    }
+
+    anItr = theElement.mAttributes.find(_S("alphagrid"));
+    if (anItr != theElement.mAttributes.end())
+    {
+        aRes-&gt;mAlphaGridFile = anItr-&gt;second;
+        // if alphagridimage is specified, noalpha is assumed
+        aRes-&gt;mLookForAlphaFile = false;
+    }
+
+    anItr = theElement.mAttributes.find(_S("rows"));
+    if (anItr != theElement.mAttributes.end())
+        aRes-&gt;mRows = sexyatoi(anItr-&gt;second.c_str());
+    else
+        aRes-&gt;mRows = 1;
+
+    anItr = theElement.mAttributes.find(_S("cols"));
+    if (anItr != theElement.mAttributes.end())
+        aRes-&gt;mCols = sexyatoi(anItr-&gt;second.c_str());
+    else
+        aRes-&gt;mCols = 1;
+
+    anItr = theElement.mAttributes.find(_S("total"));
+    if (anItr != theElement.mAttributes.end())
+        aRes-&gt;mNumCells = sexyatoi(anItr-&gt;second.c_str());
+    else
+        aRes-&gt;mNumCells = aRes-&gt;mRows * aRes-&gt;mCols;
+
+    anItr = theElement.mAttributes.find(_S("anim"));
+
+    <a href="#" onMouseOver="link('_member','AnimType62745',this); ">AnimType</a> anAnimType = <a href="#" onMouseOver="link('_member','AnimType_None62745',this); ">AnimType_None</a>;
+
+    if (anItr != theElement.mAttributes.end())
+    {
+        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aType = <a href="#" onMouseOver="link('_member','Lower1908875876',this); ">Lower</a>(anItr-&gt;second.c_str());
+
+        if      (aType == _S("none"))       anAnimType = <a href="#" onMouseOver="link('_member','AnimType_None62745',this); ">AnimType_None</a>;
+        else if (aType == _S("once"))       anAnimType = <a href="#" onMouseOver="link('_member','AnimType_Once62745',this); ">AnimType_Once</a>;
+        else if (aType == _S("loop"))       anAnimType = <a href="#" onMouseOver="link('_member','AnimType_Loop62745',this); ">AnimType_Loop</a>;
+        else if (aType == _S("pingpong"))   anAnimType = <a href="#" onMouseOver="link('_member','AnimType_PingPong62745',this); ">AnimType_PingPong</a>;
+        else 
+        {
+            return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseImageResource : ERROR : Invalid animation type: '") + anItr-&gt;second + _S("'"));
+        }
+    }
+
+    aRes-&gt;mAnimInfo.mAnimType = anAnimType;
+
+    if (anAnimType != <a href="#" onMouseOver="link('_member','AnimType_None62745',this); ">AnimType_None</a>)
+    {
+        int aBeginDelay = 0, anEndDelay = 0;
+
+        anItr = theElement.mAttributes.find(_S("framedelay"));
+        if (anItr != theElement.mAttributes.end())
+            aRes-&gt;mAnimInfo.mFrameDelay = sexyatoi(anItr-&gt;second.c_str());
+
+        anItr = theElement.mAttributes.find(_S("begindelay"));
+        if (anItr != theElement.mAttributes.end())
+            aBeginDelay = sexyatoi(anItr-&gt;second.c_str());
+
+        anItr = theElement.mAttributes.find(_S("enddelay"));
+        if (anItr != theElement.mAttributes.end())
+            anEndDelay = sexyatoi(anItr-&gt;second.c_str());
+
+        anItr = theElement.mAttributes.find(_S("perframedelay"));
+        if (anItr != theElement.mAttributes.end())
+            <a href="#" onMouseOver="link('_member','ReadIntVector2082417533',this); ">ReadIntVector</a>(anItr-&gt;second,aRes-&gt;mAnimInfo.mPerFrameDelay);
+
+        anItr = theElement.mAttributes.find(_S("framemap"));
+        if (anItr != theElement.mAttributes.end())
+            <a href="#" onMouseOver="link('_member','ReadIntVector2082417533',this); ">ReadIntVector</a>(anItr-&gt;second,aRes-&gt;mAnimInfo.mFrameMap);
+
+        // (Compute sets AnimInfo.mNumCels = aRes-&gt;mNumCells)
+        aRes-&gt;mAnimInfo.Compute(aRes-&gt;mNumCells, aBeginDelay, anEndDelay);
+    }
+
+    // colorize
+    anItr = theElement.mAttributes.find(_S("colorize"));
+    if (anItr != theElement.mAttributes.end())
+    {
+        // r,g,b,a
+        std::vector&lt;int&gt; aColorVector;
+        <a href="#" onMouseOver="link('_member','ReadIntVector2082417533',this); ">ReadIntVector</a>(anItr-&gt;second, aColorVector);
+
+        if (aColorVector.size() == 4 &amp;&amp;
+            aColorVector[0] &gt;= 0 &amp;&amp; aColorVector[0] &lt;= 255 &amp;&amp;
+            aColorVector[1] &gt;= 0 &amp;&amp; aColorVector[1] &lt;= 255 &amp;&amp;
+            aColorVector[2] &gt;= 0 &amp;&amp; aColorVector[2] &lt;= 255 &amp;&amp;
+            aColorVector[3] &gt;= 0 &amp;&amp; aColorVector[3] &lt;= 255)
+        {
+            aRes-&gt;mColorizeColor = <a href="#" onMouseOver="link('_class','SexyColor809',this); ">SexyColor</a>(aColorVector[0], aColorVector[1], aColorVector[2], aColorVector[3]);
+        }
+        else
+            return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseImageResource : ERROR : Colorize color out of range."));
+    }
+    else
+        aRes-&gt;mColorizeColor = SexyColor(-1, -1, -1, -1);
+
+    // rotation
+    anItr = theElement.mAttributes.find(_S("rotation"));
+    if (anItr != theElement.mAttributes.end())
+    {
+        int aRotation = sexyatoi(anItr-&gt;second.c_str());
+        
+        if (aRotation == ImageManager::ROT_IMG_90_DEG  || 
+            aRotation == ImageManager::ROT_IMG_180_DEG ||
+            aRotation == ImageManager::ROT_IMG_270_DEG)
+            aRes-&gt;mRotation = aRotation;
+        else
+            return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseImageResource : ERROR : Invalid rotation value."));
+
+    }
+    else
+        aRes-&gt;mRotation = 0;
+
+    // mirror X, mirror Y
+    aRes-&gt;mMirrorX = theElement.mAttributes.find(_S("mirrorx")) != theElement.mAttributes.end();
+    aRes-&gt;mMirrorY = theElement.mAttributes.find(_S("mirrory")) != theElement.mAttributes.end();
+
+    // hue
+    anItr = theElement.mAttributes.find(_S("hue"));
+    if (anItr != theElement.mAttributes.end())
+        aRes-&gt;mDeltaHue = sexyatoi(anItr-&gt;second.c_str());
+    else
+        aRes-&gt;mDeltaHue = 0;
+
+    // scale, save as SexyString
+    anItr = theElement.mAttributes.find(_S("scalex"));
+    if (anItr != theElement.mAttributes.end())
+        aRes-&gt;mScaleX = anItr-&gt;second;
+    else
+        aRes-&gt;mScaleX = _S("");
+
+    anItr = theElement.mAttributes.find(_S("scaley"));
+    if (anItr != theElement.mAttributes.end())
+        aRes-&gt;mScaleY = anItr-&gt;second;
+    else
+        aRes-&gt;mScaleY = _S("");
+
+    return true;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - WriteElementText</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">WriteElementText</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','XMLWriter809',this)" class="pathLink">XMLWriter</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">WriteElementText</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WriteElementText508646983','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','WriteElementText508646983','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WriteElementText508646983','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 229</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','WriteElementText508646983',this); ">Sexy::XMLWriter::WriteElementText</a>(SexyString theText)
+{
+    <a href="#" onMouseOver="link('_member','CheckFileOpen780958880',this); ">CheckFileOpen</a>();
+    if(<a href="#" onMouseOver="link('_member','mHasFailed780762249',this); ">mHasFailed</a>) return false;
+
+    if(<a href="#" onMouseOver="link('_member','mOpenAttributes780762249',this); ">mOpenAttributes</a>)
+    {
+        // Close Previous Element Attribute section
+        <a href="#" onMouseOver="link('_member','WriteStringToBuffer1409507333',this); ">WriteStringToBuffer</a>(_S("&gt;"));
+        <a href="#" onMouseOver="link('_member','mOpenAttributes780762249',this); ">mOpenAttributes</a> = false;
+    }
+
+    const <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aNodeName = <a href="#" onMouseOver="link('_member','mSectionStack780762249',this); ">mSectionStack</a>.top();
+    <a href="#" onMouseOver="link('_member','mSectionStack780762249',this); ">mSectionStack</a>.pop();
+
+    try
+    {
+        // I fixed this error, but just in case, I handle it by re-encoding it
+        <a href="#" onMouseOver="link('_member','WriteStringToBuffer1409507333',this); ">WriteStringToBuffer</a>(<a href="#" onMouseOver="link('_member','StrFormat798802342',this); ">StrFormat</a>(_S("%s"), theText.c_str()));
+    }
+    catch(...)
+    {
+        <a href="#" onMouseOver="link('_member','WriteStringToBuffer1409507333',this); ">WriteStringToBuffer</a>(<a href="#" onMouseOver="link('_member','StrFormat798802342',this); ">StrFormat</a>(_S("%s"), <a href="#" onMouseOver="link('_member','XMLEncodeString1908875876',this); ">XMLEncodeString</a>(theText).c_str()));
+    }
+    <a href="#" onMouseOver="link('_member','WriteStringToBuffer1409507333',this); ">WriteStringToBuffer</a>(<a href="#" onMouseOver="link('_member','StrFormat798802342',this); ">StrFormat</a>(_S("&lt;/%s&gt;\n"), aNodeName.c_str()));
+
+    <a href="#" onMouseOver="link('_member','mLineNum780762249',this); ">mLineNum</a>++;
+
+    return true;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

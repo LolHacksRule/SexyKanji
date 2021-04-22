@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - FadeOutStream</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">FadeOutStream</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','MusicManager809',this)" class="pathLink">MusicManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">FadeOutStream</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','FadeOutStream4284142674','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','FadeOutStream4284142674','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 461</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','FadeOutStream4284142674',this); ">Sexy::MusicManager::FadeOutStream</a>(unsigned int theStreamID, float theFadeOutSpeed=0.004)
+{
+    if ((theStreamID &lt; 0) || (theStreamID &gt;= <a href="#" onMouseOver="link('_member','MAX_MUSIC_STREAMS0',this); ">MAX_MUSIC_STREAMS</a>))
+    {
+        K_LOG("Sexy::MusicManager::FadeOutStream: WARNING : Invalid stream ID.");
+        return;
+    }
+
+    KSound* aSoundInstance = <a href="#" onMouseOver="link('_member','mStreamsInfo410112142',this); ">mStreamsInfo</a>[theStreamID].mSoundInstance;
+
+    if (aSoundInstance == NULL)
+    {
+        K_LOG("Sexy::MusicManager::FadeOutStream: WARNING : No sound instance for specified stream ID.");
+        return;
+    }
+
+    if (!aSoundInstance-&gt;isPlaying())
+    {
+        K_LOG("Sexy::MusicManager::FadeOutStream: WARNING : Trying to fade out a not playing stream.");
+        return;
+    }
+
+    // fade out speed must be &gt; 0
+    if (theFadeOutSpeed &lt; 0.0f)
+    {
+        K_LOG("Sexy::MusicManager::FadeOutStream: WARNING : Fade out speed is &lt; 0.");
+        return;
+    }
+
+//  Let's test before we add this line: (JPOAG)
+//  if (mFadingStreams.find(theStreamID) != mFadingStreams.end()) 
+//      return; // already fading out: avoid the same stream (JPOAG)
+
+    // save the current volume for fade
+    <a href="#" onMouseOver="link('_member','mStreamsInfo410112142',this); ">mStreamsInfo</a>[theStreamID].mFadeVolume = static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mStreamsInfo410112142',this); ">mStreamsInfo</a>[theStreamID].mCurrentVolume);
+
+    // save the info for the fading stream in the map
+    // a negative value for the fade out speed is passed, so update knows that 
+    // the stream should fade out
+    <a href="#" onMouseOver="link('_member','mFadingStreams410112142',this); ">mFadingStreams</a>[theStreamID] = std::pair&lt;KSound*, float&gt;(aSoundInstance, -theFadeOutSpeed);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

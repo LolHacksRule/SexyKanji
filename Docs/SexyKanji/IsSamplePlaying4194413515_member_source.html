@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - IsSamplePlaying</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">IsSamplePlaying</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SoundManager809',this)" class="pathLink">SoundManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">IsSamplePlaying</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','IsSamplePlaying4194413515','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','IsSamplePlaying4194413515','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 510</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','IsSamplePlaying4194413515',this); ">Sexy::SoundManager::IsSamplePlaying</a>(unsigned int theSampleID)
+{
+    if ((theSampleID &lt; 0) || (theSampleID &gt;= <a href="#" onMouseOver="link('_member','MAX_SOUND_SAMPLES0',this); ">MAX_SOUND_SAMPLES</a>))
+    {
+        K_LOG("Sexy::SoundManager::IsSamplePlaying: WARNING : Invalid sample ID.");
+        return false;
+    }
+    
+    KSound* aSoundInstance = <a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[theSampleID].mSoundInstance;
+    
+    if (aSoundInstance != NULL)
+    {
+        return aSoundInstance-&gt;isPlaying();
+    }
+    else
+    {
+        K_LOG("Sexy::SoundManager::IsSamplePlaying: WARNING : No sound instance for specified sample ID.");
+    }
+
+    return false;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

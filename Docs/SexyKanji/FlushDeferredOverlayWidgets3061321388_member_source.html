@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - FlushDeferredOverlayWidgets</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">FlushDeferredOverlayWidgets</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','WidgetManager809',this)" class="pathLink">WidgetManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">FlushDeferredOverlayWidgets</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','FlushDeferredOverlayWidgets3061321388','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','FlushDeferredOverlayWidgets3061321388','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','FlushDeferredOverlayWidgets3061321388','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 443</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','FlushDeferredOverlayWidgets3061321388',this); ">Sexy::WidgetManager::FlushDeferredOverlayWidgets</a>(int theMaxPriority)
+{
+    for (;;)
+    {
+        int aNextMinPriority = 0x7FFFFFFF;
+
+        for (int i = 0; i &lt; (int) <a href="#" onMouseOver="link('_member','mDeferredOverlayWidgets3955182565',this); ">mDeferredOverlayWidgets</a>.size(); i++)
+        {
+            Widget* aWidget = <a href="#" onMouseOver="link('_member','mDeferredOverlayWidgets3955182565',this); ">mDeferredOverlayWidgets</a>[i].first;            
+            if (aWidget != NULL)
+            {
+                int aPriority = <a href="#" onMouseOver="link('_member','mDeferredOverlayWidgets3955182565',this); ">mDeferredOverlayWidgets</a>[i].second;
+
+                if (aPriority == <a href="#" onMouseOver="link('_member','mMinDeferredOverlayPriority3955182565',this); ">mMinDeferredOverlayPriority</a>)
+                {
+                    // Overlays don't get clipped
+                    Graphics g(*mCurG);
+                    g.Translate(-<a href="#" onMouseOver="link('_member','mMouseDestRect3955182565',this); ">mMouseDestRect</a>.mX, -<a href="#" onMouseOver="link('_member','mMouseDestRect3955182565',this); ">mMouseDestRect</a>.mY);
+                    g.Translate(aWidget-&gt;mX, aWidget-&gt;mY);
+                    g.SetLinearBlend(true);
+
+                    aWidget-&gt;DrawOverlay(&amp;g, aPriority);
+                    <a href="#" onMouseOver="link('_member','mDeferredOverlayWidgets3955182565',this); ">mDeferredOverlayWidgets</a>[i].first = NULL;
+                }
+                else
+                {
+                    if (aPriority &lt; aNextMinPriority)
+                        aNextMinPriority = aPriority;
+                }
+            }
+        }
+
+        <a href="#" onMouseOver="link('_member','mMinDeferredOverlayPriority3955182565',this); ">mMinDeferredOverlayPriority</a> = aNextMinPriority;
+        if (aNextMinPriority == 0x7FFFFFFF)
+        {
+            // No more widgets lined up for overlays, clear our vector
+            <a href="#" onMouseOver="link('_member','mDeferredOverlayWidgets3955182565',this); ">mDeferredOverlayWidgets</a>.resize(0);
+            break;
+        }
+
+        // Lowest overlay priority is higher or equal to our current widget, 
+        //  so continue deferring
+        if (aNextMinPriority &gt;= theMaxPriority)
+            break;
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

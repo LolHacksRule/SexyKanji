@@ -1,0 +1,98 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - SexyImage</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">SexyImage</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyImage809',this)" class="pathLink">SexyImage</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">SexyImage</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SexyImage3202443502','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','SexyImage3202443502','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SexyImage3202443502','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 55</div>
+<pre class="codeExamples">
+ <a href="#" onMouseOver="link('_member','SexyImage1480380553',this); ">Sexy::SexyImage::SexyImage</a>(const SexyImage &amp;theImage)
+                                              :
+<a href="#" onMouseOver="link('_member','mFilePath1480183968',this); ">mFilePath</a>(theImage.<a href="#" onMouseOver="link('_member','mFilePath1480183968',this); ">mFilePath</a>),
+<a href="#" onMouseOver="link('_member','mAlphaFilePath1480183968',this); ">mAlphaFilePath</a>(theImage.<a href="#" onMouseOver="link('_member','mAlphaFilePath1480183968',this); ">mAlphaFilePath</a>),
+<a href="#" onMouseOver="link('_member','mWidth1480183968',this); ">mWidth</a>(theImage.<a href="#" onMouseOver="link('_member','mWidth1480183968',this); ">mWidth</a>),
+<a href="#" onMouseOver="link('_member','mHeight1480183968',this); ">mHeight</a>(theImage.<a href="#" onMouseOver="link('_member','mHeight1480183968',this); ">mHeight</a>),
+<a href="#" onMouseOver="link('_member','mNumRows1480183968',this); ">mNumRows</a>(theImage.<a href="#" onMouseOver="link('_member','mNumRows1480183968',this); ">mNumRows</a>),
+<a href="#" onMouseOver="link('_member','mNumCols1480183968',this); ">mNumCols</a>(theImage.<a href="#" onMouseOver="link('_member','mNumCols1480183968',this); ">mNumCols</a>),
+<a href="#" onMouseOver="link('_member','mUploaded1480183968',this); ">mUploaded</a>(false),
+<a href="#" onMouseOver="link('_member','mCompressedDataBuffer1480183968',this); ">mCompressedDataBuffer</a>(NULL),
+<a href="#" onMouseOver="link('_member','mCompressedDataSize1480183968',this); ">mCompressedDataSize</a>(theImage.<a href="#" onMouseOver="link('_member','mCompressedDataSize1480183968',this); ">mCompressedDataSize</a>),
+<a href="#" onMouseOver="link('_member','mAlphaCompressedDataBuffer1480183968',this); ">mAlphaCompressedDataBuffer</a>(NULL),
+<a href="#" onMouseOver="link('_member','mAlphaCompressedDataSize1480183968',this); ">mAlphaCompressedDataSize</a>(theImage.<a href="#" onMouseOver="link('_member','mAlphaCompressedDataSize1480183968',this); ">mAlphaCompressedDataSize</a>),
+<a href="#" onMouseOver="link('_member','mKGraphicImage1480183968',this); ">mKGraphicImage</a>(KPTK::createKGraphic()),
+<a href="#" onMouseOver="link('_member','mBits1480183968',this); ">mBits</a>(NULL),
+<a href="#" onMouseOver="link('_member','mBitsDirty1480183968',this); ">mBitsDirty</a>(theImage.<a href="#" onMouseOver="link('_member','mBitsDirty1480183968',this); ">mBitsDirty</a>),
+<a href="#" onMouseOver="link('_member','mPurgeBits1480183968',this); ">mPurgeBits</a>(theImage.<a href="#" onMouseOver="link('_member','mPurgeBits1480183968',this); ">mPurgeBits</a>),
+<a href="#" onMouseOver="link('_member','mNoBlendOverride1480183968',this); ">mNoBlendOverride</a>(theImage.<a href="#" onMouseOver="link('_member','mNoBlendOverride1480183968',this); ">mNoBlendOverride</a>),
+<a href="#" onMouseOver="link('_member','mWrappingMode1480183968',this); ">mWrappingMode</a>(theImage.<a href="#" onMouseOver="link('_member','mWrappingMode1480183968',this); ">mWrappingMode</a>)
+{
+    // Copy the data buffer if it exists.
+    if (theImage.mCompressedDataBuffer &amp;&amp; theImage.mCompressedDataSize)
+    {
+        mCompressedDataBuffer = new unsigned char[mCompressedDataSize];
+        memcpy(mCompressedDataBuffer, theImage.mCompressedDataBuffer, mCompressedDataSize);
+    }
+
+    // Copy the alpha data buffer if it exists.
+    if (theImage.mAlphaCompressedDataBuffer &amp;&amp; theImage.mAlphaCompressedDataSize)
+    {
+        mAlphaCompressedDataBuffer = new unsigned char[mAlphaCompressedDataSize];
+        memcpy(mAlphaCompressedDataBuffer, theImage.mAlphaCompressedDataBuffer, mAlphaCompressedDataSize);
+    }
+
+    // Copy the bits if they exist.
+    if (theImage.mBits)
+    {
+        int aSize = theImage.mWidth * theImage.mHeight;
+        mBits = new unsigned long [aSize];
+        memcpy(mBits, theImage.mBits, aSize * sizeof(unsigned long));
+    }
+
+    bool success = false;
+    // First try to load the mKGraphicImage with the image data.
+    success = CreateKGraphicFromData(LOAD_STEP_LOAD_ONLY);
+    if (!success)
+    {
+        // If that failed, try with the bits.
+        success = CreateKGraphicFromBits();
+    }
+
+    if (success)
+    {
+        mKGraphicImage-&gt;setTextureQuality(true);
+        mWidth = static_cast&lt;int&gt;(mKGraphicImage-&gt;getWidth());
+        <a href="#" onMouseOver="link('_member','mHeight147566763',this); ">mHeight</a> = static_cast&lt;int&gt;(mKGraphicImage-&gt;getHeight());
+    }
+
+    mAnimInfo = theImage.mAnimInfo;
+
+    mKGraphicImage-&gt;allowTextureWrap(mWrappingMode);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

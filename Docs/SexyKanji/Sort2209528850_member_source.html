@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Sort</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Sort</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ListWidget809',this)" class="pathLink">ListWidget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Sort</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Sort2209528850','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Sort2209528850','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Sort2209528850','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 111</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','Sort2209528850',this); ">Sexy::ListWidget::Sort</a>(bool ascending)
+{
+    int aCount = <a href="#" onMouseOver="link('_member','mLines1482078886',this); ">mLines</a>.size();
+    int* aMap = new int[aCount];
+    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a>* aKeys = new <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a>[aCount];
+
+    int i;
+    for (i = 0; i &lt; aCount; i++) 
+    {
+        aMap[i] = i;
+        aKeys[i] = <a href="#" onMouseOver="link('_member','GetSortKey2961488967',this); ">GetSortKey</a>(i);     
+    }
+        
+    for (i = 1; i &lt; aCount; i++) 
+        for (int j = 0; j &lt; aCount - i; j++) 
+        {
+            int aComp = aKeys[j].compare(aKeys[j+1]);
+            if ((ascending &amp;&amp; (aComp &gt; 0)) || (!ascending &amp;&amp; (aComp &lt; 0)))
+            {
+                int aSwapInt = aMap[j];
+                aMap[j] = aMap[j+1];
+                aMap[j+1] = aSwapInt;
+                        
+                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aSwapKey = aKeys[j];
+                aKeys[j] = aKeys[j+1];
+                aKeys[j+1] = aSwapKey;
+            }
+        }
+        
+    <a href="#" onMouseOver="link('_member','ListWidget2812983108',this); ">ListWidget</a> *aListWidget = this;
+    while (aListWidget-&gt;mParent != NULL)    
+        aListWidget = aListWidget-&gt;mParent;
+
+    while (aListWidget != NULL) 
+    {
+        <a href="#" onMouseOver="link('_member','SexyStringVector62745',this); ">SexyStringVector</a> aNewLines;
+        <a href="#" onMouseOver="link('_member','ColorVector62745',this); ">ColorVector</a> aNewLineColors;
+            
+        for (int i = 0; i &lt; aCount; i++)
+        {
+            aNewLines.push_back(aListWidget-&gt;mLines[aMap[i]]);
+            aNewLineColors.push_back(aListWidget-&gt;mLineColors[aMap[i]]);
+        }
+        
+        aListWidget-&gt;mLines = aNewLines;
+        aListWidget-&gt;mLineColors = aNewLineColors;
+        
+        aListWidget-&gt;MarkDirty();
+                        
+        aListWidget = aListWidget-&gt;mChild;
+    }
+
+    delete aMap;
+    delete aKeys;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

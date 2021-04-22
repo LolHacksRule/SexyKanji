@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - MouseDrag</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">MouseDrag</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','WidgetManager809',this)" class="pathLink">WidgetManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">MouseDrag</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','MouseDrag3061375031','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','MouseDrag3061375031','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','MouseDrag3061375031','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1167</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','MouseDrag3061375031',this); ">Sexy::WidgetManager::MouseDrag</a>(int x, int y)
+{   
+    <a href="#" onMouseOver="link('_member','mLastInputUpdateCnt3955182565',this); ">mLastInputUpdateCnt</a> = <a href="#" onMouseOver="link('_member','mUpdateCnt564406879',this); ">mUpdateCnt</a>;
+
+    <a href="#" onMouseOver="link('_member','mMouseIn3955182565',this); ">mMouseIn</a> = true;
+    <a href="#" onMouseOver="link('_member','mLastMouseX3955182565',this); ">mLastMouseX</a> = x;
+    <a href="#" onMouseOver="link('_member','mLastMouseY3955182565',this); ">mLastMouseY</a> = y;
+
+    if ((<a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a> != NULL) &amp;&amp; (<a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a> != <a href="#" onMouseOver="link('_member','mLastDownWidget3955182565',this); ">mLastDownWidget</a>))
+    {
+        Widget* anOverWidget = <a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a>;
+        <a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a> = NULL;    
+        <a href="#" onMouseOver="link('_member','MouseLeave3063501302',this); ">MouseLeave</a>(anOverWidget);     
+    }
+
+    if (<a href="#" onMouseOver="link('_member','mLastDownWidget3955182565',this); ">mLastDownWidget</a> != NULL)
+    {
+        <a href="#" onMouseOver="link('_member','SexyPoint62745',this); ">SexyPoint</a> anAbsPos = <a href="#" onMouseOver="link('_member','mLastDownWidget3955182565',this); ">mLastDownWidget</a>-&gt;GetAbsPos();
+
+        int aWidgetX = x - anAbsPos.mX;
+        int aWidgetY = y - anAbsPos.mY;     
+        <a href="#" onMouseOver="link('_member','mLastDownWidget3955182565',this); ">mLastDownWidget</a>-&gt;<a href="#" onMouseOver="link('_member','MouseDrag840362511',this); ">MouseDrag</a>(aWidgetX, aWidgetY);     
+        
+        <a href="#" onMouseOver="link('_class','Widget809',this); ">Widget</a>* aWidgetOver = <a href="#" onMouseOver="link('_member','GetWidgetAt1398619166',this); ">GetWidgetAt</a>(x, y, NULL, NULL);
+
+        if ((aWidgetOver == <a href="#" onMouseOver="link('_member','mLastDownWidget3955182565',this); ">mLastDownWidget</a>) &amp;&amp; (aWidgetOver != NULL))
+        {
+            if (<a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a> == NULL)
+            {
+                <a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a> = <a href="#" onMouseOver="link('_member','mLastDownWidget3955182565',this); ">mLastDownWidget</a>;
+                <a href="#" onMouseOver="link('_member','MouseEnter3063501302',this); ">MouseEnter</a>(mOverWidget);
+            }
+        }
+        else
+        {
+            if (<a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a> != NULL)
+            {
+                Widget* anOverWidget = <a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a>;
+                <a href="#" onMouseOver="link('_member','mOverWidget3955182565',this); ">mOverWidget</a> = NULL;    
+                <a href="#" onMouseOver="link('_member','MouseLeave3063501302',this); ">MouseLeave</a>(anOverWidget);             
+            }
+        }
+    }
+    
+    return true;    
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

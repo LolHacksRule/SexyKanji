@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Draw</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Draw</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Dialog809',this)" class="pathLink">Dialog</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Draw</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Draw3909224791','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Draw3909224791','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Draw3909224791','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 277</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','Draw3909224791',this); ">Sexy::Dialog::Draw</a>(Graphics *g)
+{
+    <a href="#" onMouseOver="link('_member','EnsureFonts198265572',this); ">EnsureFonts</a>();
+
+    <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a> aBoxRect(<a href="#" onMouseOver="link('_member','mBackgroundInsets198470348',this); ">mBackgroundInsets</a>.mLeft,<a href="#" onMouseOver="link('_member','mBackgroundInsets198470348',this); ">mBackgroundInsets</a>.mTop,mWidth-<a href="#" onMouseOver="link('_member','mBackgroundInsets198470348',this); ">mBackgroundInsets</a>.mLeft-<a href="#" onMouseOver="link('_member','mBackgroundInsets198470348',this); ">mBackgroundInsets</a>.mRight,mHeight-<a href="#" onMouseOver="link('_member','mBackgroundInsets198470348',this); ">mBackgroundInsets</a>.mTop-<a href="#" onMouseOver="link('_member','mBackgroundInsets198470348',this); ">mBackgroundInsets</a>.mBottom);
+    if (<a href="#" onMouseOver="link('_member','mComponentImage198470348',this); ">mComponentImage</a> != NULL)
+    {
+        g-&gt;DrawImageBox(aBoxRect,mComponentImage);
+    }
+    else
+    {
+        g-&gt;SetColor(<a href="#" onMouseOver="link('_member','GetColor3950439662',this); ">GetColor</a>(COLOR_OUTLINE, SexyColor(gDialogColors[COLOR_OUTLINE])));
+        g-&gt;DrawRect(12, 12, mWidth - 12*2 - 1, mHeight - 12*2 - 1);
+        g-&gt;SetColor(<a href="#" onMouseOver="link('_member','GetColor3950439662',this); ">GetColor</a>(COLOR_BKG, SexyColor(gDialogColors[COLOR_BKG])));
+        g-&gt;FillRect(12+1, 12+1, mWidth - 12*2 - 2, mHeight - 12*2 - 2);
+        
+        g-&gt;SetColor(<a href="#" onMouseOver="link('_class','SexyColor809',this); ">SexyColor</a>(0, 0, 0, 128));
+        g-&gt;FillRect(mWidth - 12, 12*2, 12, mHeight - 12*3);
+        g-&gt;FillRect(12*2, mHeight-12, mWidth - 12*2, 12);
+    }
+
+    int aCurY = <a href="#" onMouseOver="link('_member','mContentInsets198470348',this); ">mContentInsets</a>.mTop + <a href="#" onMouseOver="link('_member','mBackgroundInsets198470348',this); ">mBackgroundInsets</a>.mTop;
+
+    if (<a href="#" onMouseOver="link('_member','mDialogHeader198470348',this); ">mDialogHeader</a>.length() &gt; 0)
+    {
+        //aCurY += mHeaderFont-&gt;GetAscent() - mHeaderFont-&gt;GetAscentPadding();
+        
+        g-&gt;SetFont(<a href="#" onMouseOver="link('_member','mHeaderFont198470348',this); ">mHeaderFont</a>);
+        g-&gt;SetColor(<a href="#" onMouseOver="link('_member','mColors192236783',this); ">mColors</a>[<a href="#" onMouseOver="link('_member','COLOR_HEADER198470348',this); ">COLOR_HEADER</a>]);
+        g-&gt;WriteString(<a href="#" onMouseOver="link('_member','mDialogHeader198470348',this); ">mDialogHeader</a>, 0, aCurY, <a href="#" onMouseOver="link('_member','mWidth564406879',this); ">mWidth</a>);       
+
+        aCurY += <a href="#" onMouseOver="link('_member','mHeaderFont198470348',this); ">mHeaderFont</a>-&gt;GetHeight();
+
+        aCurY += <a href="#" onMouseOver="link('_member','mSpaceAfterHeader198470348',this); ">mSpaceAfterHeader</a>;
+    }
+
+    g-&gt;SetFont(mLinesFont);
+    g-&gt;SetColor(mColors[COLOR_LINES]);
+
+    <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a> aRect(<a href="#" onMouseOver="link('_member','mBackgroundInsets198470348',this); ">mBackgroundInsets</a>.mLeft+<a href="#" onMouseOver="link('_member','mContentInsets198470348',this); ">mContentInsets</a>.mLeft+2, aCurY, mWidth-<a href="#" onMouseOver="link('_member','mContentInsets198470348',this); ">mContentInsets</a>.mLeft-<a href="#" onMouseOver="link('_member','mContentInsets198470348',this); ">mContentInsets</a>.mRight-<a href="#" onMouseOver="link('_member','mBackgroundInsets198470348',this); ">mBackgroundInsets</a>.mLeft-<a href="#" onMouseOver="link('_member','mBackgroundInsets198470348',this); ">mBackgroundInsets</a>.mRight-4, 0);
+    aCurY += g-&gt;WriteWordWrapped(aRect, mDialogLines, <a href="#" onMouseOver="link('_member','mLinesFont198470348',this); ">mLinesFont</a>-&gt;GetLineSpacing() + <a href="#" onMouseOver="link('_member','mLineSpacingOffset198470348',this); ">mLineSpacingOffset</a>, <a href="#" onMouseOver="link('_member','mTextAlign198470348',this); ">mTextAlign</a>); 
+
+    if ((<a href="#" onMouseOver="link('_member','mDialogFooter198470348',this); ">mDialogFooter</a>.length() != 0) &amp;&amp; (<a href="#" onMouseOver="link('_member','mButtonMode198470348',this); ">mButtonMode</a> != <a href="#" onMouseOver="link('_member','BUTTONS_FOOTER198470348',this); ">BUTTONS_FOOTER</a>))
+    {       
+        aCurY += 8;
+        aCurY += <a href="#" onMouseOver="link('_member','mHeaderFont198470348',this); ">mHeaderFont</a>-&gt;GetLineSpacing();
+        
+        g-&gt;SetFont(mHeaderFont);
+        g-&gt;SetColor(mColors[COLOR_FOOTER]);
+        g-&gt;WriteString(mDialogFooter, mX, aCurY, mWidth);       
+    }   
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

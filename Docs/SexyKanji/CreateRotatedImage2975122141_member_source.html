@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - CreateRotatedImage</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">CreateRotatedImage</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ImageManager809',this)" class="pathLink">ImageManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">CreateRotatedImage</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CreateRotatedImage2975122141','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','CreateRotatedImage2975122141','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CreateRotatedImage2975122141','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 632</div>
+<pre class="codeExamples">
+SexyImage * <a href="#" onMouseOver="link('_member','CreateRotatedImage2975122141',this); ">Sexy::ImageManager::CreateRotatedImage</a>(SexyImage *theImage, int theRotation=ROT_IMG_90_DEG)
+{
+    if (theImage == NULL) return NULL;
+
+    int aSrcWidth = theImage-&gt;GetWidth();
+    int aSrcHeight = theImage-&gt;GetHeight();
+    int aDestWidth = aSrcWidth;
+    int aDestHeight = aSrcHeight;
+
+    unsigned long* aDestBits = new unsigned long[aDestWidth * aDestHeight * sizeof(unsigned long)];
+    unsigned long* aSrcBits = theImage-&gt;GetBits();
+
+    SexyImage* aNewImage = new SexyImage();
+
+    switch(theRotation)
+    {
+    case <a href="#" onMouseOver="link('_member','ROT_IMG_90_DEG454134940',this); ">ROT_IMG_90_DEG</a>:
+        aDestWidth = aDestHeight;
+        aDestHeight = aSrcWidth;
+        for (int aSrcY = 0; aSrcY &lt; aSrcHeight; aSrcY++)
+        {
+            for (int aSrcX = 0; aSrcX &lt; aSrcWidth; aSrcX++)
+            {
+                int aDestX = aSrcY;
+                int aDestY = (aDestHeight - aSrcX - 1);
+                aDestBits[aDestY*aDestWidth + aDestX] = aSrcBits[aSrcY*aSrcWidth + aSrcX];
+            }
+        }
+        aNewImage-&gt;SetBits(aDestBits, aDestWidth, aDestHeight);
+        break;
+
+
+    case <a href="#" onMouseOver="link('_member','ROT_IMG_180_DEG454134940',this); ">ROT_IMG_180_DEG</a>:
+        for (int aSrcY = 0; aSrcY &lt; aSrcHeight; aSrcY++)
+        {
+            for (int aSrcX = 0; aSrcX &lt; aSrcWidth; aSrcX++)
+            {
+                int aDestX = (aDestWidth - aSrcX - 1);
+                int aDestY = (aDestHeight - aSrcY - 1);
+                aDestBits[aDestY*aDestWidth + aDestX] = aSrcBits[aSrcY*aSrcWidth + aSrcX];
+            }
+        }
+        aNewImage-&gt;SetBits(aDestBits, aDestWidth, aDestHeight);
+        break;
+
+
+    case <a href="#" onMouseOver="link('_member','ROT_IMG_270_DEG454134940',this); ">ROT_IMG_270_DEG</a>:
+        aDestWidth = aDestHeight;
+        aDestHeight = aSrcWidth;
+        for (int aSrcY = 0; aSrcY &lt; aSrcHeight; aSrcY++)
+        {
+            for (int aSrcX = 0; aSrcX &lt; aSrcWidth; aSrcX++)
+            {
+                int aDestX = (aDestWidth - aSrcY - 1);
+                int aDestY = aSrcX;
+                aDestBits[aDestY*aDestWidth + aDestX] = aSrcBits[aSrcY*aSrcWidth + aSrcX];
+            }
+        }
+        aNewImage-&gt;SetBits(aDestBits, aDestWidth, aDestHeight);
+        break;
+
+
+    default:
+        K_LOG(<a href="#" onMouseOver="link('_member','StrFormat798802342',this); ">StrFormat</a>("Sexy::ImageManager::CreateRotatedImage :Warning: Attempt to call with invalid rotation: %d", theRotation).c_str());
+        aNewImage-&gt;SetBits(theImage-&gt;GetBits(), aDestWidth, aDestHeight);
+        break;
+    }
+
+    delete [] aDestBits;
+
+    return aNewImage;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

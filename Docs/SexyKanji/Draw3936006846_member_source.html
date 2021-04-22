@@ -1,0 +1,163 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Draw</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Draw</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ButtonWidget809',this)" class="pathLink">ButtonWidget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Draw</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Draw3936006846','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Draw3936006846','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Draw3936006846','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 130</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','Draw3936006846',this); ">Sexy::ButtonWidget::Draw</a>(Graphics *g)
+{
+    if (<a href="#" onMouseOver="link('_member','mBtnNoDraw1220410105',this); ">mBtnNoDraw</a>)
+        return;
+
+    bool isDown = <a href="#" onMouseOver="link('_member','mIsDown192236783',this); ">mIsDown</a> &amp;&amp; <a href="#" onMouseOver="link('_member','mIsOver192236783',this); ">mIsOver</a> &amp;&amp; !<a href="#" onMouseOver="link('_member','mDisabled192236783',this); ">mDisabled</a>;
+    isDown ^= <a href="#" onMouseOver="link('_member','mInverted1220410105',this); ">mInverted</a>;
+
+    int aFontX = 0; // BUTTON_LABEL_LEFT
+    int aFontY = 0;
+
+    if (((SexyFont*)<a href="#" onMouseOver="link('_member','mFont1220410105',this); ">mFont</a>) != NULL)
+    {
+        if (<a href="#" onMouseOver="link('_member','mLabelJustify1220410105',this); ">mLabelJustify</a> == <a href="#" onMouseOver="link('_member','BUTTON_LABEL_CENTER1220410105',this); ">BUTTON_LABEL_CENTER</a>)
+            aFontX = (<a href="#" onMouseOver="link('_member','mWidth564406879',this); ">mWidth</a> - <a href="#" onMouseOver="link('_member','mFont1220410105',this); ">mFont</a>-&gt;StringWidth(mLabel))/2;
+        else if (<a href="#" onMouseOver="link('_member','mLabelJustify1220410105',this); ">mLabelJustify</a> == <a href="#" onMouseOver="link('_member','BUTTON_LABEL_RIGHT1220410105',this); ">BUTTON_LABEL_RIGHT</a>)
+            aFontX = <a href="#" onMouseOver="link('_member','mWidth564406879',this); ">mWidth</a> - <a href="#" onMouseOver="link('_member','mFont1220410105',this); ">mFont</a>-&gt;StringWidth(mLabel);
+        aFontY = (<a href="#" onMouseOver="link('_member','mHeight564406879',this); ">mHeight</a> / 2) - (<a href="#" onMouseOver="link('_member','mFont1220410105',this); ">mFont</a>-&gt;GetAscent() / 2);
+
+        //aFontY = (mHeight + mFont-&gt;GetAscent() - mFont-&gt;GetAscent()/6 - 1)/2;
+
+        //aFontX = (mWidth - mFont-&gt;StringWidth(mLabel))/2;
+        //aFontY = (mHeight - mFont-&gt;GetHeight())/2 + mFont-&gt;GetAscent() - 1;       
+    }
+
+    g-&gt;SetFont(mFont);
+    
+    if ((<a href="#" onMouseOver="link('_member','mButtonImage1220410105',this); ">mButtonImage</a> == NULL) &amp;&amp; (<a href="#" onMouseOver="link('_member','mDownImage1220410105',this); ">mDownImage</a> == NULL))
+    {
+        if (!<a href="#" onMouseOver="link('_member','mFrameNoDraw1220410105',this); ">mFrameNoDraw</a>)
+        {
+            g-&gt;SetColor(<a href="#" onMouseOver="link('_member','mColors192236783',this); ">mColors</a>[<a href="#" onMouseOver="link('_member','COLOR_BKG1220410105',this); ">COLOR_BKG</a>]);
+            g-&gt;FillRect(0, 0, <a href="#" onMouseOver="link('_member','mWidth564406879',this); ">mWidth</a>, <a href="#" onMouseOver="link('_member','mHeight564406879',this); ">mHeight</a>);
+        }
+
+        if (isDown)
+        {
+            if (!<a href="#" onMouseOver="link('_member','mFrameNoDraw1220410105',this); ">mFrameNoDraw</a>)
+            {
+                g-&gt;SetColor(mColors[COLOR_DARK_OUTLINE]);
+                g-&gt;FillRect(0, 0, mWidth-1, 1);
+                g-&gt;FillRect(0, 0, 1, mHeight-1);
+                
+                g-&gt;SetColor(mColors[COLOR_LIGHT_OUTLINE]);
+                g-&gt;FillRect(0, mHeight - 1, mWidth, 1);
+                g-&gt;FillRect(mWidth - 1, 0, 1, mHeight);                                 
+        
+                g-&gt;SetColor(mColors[COLOR_MEDIUM_OUTLINE]);
+                g-&gt;FillRect(1, 1, mWidth - 3, 1);
+                g-&gt;FillRect(1, 1, 1, mHeight - 3);
+            }
+
+            if (<a href="#" onMouseOver="link('_member','mIsOver192236783',this); ">mIsOver</a>)
+                g-&gt;SetColor(mColors[COLOR_LABEL_HILITE]);
+            else
+                g-&gt;SetColor(mColors[COLOR_LABEL]);
+
+            g-&gt;DrawString(mLabel, aFontX+1, aFontY+1);
+        }
+        else
+        {           
+            if (!<a href="#" onMouseOver="link('_member','mFrameNoDraw1220410105',this); ">mFrameNoDraw</a>)
+            {
+                g-&gt;SetColor(mColors[COLOR_LIGHT_OUTLINE]);
+                g-&gt;FillRect(0, 0, mWidth-1, 1);
+                g-&gt;FillRect(0, 0, 1, mHeight-1);
+                
+                g-&gt;SetColor(mColors[COLOR_DARK_OUTLINE]);
+                g-&gt;FillRect(0, mHeight - 1, mWidth, 1);
+                g-&gt;FillRect(mWidth - 1, 0, 1, mHeight);                                 
+        
+                g-&gt;SetColor(mColors[COLOR_MEDIUM_OUTLINE]);
+                g-&gt;FillRect(1, mHeight - 2, mWidth - 2, 1);
+                g-&gt;FillRect(mWidth - 2, 1, 1, mHeight - 2);         
+            }
+            
+            if (<a href="#" onMouseOver="link('_member','mIsOver192236783',this); ">mIsOver</a>)
+                g-&gt;SetColor(mColors[COLOR_LABEL_HILITE]);
+            else
+                g-&gt;SetColor(mColors[COLOR_LABEL]);
+
+            g-&gt;DrawString(mLabel, aFontX, aFontY);      
+        }       
+    }
+    else
+    {
+        if (!isDown)
+        {
+            if (<a href="#" onMouseOver="link('_member','mDisabled192236783',this); ">mDisabled</a> &amp;&amp; <a href="#" onMouseOver="link('_member','HaveButtonImage387979168',this); ">HaveButtonImage</a>(<a href="#" onMouseOver="link('_member','mDisabledImage1220410105',this); ">mDisabledImage</a>,<a href="#" onMouseOver="link('_member','mDisabledRect1220410105',this); ">mDisabledRect</a>))
+                <a href="#" onMouseOver="link('_member','DrawButtonImage3053968130',this); ">DrawButtonImage</a>(g,<a href="#" onMouseOver="link('_member','mDisabledImage1220410105',this); ">mDisabledImage</a>,<a href="#" onMouseOver="link('_member','mDisabledRect1220410105',this); ">mDisabledRect</a>,0,0);
+            else if ((<a href="#" onMouseOver="link('_member','mOverAlpha1220410105',this); ">mOverAlpha</a> &gt; 0) &amp;&amp; <a href="#" onMouseOver="link('_member','HaveButtonImage387979168',this); ">HaveButtonImage</a>(<a href="#" onMouseOver="link('_member','mOverImage1220410105',this); ">mOverImage</a>,<a href="#" onMouseOver="link('_member','mOverRect1220410105',this); ">mOverRect</a>))
+            {
+                if (<a href="#" onMouseOver="link('_member','HaveButtonImage387979168',this); ">HaveButtonImage</a>(<a href="#" onMouseOver="link('_member','mButtonImage1220410105',this); ">mButtonImage</a>, <a href="#" onMouseOver="link('_member','mNormalRect1220410105',this); ">mNormalRect</a>)  &amp;&amp; <a href="#" onMouseOver="link('_member','mOverAlpha1220410105',this); ">mOverAlpha</a>&lt;1)
+                    <a href="#" onMouseOver="link('_member','DrawButtonImage3053968130',this); ">DrawButtonImage</a>(g,<a href="#" onMouseOver="link('_member','mButtonImage1220410105',this); ">mButtonImage</a>,<a href="#" onMouseOver="link('_member','mNormalRect1220410105',this); ">mNormalRect</a>,0,0);
+
+                g-&gt;SetColorizeImages(true);
+                g-&gt;SetColor(<a href="#" onMouseOver="link('_class','SexyColor809',this); ">SexyColor</a>(255,255,255,(int)(<a href="#" onMouseOver="link('_member','mOverAlpha1220410105',this); ">mOverAlpha</a> * 255)));
+                <a href="#" onMouseOver="link('_member','DrawButtonImage3053968130',this); ">DrawButtonImage</a>(g,mOverImage,mOverRect,0,0);
+                g-&gt;SetColorizeImages(false);
+            }
+            else if ((<a href="#" onMouseOver="link('_member','mIsOver192236783',this); ">mIsOver</a> || <a href="#" onMouseOver="link('_member','mIsDown192236783',this); ">mIsDown</a>) &amp;&amp; <a href="#" onMouseOver="link('_member','HaveButtonImage387979168',this); ">HaveButtonImage</a>(mOverImage,mOverRect))
+            {
+                <a href="#" onMouseOver="link('_member','DrawButtonImage3053968130',this); ">DrawButtonImage</a>(g,mOverImage,mOverRect,0,0);
+            }
+            else if (<a href="#" onMouseOver="link('_member','HaveButtonImage387979168',this); ">HaveButtonImage</a>(mButtonImage,mNormalRect))
+                <a href="#" onMouseOver="link('_member','DrawButtonImage3053968130',this); ">DrawButtonImage</a>(g,mButtonImage,mNormalRect,0,0);
+
+            if (<a href="#" onMouseOver="link('_member','mIsOver192236783',this); ">mIsOver</a>)
+                g-&gt;SetColor(mColors[COLOR_LABEL_HILITE]);
+            else
+                g-&gt;SetColor(mColors[COLOR_LABEL]);
+            g-&gt;DrawString(mLabel, aFontX, aFontY);
+        }
+        else
+        {
+            if (<a href="#" onMouseOver="link('_member','HaveButtonImage387979168',this); ">HaveButtonImage</a>(<a href="#" onMouseOver="link('_member','mDownImage1220410105',this); ">mDownImage</a>, <a href="#" onMouseOver="link('_member','mDownRect1220410105',this); ">mDownRect</a>))
+                <a href="#" onMouseOver="link('_member','DrawButtonImage3053968130',this); ">DrawButtonImage</a>(g, <a href="#" onMouseOver="link('_member','mDownImage1220410105',this); ">mDownImage</a>, <a href="#" onMouseOver="link('_member','mDownRect1220410105',this); ">mDownRect</a>, 0, 0);
+            else if (<a href="#" onMouseOver="link('_member','HaveButtonImage387979168',this); ">HaveButtonImage</a>(<a href="#" onMouseOver="link('_member','mOverImage1220410105',this); ">mOverImage</a>,<a href="#" onMouseOver="link('_member','mOverRect1220410105',this); ">mOverRect</a>))
+                <a href="#" onMouseOver="link('_member','DrawButtonImage3053968130',this); ">DrawButtonImage</a>(g, <a href="#" onMouseOver="link('_member','mOverImage1220410105',this); ">mOverImage</a>, <a href="#" onMouseOver="link('_member','mOverRect1220410105',this); ">mOverRect</a>, 1, 1);
+            else
+                <a href="#" onMouseOver="link('_member','DrawButtonImage3053968130',this); ">DrawButtonImage</a>(g, <a href="#" onMouseOver="link('_member','mButtonImage1220410105',this); ">mButtonImage</a>, <a href="#" onMouseOver="link('_member','mNormalRect1220410105',this); ">mNormalRect</a>, 1, 1);
+
+            g-&gt;SetColor(<a href="#" onMouseOver="link('_member','mColors192236783',this); ">mColors</a>[<a href="#" onMouseOver="link('_member','COLOR_LABEL_HILITE1220410105',this); ">COLOR_LABEL_HILITE</a>]);
+            g-&gt;DrawString(<a href="#" onMouseOver="link('_member','mLabel1220410105',this); ">mLabel</a>, aFontX+1, aFontY+1);
+        }
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

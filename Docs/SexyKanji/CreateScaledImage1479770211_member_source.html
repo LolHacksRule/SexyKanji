@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - CreateScaledImage</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">CreateScaledImage</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ImageManager809',this)" class="pathLink">ImageManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">CreateScaledImage</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CreateScaledImage1479770211','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','CreateScaledImage1479770211','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CreateScaledImage1479770211','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 840</div>
+<pre class="codeExamples">
+SexyImage * <a href="#" onMouseOver="link('_member','CreateScaledImage1479770211',this); ">Sexy::ImageManager::CreateScaledImage</a>(SexyImage *theImage, float theScaleX, float theScaleY)
+{
+    if (theImage == NULL)
+    {
+        K_LOG("Sexy::ImageManager::ScaleImage :ERROR: Attempting to pass NULL Pointer");
+        return NULL;
+    }
+
+    if (theScaleX == 0 || theScaleY == 0 || theImage-&gt;GetWidth() == 0 || theImage-&gt;GetHeight() == 0 || theImage-&gt;GetBits() == NULL)
+    {
+        K_LOG("Sexy::ImageManager::ScaleImage :ERROR: ScaleX: %f ScaleY: %f ImageWidth: %d ImageHeight: %d Bits %X",
+            theScaleX, theScaleY, theImage-&gt;GetWidth(), theImage-&gt;GetHeight(), theImage-&gt;GetBits());
+        return NULL;
+    }
+
+    long theWidth = theImage-&gt;GetWidth();
+    long theHeight = theImage-&gt;GetHeight();
+    KImage aTempImage;
+
+    unsigned long* aTempPixelBuffer = new unsigned long[theWidth * theHeight * sizeof(unsigned long)];
+    memcpy(aTempPixelBuffer, theImage-&gt;GetBits(), theWidth * theHeight * sizeof(unsigned long));
+
+    // KImage frees aTempPixelBuffer during the Re sampling
+    aTempImage.setPixels(theImage-&gt;GetWidth(), theImage-&gt;GetHeight(), true, aTempPixelBuffer);
+    aTempImage.resampleImage((unsigned long)((float)theWidth * theScaleX), (unsigned long)((float)theHeight * theScaleY));
+
+    SexyImage* aNewImage = new SexyImage();
+    aNewImage-&gt;SetBits(aTempImage.getPixels(), aTempImage.getImageWidth(), aTempImage.getImageHeight());
+
+    return aNewImage;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

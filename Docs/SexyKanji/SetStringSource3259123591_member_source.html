@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - SetStringSource</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">SetStringSource</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','XMLParser809',this)" class="pathLink">XMLParser</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">SetStringSource</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SetStringSource3259123591','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','SetStringSource3259123591','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SetStringSource3259123591','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 164</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','SetStringSource3259123591',this); ">Sexy::XMLParser::SetStringSource</a>(const std::wstring &amp;theString)
+{
+    <a href="#" onMouseOver="link('_member','Init800879249',this); ">Init</a>();
+
+    int aSize = theString.size();
+
+    <a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>.resize(aSize); 
+    for (int i = 0; i &lt; aSize; i++)
+        <a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>[i] = theString[aSize - i - 1]; 
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

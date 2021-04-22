@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DrawImageRotated</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DrawImageRotated</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Graphics809',this)" class="pathLink">Graphics</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DrawImageRotated</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawImageRotated1826308940','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DrawImageRotated1826308940','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawImageRotated1826308940','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1512</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','DrawImageRotated1826308940',this); ">Sexy::Graphics::DrawImageRotated</a>(SexyImage *theImage, int theX, int theY, float theRot, const SexyRect *theSrcRect=NULL)
+{
+    if (theImage == NULL) return;
+
+    float aRotCenterX = 0;
+    float aRotCenterY = 0;
+
+    if (theSrcRect == NULL)
+    {
+        aRotCenterX = theImage-&gt;GetWidth() / 2.0f;
+        aRotCenterY = theImage-&gt;GetHeight() / 2.0f;
+    }
+    else
+    {
+        aRotCenterX = theSrcRect-&gt;mWidth / 2.0f;
+        aRotCenterY = theSrcRect-&gt;mHeight / 2.0f;
+    }
+
+    <a href="#" onMouseOver="link('_member','DrawImageRotatedF2444138637',this); ">DrawImageRotatedF</a>(theImage, static_cast&lt;float&gt;(theX), static_cast&lt;float&gt;(theY), theRot, aRotCenterX, aRotCenterY, theSrcRect);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

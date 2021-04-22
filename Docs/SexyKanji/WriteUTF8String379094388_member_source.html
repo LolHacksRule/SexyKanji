@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - WriteUTF8String</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">WriteUTF8String</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Buffer809',this)" class="pathLink">Buffer</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">WriteUTF8String</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WriteUTF8String379094388','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','WriteUTF8String379094388','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WriteUTF8String379094388','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 470</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','WriteUTF8String379094388',this); ">Sexy::Buffer::WriteUTF8String</a>(const std::wstring &amp;theString)
+{
+    if ((<a href="#" onMouseOver="link('_member','mWriteBitPos150216417',this); ">mWriteBitPos</a> &amp; 7) != 0) // boo! let's get byte aligned.
+        <a href="#" onMouseOver="link('_member','mWriteBitPos150216417',this); ">mWriteBitPos</a> = (<a href="#" onMouseOver="link('_member','mWriteBitPos150216417',this); ">mWriteBitPos</a> + 8) &amp; ~7;
+
+    <a href="#" onMouseOver="link('_member','WriteShort2283772971',this); ">WriteShort</a>((short) theString.length());
+    for (int i = 0; i &lt; (int)theString.length(); ++i)
+    {
+        const unsigned int c = (unsigned int)theString[i]; // just in case wchar_t is only 16 bits, and it generally is in visual studio
+        if (c &lt; 0x80)
+        {
+            <a href="#" onMouseOver="link('_member','WriteByte3232556357',this); ">WriteByte</a>((unsigned char)c);
+        }
+        else if (c &lt; 0x800) 
+        {
+            <a href="#" onMouseOver="link('_member','WriteByte3232556357',this); ">WriteByte</a>((unsigned char)(0xC0 | (c&gt;&gt;6)));
+            <a href="#" onMouseOver="link('_member','WriteByte3232556357',this); ">WriteByte</a>((unsigned char)(0x80 | (c &amp; 0x3F)));
+        }
+        else if (c &lt; 0x10000) 
+        {
+            <a href="#" onMouseOver="link('_member','WriteByte3232556357',this); ">WriteByte</a>((unsigned char)(0xE0 | c&gt;&gt;12));
+            <a href="#" onMouseOver="link('_member','WriteByte3232556357',this); ">WriteByte</a>((unsigned char)(0x80 | ((c&gt;&gt;6) &amp; 0x3F)));
+            <a href="#" onMouseOver="link('_member','WriteByte3232556357',this); ">WriteByte</a>((unsigned char)(0x80 | (c &amp; 0x3F)));
+        }
+        else if (c &lt; 0x110000) 
+        {
+            <a href="#" onMouseOver="link('_member','WriteByte3232556357',this); ">WriteByte</a>((unsigned char)(0xF0 | (c&gt;&gt;18)));
+            <a href="#" onMouseOver="link('_member','WriteByte3232556357',this); ">WriteByte</a>((unsigned char)(0x80 | ((c&gt;&gt;12) &amp; 0x3F)));
+            <a href="#" onMouseOver="link('_member','WriteByte3232556357',this); ">WriteByte</a>((unsigned char)(0x80 | ((c&gt;&gt;6) &amp; 0x3F)));
+            <a href="#" onMouseOver="link('_member','WriteByte3232556357',this); ">WriteByte</a>((unsigned char)(0x80 | (c &amp; 0x3F)));
+        } // are the remaining ranges really necessary? add if so!
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

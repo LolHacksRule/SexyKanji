@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ParsePropertiesFile</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ParsePropertiesFile</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyPropertiesParser809',this)" class="pathLink">SexyPropertiesParser</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ParsePropertiesFile</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParsePropertiesFile3142934972','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ParsePropertiesFile3142934972','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParsePropertiesFile3142934972','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 315</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','ParsePropertiesFile3142934972',this); ">Sexy::SexyPropertiesParser::ParsePropertiesFile</a>(const SexyString &amp;theFilename)
+{
+    if(<a href="#" onMouseOver="link('_member','Lower1908875876',this); ">Lower</a>(<a href="#" onMouseOver="link('_member','GetFileExt1908875876',this); ">GetFileExt</a>(theFilename)) != <a href="#" onMouseOver="link('_member','Lower1908875876',this); ">Lower</a>(_S("xml")))
+        return <a href="#" onMouseOver="link('_member','ParsePropertiesFileBinary3142934972',this); ">ParsePropertiesFileBinary</a>(theFilename);
+
+    <a href="#" onMouseOver="link('_member','mXMLParser1464883425',this); ">mXMLParser</a> = new XMLParser();
+    if(!<a href="#" onMouseOver="link('_member','mXMLParser1464883425',this); ">mXMLParser</a>-&gt;OpenFile(theFilename))
+    {
+        K_LOG("Sexy::SexyPropertiesParser::ParsePropertiesFile :Warning: Properties File not found: \"%s\".", SexyStringToStringFast(theFilename).c_str());
+        return false;
+    }
+
+    if(<a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a> == NULL)
+        K_LOG("Sexy::SexyPropertiesParser::ParsePropertiesFile :Warning: Attempting to Parse Properties File \"%s\" with NULL Properties Pointer.", SexyStringToStringFast(theFilename).c_str());
+
+    return <a href="#" onMouseOver="link('_member','DoParseProperties3008366725',this); ">DoParseProperties</a>();  
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

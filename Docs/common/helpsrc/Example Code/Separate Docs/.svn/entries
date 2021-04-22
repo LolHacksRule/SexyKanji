@@ -1,0 +1,76 @@
+8
+
+dir
+24
+https://doxys.svn.sourceforge.net/svnroot/doxys/trunk/homepage/Documentation/Example%20Code/Separate%20Docs
+https://doxys.svn.sourceforge.net/svnroot/doxys
+
+
+
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+
+
+svn:special svn:externals svn:needs-lock
+
+separated_documentation.dxd
+file
+
+
+
+
+2007-11-15T16:40:17.188889Z
+c6b8488f3ee94b37cd3207671f5d3fe8
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+
+separated_documentation.cpp
+file
+
+
+
+
+2007-11-15T16:40:17.188889Z
+ea5268d85d6f92c34d74caab2ee347f7
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+
+separated_documentation.h
+file
+
+
+
+
+2007-11-15T16:40:17.188889Z
+b236c293666be70f36ba8b05a29ca254
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+
+separated_documentation.inc
+file
+
+
+
+
+2007-11-15T16:40:17.188889Z
+cc2628bdb3020c2f826e77bfc859fcb4
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+
+SeparateDocs.dir
+file
+
+
+
+
+2007-11-15T16:40:17.188889Z
+34d7e5e6076dc5f09902a1022a84d660
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+

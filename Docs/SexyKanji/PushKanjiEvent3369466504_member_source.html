@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - PushKanjiEvent</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">PushKanjiEvent</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">PushKanjiEvent</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','PushKanjiEvent3369466504','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','PushKanjiEvent3369466504','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1016</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','PushKanjiEvent3369466504',this); ">Sexy::SexyAppBase::PushKanjiEvent</a>(KEvent *theKEvent)
+{
+    if (theKEvent != NULL)
+    {
+        switch (theKEvent-&gt;type)
+        {
+            case K_EVENT_MOUSEMOVE:
+            case K_EVENT_MOUSEUP:
+            case K_EVENT_MOUSEDOWN:
+        //  case K_EVENT_CHAR:  // Ignored because we process K_EVENT_UNICHAR and we use Unicode Strings (JPOAG)
+            case K_EVENT_KEYDOWN:
+            case K_EVENT_KEYUP:
+            case K_EVENT_DBLCLICK:
+            case K_EVENT_WHEEL:
+            case K_EVENT_CONTEXTMENU:
+            case K_EVENT_ACTIVATED:
+            case K_EVENT_DEACTIVATED:
+            case K_EVENT_UNICHAR:
+            case K_EVENT_TOUCH: // iPhone/iPad
+            case K_EVENT_ACCEL: // iPhone/iPad
+            case K_EVENT_LOW_MEMORY: // iPhone/iPad
+            case K_EVENT_ORIENTATION: // iPhone/iPad
+                <a href="#" onMouseOver="link('_member','mDeferredEventQueue414388462',this); ">mDeferredEventQueue</a>.push(*theKEvent);
+        }
+    }
+
+    // Kanji can ProcessEvents() at any time (to keep the window responsive 
+    // the the OS).  If the MainLoop 'Start()' state machine isn't in the
+    // UPDATESTATE_MESSAGES state, then very bad things can occur.
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

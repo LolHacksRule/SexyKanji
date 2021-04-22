@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - WidgetRemovedHelper</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">WidgetRemovedHelper</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Widget809',this)" class="pathLink">Widget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">WidgetRemovedHelper</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WidgetRemovedHelper191917255','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','WidgetRemovedHelper191917255','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WidgetRemovedHelper191917255','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 54</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','WidgetRemovedHelper191917255',this); ">Sexy::Widget::WidgetRemovedHelper</a>()
+{
+    if (<a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>==NULL)
+        return;
+
+    // Call RemovedFromManager on all child widgets and disable them and stuff like that
+    for (WidgetList::iterator aWidgetItr = <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.begin(); aWidgetItr != <a href="#" onMouseOver="link('_member','mWidgets564406879',this); ">mWidgets</a>.end(); ++aWidgetItr)
+    {
+        <a href="#" onMouseOver="link('_member','Widget191917255',this); ">Widget</a> *aWidget = *aWidgetItr;
+        aWidget-&gt;WidgetRemovedHelper();
+    }   
+
+    <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;DisableWidget(this);
+
+    PreModalInfoList::iterator anItr = <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;mPreModalInfoList.begin();
+    while (anItr != <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;mPreModalInfoList.end())
+    {
+        PreModalInfo* aPreModalInfo = &amp;(*anItr);
+        if (aPreModalInfo-&gt;mPrevBaseModalWidget == this)
+            aPreModalInfo-&gt;mPrevBaseModalWidget = NULL;
+        if (aPreModalInfo-&gt;mPrevFocusWidget == this)
+            aPreModalInfo-&gt;mPrevFocusWidget = NULL;
+        ++anItr;
+    }
+    
+    <a href="#" onMouseOver="link('_member','RemovedFromManager799511973',this); ">RemovedFromManager</a>(mWidgetManager);
+    <a href="#" onMouseOver="link('_member','MarkDirtyFull614906463',this); ">MarkDirtyFull</a>(this);
+
+    <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a> = NULL;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

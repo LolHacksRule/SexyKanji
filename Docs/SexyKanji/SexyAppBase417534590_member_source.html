@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - SexyAppBase</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">SexyAppBase</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">SexyAppBase</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','SexyAppBase417534590','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','SexyAppBase417534590','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 112</div>
+<pre class="codeExamples">
+ <a href="#" onMouseOver="link('_member','SexyAppBase417534590',this); ">Sexy::SexyAppBase::SexyAppBase</a>()
+{
+    <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a> = this;
+    <a href="#" onMouseOver="link('_member','mLoadingThread414388462',this); ">mLoadingThread</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mIsWindowed414388462',this); ">mIsWindowed</a> = <a href="#" onMouseOver="link('_member','DEFAULT_WINDOWED0',this); ">DEFAULT_WINDOWED</a>;
+    <a href="#" onMouseOver="link('_member','mCompanyName414388462',this); ">mCompanyName</a> = <a href="#" onMouseOver="link('_member','DEFAULT_COMPANY0',this); ">DEFAULT_COMPANY</a>;
+    <a href="#" onMouseOver="link('_member','mTitle414388462',this); ">mTitle</a> = <a href="#" onMouseOver="link('_member','DEFAULT_TITLE0',this); ">DEFAULT_TITLE</a>;
+    <a href="#" onMouseOver="link('_member','mVersion414388462',this); ">mVersion</a> = <a href="#" onMouseOver="link('_member','DEFAULT_VERSION0',this); ">DEFAULT_VERSION</a>;
+    <a href="#" onMouseOver="link('_member','mWidth414388462',this); ">mWidth</a> = <a href="#" onMouseOver="link('_member','DEFAULT_WIDTH0',this); ">DEFAULT_WIDTH</a>;
+    <a href="#" onMouseOver="link('_member','mHeight414388462',this); ">mHeight</a> = <a href="#" onMouseOver="link('_member','DEFAULT_HEIGHT0',this); ">DEFAULT_HEIGHT</a>;
+    <a href="#" onMouseOver="link('_member','mFullscreenBits414388462',this); ">mFullscreenBits</a> = <a href="#" onMouseOver="link('_member','DEFAULT_BITS0',this); ">DEFAULT_BITS</a>;
+    <a href="#" onMouseOver="link('_member','mGraphics414388462',this); ">mGraphics</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mClock414388462',this); ">mClock</a> = 0;
+    <a href="#" onMouseOver="link('_member','mLastClockTick414388462',this); ">mLastClockTick</a> = 0;
+    <a href="#" onMouseOver="link('_member','mAverageClockTickDelta414388462',this); ">mAverageClockTickDelta</a> = 0;
+    <a href="#" onMouseOver="link('_member','mClockTickCount414388462',this); ">mClockTickCount</a> = 0;
+    <a href="#" onMouseOver="link('_member','mUpdateAppDepth414388462',this); ">mUpdateAppDepth</a> = 0;
+    <a href="#" onMouseOver="link('_member','mShutdown414388462',this); ">mShutdown</a> = false;
+    <a href="#" onMouseOver="link('_member','mAutoStartLoadingThread414388462',this); ">mAutoStartLoadingThread</a> = true;
+    <a href="#" onMouseOver="link('_member','mRunning414388462',this); ">mRunning</a> = false;
+    <a href="#" onMouseOver="link('_member','mYieldMainThread414388462',this); ">mYieldMainThread</a> = false;
+    <a href="#" onMouseOver="link('_member','mLoadingThreadStarted414388462',this); ">mLoadingThreadStarted</a> = false;
+    <a href="#" onMouseOver="link('_member','mLoadingThreadCompleted414388462',this); ">mLoadingThreadCompleted</a> = false;
+    <a href="#" onMouseOver="link('_member','mNumLoadingThreadTasks414388462',this); ">mNumLoadingThreadTasks</a> = 0;
+    <a href="#" onMouseOver="link('_member','mCompletedLoadingThreadTasks414388462',this); ">mCompletedLoadingThreadTasks</a> = 0;
+    <a href="#" onMouseOver="link('_member','mLoadingFailed414388462',this); ">mLoadingFailed</a> = false;
+    <a href="#" onMouseOver="link('_member','mMusicVolume414388462',this); ">mMusicVolume</a> = <a href="#" onMouseOver="link('_member','DEFAULT_MUSIC_VOLUME0',this); ">DEFAULT_MUSIC_VOLUME</a>;
+    <a href="#" onMouseOver="link('_member','mSfxVolume414388462',this); ">mSfxVolume</a> = <a href="#" onMouseOver="link('_member','DEFAULT_SOUND_VOLUME0',this); ">DEFAULT_SOUND_VOLUME</a>;
+    <a href="#" onMouseOver="link('_member','mMuteCount414388462',this); ">mMuteCount</a> = 0;   
+    <a href="#" onMouseOver="link('_member','mAutoMuteCount414388462',this); ">mAutoMuteCount</a> = 0;
+    <a href="#" onMouseOver="link('_member','mVSyncBroken414388462',this); ">mVSyncBroken</a> = false;
+    <a href="#" onMouseOver="link('_member','mVSyncEnabled414388462',this); ">mVSyncEnabled</a> = true;
+    <a href="#" onMouseOver="link('_member','mLastDrawWasEmpty414388462',this); ">mLastDrawWasEmpty</a> = false;
+    <a href="#" onMouseOver="link('_member','mPaused414388462',this); ">mPaused</a> = false;
+    <a href="#" onMouseOver="link('_member','mVSyncBrokenTestUpdates414388462',this); ">mVSyncBrokenTestUpdates</a> = 0;
+    <a href="#" onMouseOver="link('_member','mLoaded414388462',this); ">mLoaded</a> = false;
+    <a href="#" onMouseOver="link('_member','mSoundManager414388462',this); ">mSoundManager</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mMusicManager414388462',this); ">mMusicManager</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mImageManager414388462',this); ">mImageManager</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mFontManager414388462',this); ">mFontManager</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mProperties414388462',this); ">mProperties</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a> = NULL;
+    <a href="#" onMouseOver="link('_member','mResourceManager414388462',this); ">mResourceManager</a>= NULL;
+    <a href="#" onMouseOver="link('_member','mCurrentCursor414388462',this); ">mCurrentCursor</a> = <a href="#" onMouseOver="link('_member','SEXY_CURSOR_POINTER62745',this); ">SEXY_CURSOR_POINTER</a>;
+    <a href="#" onMouseOver="link('_member','mCursorMap414388462',this); ">mCursorMap</a>.resize(NUM_SEXY_CURSORS, NULL);
+    <a href="#" onMouseOver="link('_member','mCustomCursorsEnabled414388462',this); ">mCustomCursorsEnabled</a> = true;
+
+    <a href="#" onMouseOver="link('_member','mDebugKeysEnabled414388462',this); ">mDebugKeysEnabled</a> = false;
+#ifdef _DEBUG
+    <a href="#" onMouseOver="link('_member','mDebugKeysEnabled414388462',this); ">mDebugKeysEnabled</a> = true;
+#endif
+    <a href="#" onMouseOver="link('_member','mShowFPS414388462',this); ">mShowFPS</a> = false;
+    <a href="#" onMouseOver="link('_member','mShowProgramStats414388462',this); ">mShowProgramStats</a> = 0;
+
+#ifdef K_WIN32
+    mDraggingCursor = NULL;
+#endif
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

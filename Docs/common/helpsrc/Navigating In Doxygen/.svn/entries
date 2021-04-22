@@ -1,0 +1,40 @@
+8
+
+dir
+24
+https://doxys.svn.sourceforge.net/svnroot/doxys/trunk/homepage/Documentation/Navigating%20In%20Doxygen
+https://doxys.svn.sourceforge.net/svnroot/doxys
+
+
+
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+
+
+svn:special svn:externals svn:needs-lock
+
+anonymous_types_explained.page
+file
+
+
+
+
+2007-11-15T16:40:17.188889Z
+7c3fa04c28caa810e0db04180a96b50c
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+
+NavigatingInDoxygen.dir
+file
+
+
+
+
+2007-11-15T16:40:17.188889Z
+36b5d1e2329bf8d812bf3ea4bddf3537
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+

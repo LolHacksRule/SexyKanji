@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - RemoveBaseModal</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">RemoveBaseModal</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','WidgetManager809',this)" class="pathLink">WidgetManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">RemoveBaseModal</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','RemoveBaseModal3063501302','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','RemoveBaseModal3063501302','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','RemoveBaseModal3063501302','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 636</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','RemoveBaseModal3063501302',this); ">Sexy::WidgetManager::RemoveBaseModal</a>(Widget *theWidget)
+{
+    //DBG_ASSERT(mPreModalInfoList.size() &gt; 0);
+    
+    bool first = true;
+    
+    while (<a href="#" onMouseOver="link('_member','mPreModalInfoList3955182565',this); ">mPreModalInfoList</a>.size() &gt; 0)
+    {
+        PreModalInfo* aPreModalInfo = &amp;<a href="#" onMouseOver="link('_member','mPreModalInfoList3955182565',this); ">mPreModalInfoList</a>.back();
+        
+        if ((first) &amp;&amp; (aPreModalInfo-&gt;mBaseModalWidget != theWidget))
+        {
+            // We don't remove it yet, because we want to restore
+            //  its keyboard focused widget and crap later
+            return;
+        }
+        
+        // If we removed a widget's self from pre-modal info before
+        //  then that means the dialog got removed out-of-order but we
+        //  deferred setting the state back until now
+        bool done = (aPreModalInfo-&gt;mPrevBaseModalWidget != NULL) ||
+            (<a href="#" onMouseOver="link('_member','mPreModalInfoList3955182565',this); ">mPreModalInfoList</a>.size() == 1);
+
+        <a href="#" onMouseOver="link('_member','SetBaseModal615343416',this); ">SetBaseModal</a>(aPreModalInfo-&gt;mPrevBaseModalWidget, 
+            aPreModalInfo-&gt;mPrevBelowModalFlagsMod);
+
+        if (<a href="#" onMouseOver="link('_member','mFocusWidget3955182565',this); ">mFocusWidget</a> == NULL)
+        {
+            <a href="#" onMouseOver="link('_member','mFocusWidget3955182565',this); ">mFocusWidget</a> = aPreModalInfo-&gt;mPrevFocusWidget;
+            if (<a href="#" onMouseOver="link('_member','mFocusWidget3955182565',this); ">mFocusWidget</a> != NULL)
+                <a href="#" onMouseOver="link('_member','mFocusWidget3955182565',this); ">mFocusWidget</a>-&gt;<a href="#" onMouseOver="link('_member','GotFocus191917255',this); ">GotFocus</a>();
+        }
+
+        <a href="#" onMouseOver="link('_member','mPreModalInfoList3955182565',this); ">mPreModalInfoList</a>.pop_back();        
+
+        if (done)
+            break;
+
+        first = false;
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

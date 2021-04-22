@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetKTextFace</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetKTextFace</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyFont809',this)" class="pathLink">SexyFont</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetKTextFace</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetKTextFace2295238827','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetKTextFace2295238827','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 326</div>
+<pre class="codeExamples">
+virtual KTextFace * <a href="#" onMouseOver="link('_member','GetKTextFace2295238827',this); ">Sexy::SexyFont::GetKTextFace</a>()
+{
+    if (!<a href="#" onMouseOver="link('_member','mUpLoaded147566763',this); ">mUpLoaded</a>)
+    {
+        <a href="#" onMouseOver="link('_member','mUpLoaded147566763',this); ">mUpLoaded</a> = true;
+
+        // KTEXT is an Image Font.  The Font is possibly loaded in a second
+        // thread and some of the objects can only be created in the main thread.
+        // E.g. KGraphic uploads to the texture.
+        KText* pKText = dynamic_cast&lt;KText*&gt;(<a href="#" onMouseOver="link('_member','mKTextFace147566763',this); ">mKTextFace</a>);
+        if (pKText)
+        {
+            for (int i = 0; i &lt; MAX_KTEXT_GLYPH_PAGES; i++)
+            {
+                // This should also cause the SexyImage to upload the graphic to a texture (JPOAG)
+                if(((SexyImage*)<a href="#" onMouseOver="link('_member','mGlyphPages147566763',this); ">mGlyphPages</a>[i]) != NULL)
+                    pKText-&gt;setKGraphic(mGlyphPages[i]-&gt;GetKanjiImage(), i);
+
+// This is a temp fix for font issues.
+//              if(((SexyImage*)mGlyphPages[i]) != NULL)
+//                  if(mGlyphPages[i]-&gt;GetKanjiImage())
+//                      mGlyphPages[i]-&gt;GetKanjiImage()-&gt;setTextureQuality(false);
+            }
+
+            delete [] <a href="#" onMouseOver="link('_member','mFontTable147566763',this); ">mFontTable</a>;
+            <a href="#" onMouseOver="link('_member','mFontTable147566763',this); ">mFontTable</a> = NULL;
+
+            // KText knows the end of the font table by a NULL entry
+            KFont aFinalChar;
+            memset(&amp;aFinalChar, 0, sizeof(KFont));
+            <a href="#" onMouseOver="link('_member','mGlyphs147566763',this); ">mGlyphs</a>.push_back(aFinalChar);
+
+            // KText doesn't manage the lifetime of the FontTable array
+            <a href="#" onMouseOver="link('_member','mFontTable147566763',this); ">mFontTable</a> = new KFont[<a href="#" onMouseOver="link('_member','mGlyphs147566763',this); ">mGlyphs</a>.size()];
+            memcpy(mFontTable, &amp;mGlyphs[0], sizeof(KFont) * <a href="#" onMouseOver="link('_member','mGlyphs147566763',this); ">mGlyphs</a>.size());
+
+            <a href="#" onMouseOver="link('_member','mGlyphs147566763',this); ">mGlyphs</a>.pop_back();
+
+            pKText-&gt;setFontTable(mFontTable);
+            for(long i = 0; i &lt; KTEXT_MAXPAGES; i++) pKText-&gt;setGlobalKerning(i, (float)mGlobalKerning);
+            pKText-&gt;setYSpacing((float)mLineSpacingOffset);
+        }
+
+    }
+    return <a href="#" onMouseOver="link('_member','mKTextFace147566763',this); ">mKTextFace</a>;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

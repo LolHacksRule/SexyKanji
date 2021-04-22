@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DrawDirtyStuff</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DrawDirtyStuff</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DrawDirtyStuff</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawDirtyStuff4075147123','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DrawDirtyStuff4075147123','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawDirtyStuff4075147123','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 721</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','DrawDirtyStuff4075147123',this); ">Sexy::SexyAppBase::DrawDirtyStuff</a>(Graphics *g)
+{
+    <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>-&gt;setWorldView(0, 0, 0.0f, 1.0f, false);
+
+//  if(g_buffered_rendering)
+//      mWidgetManager-&gt;MarkDirtyFull();
+
+    g-&gt;PreDraw();
+
+    if(!<a href="#" onMouseOver="link('_member','mShutdown414388462',this); ">mShutdown</a> &amp;&amp; <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;DrawScreen(g)) <a href="#" onMouseOver="link('_member','gDirtyFPSTimer169305234',this); ">gDirtyFPSTimer</a>.OnEvent();
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

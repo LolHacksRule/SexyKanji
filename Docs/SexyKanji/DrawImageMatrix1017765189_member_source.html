@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DrawImageMatrix</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DrawImageMatrix</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Graphics809',this)" class="pathLink">Graphics</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DrawImageMatrix</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawImageMatrix1017765189','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DrawImageMatrix1017765189','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawImageMatrix1017765189','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1824</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','DrawImageMatrix2069322544',this); ">Sexy::Graphics::DrawImageMatrix</a>(SexyImage *theImage, const SexyMatrix3 &amp;theMatrix, const SexyRect &amp;theSrcRect, const SexyRect &amp;theDestRect, float x=0, float y=0)
+{
+    // Early Checks to avoid Draw Call
+    if (theImage == NULL || theImage-&gt;GetKanjiImage() == NULL) return;
+
+    <a href="#" onMouseOver="link('_member','PreDraw2295276211',this); ">PreDraw</a>();
+
+    // Make a copy to keep all calls const (JSullivan)
+    <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a> aSrcRect = theSrcRect;
+
+    // theSrcRect Clipped to image size (JSULLIVAN)
+    if ((aSrcRect.mX + aSrcRect.mWidth) &gt; theImage-&gt;GetWidth())
+    {
+        aSrcRect.mWidth = theImage-&gt;GetWidth() - aSrcRect.mX;
+    }
+    if ((aSrcRect.mY + aSrcRect.mHeight) &gt; theImage-&gt;GetHeight())
+    {
+        aSrcRect.mHeight = theImage-&gt;GetHeight() - aSrcRect.mY;
+    }
+
+    x += <a href="#" onMouseOver="link('_member','mTransX942441602',this); ">mTransX</a>;
+    y += <a href="#" onMouseOver="link('_member','mTransY942441602',this); ">mTransY</a>;
+
+    KGraphic* aPTKImage = theImage-&gt;GetKanjiImage();
+
+    if (aPTKImage &amp;&amp; (aSrcRect.mWidth &gt; 0) &amp;&amp; (aSrcRect.mHeight &gt; 0))
+    {
+        if(<a href="#" onMouseOver="link('_member','mColorizeImages942441602',this); ">mColorizeImages</a>)
+        {
+            aPTKImage-&gt;setBlitColor(static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mRed) / 255.0f, static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mGreen) / 255.0f, 
+                static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mBlue) / 255.0f, static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mAlpha) / 255.0f);
+        }
+        else
+        {
+            aPTKImage-&gt;setBlitColor(1, 1, 1, 1);
+        }
+
+        aPTKImage-&gt;setAlphaMode((mDrawMode == DRAWMODE_ADDITIVE) ? K_ALPHA_ADDITIVE : K_ALPHA_NORMAL);
+        aPTKImage-&gt;setTextureQuality(mLinearBlend &amp;&amp; !theImage-&gt;GetNoBlendOverride()); // let an image turn off linear blending (JPOAG)
+
+        //TODO: Clip the screen to mClipRect
+
+        // Matrix multiply coords
+        float w2 = (float)aSrcRect.mWidth / 2.0f;
+        float h2 = (float)aSrcRect.mHeight / 2.0f;
+
+        // Note: the arbitrary quad blitter converts to UV space for us
+        float u0 = static_cast&lt;float&gt;(aSrcRect.mX);
+        float u1 = static_cast&lt;float&gt;(aSrcRect.mX + aSrcRect.mWidth);
+        float v0 = static_cast&lt;float&gt;(aSrcRect.mY);
+        float v1 = static_cast&lt;float&gt;(aSrcRect.mY + aSrcRect.mHeight);
+
+        SexyTriVertex aVerts[4];
+        aVerts[0] = SexyTriVertex(-w2, -h2, u0, v0, 0xFFFFFFFF);
+        aVerts[1] = SexyTriVertex(w2, -h2, u1, v0, 0xFFFFFFFF);
+        aVerts[2] = SexyTriVertex(w2, h2, u1, v1, 0xFFFFFFFF);
+        aVerts[3] = SexyTriVertex(-w2, h2, u0, v1, 0xFFFFFFFF);
+
+        <a href="#" onMouseOver="link('_class','SexyMatrix3809',this); ">SexyMatrix3</a> aMatrix;
+        aMatrix = theMatrix;// * mTransform.GetMatrix(); // Move the master trasnform to KWindow::setWorldMatrix
+
+        for (int i = 0; i &lt; 4; i++)
+        {
+            <a href="#" onMouseOver="link('_class','SexyVector3809',this); ">SexyVector3</a> v(aVerts[i].x, aVerts[i].y, 1);
+            v = aMatrix * v;
+            aVerts[i].<a href="#" onMouseOver="link('_member','x4190498945',this); ">x</a> = v.<a href="#" onMouseOver="link('_member','x4190498945',this); ">x</a> + x;
+            aVerts[i].y = v.<a href="#" onMouseOver="link('_member','y4190498945',this); ">y</a> + y;
+        }
+
+        aPTKImage-&gt;blitArbitraryQuad(u0, v0, u1, v0, u1, v1, u0, v1, 
+            aVerts[0].x, aVerts[0].y, 
+            aVerts[1].x, aVerts[1].y,
+            aVerts[2].x, aVerts[2].y,
+            aVerts[3].x, aVerts[3].y);
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

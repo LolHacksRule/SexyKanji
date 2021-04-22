@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Update</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Update</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','MusicManager809',this)" class="pathLink">MusicManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Update</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Update1248973326','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Update1248973326','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 557</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','Update1248973326',this); ">Sexy::MusicManager::Update</a>()
+{
+    // check fading streams
+    for (FadingStreamMap::iterator aIterator = <a href="#" onMouseOver="link('_member','mFadingStreams410112142',this); ">mFadingStreams</a>.begin(); aIterator != <a href="#" onMouseOver="link('_member','mFadingStreams410112142',this); ">mFadingStreams</a>.end(); )
+    {
+        // get the fade speed
+        float aFadeSpeed = aIterator-&gt;second.second;
+
+        // do we need to fade the stream?
+        if (aFadeSpeed != 0.0f)
+        {
+            // get the fade volume of the fading stream
+            float aVolume = <a href="#" onMouseOver="link('_member','mStreamsInfo410112142',this); ">mStreamsInfo</a>[aIterator-&gt;first].mFadeVolume;
+            // this is a helper, just to prevent: if (aVolume == 0.0f)
+            int aFadeEnded = 0;
+
+            // always add the fade speed, fade out speed values are &lt; 0, fade in speed values are &gt; 0
+            aVolume += aFadeSpeed;
+
+            // clamp
+            if (aVolume &lt; 0.0f)
+            {
+                aVolume = 0.0f;
+                aFadeEnded = -1;
+            }
+            if (static_cast&lt;int&gt;(aVolume) &gt; <a href="#" onMouseOver="link('_member','mStreamsInfo410112142',this); ">mStreamsInfo</a>[aIterator-&gt;first].mCurrentVolume) 
+            {
+                aVolume = static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mStreamsInfo410112142',this); ">mStreamsInfo</a>[aIterator-&gt;first].mCurrentVolume);
+                aFadeEnded = 1;
+            }
+            
+            // save the fade volume
+            <a href="#" onMouseOver="link('_member','mStreamsInfo410112142',this); ">mStreamsInfo</a>[aIterator-&gt;first].mFadeVolume = aVolume;
+
+            // set the new volume
+            aIterator-&gt;second.first-&gt;setVolume(static_cast&lt;int&gt;(aVolume));
+
+            if (aFadeEnded == -1)
+            {
+                // fade out completed, volume is MIN_VOLUME, clear fade speed
+                aIterator-&gt;second.second = 0.0f;
+                // remove the fading stream from the map
+                <a href="#" onMouseOver="link('_member','mFadingStreams410112142',this); ">mFadingStreams</a>.erase(aIterator);
+                break;
+            }
+            
+            if (aFadeEnded == 1)
+            {
+                // fade in completed, max volume reached, clear fade speed
+                aIterator-&gt;second.second = 0.0f;
+                // remove the fading stream from the map
+                <a href="#" onMouseOver="link('_member','mFadingStreams410112142',this); ">mFadingStreams</a>.erase(aIterator); 
+                break;
+            }
+        }
+
+        // avoid incrementing an end() iterator (JPOAG)
+        ++aIterator;
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

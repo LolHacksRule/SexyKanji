@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - FadeOutLoopingSample</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">FadeOutLoopingSample</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SoundManager809',this)" class="pathLink">SoundManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">FadeOutLoopingSample</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','FadeOutLoopingSample4234885716','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','FadeOutLoopingSample4234885716','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 634</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','FadeOutLoopingSample4234885716',this); ">Sexy::SoundManager::FadeOutLoopingSample</a>(unsigned int theSampleID, float theFadeOutSpeed)
+{
+    LoopingSampleMap::iterator aIterator = <a href="#" onMouseOver="link('_member','mLoopingSamples457195144',this); ">mLoopingSamples</a>.find(theSampleID);
+
+    if (aIterator == <a href="#" onMouseOver="link('_member','mLoopingSamples457195144',this); ">mLoopingSamples</a>.end())
+    {
+        K_LOG("Sexy::SoundManager::FadeOutLoopingSample: WARNING : Trying to fade out a not looping sample.");
+        return;
+    }
+
+    // fade out speed must be &gt; 0
+    if (theFadeOutSpeed &lt; 0.0f)
+    {
+        K_LOG("Sexy::SoundManager::FadeOutLoopingSample: WARNING : Fade out speed is &lt; 0.");
+        return;
+    }
+
+    // save the current volume for fade
+    <a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[theSampleID].mFadeVolume = static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[theSampleID].mCurrentVolume);
+
+    // store a negative fade out speed in the map, so Update() knows 
+    // that the sample should fade out
+    aIterator-&gt;second.second = - theFadeOutSpeed;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

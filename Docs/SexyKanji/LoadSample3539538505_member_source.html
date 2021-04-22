@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - LoadSample</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">LoadSample</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SoundManager809',this)" class="pathLink">SoundManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">LoadSample</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','LoadSample3539538505','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','LoadSample3539538505','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','LoadSample3539538505','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 133</div>
+<pre class="codeExamples">
+virtual int <a href="#" onMouseOver="link('_member','LoadSample1516609643',this); ">Sexy::SoundManager::LoadSample</a>(const SexyString &amp;theFileName, int theVolume=100)
+{
+    unsigned int aSampleID;
+    int aFailedID = -1;
+
+    // If we've already loaded the sample, just return its ID. (JSullivan)
+    for (aSampleID = 0; aSampleID &lt; <a href="#" onMouseOver="link('_member','MAX_SOUND_SAMPLES0',this); ">MAX_SOUND_SAMPLES</a>; aSampleID++)
+    {
+        if (<a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[aSampleID].mFileName == theFileName)
+        {
+            return aSampleID;
+        }
+    }
+
+    // We haven't already loaded the sample, so find an available ID and 
+    // try to load it, then return the new ID. (JSullivan)
+    for (aSampleID = <a href="#" onMouseOver="link('_member','MAX_SOUND_SAMPLES0',this); ">MAX_SOUND_SAMPLES</a> - 1; aSampleID &gt;= 0; aSampleID--)
+    {       
+        if (<a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[aSampleID].mSoundInstance == NULL)
+        {
+            if (!<a href="#" onMouseOver="link('_member','LoadSample1516609643',this); ">LoadSample</a>(aSampleID, theFileName, theVolume))
+            {
+                return aFailedID;
+            }
+            else
+            {
+                return aSampleID;
+            }
+        }
+    }   
+
+    return aFailedID;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

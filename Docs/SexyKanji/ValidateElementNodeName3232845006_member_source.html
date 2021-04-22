@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ValidateElementNodeName</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ValidateElementNodeName</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','XMLWriter809',this)" class="pathLink">XMLWriter</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ValidateElementNodeName</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ValidateElementNodeName3232845006','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ValidateElementNodeName3232845006','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 429</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','ValidateElementNodeName3232845006',this); ">Sexy::XMLWriter::ValidateElementNodeName</a>(const SexyString &amp;theNodeName)
+{
+    const <a href="#" onMouseOver="link('_member','SexyChar0',this); ">SexyChar</a>* aNodeName = theNodeName.c_str();
+
+    for(int i = 0; i &lt; theNodeName.size(); i++)
+    {
+        if( aNodeName[i] &lt; '0'
+            || (aNodeName[i] &gt; '9' &amp;&amp; aNodeName[i] &lt; 'A')
+            || (aNodeName[i] &gt; 'Z' &amp;&amp; aNodeName[i] &lt; '_')
+            || (aNodeName[i] &gt; '_' &amp;&amp; aNodeName[i] &lt; 'a')
+            || aNodeName[i] &gt; 'z')
+        {
+            return false;
+        }
+    }
+    return true;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

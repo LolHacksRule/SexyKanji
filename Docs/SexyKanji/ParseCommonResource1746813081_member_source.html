@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ParseCommonResource</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ParseCommonResource</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ResourceManager809',this)" class="pathLink">ResourceManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ParseCommonResource</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParseCommonResource1746813081','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ParseCommonResource1746813081','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParseCommonResource1746813081','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 324</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','ParseCommonResource1746813081',this); ">Sexy::ResourceManager::ParseCommonResource</a>(XMLElement &amp;theElement, BaseRes *theRes, ResMap &amp;theMap)
+{
+    <a href="#" onMouseOver="link('_member','mHadAlreadyDefinedError288852731',this); ">mHadAlreadyDefinedError</a> = false;
+
+    const <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> &amp;aPath = theElement.mAttributes[_S("path")];
+    
+    if (aPath.empty() == true)
+        return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseCommonResource : ERROR : No path specified."));
+
+    theRes-&gt;mXMLAttributes = theElement.mAttributes;
+    theRes-&gt;mFromProgram = false;
+
+    // check for program supplied resource
+    if (aPath[0] == _S('!'))
+    {
+        theRes-&gt;mPath = aPath;
+        if (aPath == _S("!program"))
+            theRes-&gt;mFromProgram = true;
+    }
+    else
+    {
+        theRes-&gt;mPath = <a href="#" onMouseOver="link('_member','mDefaultPath288852731',this); ">mDefaultPath</a> + aPath;
+    }
+    
+    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> anId;
+    XMLParamMap::iterator anItr = theElement.mAttributes.find(_S("id"));
+
+    if (anItr == theElement.mAttributes.end())
+        anId = <a href="#" onMouseOver="link('_member','mDefaultIdPrefix288852731',this); ">mDefaultIdPrefix</a> + <a href="#" onMouseOver="link('_member','GetFileName1640495726',this); ">GetFileName</a>(theRes-&gt;mPath, true);
+    else
+        anId = <a href="#" onMouseOver="link('_member','mDefaultIdPrefix288852731',this); ">mDefaultIdPrefix</a> + anItr-&gt;second;
+
+    theRes-&gt;mResGroup = <a href="#" onMouseOver="link('_member','mCurResGroup288852731',this); ">mCurResGroup</a>;
+    theRes-&gt;mId = anId;
+    
+    // store the resource information in the map
+    std::pair&lt;ResMap::iterator, bool&gt; aRet = theMap.insert(ResMap::value_type(anId, theRes));
+
+    if (aRet.second == false)
+    {
+        <a href="#" onMouseOver="link('_member','mHadAlreadyDefinedError288852731',this); ">mHadAlreadyDefinedError</a> = true;
+        return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseCommonResource : ERROR : Resource already defined."));
+    }
+
+    <a href="#" onMouseOver="link('_member','mCurResGroupList288852731',this); ">mCurResGroupList</a>-&gt;push_back(theRes);
+
+    return true;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

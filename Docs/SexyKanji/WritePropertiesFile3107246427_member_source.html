@@ -1,0 +1,102 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - WritePropertiesFile</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">WritePropertiesFile</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyPropertiesWriter809',this)" class="pathLink">SexyPropertiesWriter</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">WritePropertiesFile</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WritePropertiesFile3107246427','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','WritePropertiesFile3107246427','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WritePropertiesFile3107246427','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 45</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','WritePropertiesFile3107246427',this); ">Sexy::SexyPropertiesWriter::WritePropertiesFile</a>(const SexyString &amp;theFilename)
+{
+    if (<a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a> == NULL) return <a href="#" onMouseOver="link('_member','Fail3107246427',this); ">Fail</a>(_S("Error: Cannot write NULL Properties Pointer."));
+
+    if(<a href="#" onMouseOver="link('_member','Lower1908875876',this); ">Lower</a>(<a href="#" onMouseOver="link('_member','GetFileExt1908875876',this); ">GetFileExt</a>(theFilename)) != <a href="#" onMouseOver="link('_member','Lower1908875876',this); ">Lower</a>(_S("xml"))) 
+        return <a href="#" onMouseOver="link('_member','WritePropertiesFileBinary3107246427',this); ">WritePropertiesFileBinary</a>(theFilename);
+    
+    XMLWriter aWriter;
+
+    if(aWriter.OpenFile(theFilename) &amp;&amp; !aWriter.HasFailed())
+    {
+        aWriter.StartElement(_S("Properties"));
+        {
+            StringIntMap::iterator int_map_itr = <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mIntProperties.begin();
+            for (; int_map_itr != <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mIntProperties.end(); int_map_itr++)
+            {
+                aWriter.StartElement(_S("Integer"));
+                aWriter.WriteAttribute(_S("id"), int_map_itr-&gt;first);
+                aWriter.WriteElementText(<a href="#" onMouseOver="link('_member','StrFormat798802342',this); ">StrFormat</a>(_S("%d"), int_map_itr-&gt;second));
+            }
+
+            StringBoolMap::iterator bool_map_itr = <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;<a href="#" onMouseOver="link('_member','mBoolProperties3212277428',this); ">mBoolProperties</a>.begin();
+            for (; bool_map_itr != <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;<a href="#" onMouseOver="link('_member','mBoolProperties3212277428',this); ">mBoolProperties</a>.end(); bool_map_itr++)
+            {
+                aWriter.StartElement(_S("Boolean"));
+                aWriter.WriteAttribute(_S("id"), bool_map_itr-&gt;first);
+                aWriter.WriteElementText(bool_map_itr-&gt;second ? _S("true") : _S("false"));
+            }
+
+            StringDoubleMap::iterator double_map_itr = <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mDoubleProperties.begin();
+            for (; double_map_itr != <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mDoubleProperties.end(); double_map_itr++)
+            {
+                aWriter.StartElement(_S("Double"));
+                aWriter.WriteAttribute(_S("id"), double_map_itr-&gt;first);
+                aWriter.WriteElementText(<a href="#" onMouseOver="link('_member','StrFormat798802342',this); ">StrFormat</a>(_S("%f"), double_map_itr-&gt;second));
+            }
+
+            StringStringMap::iterator str_map_itr = <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mStringProperties.begin();
+            for (; str_map_itr != <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mStringProperties.end(); str_map_itr++)
+            {
+                aWriter.StartElement(_S("String"));
+                aWriter.WriteAttribute(_S("id"), str_map_itr-&gt;first);
+                aWriter.WriteElementText(<a href="#" onMouseOver="link('_member','XMLEncodeString1908875876',this); ">XMLEncodeString</a>(str_map_itr-&gt;second));
+            }
+
+            StringStringVectorMap::iterator str_vec_map_itr = <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mStringVectorProperties.begin();
+            for (; str_vec_map_itr != <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mStringVectorProperties.end(); str_vec_map_itr++)
+            {
+                aWriter.StartElement(_S("StringVector"));
+                aWriter.WriteAttribute(_S("id"), str_vec_map_itr-&gt;first);
+                //aWriter.WriteElementText(StrFormat(_S("%f"), str_vec_map_itr-&gt;second));
+                for (unsigned int i = 0; i &lt; str_vec_map_itr-&gt;second.size(); i++)
+                {
+                    aWriter.StartElement(_S("String"));
+                    aWriter.WriteElementText(<a href="#" onMouseOver="link('_member','XMLEncodeString1908875876',this); ">XMLEncodeString</a>(str_vec_map_itr-&gt;second[i]));
+                }
+                aWriter.StopElement(/*S("StringVector")*/);
+            }
+        }
+        aWriter.StopElement(/*("Properties")*/);
+
+        return aWriter.CloseFile();;
+    }
+
+    return false;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

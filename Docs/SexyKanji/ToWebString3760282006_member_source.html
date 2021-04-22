@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ToWebString</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ToWebString</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Buffer809',this)" class="pathLink">Buffer</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ToWebString</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ToWebString3760282006','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ToWebString3760282006','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ToWebString3760282006','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 216</div>
+<pre class="codeExamples">
+std::string <a href="#" onMouseOver="link('_member','ToWebString3760282006',this); ">Sexy::Buffer::ToWebString</a>() const
+{
+    std::string aString;
+    int aSizeBits = <a href="#" onMouseOver="link('_member','mWriteBitPos150216417',this); ">mWriteBitPos</a>;
+    
+    int anOldReadBitPos = <a href="#" onMouseOver="link('_member','mReadBitPos150216417',this); ">mReadBitPos</a>;
+    <a href="#" onMouseOver="link('_member','mReadBitPos150216417',this); ">mReadBitPos</a> = 0;
+
+    char aStr[256];
+    sprintf(aStr, "%08X", aSizeBits);
+    aString += aStr;
+
+    int aNumChars = (aSizeBits + 5) / 6;
+    for (int aCharNum = 0; aCharNum &lt; aNumChars; aCharNum++)
+        aString += <a href="#" onMouseOver="link('_member','gWebEncodeMap0',this); ">gWebEncodeMap</a>[<a href="#" onMouseOver="link('_member','ReadNumBits993381507',this); ">ReadNumBits</a>(6, false)];
+    
+    <a href="#" onMouseOver="link('_member','mReadBitPos150216417',this); ">mReadBitPos</a> = anOldReadBitPos;
+    
+    return aString;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

@@ -1,0 +1,308 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ProcessKey</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ProcessKey</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','EditWidget809',this)" class="pathLink">EditWidget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ProcessKey</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ProcessKey2932793697','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ProcessKey2932793697','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ProcessKey2932793697','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 393</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','ProcessKey2932793697',this); ">Sexy::EditWidget::ProcessKey</a>(EKeyboardLayout theKey, SexyChar theChar)
+{
+    bool shiftDown = (<a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;mKeyDown[K_VK_L_SHIFT] || <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;mKeyDown[K_VK_R_SHIFT]);
+    bool controlDown = (<a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;mKeyDown[K_VK_L_CONTROL] || <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;mKeyDown[K_VK_R_CONTROL]);
+
+    if ((theKey == K_VK_L_SHIFT) || (theKey == K_VK_R_SHIFT) || 
+        (theKey == K_VK_L_CONTROL) || (theKey == K_VK_R_CONTROL))
+        return;
+
+    bool bigChange = false;
+    bool removeHilite = !shiftDown;
+    
+    if (shiftDown &amp;&amp; (<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> == -1))
+        <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> = <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>;
+    
+    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> anOldString = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>;
+    int anOldCursorPos = <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>;
+    int anOldHilitePos = <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a>;
+    if ((theChar == 3) || (theChar == 24))
+    {
+        // Copy selection
+        if ((<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> != -1) &amp;&amp; (<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> != <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>))
+        {
+            if (<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> &lt; <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a>)
+                <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;mApp-&gt;CopyToClipboard(<a href="#" onMouseOver="link('_member','GetDisplayString1503931028',this); ">GetDisplayString</a>().substr(<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>, <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a>));
+            else
+                <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;<a href="#" onMouseOver="link('_member','mApp3955182565',this); ">mApp</a>-&gt;<a href="#" onMouseOver="link('_member','CopyToClipboard3349366641',this); ">CopyToClipboard</a>(<a href="#" onMouseOver="link('_member','GetDisplayString1503931028',this); ">GetDisplayString</a>().substr(mHilitePos, mCursorPos));
+
+            if (theChar == 3)
+            {
+                removeHilite = false;
+            }
+            else
+            {
+                <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0, K_MIN(mCursorPos, mHilitePos)) + <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(K_MAX(mCursorPos, mHilitePos));
+                <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = K_MIN(mCursorPos, mHilitePos);
+                <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> = -1;
+                bigChange = true;
+            }
+        }
+    }
+    else if (theChar == 22)
+    {
+        // Paste selection
+        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aBaseString = <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;mApp-&gt;GetClipboard();
+
+        if (aBaseString.length() &gt; 0)
+        {
+            <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aString;
+
+            for (<a href="#" onMouseOver="link('_member','ulong0',this); ">ulong</a> i = 0; i &lt; aBaseString.length(); i++)
+            {
+                if ((aBaseString[i] == '\r') || (aBaseString[i] == '\n'))
+                    break;
+
+                if (<a href="#" onMouseOver="link('_member','mFont1509305020',this); ">mFont</a>-&gt;CharWidth(aBaseString[i]) != 0 &amp;&amp; <a href="#" onMouseOver="link('_member','mEditListener1509305020',this); ">mEditListener</a>-&gt;AllowChar(mId, aBaseString[i]))
+                    aString += aBaseString[i];
+            }
+
+            if (<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> == -1)
+            {
+                // Insert string where cursor is
+                <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0, <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>) + aString + <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>);
+            }
+            else
+            {
+                // Replace selection with new string
+                <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0, K_MIN(mCursorPos, mHilitePos)) + aString + <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(K_MAX(mCursorPos, mHilitePos));
+                <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = K_MIN(mCursorPos, mHilitePos);
+                <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> = -1;
+            }
+
+            <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> += aString.length();
+
+            bigChange = true;
+        }
+    }
+    else if (theChar == 26)
+    {
+        // Undo
+        
+        <a href="#" onMouseOver="link('_member','mLastModifyIdx1509305020',this); ">mLastModifyIdx</a> = -1;
+        
+        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aSwapString = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>;
+        int aSwapCursorPos = <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>;
+        int aSwapHilitePos = <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a>;          
+        
+        <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mUndoString1509305020',this); ">mUndoString</a>;
+        <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = <a href="#" onMouseOver="link('_member','mUndoCursor1509305020',this); ">mUndoCursor</a>;
+        <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> = <a href="#" onMouseOver="link('_member','mUndoHilitePos1509305020',this); ">mUndoHilitePos</a>;
+                    
+        <a href="#" onMouseOver="link('_member','mUndoString1509305020',this); ">mUndoString</a> = aSwapString;
+        <a href="#" onMouseOver="link('_member','mUndoCursor1509305020',this); ">mUndoCursor</a> = aSwapCursorPos;
+        <a href="#" onMouseOver="link('_member','mUndoHilitePos1509305020',this); ">mUndoHilitePos</a> = aSwapHilitePos;          
+        
+        removeHilite = false;                       
+    }
+    else if (theKey == K_VK_LEFT)
+    {
+        if (controlDown)
+        {
+            // Get to a word
+            while ((<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> &gt; 0) &amp;&amp; (!<a href="#" onMouseOver="link('_member','IsPartOfWord4080443631',this); ">IsPartOfWord</a>(<a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>[<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>-1])))
+                   <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>--;
+            
+            // Go beyond the word
+            while ((<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> &gt; 0) &amp;&amp; (<a href="#" onMouseOver="link('_member','IsPartOfWord4080443631',this); ">IsPartOfWord</a>(<a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>[<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>-1])))
+                   <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>--;
+        }
+        else if (shiftDown || (<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> == -1))
+            <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>--;
+        else
+            <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = K_MIN(<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>, <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a>);
+    }
+    else if (theKey == K_VK_RIGHT)
+    {
+        if (controlDown)
+        {
+            // Get to whitespace
+            while ((<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> &lt; (int) <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.length()-1) &amp;&amp; (<a href="#" onMouseOver="link('_member','IsPartOfWord4080443631',this); ">IsPartOfWord</a>(<a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>[<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>+1])))
+                   <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>++;
+            
+            // Go beyond the whitespace
+            while ((<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> &lt; (int) <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.length()-1) &amp;&amp; (!<a href="#" onMouseOver="link('_member','IsPartOfWord4080443631',this); ">IsPartOfWord</a>(<a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>[<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>+1])))
+                   <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>++;
+        }
+        if (shiftDown || (<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> == -1))
+            <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>++;
+        else
+            <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = K_MAX(mCursorPos, mHilitePos);
+    }
+    else if (theKey == K_VK_BACK)
+    {
+        if (<a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.length() &gt; 0)
+        {
+            if ((<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> != -1) &amp;&amp; (<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> != <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>))
+            {
+                // Delete selection
+                <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0, K_MIN(mCursorPos, mHilitePos)) + <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(K_MAX(mCursorPos, mHilitePos));
+                <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = K_MIN(mCursorPos, mHilitePos);
+                <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> = -1;
+                
+                bigChange = true;
+            }
+            else
+            {
+                // Delete char behind cursor
+                if (<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> &gt; 0)
+                    <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0, mCursorPos-1) + <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(mCursorPos);
+                else
+                    <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(mCursorPos);
+                <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>--;
+                <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> = -1;
+                
+                if (<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> != <a href="#" onMouseOver="link('_member','mLastModifyIdx1509305020',this); ">mLastModifyIdx</a>)
+                    bigChange = true;
+                <a href="#" onMouseOver="link('_member','mLastModifyIdx1509305020',this); ">mLastModifyIdx</a> = <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>-1;
+            }
+        }
+    }
+    else if (theKey == K_VK_DEL)
+    {
+        if (<a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.length() &gt; 0)
+        {
+            if ((<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> != -1) &amp;&amp; (<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> != <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>))
+            {
+                // Delete selection
+                <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0, K_MIN(<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>, <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a>)) + <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(K_MAX(<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>, <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a>));
+                <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = K_MIN(<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>, <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a>);
+                <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> = -1;
+                
+                bigChange = true;
+            }
+            else
+            {
+                // Delete char in front of cursor
+                if (<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> &lt; (int) <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.length())
+                    <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0, <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>) + <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>+1);
+                
+                if (<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> != <a href="#" onMouseOver="link('_member','mLastModifyIdx1509305020',this); ">mLastModifyIdx</a>)
+                    bigChange = true;
+                <a href="#" onMouseOver="link('_member','mLastModifyIdx1509305020',this); ">mLastModifyIdx</a> = <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>;
+            }
+        }   
+    }
+    else if (theKey == K_VK_HOME)
+    {
+        <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = 0;   
+    }
+    else if (theKey == K_VK_END)
+    {
+        <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.length();   
+    }
+    else if (theKey == K_VK_RETURN)
+    {
+        <a href="#" onMouseOver="link('_member','mEditListener1509305020',this); ">mEditListener</a>-&gt;EditWidgetText(mId, mString);     
+    }
+    else
+    {
+        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aString = <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a>(1, theChar);
+        unsigned int uTheChar = (unsigned int)theChar;
+        unsigned int range = 127;
+        //if (gSexyAppBase-&gt;mbAllowExtendedChars)
+        {
+            range = 255;
+        }
+
+        if ((uTheChar &gt;= 32) &amp;&amp; (uTheChar &lt;= range) &amp;&amp; (<a href="#" onMouseOver="link('_member','mFont1509305020',this); ">mFont</a>-&gt;StringWidth(aString) &gt; 0) &amp;&amp; <a href="#" onMouseOver="link('_member','mEditListener1509305020',this); ">mEditListener</a>-&gt;AllowChar(mId, theChar))
+        {               
+            if ((<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> != -1) &amp;&amp; (<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> != <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>))
+            {
+                // Replace selection with new character
+                <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0, K_MIN(mCursorPos, mHilitePos)) + <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a>(1, theChar) + <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(K_MAX(mCursorPos, mHilitePos));
+                <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = K_MIN(mCursorPos, mHilitePos);
+                <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> = -1;
+                
+                bigChange = true;
+            }
+            else
+            {
+                // Insert character where cursor is
+                <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0, mCursorPos) + <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a>(1, theChar) + <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(mCursorPos);
+                
+                if (<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> != <a href="#" onMouseOver="link('_member','mLastModifyIdx1509305020',this); ">mLastModifyIdx</a>+1)
+                    bigChange = true;                       
+                <a href="#" onMouseOver="link('_member','mLastModifyIdx1509305020',this); ">mLastModifyIdx</a> = <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>;
+                <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> = -1;
+            }
+                                            
+            <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>++;             
+            <a href="#" onMouseOver="link('_member','FocusCursor2182229000',this); ">FocusCursor</a>(false);
+        }
+        else
+            removeHilite = false;
+    }
+    
+    if ((<a href="#" onMouseOver="link('_member','mMaxChars1509305020',this); ">mMaxChars</a> != -1) &amp;&amp; ((int) <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.length() &gt; <a href="#" onMouseOver="link('_member','mMaxChars1509305020',this); ">mMaxChars</a>))
+        <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.substr(0, mMaxChars);
+
+    <a href="#" onMouseOver="link('_member','EnforceMaxPixels1503931028',this); ">EnforceMaxPixels</a>();
+
+    if (<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> &lt; 0)
+        <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = 0;
+    else if (<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> &gt; (int) <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.length())
+        <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.length();
+    
+    if (anOldCursorPos != <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>)
+    {
+        <a href="#" onMouseOver="link('_member','mBlinkAcc1509305020',this); ">mBlinkAcc</a> = 0;
+        <a href="#" onMouseOver="link('_member','mShowingCursor1509305020',this); ">mShowingCursor</a> = true;
+    }
+    
+    <a href="#" onMouseOver="link('_member','FocusCursor2182229000',this); ">FocusCursor</a>(true);
+    
+    if (removeHilite || <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a>==<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a>)
+        <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> = -1;
+    
+    if (!<a href="#" onMouseOver="link('_member','mEditListener1509305020',this); ">mEditListener</a>-&gt;AllowText(mId, mString))
+    {
+        <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a> = anOldString;
+        <a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> = anOldCursorPos;
+        <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> = anOldHilitePos;
+    }
+    else if (bigChange)
+    {
+        <a href="#" onMouseOver="link('_member','mUndoString1509305020',this); ">mUndoString</a> = anOldString;
+        <a href="#" onMouseOver="link('_member','mUndoCursor1509305020',this); ">mUndoCursor</a> = anOldCursorPos;
+        <a href="#" onMouseOver="link('_member','mUndoHilitePos1509305020',this); ">mUndoHilitePos</a> = anOldHilitePos;
+    }
+    
+    <a href="#" onMouseOver="link('_member','MarkDirty1503931028',this); ">MarkDirty</a>();
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

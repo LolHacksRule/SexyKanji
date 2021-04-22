@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetAppDataFolder</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetAppDataFolder</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetAppDataFolder</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetAppDataFolder61457','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetAppDataFolder61457','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetAppDataFolder61457','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 139</div>
+<pre class="codeExamples">
+<a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> <a href="#" onMouseOver="link('_member','GetAppDataFolder61457',this); ">GetAppDataFolder</a>()
+{
+    if (Sexy::gAppDataFolder == _S(""))
+    {
+#ifdef K_WIN32
+        {
+            HMODULE aMod;
+            SHGetFolderPathFunc aFunc = (SHGetFolderPathFunc)GetSHGetFolderPath("shell32.dll", &amp;aMod);
+            if (aFunc == NULL || aMod == NULL)
+                aFunc = (SHGetFolderPathFunc)GetSHGetFolderPath("shfolder.dll", &amp;aMod);
+
+            if (aMod != NULL)
+            {
+                TCHAR aPath[MAX_PATH];
+                aFunc(NULL, CSIDL_COMMON_APPDATA, NULL, SHGFP_TYPE_CURRENT, (LPTSTR)aPath);
+
+                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aDataPath = StringToSexyStringFast(<a href="#" onMouseOver="link('_member','RemoveTrailingSlash1908875876',this); ">RemoveTrailingSlash</a>(<a href="#" onMouseOver="link('_member','WStringToString351097544',this); ">WStringToString</a>(aPath))) 
+                    + _S("\\") + (<a href="#" onMouseOver="link('_member','DEFAULT_COMPANY0',this); ">DEFAULT_COMPANY</a>) + _S("\\") + (<a href="#" onMouseOver="link('_member','DEFAULT_TITLE0',this); ">DEFAULT_TITLE</a>) + _S("\\");
+                Sexy::gAppDataFolder = aDataPath;
+                <a href="#" onMouseOver="link('_member','MkDir1908875876',this); ">MkDir</a>(SexyStringToStringFast(aDataPath));
+                <a href="#" onMouseOver="link('_member','AllowAllAccess1730493082',this); ">AllowAllAccess</a>(aDataPath);
+
+                FreeLibrary(aMod);
+            }
+        }
+#else
+        Sexy::gAppDataFolder = <a href="#" onMouseOver="link('_member','StringToWString1908875876',this); ">StringToWString</a>(KMiscTools::getPreferencesFolder());
+#endif
+    }
+
+    return Sexy::gAppDataFolder;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

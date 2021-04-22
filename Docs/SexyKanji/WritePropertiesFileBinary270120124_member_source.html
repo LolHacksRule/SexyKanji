@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - WritePropertiesFileBinary</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">WritePropertiesFileBinary</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyPropertiesWriter809',this)" class="pathLink">SexyPropertiesWriter</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">WritePropertiesFileBinary</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WritePropertiesFileBinary270120124','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','WritePropertiesFileBinary270120124','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WritePropertiesFileBinary270120124','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 133</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','WritePropertiesFileBinary270120124',this); ">Sexy::SexyPropertiesWriter::WritePropertiesFileBinary</a>(const std::wstring &amp;theFilename)
+{
+    if(<a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a> == NULL) return <a href="#" onMouseOver="link('_member','Fail3107246427',this); ">Fail</a>(_S("Error: Cannot write NULL Properties Pointer."));
+
+    unsigned char MagicWord[4] = {0x73, 0x6b, 0x62,0x70};
+
+    <a href="#" onMouseOver="link('_class','Buffer809',this); ">Sexy::Buffer</a> aBuffer;
+    aBuffer.<a href="#" onMouseOver="link('_member','WriteBytes1358286778',this); ">WriteBytes</a>(MagicWord, 4);
+
+    aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(SexyProperties::INT_MAP_META_TAG);
+    aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(<a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mIntProperties.size());
+    StringIntMap::iterator int_map_itr = <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mIntProperties.begin();
+    for (; int_map_itr != <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mIntProperties.end(); int_map_itr++)
+    {
+        aBuffer.<a href="#" onMouseOver="link('_member','WriteUTF8String379094388',this); ">WriteUTF8String</a>(SexyStringToWStringFast(int_map_itr-&gt;first));
+        aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(int_map_itr-&gt;second);
+    }
+
+    aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(SexyProperties::BOOL_MAP_META_TAG);
+    aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(<a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;<a href="#" onMouseOver="link('_member','mBoolProperties3212277428',this); ">mBoolProperties</a>.size());
+    StringBoolMap::iterator bool_map_itr = <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;<a href="#" onMouseOver="link('_member','mBoolProperties3212277428',this); ">mBoolProperties</a>.begin();
+    for (; bool_map_itr != <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;<a href="#" onMouseOver="link('_member','mBoolProperties3212277428',this); ">mBoolProperties</a>.end(); bool_map_itr++)
+    {
+        aBuffer.<a href="#" onMouseOver="link('_member','WriteUTF8String379094388',this); ">WriteUTF8String</a>(SexyStringToWStringFast(bool_map_itr-&gt;first));
+        aBuffer.<a href="#" onMouseOver="link('_member','WriteBoolean4171742885',this); ">WriteBoolean</a>(bool_map_itr-&gt;second);
+    }
+
+    aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(SexyProperties::DOUBLE_MAP_META_TAG);
+    aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(<a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mDoubleProperties.size());
+    StringDoubleMap::iterator double_map_itr = <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;<a href="#" onMouseOver="link('_member','mDoubleProperties3212277428',this); ">mDoubleProperties</a>.begin();
+    for (; double_map_itr != <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;<a href="#" onMouseOver="link('_member','mDoubleProperties3212277428',this); ">mDoubleProperties</a>.end(); double_map_itr++)
+    {
+        aBuffer.<a href="#" onMouseOver="link('_member','WriteUTF8String379094388',this); ">WriteUTF8String</a>(SexyStringToWStringFast(double_map_itr-&gt;first));
+        aBuffer.<a href="#" onMouseOver="link('_member','WriteBytes1358286778',this); ">WriteBytes</a>(((unsigned char*)(&amp;double_map_itr-&gt;second)), sizeof(double));
+    }
+
+    aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(SexyProperties::STRING_MAP_META_TAG);
+    aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(<a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mStringProperties.size());
+    StringStringMap::iterator str_map_itr = <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mStringProperties.begin();
+    for (; str_map_itr != <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mStringProperties.end(); str_map_itr++)
+    {
+        aBuffer.<a href="#" onMouseOver="link('_member','WriteUTF8String379094388',this); ">WriteUTF8String</a>(SexyStringToWStringFast(str_map_itr-&gt;first));
+        aBuffer.<a href="#" onMouseOver="link('_member','WriteUTF8String379094388',this); ">WriteUTF8String</a>(<a href="#" onMouseOver="link('_member','XMLEncodeString1908875876',this); ">XMLEncodeString</a>(SexyStringToWStringFast(str_map_itr-&gt;second)));
+    }
+
+    aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(SexyProperties::STRING_VECTOR_MAP_META_TAG);
+    aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(<a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mStringVectorProperties.size());
+    StringStringVectorMap::iterator str_vec_map_itr = <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mStringVectorProperties.begin();
+    for (; str_vec_map_itr != <a href="#" onMouseOver="link('_member','mProperties1429334022',this); ">mProperties</a>-&gt;mStringVectorProperties.end(); str_vec_map_itr++)
+    {
+        aBuffer.<a href="#" onMouseOver="link('_member','WriteUTF8String379094388',this); ">WriteUTF8String</a>(SexyStringToWStringFast(str_vec_map_itr-&gt;first));
+        aBuffer.<a href="#" onMouseOver="link('_member','WriteLong4171652782',this); ">WriteLong</a>(str_vec_map_itr-&gt;second.size());
+        for (unsigned int i = 0; i &lt; str_vec_map_itr-&gt;second.size(); i++)
+        {
+            aBuffer.<a href="#" onMouseOver="link('_member','WriteUTF8String379094388',this); ">WriteUTF8String</a>(<a href="#" onMouseOver="link('_member','XMLEncodeString1908875876',this); ">XMLEncodeString</a>(SexyStringToWStringFast(str_vec_map_itr-&gt;second[i])));
+        }
+    }
+
+    return <a href="#" onMouseOver="link('_member','WriteBufferToFile2919419549',this); ">Sexy::Buffer::WriteBufferToFile</a>(theFilename, aBuffer);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

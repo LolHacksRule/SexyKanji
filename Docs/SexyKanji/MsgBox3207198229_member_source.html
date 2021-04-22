@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - MsgBox</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">MsgBox</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">MsgBox</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','MsgBox3207198229','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','MsgBox3207198229','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','MsgBox3207198229','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1530</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','MsgBox3207198229',this); ">Sexy::SexyAppBase::MsgBox</a>(const SexyString &amp;theText, const SexyString &amp;theTitle=L"Message")
+{
+    if(<a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>)
+    {
+        <a href="#" onMouseOver="link('_member','BeginPopup417534590',this); ">BeginPopup</a>();
+        KMiscTools::messageBox(SexyStringToStringFast(theText).c_str(), SexyStringToStringFast(theTitle).c_str());
+        <a href="#" onMouseOver="link('_member','EndPopup417534590',this); ">EndPopup</a>();
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

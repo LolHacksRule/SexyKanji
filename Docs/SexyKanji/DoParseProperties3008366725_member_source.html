@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DoParseProperties</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DoParseProperties</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyPropertiesParser809',this)" class="pathLink">SexyPropertiesParser</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DoParseProperties</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DoParseProperties3008366725','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DoParseProperties3008366725','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DoParseProperties3008366725','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 267</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','DoParseProperties3008366725',this); ">Sexy::SexyPropertiesParser::DoParseProperties</a>()
+{
+    if (!<a href="#" onMouseOver="link('_member','mXMLParser1464883425',this); ">mXMLParser</a>-&gt;HasFailed())
+    {
+        for (;;)
+        {
+            XMLElement aXMLElement;
+            if (!<a href="#" onMouseOver="link('_member','mXMLParser1464883425',this); ">mXMLParser</a>-&gt;NextElement(&amp;aXMLElement))
+                break;
+
+            if (aXMLElement.mType == XMLElement::TYPE_START)
+            {
+                if (aXMLElement.mValue == _S("Properties"))
+                {
+                    if (!<a href="#" onMouseOver="link('_member','ParseProperties3008366725',this); ">ParseProperties</a>())
+                        break;
+                }
+                else 
+                {
+                    <a href="#" onMouseOver="link('_member','Fail3142934972',this); ">Fail</a>(_S("Invalid Section '") + aXMLElement.mValue + _S("'"));
+                    break;
+                }
+            }
+            else if (aXMLElement.mType == XMLElement::TYPE_ELEMENT)
+            {
+                <a href="#" onMouseOver="link('_member','Fail3142934972',this); ">Fail</a>(_S("Element Not Expected '") + aXMLElement.mValue + _S("'"));
+                break;
+            }
+        }
+    }
+
+    if (<a href="#" onMouseOver="link('_member','mXMLParser1464883425',this); ">mXMLParser</a>-&gt;HasFailed())
+        <a href="#" onMouseOver="link('_member','Fail3142934972',this); ">Fail</a>(<a href="#" onMouseOver="link('_member','mXMLParser1464883425',this); ">mXMLParser</a>-&gt;GetErrorText()); 
+
+    delete <a href="#" onMouseOver="link('_member','mXMLParser1464883425',this); ">mXMLParser</a>;
+    <a href="#" onMouseOver="link('_member','mXMLParser1464883425',this); ">mXMLParser</a> = NULL;
+
+    return !<a href="#" onMouseOver="link('_member','mHasFailed1464883425',this); ">mHasFailed</a>;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

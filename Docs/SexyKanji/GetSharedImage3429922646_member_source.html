@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetSharedImage</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetSharedImage</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ImageManager809',this)" class="pathLink">ImageManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetSharedImage</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetSharedImage3429922646','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetSharedImage3429922646','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetSharedImage3429922646','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 570</div>
+<pre class="codeExamples">
+SharedImageRef <a href="#" onMouseOver="link('_member','GetSharedImage918743780',this); ">Sexy::ImageManager::GetSharedImage</a>(const std::string &amp;theFileName, const std::string &amp;theVariant="", bool bLookForAlpha=true, bool *isNew=NULL)
+{
+    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> anUpperFileName = <a href="#" onMouseOver="link('_member','StringToUpper1908875876',this); ">StringToUpper</a>(StringToSexyStringFast(theFileName));
+    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> anUpperVariant = <a href="#" onMouseOver="link('_member','StringToUpper1908875876',this); ">StringToUpper</a>(StringToSexyStringFast(theVariant));
+
+    std::pair&lt;SharedImageMap::iterator, bool&gt; aResultPair;
+    SharedImageRef aSharedImageRef;
+
+    aResultPair = <a href="#" onMouseOver="link('_member','mSharedImageMap454134940',this); ">mSharedImageMap</a>.insert(SharedImageMap::value_type(SharedImageMap::key_type(anUpperFileName, anUpperVariant), SharedImage()));
+    aSharedImageRef = &amp;aResultPair.first-&gt;second;
+
+    if (isNew != NULL)
+        *isNew = aResultPair.second;
+
+    if (aResultPair.second)
+    {
+        // Pass in a '!' as the first char of the file name to create a new aRetImage
+        if ((theFileName.length() &gt; 0) &amp;&amp; (theFileName[0] == '!'))
+            aSharedImageRef.mSharedImage-&gt;mImage = new SexyImage();
+        else
+            aSharedImageRef.mSharedImage-&gt;mImage = <a href="#" onMouseOver="link('_member','GetImage1726884476',this); ">GetImage</a>(theFileName, bLookForAlpha);
+    }
+
+    return aSharedImageRef;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

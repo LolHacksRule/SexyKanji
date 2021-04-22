@@ -1,0 +1,150 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ProcessDeferredMessages</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ProcessDeferredMessages</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ProcessDeferredMessages</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ProcessDeferredMessages3412166305','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ProcessDeferredMessages3412166305','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ProcessDeferredMessages3412166305','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 892</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','ProcessDeferredMessages3412166305',this); ">Sexy::SexyAppBase::ProcessDeferredMessages</a>(bool bSingleMessage=false)
+{
+    if(<a href="#" onMouseOver="link('_member','mDeferredEventQueue414388462',this); ">mDeferredEventQueue</a>.empty())
+        return false;
+
+    // bSingleMessage is broken 
+    while (!<a href="#" onMouseOver="link('_member','mDeferredEventQueue414388462',this); ">mDeferredEventQueue</a>.empty()/* &amp;&amp; !bSingleMessage*/)
+    {
+        KEvent anEvent = <a href="#" onMouseOver="link('_member','mDeferredEventQueue414388462',this); ">mDeferredEventQueue</a>.front();
+        <a href="#" onMouseOver="link('_member','mDeferredEventQueue414388462',this); ">mDeferredEventQueue</a>.pop();
+
+        // This is provided for ease of use.
+        int theMouseX = anEvent.mouseX;
+        int theMouseY = anEvent.mouseY;
+        wchar_t aCharacter = (wchar_t)anEvent.unicodeChar;
+
+        switch (anEvent.type)
+        {
+        case K_EVENT_ACTIVATED :
+            if (!<a href="#" onMouseOver="link('_member','mIsWindowed414388462',this); ">mIsWindowed</a>)
+            {
+                <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;MarkAllDirty();
+            }
+            <a href="#" onMouseOver="link('_member','GotFocus417534590',this); ">GotFocus</a>();
+            break;
+
+        case K_EVENT_DEACTIVATED :
+            <a href="#" onMouseOver="link('_member','LostFocus417534590',this); ">LostFocus</a>();
+            break;
+        case K_EVENT_MOUSEMOVE:
+            <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;MouseMove(theMouseX, theMouseY);
+            break;
+
+        case K_EVENT_MOUSEDOWN:
+            switch (anEvent.buttonIndex)
+            {
+            case K_LBUTTON :
+                <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;MouseDown(theMouseX, theMouseY, MOUSE_BUTTON_LEFT);
+                break;
+            case K_RBUTTON :
+                <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;MouseDown(theMouseX, theMouseY, MOUSE_BUTTON_RIGHT);
+                break;
+            case K_MBUTTON :
+                <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;MouseDown(theMouseX, theMouseY, MOUSE_BUTTON_CENTER);
+                break;
+            }
+            break;
+
+        case K_EVENT_DBLCLICK:
+            switch (anEvent.buttonIndex)
+            {
+            case K_LBUTTON :
+                <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;<a href="#" onMouseOver="link('_member','MouseDown3149821154',this); ">MouseDown</a>(theMouseX, theMouseY, MOUSE_DBLCLICK_LEFT);
+                break;
+            case K_RBUTTON :
+                <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;<a href="#" onMouseOver="link('_member','MouseDown3149821154',this); ">MouseDown</a>(theMouseX, theMouseY, MOUSE_DBLCLICK_RIGHT);
+                break;
+            }
+            break;
+
+        case K_EVENT_MOUSEUP:
+            switch (anEvent.buttonIndex)
+            {
+            case K_LBUTTON :
+                <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;MouseUp(theMouseX, theMouseY, MOUSE_BUTTON_LEFT);
+                break;
+            case K_RBUTTON :
+                <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;MouseUp(theMouseX, theMouseY, MOUSE_BUTTON_RIGHT);
+                break;
+            case K_MBUTTON :
+                <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;MouseUp(theMouseX, theMouseY, MOUSE_BUTTON_CENTER);
+                break;
+            }
+            break;
+
+        case K_EVENT_KEYDOWN:
+            if(!<a href="#" onMouseOver="link('_member','DebugKeyDown2405652591',this); ">DebugKeyDown</a>(anEvent.ptkKey))
+            {
+                if(anEvent.ptkKey == K_VK_RETURN &amp;&amp; (KInput::isPressed(K_VK_R_CONTROL) || KInput::isPressed(K_VK_L_CONTROL)))
+                    <a href="#" onMouseOver="link('_member','ToggleWindowed417534590',this); ">ToggleWindowed</a>();
+                if(anEvent.ptkKey == K_VK_D &amp;&amp; (KInput::isPressed(K_VK_R_CONTROL) || KInput::isPressed(K_VK_L_CONTROL)))
+                    <a href="#" onMouseOver="link('_member','mDebugKeysEnabled414388462',this); ">mDebugKeysEnabled</a> = !<a href="#" onMouseOver="link('_member','mDebugKeysEnabled414388462',this); ">mDebugKeysEnabled</a>;
+                else
+                    <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;KeyDown(anEvent.ptkKey);
+            }
+            break;
+        case K_EVENT_KEYUP:
+            <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;KeyUp(anEvent.ptkKey);
+            break;
+
+        case K_EVENT_WHEEL:
+            <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;MouseWheel(anEvent.wheel/120);
+            break;
+
+        case K_EVENT_CONTEXTMENU:
+            break;
+        case K_EVENT_UNICHAR:
+            <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>-&gt;KeyChar((SexyChar)aCharacter);
+            break;
+        case K_EVENT_TOUCH: // iPhone/iPad
+            break;
+        case K_EVENT_ACCEL: // iPhone/iPad
+            break;
+        case K_EVENT_LOW_MEMORY: // iPhone/iPad
+            break;
+        case K_EVENT_ORIENTATION: // iPhone/iPad
+            break;
+        default :
+            break;
+        }
+    }
+
+    return true;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

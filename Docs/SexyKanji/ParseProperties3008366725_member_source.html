@@ -1,0 +1,148 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ParseProperties</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ParseProperties</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyPropertiesParser809',this)" class="pathLink">SexyPropertiesParser</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ParseProperties</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParseProperties3008366725','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ParseProperties3008366725','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParseProperties3008366725','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 148</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','ParseProperties3008366725',this); ">Sexy::SexyPropertiesParser::ParseProperties</a>()
+{
+    for (;;)
+    {
+        XMLElement aXMLElement;
+        if (!<a href="#" onMouseOver="link('_member','mXMLParser1464883425',this); ">mXMLParser</a>-&gt;NextElement(&amp;aXMLElement))
+            return false;
+        
+        if (aXMLElement.mType == XMLElement::TYPE_START)
+        {
+            if (aXMLElement.mValue == _S("String"))
+            {               
+                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aDef;
+                if (!<a href="#" onMouseOver="link('_member','ParseSingleElement531015471',this); ">ParseSingleElement</a>(&amp;aDef))
+                    return false;
+
+                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> anId = (aXMLElement.mAttributes[_S("id")]);
+                if(<a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>)
+                    <a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>-&gt;<a href="#" onMouseOver="link('_member','SetString33925034',this); ">SetString</a>(anId, (aDef));
+            }
+            else if (aXMLElement.mValue == _S("StringArray"))
+            {
+                <a href="#" onMouseOver="link('_member','StringVector0',this); ">StringVector</a> aDef;
+
+                if (!<a href="#" onMouseOver="link('_member','ParseStringArray2563738190',this); ">ParseStringArray</a>(&amp;aDef))
+                    return false;
+
+                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> anId = (aXMLElement.mAttributes[_S("id")]);
+
+                if(<a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>) 
+                    <a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>-&gt;SetStringVector(anId, aDef);
+            }
+            else if (aXMLElement.mValue == _S("Boolean"))
+            {
+                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aVal;
+
+                if (!<a href="#" onMouseOver="link('_member','ParseSingleElement531015471',this); ">ParseSingleElement</a>(&amp;aVal))
+                    return false;
+
+                aVal = <a href="#" onMouseOver="link('_member','Upper1908875876',this); ">Upper</a>(aVal);
+
+                bool boolVal;
+                if ((aVal == _S("1")) || (aVal == _S("YES")) || (aVal == _S("ON")) || (aVal == _S("TRUE")))
+                    boolVal = true;
+                else if ((aVal == _S("0")) || (aVal == _S("NO")) || (aVal == _S("OFF")) || (aVal == _S("FALSE")))
+                    boolVal = false;
+                else
+                {
+                    <a href="#" onMouseOver="link('_member','Fail3142934972',this); ">Fail</a>(_S("Invalid Boolean Value: '") + aVal + _S("'"));
+                    return false;
+                }
+
+                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> anId = (aXMLElement.mAttributes[_S("id")]);
+
+                if(<a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>)
+                    <a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>-&gt;<a href="#" onMouseOver="link('_member','SetBoolean19501777',this); ">SetBoolean</a>(anId, boolVal);
+            }
+            else if (aXMLElement.mValue == _S("Integer"))
+            {
+                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aVal;
+
+                if (!<a href="#" onMouseOver="link('_member','ParseSingleElement531015471',this); ">ParseSingleElement</a>(&amp;aVal))
+                    return false;
+
+                int anInt;
+                if (!<a href="#" onMouseOver="link('_member','StringToInt1372038482',this); ">StringToInt</a>(aVal, &amp;anInt))
+                {
+                    <a href="#" onMouseOver="link('_member','Fail3142934972',this); ">Fail</a>(_S("Invalid Integer Value: '") + aVal + _S("'"));
+                    return false;
+                }
+
+                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> anId = (aXMLElement.mAttributes[_S("id")]);
+
+                if(<a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>)
+                    <a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>-&gt;SetInteger(anId, anInt);
+            }
+            else if (aXMLElement.mValue == _S("Double"))
+            {
+                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aVal;
+
+                if (!<a href="#" onMouseOver="link('_member','ParseSingleElement531015471',this); ">ParseSingleElement</a>(&amp;aVal))
+                    return false;
+
+                double aDouble;
+                if (!<a href="#" onMouseOver="link('_member','StringToDouble1954884994',this); ">StringToDouble</a>(aVal, &amp;aDouble))
+                {
+                    <a href="#" onMouseOver="link('_member','Fail3142934972',this); ">Fail</a>(_S("Invalid Double Value: '") + aVal + _S("'"));
+                    return false;
+                }
+
+                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> anId = (aXMLElement.mAttributes[_S("id")]);
+
+                if(<a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>)
+                    <a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>-&gt;SetDouble(anId, aDouble);
+            }
+            else
+            {
+                <a href="#" onMouseOver="link('_member','Fail3142934972',this); ">Fail</a>(_S("Invalid Section '") + aXMLElement.mValue + _S("'"));
+                return false;
+            }
+        }
+        else if (aXMLElement.mType == XMLElement::TYPE_ELEMENT)
+        {
+            <a href="#" onMouseOver="link('_member','Fail3142934972',this); ">Fail</a>(_S("Element Not Expected '") + aXMLElement.mValue + _S("'"));
+            return false;
+        }       
+        else if (aXMLElement.mType == XMLElement::TYPE_END)
+        {
+            return true;
+        }
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

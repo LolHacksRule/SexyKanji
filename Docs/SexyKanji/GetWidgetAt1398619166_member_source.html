@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetWidgetAt</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetWidgetAt</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','WidgetManager809',this)" class="pathLink">WidgetManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetWidgetAt</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetWidgetAt1398619166','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetWidgetAt1398619166','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetWidgetAt1398619166','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 364</div>
+<pre class="codeExamples">
+Widget * <a href="#" onMouseOver="link('_member','GetWidgetAt1398619166',this); ">Sexy::WidgetManager::GetWidgetAt</a>(int x, int y, int *theWidgetX, int *theWidgetY)
+{   
+    Widget* aWidget = <a href="#" onMouseOver="link('_member','GetAnyWidgetAt1398619166',this); ">GetAnyWidgetAt</a>(x, y, theWidgetX, theWidgetY);
+    if ((aWidget != NULL) &amp;&amp; (aWidget-&gt;mDisabled))
+        aWidget = NULL;
+    return aWidget;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

@@ -1,0 +1,92 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Draw</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Draw</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','EditWidget809',this)" class="pathLink">EditWidget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Draw</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Draw2524897591','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Draw2524897591','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Draw2524897591','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 187</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','Draw2524897591',this); ">Sexy::EditWidget::Draw</a>(Graphics *g)
+{
+    if (<a href="#" onMouseOver="link('_member','mFont1509305020',this); ">mFont</a> == NULL) return;
+        //mFont = new SysFont(mWidgetManager-&gt;mApp, "Arial Unicode MS", 10, false);
+
+    g-&gt;SetFont(mFont);
+    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> &amp;aString = <a href="#" onMouseOver="link('_member','GetDisplayString1503931028',this); ">GetDisplayString</a>();
+
+    // Draw the background rect.
+    g-&gt;SetColor(mColors[COLOR_BKG]);
+    g-&gt;FillRect(0, 0, mWidth, mHeight);
+
+    //  Get the current cursor position.
+    int aCursorX = <a href="#" onMouseOver="link('_member','mFont1509305020',this); ">mFont</a>-&gt;StringWidth(aString.substr(0, mCursorPos)) - <a href="#" onMouseOver="link('_member','mFont1509305020',this); ">mFont</a>-&gt;StringWidth(aString.substr(0, mLeftPos));
+    aCursorX = K_MIN(K_MAX(0, aCursorX), mWidth-8);
+
+    // Get the current highlight position.
+    int aHiliteX = aCursorX;
+    if ((<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> != -1) &amp;&amp; (<a href="#" onMouseOver="link('_member','mCursorPos1509305020',this); ">mCursorPos</a> != <a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a>))
+    {
+        aHiliteX = <a href="#" onMouseOver="link('_member','mFont1509305020',this); ">mFont</a>-&gt;StringWidth(aString.substr(0, mHilitePos)) - <a href="#" onMouseOver="link('_member','mFont1509305020',this); ">mFont</a>-&gt;StringWidth(aString.substr(0, mLeftPos));
+        aHiliteX = K_MIN(K_MAX(0, aHiliteX), mWidth-8);
+    }
+
+    //  When drawing the cursor add 2px for cursor width.
+    int aWidth = std::abs(aHiliteX - aCursorX);
+    int x = 4 + K_MIN(aCursorX, aHiliteX);
+    if (<a href="#" onMouseOver="link('_member','mShowingCursor1509305020',this); ">mShowingCursor</a>)
+    {
+        aWidth += 2;
+        if (aHiliteX &gt; aCursorX)
+        {
+            x -= 2;
+        }
+    }
+
+    // Draw the cursor/highlighted rect.
+    if (aWidth &gt; 0)
+    {
+        g-&gt;SetColor(mColors[COLOR_HILITE]);
+        g-&gt;FillRect(x, 0, aWidth, mHeight);
+    }
+
+    g-&gt;SetColor(mColors[COLOR_TEXT]);
+    g-&gt;DrawStringClipped(aString.substr(mLeftPos), 4, (<a href="#" onMouseOver="link('_member','mHeight564406879',this); ">mHeight</a> / 2) - (<a href="#" onMouseOver="link('_member','mFont1509305020',this); ">mFont</a>-&gt;GetHeight() / 2));
+
+    if (<a href="#" onMouseOver="link('_member','mHilitePos1509305020',this); ">mHilitePos</a> &gt; -1)
+    {
+        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aClippedString = aString.substr(K_MIN(K_MAX(mHilitePos, mLeftPos), mCursorPos), std::abs(mCursorPos - K_MAX(mHilitePos, mLeftPos)));
+        g-&gt;SetColor(mColors[COLOR_HILITE_TEXT]);
+        g-&gt;DrawStringClipped(aClippedString, K_MIN(aHiliteX, aCursorX)+4, (mHeight / 2) - (<a href="#" onMouseOver="link('_member','mFont1509305020',this); ">mFont</a>-&gt;GetHeight() / 2));
+    }
+
+    g-&gt;SetColor(mColors[COLOR_OUTLINE]);
+    g-&gt;DrawRect(0, 0, mWidth - 1, mHeight - 1);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

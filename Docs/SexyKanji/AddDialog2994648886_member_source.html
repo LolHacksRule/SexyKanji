@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - AddDialog</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">AddDialog</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','WidgetManager809',this)" class="pathLink">WidgetManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">AddDialog</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','AddDialog2994648886','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','AddDialog2994648886','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','AddDialog2994648886','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 212</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','AddDialog2994648886',this); ">Sexy::WidgetManager::AddDialog</a>(int theDialogId, Dialog *theDialog)
+{
+    <a href="#" onMouseOver="link('_member','KillDialog3170504137',this); ">KillDialog</a>(theDialogId);
+
+    if (theDialog-&gt;mWidth == 0)
+    {
+        // Set the dialog position ourselves
+        int aWidth = <a href="#" onMouseOver="link('_member','mWidth564406879',this); ">mWidth</a>/2;
+        theDialog-&gt;Resize((mWidth - aWidth)/2, mHeight / 5, aWidth, theDialog-&gt;GetPreferredHeight(aWidth));
+    }
+    <a href="#" onMouseOver="link('_member','mDialogMap3955182565',this); ">mDialogMap</a>.insert(DialogMap::value_type(theDialogId, theDialog));
+    <a href="#" onMouseOver="link('_member','mDialogList3955182565',this); ">mDialogList</a>.push_back(theDialog);
+
+    <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;AddWidget(theDialog);
+    if (theDialog-&gt;IsModal())
+    {
+        <a href="#" onMouseOver="link('_member','mWidgetManager564406879',this); ">mWidgetManager</a>-&gt;AddBaseModal(theDialog);
+        <a href="#" onMouseOver="link('_member','ModalOpen3149876172',this); ">ModalOpen</a>();
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

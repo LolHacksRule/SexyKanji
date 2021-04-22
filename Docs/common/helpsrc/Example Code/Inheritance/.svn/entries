@@ -1,0 +1,52 @@
+8
+
+dir
+24
+https://doxys.svn.sourceforge.net/svnroot/doxys/trunk/homepage/Documentation/Example%20Code/Inheritance
+https://doxys.svn.sourceforge.net/svnroot/doxys
+
+
+
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+
+
+svn:special svn:externals svn:needs-lock
+
+Inheritance.dir
+file
+
+
+
+
+2007-11-15T16:40:17.188889Z
+056cba2081e19398ca581d50a513dabe
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+
+inheritance_classes.cpp
+file
+
+
+
+
+2007-11-15T16:40:17.188889Z
+de61d6b3cf5a07920362301c9b497e1b
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+
+inheritance_classes.h
+file
+
+
+
+
+2007-11-15T16:40:17.188889Z
+dc87367a1ece84298837d591da6a7f69
+2008-04-25T10:07:24.971237Z
+24
+mlutken
+

@@ -1,0 +1,402 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - NextElement</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">NextElement</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','XMLParser809',this)" class="pathLink">XMLParser</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">NextElement</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','NextElement2843802691','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','NextElement2843802691','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','NextElement2843802691','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 194</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','NextElement2843802691',this); ">Sexy::XMLParser::NextElement</a>(XMLElement *theElement)
+{
+    for (;;)
+    {       
+        theElement-&gt;mType = XMLElement::TYPE_NONE;
+        theElement-&gt;mSection = <a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a>;
+        theElement-&gt;mValue = _S("");
+        theElement-&gt;mAttributes.clear();            
+        theElement-&gt;mInstruction.erase();
+
+        bool hasSpace = false;  
+        bool inQuote = false;
+        bool gotEndQuote = false;
+
+        bool doingAttribute = false;
+        bool AttributeVal = false;
+        std::wstring aAttributeKey;
+        std::wstring aAttributeValue;
+
+        std::wstring aLastAttributeKey;
+        
+        for (;;)
+        {
+            // Process character by character
+
+            wchar_t c;
+            int aVal;
+            
+            if (<a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>.size() &gt; 0)
+            {                               
+                c = <a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>[<a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>.size()-1];
+                <a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>.pop_back();                
+
+                aVal = 1;
+            }
+            else
+                aVal = 0;
+            
+            if (aVal == 1)
+            {
+                bool processChar = false;
+
+                if (c == L'\n')
+                {
+                    <a href="#" onMouseOver="link('_member','mLineNum800682680',this); ">mLineNum</a>++;
+                }
+
+                if (theElement-&gt;mType == XMLElement::TYPE_COMMENT)
+                {
+                    // Just add text to theElement-&gt;mInstruction until we find --&gt;
+
+                    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a>* aStrPtr = &amp;theElement-&gt;mInstruction;
+                    
+                    *aStrPtr += (<a href="#" onMouseOver="link('_member','SexyChar0',this); ">SexyChar</a>)c;                    
+
+                    int aLen = aStrPtr-&gt;length();
+
+                    if ((c == L'&gt;') &amp;&amp; (aLen &gt;= 3) &amp;&amp; ((*aStrPtr)[aLen - 2] == L'-') &amp;&amp; ((*aStrPtr)[aLen - 3] == L'-'))
+                    {
+                        *aStrPtr = aStrPtr-&gt;substr(0, aLen - 3);
+                        break;
+                    }
+                }
+                else if (theElement-&gt;mType == XMLElement::TYPE_INSTRUCTION)
+                {
+                    // Just add text to theElement-&gt;mInstruction until we find ?&gt;
+
+                    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a>* aStrPtr = &amp;theElement-&gt;mValue;
+
+                    if ((theElement-&gt;mInstruction.length() != 0) || (::iswspace(c)))
+                        aStrPtr = &amp;theElement-&gt;mInstruction;
+                    
+                    *aStrPtr += (<a href="#" onMouseOver="link('_member','SexyChar0',this); ">SexyChar</a>)c;                    
+
+                    int aLen = aStrPtr-&gt;length();
+
+                    if ((c == L'&gt;') &amp;&amp; (aLen &gt;= 2) &amp;&amp; ((*aStrPtr)[aLen - 2] == L'?'))
+                    {
+                        *aStrPtr = aStrPtr-&gt;substr(0, aLen - 2);
+                        break;
+                    }
+                }
+                else
+                {
+                    if (c == L'"')
+                    {
+                        inQuote = !inQuote;
+                        if (theElement-&gt;mType==XMLElement::TYPE_NONE || theElement-&gt;mType==XMLElement::TYPE_ELEMENT)
+                            processChar = true;
+
+                        if (!inQuote)
+                            gotEndQuote = true;
+                    }
+                    else if (!inQuote)
+                    {
+                        if (c == L'&lt;')
+                        {
+                            if (theElement-&gt;mType == XMLElement::TYPE_ELEMENT)
+                            {
+                                //TODO: Fix buffered text.  Not sure what I meant by that.
+
+                                //OLD: mBufferedText = c + mBufferedText;
+
+                                <a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>.push_back(c);                              
+                                break;
+                            }
+
+                            if (theElement-&gt;mType == XMLElement::TYPE_NONE)
+                            {
+                                theElement-&gt;mType = XMLElement::TYPE_START;
+                            }
+                            else
+                            {
+                                <a href="#" onMouseOver="link('_member','Fail3246473983',this); ">Fail</a>(_S("Unexpected '&lt;'"));
+                                return false;
+                            }
+                        }
+                        else if (c == L'&gt;')
+                        {
+                            if (theElement-&gt;mType == XMLElement::TYPE_START)
+                            {   
+                                bool insertEnd = false;
+
+                                if (aAttributeKey == L"/")
+                                {
+                                    // We will get this if we have a space before the /&gt;, so we can ignore it
+                                    //  and go about our business now
+                                    insertEnd = true;
+                                }
+                                else
+                                {
+                                    // Probably isn't committed yet
+                                    if (aAttributeKey.length() &gt; 0)
+                                    {                                       
+//                                      theElement-&gt;mAttributes[aLastAttributeKey] = aAttributeValue;
+
+                                        aAttributeKey = <a href="#" onMouseOver="link('_member','XMLDecodeString3267588478',this); ">XMLDecodeString</a>(aAttributeKey);
+                                        aAttributeValue = <a href="#" onMouseOver="link('_member','XMLDecodeString3267588478',this); ">XMLDecodeString</a>(aAttributeValue);
+
+                                        aLastAttributeKey = aAttributeKey;
+                                        <a href="#" onMouseOver="link('_member','AddAttribute2456113921',this); ">AddAttribute</a>(theElement, WStringToSexyStringFast(aLastAttributeKey), WStringToSexyStringFast(aAttributeValue));
+
+                                        aAttributeKey = L"";
+                                        aAttributeValue = L"";
+                                    }
+
+                                    if (aLastAttributeKey.length() &gt; 0)
+                                    {
+                                        <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aVal = theElement-&gt;mAttributes[WStringToSexyStringFast(aLastAttributeKey)];
+
+                                        int aLen = aVal.length();
+
+                                        if ((aLen &gt; 0) &amp;&amp; (aVal[aLen-1] == _S('/')))
+                                        {
+                                            // Its an empty element, fake start and end segments
+//                                          theElement-&gt;mAttributes[aLastAttributeKey] = aVal.substr(0, aLen - 1);
+                                            
+                                            <a href="#" onMouseOver="link('_member','AddAttribute2456113921',this); ">AddAttribute</a>(theElement, WStringToSexyStringFast(aLastAttributeKey), (<a href="#" onMouseOver="link('_member','XMLDecodeString3267588478',this); ">XMLDecodeString</a>(aVal.substr(0, aLen - 1))));
+
+                                            insertEnd = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        int aLen = theElement-&gt;mValue.length();
+
+                                        if ((aLen &gt; 0) &amp;&amp; (theElement-&gt;mValue[aLen-1] == '/'))
+                                        {
+                                            // Its an empty element, fake start and end segments
+                                            theElement-&gt;mValue = theElement-&gt;mValue.substr(0, aLen - 1);
+                                            insertEnd = true;
+                                        }
+                                    }
+                                }
+
+                                // Do we want to fake an ending section?
+                                if (insertEnd)
+                                {                                   
+                                    std::wstring anAddString = L"&lt;/" + SexyStringToWStringFast(theElement-&gt;mValue) + L"&gt;";
+
+                                    int anOldSize = <a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>.size();
+                                    int anAddLength = anAddString.length();
+
+                                    <a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>.resize(anOldSize + anAddLength);
+
+                                    for (int i = 0; i &lt; anAddLength; i++)
+                                        <a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>[anOldSize + i] = (wchar_t)(anAddString[anAddLength - i - 1]);
+
+                                    // clear out aAttributeKey, since it contains "/" as its value and will insert
+                                    // it into the element's attribute map.
+                                    aAttributeKey = L"";
+
+                                    //OLD: mBufferedText = "&lt;/" + theElement-&gt;mValue + "&gt;" + mBufferedText;
+                                }
+
+                                if (<a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a>.length() != 0)
+                                    <a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a> += _S("/");
+
+                                <a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a> += theElement-&gt;mValue;                             
+
+                                break;
+                            }
+                            else if (theElement-&gt;mType == XMLElement::TYPE_END)
+                            {
+                                int aLastSlash = <a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a>.rfind(_S('/'));
+                                if ((aLastSlash == -1) &amp;&amp; (<a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a>.length() == 0))
+                                {
+                                    <a href="#" onMouseOver="link('_member','Fail3246473983',this); ">Fail</a>(_S("Unexpected End"));
+                                    return false;
+                                }
+
+                                <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aLastSectionName = <a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a>.substr(aLastSlash + 1);
+                                
+                                if (aLastSectionName != theElement-&gt;mValue)
+                                {
+                                    <a href="#" onMouseOver="link('_member','Fail3246473983',this); ">Fail</a>(_S("End '") + theElement-&gt;mValue + _S("' Doesn't Match Start '") + aLastSectionName + _S("'"));
+                                    return false;
+                                }
+
+                                if (aLastSlash == -1)
+                                    <a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a>.erase(<a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a>.begin(), <a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a>.end());
+                                else
+                                    <a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a>.erase(<a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a>.begin() + aLastSlash, <a href="#" onMouseOver="link('_member','mSection800682680',this); ">mSection</a>.end());
+
+                                break;
+                            }
+                            else
+                            {
+                                <a href="#" onMouseOver="link('_member','Fail3246473983',this); ">Fail</a>(_S("Unexpected '&gt;'"));
+                                return false;
+                            }
+                        }
+                        else if ((c == L'/') &amp;&amp; (theElement-&gt;mType == XMLElement::TYPE_START) &amp;&amp; (theElement-&gt;mValue == _S("")))
+                        {                   
+                            theElement-&gt;mType = XMLElement::TYPE_END;                   
+                        }               
+                        else if ((c == L'?') &amp;&amp; (theElement-&gt;mType == XMLElement::TYPE_START) &amp;&amp; (theElement-&gt;mValue == _S("")))
+                        {
+                            theElement-&gt;mType = XMLElement::TYPE_INSTRUCTION;
+                        }
+                        else if (::isspace((unsigned char) c))
+                        {
+                            if (theElement-&gt;mValue != _S(""))
+                                hasSpace = true;
+
+                            // It's a comment!
+                            if ((theElement-&gt;mType == XMLElement::TYPE_START) &amp;&amp; (theElement-&gt;mValue == _S("!--")))
+                                theElement-&gt;mType = XMLElement::TYPE_COMMENT;
+                        }
+                        else if (c &gt; 32)
+                        {
+                            processChar = true;
+                        }
+                        else
+                        {
+                            <a href="#" onMouseOver="link('_member','Fail3246473983',this); ">Fail</a>(_S("Illegal Character"));
+                            return false;
+                        }
+                    } 
+                    else
+                    {
+                        processChar = true;
+                    }
+
+                    if (processChar)
+                    {
+                        if (theElement-&gt;mType == XMLElement::TYPE_NONE)
+                            theElement-&gt;mType = XMLElement::TYPE_ELEMENT;
+
+                        if (theElement-&gt;mType == XMLElement::TYPE_START)
+                        {
+                            if (hasSpace)
+                            {
+                                if ((!doingAttribute) || ((!AttributeVal) &amp;&amp; (c != _S('='))) ||
+                                    ((AttributeVal) &amp;&amp; ((aAttributeValue.length() &gt; 0) || gotEndQuote)))
+                                {
+                                    if (doingAttribute)
+                                    {
+                                        aAttributeKey = <a href="#" onMouseOver="link('_member','XMLDecodeString3267588478',this); ">XMLDecodeString</a>(aAttributeKey);
+                                        aAttributeValue = <a href="#" onMouseOver="link('_member','XMLDecodeString3267588478',this); ">XMLDecodeString</a>(aAttributeValue);
+
+//                                      theElement-&gt;mAttributes[aAttributeKey] = aAttributeValue;
+
+                                        <a href="#" onMouseOver="link('_member','AddAttribute2456113921',this); ">AddAttribute</a>(theElement, WStringToSexyStringFast(aAttributeKey), WStringToSexyStringFast(aAttributeValue));
+
+                                        aAttributeKey = L"";
+                                        aAttributeValue = L"";
+
+                                        aLastAttributeKey = aAttributeKey;
+                                    }
+                                    else
+                                    {
+                                        doingAttribute = true;
+                                    }
+                                                                
+                                    AttributeVal = false;
+                                }
+
+                                hasSpace = false;
+                            }
+
+                            std::wstring* aStrPtr = NULL;
+
+                            if (!doingAttribute)
+                            {
+                                theElement-&gt;mValue += (<a href="#" onMouseOver="link('_member','SexyChar0',this); ">SexyChar</a>)c;
+                            }
+                            else
+                            {
+                                if (!AttributeVal &amp;&amp; c == L'=')
+                                {
+                                    AttributeVal = true;
+                                    gotEndQuote = false;
+                                }
+                                else
+                                {
+                                    if (!AttributeVal)
+                                        aStrPtr = &amp;aAttributeKey;
+                                    else
+                                        aStrPtr = &amp;aAttributeValue;
+                                }
+                            }
+
+                            if (aStrPtr != NULL)
+                            {                               
+                                *aStrPtr += c;                      
+                            }
+                        }
+                        else
+                        {
+                            if (hasSpace)
+                            {
+                                theElement-&gt;mValue += _S(" ");
+                                hasSpace = false;
+                            }
+                            
+                            theElement-&gt;mValue += (<a href="#" onMouseOver="link('_member','SexyChar0',this); ">SexyChar</a>)c;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (theElement-&gt;mType != XMLElement::TYPE_NONE)
+                    <a href="#" onMouseOver="link('_member','Fail3246473983',this); ">Fail</a>(_S("Unexpected End of File"));
+                    
+                return false;
+            }           
+        }       
+
+        if (aAttributeKey.length() &gt; 0)
+        {
+            aAttributeKey = <a href="#" onMouseOver="link('_member','XMLDecodeString3267588478',this); ">XMLDecodeString</a>(aAttributeKey);
+            aAttributeValue = <a href="#" onMouseOver="link('_member','XMLDecodeString3267588478',this); ">XMLDecodeString</a>(aAttributeValue);
+//          theElement-&gt;mAttributes[aAttributeKey] = aAttributeValue;
+
+            <a href="#" onMouseOver="link('_member','AddAttribute2456113921',this); ">AddAttribute</a>(theElement, WStringToSexyStringFast(aAttributeKey), WStringToSexyStringFast(aAttributeValue));
+        }
+
+        theElement-&gt;mValue = (<a href="#" onMouseOver="link('_member','XMLDecodeString3267588478',this); ">XMLDecodeString</a>(theElement-&gt;mValue));                
+
+        // Ignore comments
+        if ((theElement-&gt;mType != XMLElement::TYPE_COMMENT) || <a href="#" onMouseOver="link('_member','mAllowComments800682680',this); ">mAllowComments</a>)
+            return true;
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

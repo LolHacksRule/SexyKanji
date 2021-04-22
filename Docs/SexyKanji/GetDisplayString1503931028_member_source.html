@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - GetDisplayString</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">GetDisplayString</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','EditWidget809',this)" class="pathLink">EditWidget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">GetDisplayString</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','GetDisplayString1503931028','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','GetDisplayString1503931028','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 119</div>
+<pre class="codeExamples">
+<a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> &amp; <a href="#" onMouseOver="link('_member','GetDisplayString1503931028',this); ">Sexy::EditWidget::GetDisplayString</a>()
+{
+    if (<a href="#" onMouseOver="link('_member','mPasswordChar1509305020',this); ">mPasswordChar</a>==0)
+        return <a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>;
+
+    if (<a href="#" onMouseOver="link('_member','mPasswordDisplayString1509305020',this); ">mPasswordDisplayString</a>.size()!=<a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.size())
+    {
+        <a href="#" onMouseOver="link('_member','mPasswordDisplayString1509305020',this); ">mPasswordDisplayString</a> = <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a>(<a href="#" onMouseOver="link('_member','mString1509305020',this); ">mString</a>.size(), <a href="#" onMouseOver="link('_member','mPasswordChar1509305020',this); ">mPasswordChar</a>);
+        //mPasswordDisplayString.resize(mString.size());
+        //for (int i=0; i&lt;(int)mPasswordDisplayString.length(); i++)
+        //  mPasswordDisplayString[i] = mPasswordChar; 
+    }
+
+    return <a href="#" onMouseOver="link('_member','mPasswordDisplayString1509305020',this); ">mPasswordDisplayString</a>;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - WriteWordWrapped</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">WriteWordWrapped</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Graphics809',this)" class="pathLink">Graphics</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">WriteWordWrapped</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WriteWordWrapped2071243445','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','WriteWordWrapped2071243445','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WriteWordWrapped2071243445','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1065</div>
+<pre class="codeExamples">
+virtual int <a href="#" onMouseOver="link('_member','WriteWordWrapped2190412865',this); ">Sexy::Graphics::WriteWordWrapped</a>(const std::wstring &amp;theString, int theX, int theY, int theWrapWidth=10000000, int theLineSpacing=-1, int theJustification=-1, bool doBlit=true)
+{
+    if (<a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a> == NULL) return 0;
+    <a href="#" onMouseOver="link('_member','PreDraw2295276211',this); ">PreDraw</a>();
+
+    KTextFace* aKTextFace = <a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a>-&gt;GetKTextFace();
+    if (aKTextFace == NULL) return 0;
+
+    // Save the original setting.
+    float aTempSpacing = aKTextFace-&gt;getYSpacing();
+    if (theLineSpacing != -1)
+    {
+        aKTextFace-&gt;setYSpacing(static_cast&lt;float&gt;(theLineSpacing));
+    }
+    else
+    {
+        aKTextFace-&gt;setYSpacing(static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a>-&gt;GetAscent()));
+    }
+
+    aKTextFace-&gt;setBlitColor(static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mRed) / 255.0f, static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mGreen) / 255.0f, 
+        static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mBlue) / 255.0f, static_cast&lt;float&gt;(<a href="#" onMouseOver="link('_member','mColor942441602',this); ">mColor</a>.mAlpha) / 255.0f);
+
+    aKTextFace-&gt;setAlphaMode((mDrawMode == DRAWMODE_ADDITIVE) ? K_ALPHA_ADDITIVE : K_ALPHA_NORMAL);
+
+    switch (theJustification)
+    {
+    case <a href="#" onMouseOver="link('_member','LEFT_JUSTIFIED147456691',this); ">LEFT_JUSTIFIED</a> :
+        theJustification = TEXTSTYLE_LEFT ;
+        break;
+    case <a href="#" onMouseOver="link('_member','CENTER_JUSTIFIED147456691',this); ">CENTER_JUSTIFIED</a> :
+        theJustification = TEXTSTYLE_CENTER ;
+        break;
+    case <a href="#" onMouseOver="link('_member','RIGHT_JUSTIFIED147456691',this); ">RIGHT_JUSTIFIED</a> :
+        theJustification = TEXTSTYLE_RIGHT ;
+        break;
+    default :
+        theJustification = TEXTSTYLE_LEFT ;
+    }
+
+    long aHeight = aKTextFace-&gt;getMultilineHeight(reinterpret_cast&lt;const char*&gt;(theString.c_str()), theX, theX + theWrapWidth, theY, theJustification);
+
+    if (doBlit)
+    {
+        <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a> aClipRect = <a href="#" onMouseOver="link('_member','SexyRect62745',this); ">SexyRect</a>(theX + static_cast&lt;int&gt;(<a href="#" onMouseOver="link('_member','mTransX942441602',this); ">mTransX</a>), theY + static_cast&lt;int&gt;(<a href="#" onMouseOver="link('_member','mTransY942441602',this); ">mTransY</a>),
+            theWrapWidth, aHeight).Intersection(<a href="#" onMouseOver="link('_member','mClipRect942441602',this); ">mClipRect</a>);
+
+        aKTextFace-&gt;drawMultiline(reinterpret_cast&lt;const char*&gt;(theString.c_str()), aClipRect.mX, aClipRect.mX + theWrapWidth, aClipRect.mY, theJustification);
+    }
+
+    // Reset the original setting.
+    aKTextFace-&gt;setYSpacing(aTempSpacing);
+
+    return aHeight + <a href="#" onMouseOver="link('_member','mFont942441602',this); ">mFont</a>-&gt;GetAscent();
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

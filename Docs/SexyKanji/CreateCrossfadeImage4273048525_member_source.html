@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - CreateCrossfadeImage</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">CreateCrossfadeImage</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ImageManager809',this)" class="pathLink">ImageManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">CreateCrossfadeImage</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CreateCrossfadeImage4273048525','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','CreateCrossfadeImage4273048525','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CreateCrossfadeImage4273048525','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 99</div>
+<pre class="codeExamples">
+SexyImage * <a href="#" onMouseOver="link('_member','CreateCrossfadeImage4273048525',this); ">Sexy::ImageManager::CreateCrossfadeImage</a>(SexyImage *theImage1, const SexyRect &amp;theRect1, SexyImage *theImage2, const SexyRect &amp;theRect2, double theFadeFactor)
+{
+    if ((theImage1 == NULL) || (theImage2 == NULL)) return NULL;
+
+    if ((theRect1.mX &lt; 0) || (theRect1.mY &lt; 0) || 
+        (theRect1.mX + theRect1.mWidth &gt; theImage1-&gt;GetWidth()) ||
+        (theRect1.mY + theRect1.mHeight &gt; theImage1-&gt;GetHeight()))
+    {
+        return NULL;
+    }
+
+    if ((theRect2.mX &lt; 0) || (theRect2.mY &lt; 0) || 
+        (theRect2.mX + theRect2.mWidth &gt; theImage2-&gt;GetWidth()) ||
+        (theRect2.mY + theRect2.mHeight &gt; theImage2-&gt;GetHeight()))
+    {
+        return NULL;
+    }
+
+    int aWidth = theRect1.mWidth;
+    int aHeight = theRect1.mHeight;
+
+    SexyImage* anImage = new SexyImage();
+
+    int aSize = aWidth * aHeight;
+    unsigned long* aDestBits = new unsigned long[aSize];
+    unsigned long* aSrcBits1 = theImage1-&gt;GetBits();
+    unsigned long* aSrcBits2 = theImage2-&gt;GetBits();
+
+    if(aDestBits == NULL || aSrcBits1 == NULL || aSrcBits2 == NULL)
+    {
+        delete [] aDestBits;
+        aDestBits = NULL;
+        return NULL;
+    }
+
+    int aSrc1Width = theImage1-&gt;GetWidth();
+    int aSrc2Width = theImage2-&gt;GetWidth();
+    unsigned long aMult = static_cast&lt;unsigned long&gt;(theFadeFactor * 256);
+    unsigned long aOMM = (256 - aMult);
+
+    for (int y = 0; y &lt; aHeight; y++)
+    {
+        unsigned long* s1 = &amp;aSrcBits1[(y+theRect1.mY)*aSrc1Width+theRect1.mX];
+        unsigned long* s2 = &amp;aSrcBits2[(y+theRect2.mY)*aSrc2Width+theRect2.mX];
+        unsigned long* d = &amp;aDestBits[y*aWidth];
+
+        for (int x = 0; x &lt; aWidth; x++)
+        {
+            unsigned long p1 = *s1++;
+            unsigned long p2 = *s2++;
+
+            *d++ = 
+                ((((p1 &amp; 0x000000FF)*aOMM + (p2 &amp; 0x000000FF)*aMult)&gt;&gt;8) &amp; 0x000000FF) |
+                ((((p1 &amp; 0x0000FF00)*aOMM + (p2 &amp; 0x0000FF00)*aMult)&gt;&gt;8) &amp; 0x0000FF00) |
+                ((((p1 &amp; 0x00FF0000)*aOMM + (p2 &amp; 0x00FF0000)*aMult)&gt;&gt;8) &amp; 0x00FF0000) |
+                ((((p1 &gt;&gt; 24)*aOMM + (p2 &gt;&gt; 24)*aMult)&lt;&lt;16) &amp; 0xFF000000);
+        }
+    }
+
+    anImage-&gt;SetBits(aDestBits, aWidth, aHeight);
+    delete [] aDestBits;
+    aDestBits = NULL;
+
+    return anImage;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

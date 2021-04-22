@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - CommaSeperate</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">CommaSeperate</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">CommaSeperate</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CommaSeperate243669048','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','CommaSeperate243669048','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 751</div>
+<pre class="codeExamples">
+<a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> <a href="#" onMouseOver="link('_member','CommaSeperate243669048',this); ">CommaSeperate</a>(int theValue)
+{   
+    if (theValue == 0)
+        return _S("0");
+
+    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aCurString;
+
+    int aPlace = 0;
+    int aCurValue = theValue;
+
+    while (aCurValue &gt; 0)
+    {
+        if ((aPlace != 0) &amp;&amp; (aPlace % 3 == 0))
+            aCurString = _S(',') + aCurString;
+        aCurString = (<a href="#" onMouseOver="link('_member','SexyChar0',this); ">SexyChar</a>) (_S('0') + (aCurValue % 10)) + aCurString;
+        aCurValue /= 10;
+        aPlace++;
+    }
+
+    return aCurString;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

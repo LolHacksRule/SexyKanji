@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - DrawColorStringHilited</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">DrawColorStringHilited</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','TextWidget809',this)" class="pathLink">TextWidget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">DrawColorStringHilited</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawColorStringHilited1282033930','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','DrawColorStringHilited1282033930','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','DrawColorStringHilited1282033930','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 68</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','DrawColorStringHilited1282033930',this); ">Sexy::TextWidget::DrawColorStringHilited</a>(Graphics *g, const SexyString &amp;theString, int x, int y, int theStartPos, int theEndPos)
+{
+    <a href="#" onMouseOver="link('_member','DrawColorString515116596',this); ">DrawColorString</a>(g, theString, x, y, true);             
+    
+    if (theEndPos &gt; theStartPos)
+    {
+        int aXOfs = <a href="#" onMouseOver="link('_member','GetColorStringWidth2218084706',this); ">GetColorStringWidth</a>(theString.substr(0, theStartPos));
+        int aWidth = <a href="#" onMouseOver="link('_member','GetColorStringWidth2218084706',this); ">GetColorStringWidth</a>(theString.substr(0, theEndPos)) - aXOfs;
+    
+        <a href="#" onMouseOver="link('_class','Graphics809',this); ">Graphics</a> aClipG(*g);
+        aClipG.<a href="#" onMouseOver="link('_member','ClipRect3358465818',this); ">ClipRect</a>(x + aXOfs, y - g-&gt;GetFont()-&gt;GetAscent(), aWidth, g-&gt;GetFont()-&gt;GetHeight());
+    
+        g-&gt;SetColor(<a href="#" onMouseOver="link('_class','SexyColor809',this); ">SexyColor</a>(0, 0, 128));
+        g-&gt;FillRect(x + aXOfs, y - g-&gt;GetFont()-&gt;GetAscent(), aWidth, g-&gt;GetFont()-&gt;GetHeight());
+    
+        aClipG.<a href="#" onMouseOver="link('_member','SetColor1858005701',this); ">SetColor</a>(<a href="#" onMouseOver="link('_class','SexyColor809',this); ">SexyColor</a>(255, 255, 255));
+        <a href="#" onMouseOver="link('_member','DrawColorString515116596',this); ">DrawColorString</a>(&amp;aClipG, theString, x, y, false);
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - StringToInt</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">StringToInt</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">StringToInt</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','StringToInt1372038482','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','StringToInt1372038482','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 501</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','StringToInt1372038482',this); ">StringToInt</a>(const std::string theString, int *theIntVal)
+{
+    *theIntVal = 0;
+
+    if (theString.length() == 0)
+        return false;
+
+    int theRadix = 10;
+    bool isNeg = false;
+
+    unsigned i = 0;
+    if (theString[i] == '-')
+    {
+        isNeg = true;
+        i++;
+    }
+
+    for (; i &lt; theString.length(); i++)
+    {
+        char aChar = theString[i];
+        
+        if ((theRadix == 10) &amp;&amp; (aChar &gt;= '0') &amp;&amp; (aChar &lt;= '9'))
+            *theIntVal = (*theIntVal * 10) + (aChar - '0');
+        else if ((theRadix == 0x10) &amp;&amp; 
+            (((aChar &gt;= '0') &amp;&amp; (aChar &lt;= '9')) || 
+             ((aChar &gt;= 'A') &amp;&amp; (aChar &lt;= 'F')) || 
+             ((aChar &gt;= 'a') &amp;&amp; (aChar &lt;= 'f'))))
+        {           
+            if (aChar &lt;= '9')
+                *theIntVal = (*theIntVal * 0x10) + (aChar - '0');
+            else if (aChar &lt;= 'F')
+                *theIntVal = (*theIntVal * 0x10) + (aChar - 'A') + 0x0A;
+            else
+                *theIntVal = (*theIntVal * 0x10) + (aChar - 'a') + 0x0A;
+        }
+        else if (((aChar == 'x') || (aChar == 'X')) &amp;&amp; (i == 1) &amp;&amp; (*theIntVal == 0))
+        {
+            theRadix = 0x10;
+        }
+        else
+        {
+            *theIntVal = 0;
+            return false;
+        }
+    }
+
+    if (isNeg)
+        *theIntVal = -*theIntVal;
+
+    return true;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

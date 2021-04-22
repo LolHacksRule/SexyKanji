@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - OpenFile</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">OpenFile</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','XMLParser809',this)" class="pathLink">XMLParser</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">OpenFile</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','OpenFile3259123591','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','OpenFile3259123591','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','OpenFile3259123591','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 92</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','OpenFile3259123591',this); ">Sexy::XMLParser::OpenFile</a>(const std::wstring &amp;theFilename)
+{       
+    Buffer aFileBuffer;
+
+    if (Buffer::ReadBufferFromFile(WStringToSexyStringFast(theFileName), aFileBuffer) &amp;&amp; aFileBuffer.GetDataLen() &gt; 0)
+    {
+        <a href="#" onMouseOver="link('_member','mFileName800682680',this); ">mFileName</a> = <a href="#" onMouseOver="link('_member','WStringToString351097544',this); ">WStringToString</a>(theFileName);
+        if (!<a href="#" onMouseOver="link('_member','mForcedEncodingType800682680',this); ">mForcedEncodingType</a>)
+        {
+            long anEncoding = K_ANSI;
+            const unsigned char* aDataPtr = aFileBuffer.GetDataPtr();
+
+            KTextFace::detectEncoding((const char*)aDataPtr, (long)aFileBuffer.GetDataLen(), anEncoding);
+
+            // Copy to Internal Buffer
+            std::stack&lt;wchar_t&gt;  aBufferStack; // mBufferedText is backward
+            <a href="#" onMouseOver="link('_member','Init800879249',this); ">Init</a>();
+
+            wchar_t aTempChar = 0;
+            long aCursor = 0;
+
+            // If Kanji does it, then use kanji! (JPOAG)
+            do 
+            {
+                aTempChar = (wchar_t)KTextFace::decodeChar(anEncoding, (const char*)aDataPtr, aCursor, true);
+                if(aTempChar != 0 &amp;&amp; aTempChar != 0xFEFF)
+                    aBufferStack.push(aTempChar);
+            } while (aTempChar &amp;&amp; aCursor &lt; aFileBuffer.GetDataLen());
+
+            // The parser uses a vector like a stack, so the string needs to be reversed
+            <a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>.clear();
+            while(!aBufferStack.empty())
+            {
+                <a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>.push_back(aBufferStack.top());
+                aBufferStack.pop();
+            }
+        }
+    }
+    else
+    {
+        <a href="#" onMouseOver="link('_member','mLineNum800682680',this); ">mLineNum</a> = 0;
+        return <a href="#" onMouseOver="link('_member','Fail3246473983',this); ">Fail</a>(StringToSexyStringFast("Unable to open file ") + WStringToSexyStringFast(theFileName));
+    }
+
+    return !<a href="#" onMouseOver="link('_member','mBufferedText800682680',this); ">mBufferedText</a>.empty();
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - FromWebString</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">FromWebString</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','Buffer809',this)" class="pathLink">Buffer</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">FromWebString</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','FromWebString375177874','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','FromWebString375177874','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','FromWebString375177874','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 277</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','FromWebString375177874',this); ">Sexy::Buffer::FromWebString</a>(const std::string &amp;theString)
+{
+    <a href="#" onMouseOver="link('_member','Clear150027977',this); ">Clear</a>();
+
+    if (theString.size() &lt; 4)
+        return;
+    
+    int aSizeBits = 0;
+
+    for (int aDigitNum = 0; aDigitNum &lt; 8; aDigitNum++)
+    {
+        char aChar = theString[aDigitNum];
+        int aVal = 0;
+
+        if ((aChar &gt;= '0') &amp;&amp; (aChar &lt;= '9'))
+            aVal = aChar - '0';
+        else if ((aChar &gt;= 'A') &amp;&amp; (aChar &lt;= 'F'))
+            aVal = (aChar - 'A') + 10;
+        else if ((aChar &gt;= 'a') &amp;&amp; (aChar &lt;= 'f'))
+            aVal = (aChar - 'f') + 10;
+
+        aSizeBits += (aVal &lt;&lt; ((7 - aDigitNum) * 4));
+    }
+
+    int aCharIdx = 8;
+    int aNumBitsLeft = aSizeBits;
+    while (aNumBitsLeft &gt; 0)
+    {
+        unsigned char aChar = theString[aCharIdx++];
+        int aVal = <a href="#" onMouseOver="link('_member','gWebDecodeMap0',this); ">gWebDecodeMap</a>[aChar];
+        int aNumBits = min(aNumBitsLeft, 6);
+        <a href="#" onMouseOver="link('_member','WriteNumBits832026625',this); ">WriteNumBits</a>(aVal, aNumBits);
+        aNumBitsLeft -= aNumBits;       
+    }
+
+    <a href="#" onMouseOver="link('_member','SeekFront3760282006',this); ">SeekFront</a>();
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

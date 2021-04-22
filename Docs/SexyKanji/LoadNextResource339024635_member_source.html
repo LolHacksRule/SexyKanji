@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - LoadNextResource</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">LoadNextResource</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ResourceManager809',this)" class="pathLink">ResourceManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">LoadNextResource</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','LoadNextResource339024635','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','LoadNextResource339024635','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','LoadNextResource339024635','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 1513</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','LoadNextResource339024635',this); ">Sexy::ResourceManager::LoadNextResource</a>()
+{
+    if (<a href="#" onMouseOver="link('_member','HadError339024635',this); ">HadError</a>() == true)
+        return false;
+
+    if (<a href="#" onMouseOver="link('_member','mCurResGroupList288852731',this); ">mCurResGroupList</a> == NULL)
+        return false;
+
+    while (<a href="#" onMouseOver="link('_member','mCurResGroupListItr288852731',this); ">mCurResGroupListItr</a> != <a href="#" onMouseOver="link('_member','mCurResGroupList288852731',this); ">mCurResGroupList</a>-&gt;end())
+    {
+        BaseRes* aRes = *<a href="#" onMouseOver="link('_member','mCurResGroupListItr288852731',this); ">mCurResGroupListItr</a>++;
+
+        if (aRes-&gt;mFromProgram == true)
+            continue;
+
+        switch (aRes-&gt;mType)
+        {
+            case <a href="#" onMouseOver="link('_member','ResType_Image288852731',this); ">ResType_Image</a>: 
+            {
+                ImageRes* anImageRes = (ImageRes*)aRes;
+
+                if ((SexyImage*)anImageRes-&gt;mImage != NULL) 
+                    continue;
+
+                return <a href="#" onMouseOver="link('_member','DoLoadImage292666248',this); ">DoLoadImage</a>(anImageRes); 
+            }
+            
+            case <a href="#" onMouseOver="link('_member','ResType_Sound288852731',this); ">ResType_Sound</a>: 
+            {
+                SoundRes* aSoundRes = (SoundRes*)aRes;
+
+                if (aSoundRes-&gt;mSampleID != -1)
+                    continue;
+
+                return <a href="#" onMouseOver="link('_member','DoLoadSound292559838',this); ">DoLoadSound</a>(aSoundRes); 
+            }
+
+            case <a href="#" onMouseOver="link('_member','ResType_Music288852731',this); ">ResType_Music</a>: 
+            {
+                MusicRes* aMusicRes = (MusicRes*)aRes;
+
+                if (aMusicRes-&gt;mStreamID != -1)
+                    continue;
+
+                return <a href="#" onMouseOver="link('_member','DoLoadMusic292681958',this); ">DoLoadMusic</a>(aMusicRes); 
+            }
+            
+            case <a href="#" onMouseOver="link('_member','ResType_Font288852731',this); ">ResType_Font</a>: 
+            {
+                FontRes* aFontRes = (FontRes*)aRes;
+
+                if (aFontRes-&gt;mFont != NULL)
+                    continue;
+
+                return <a href="#" onMouseOver="link('_member','DoLoadFont286362830',this); ">DoLoadFont</a>(aFontRes);
+            }
+
+            case <a href="#" onMouseOver="link('_member','ResType_Movie288852731',this); ">ResType_Movie</a>: 
+            {
+                MovieRes* aMovieRes = (MovieRes*)aRes;
+
+                if (aMovieRes-&gt;mMovie != NULL)
+                    continue;
+
+                return <a href="#" onMouseOver="link('_member','DoLoadMovie292682691',this); ">DoLoadMovie</a>(aMovieRes);
+            }
+        }
+    }
+
+    return false;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - Tokenize</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">Tokenize</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','StringUtility809',this)" class="pathLink">StringUtility</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">Tokenize</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','Tokenize664977250','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','Tokenize664977250','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 80</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','Tokenize664977250',this); ">Sexy::StringUtility::Tokenize</a>(const std::wstring &amp;theSourceString, std::vector&lt; std::wstring &gt; &amp;theTokens, const std::wstring &amp;theDelimiter=L"")
+{
+    // If no delimiter is passed, tokenize on all white space.
+    if (theDelimiter == L"")
+    {
+        std::wstring aBuffer; // Have a buffer string
+        std::wstringstream ss(theSourceString); // Insert the string into a stream
+
+        while (ss &gt;&gt; aBuffer)
+        {
+            theTokens.push_back(aBuffer);
+        }
+    }
+
+    // Skip delimiters at beginning.
+    std::wstring::size_type aLastPosition = theSourceString.find_first_not_of(theDelimiter, 0);
+
+    // Find first "non-delimiter".
+    std::wstring::size_type aPosition = theSourceString.find_first_of(theDelimiter, aLastPosition);
+
+    while (aPosition != std::wstring::npos || aLastPosition != std::wstring::npos)
+    {
+        // Found a token, add it to the vector.
+        theTokens.push_back(theSourceString.substr(aLastPosition, aPosition - aLastPosition));
+
+        // Skip delimiters.  Note the "not_of"
+        aLastPosition = theSourceString.find_first_not_of(theDelimiter, aPosition);
+
+        // Find next "non-delimiter"
+        aPosition = theSourceString.find_first_of(theDelimiter, aLastPosition);
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

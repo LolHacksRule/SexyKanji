@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - IncSampleVolume</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">IncSampleVolume</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SoundManager809',this)" class="pathLink">SoundManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">IncSampleVolume</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','IncSampleVolume4232149290','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','IncSampleVolume4232149290','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 325</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','IncSampleVolume4232149290',this); ">Sexy::SoundManager::IncSampleVolume</a>(unsigned int theSampleID, int theVolumeInc)
+{
+    if ((theSampleID &lt; 0) || (theSampleID &gt;= <a href="#" onMouseOver="link('_member','MAX_SOUND_SAMPLES0',this); ">MAX_SOUND_SAMPLES</a>))
+    {
+        K_LOG("Sexy::SoundManager::IncSampleVolume: WARNING : Invalid sample ID.");
+        return;
+    }
+    
+    KSound* aSoundInstance = <a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[theSampleID].mSoundInstance;
+
+    if (aSoundInstance != NULL)
+    {
+        // get, increment and clamp the volume
+        int aVolume = <a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[theSampleID].mCurrentVolume + theVolumeInc;
+        if (aVolume &lt; MIN_VOLUME) aVolume = MIN_VOLUME;
+        if (aVolume &gt; MAX_VOLUME) aVolume = MAX_VOLUME;
+        
+        <a href="#" onMouseOver="link('_member','mSamplesInfo457195144',this); ">mSamplesInfo</a>[theSampleID].mCurrentVolume = aVolume;
+        aSoundInstance-&gt;setVolume(aVolume);
+
+        // if playing a looping sample, then change volume of looping sample
+        LoopingSampleMap::iterator aIterator = <a href="#" onMouseOver="link('_member','mLoopingSamples457195144',this); ">mLoopingSamples</a>.find(theSampleID);
+        if (aIterator != <a href="#" onMouseOver="link('_member','mLoopingSamples457195144',this); ">mLoopingSamples</a>.end())
+            aIterator-&gt;second.first-&gt;setVolume(aVolume);
+    }
+    else
+    {
+        K_LOG("Sexy::SoundManager::IncSampleVolume: WARNING : No sound instance for specified sample ID.");
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

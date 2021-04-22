@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ParsePropertiesFileBinary</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ParsePropertiesFileBinary</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyPropertiesParser809',this)" class="pathLink">SexyPropertiesParser</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ParsePropertiesFileBinary</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParsePropertiesFileBinary3142934972','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ParsePropertiesFileBinary3142934972','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParsePropertiesFileBinary3142934972','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 350</div>
+<pre class="codeExamples">
+bool <a href="#" onMouseOver="link('_member','ParsePropertiesFileBinary3142934972',this); ">Sexy::SexyPropertiesParser::ParsePropertiesFileBinary</a>(const SexyString &amp;theFilename)
+{
+    if(<a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a> == NULL)
+        K_LOG("Sexy::SexyPropertiesParser::ParsePropertiesFileBinary :Warning: Attempting to Parse Properties File \"%s\" with NULL Properties Pointer.", SexyStringToStringFast(theFilename).c_str());
+
+    <a href="#" onMouseOver="link('_class','Buffer809',this); ">Sexy::Buffer</a> aBuffer;
+
+    if (Buffer::ReadBufferFromFile(theFilename, aBuffer))
+    {
+        unsigned char aReadMagicWord[4] = {0};
+        unsigned char aMagicWord[4] = {0x73, 0x6b, 0x62,0x70};
+
+        aBuffer.<a href="#" onMouseOver="link('_member','ReadBytes435762512',this); ">ReadBytes</a>(aReadMagicWord, 4);
+
+        for(int i = 0; i &lt; 4; i++)
+            if(aReadMagicWord[i] != aMagicWord[i])
+            {
+                K_LOG("Sexy::SexyPropertiesParser::ParsePropertiesFileBinary :Error: Failed to Parse Binary Properties File \"%s\" with Bad Header.", SexyStringToStringFast(theFilename).c_str());
+                return false;
+            }
+
+        while(!aBuffer.<a href="#" onMouseOver="link('_member','AtEnd3760282006',this); ">AtEnd</a>())
+        {
+            int aMetaTag = aBuffer.<a href="#" onMouseOver="link('_member','ReadLong3760282006',this); ">ReadLong</a>();
+            int aCount = 0;
+            switch (aMetaTag)
+            {
+            case SexyProperties::INT_MAP_META_TAG:
+                aCount = aBuffer.<a href="#" onMouseOver="link('_member','ReadLong3760282006',this); ">ReadLong</a>();
+                for (int i = 0; i &lt; aCount &amp;&amp; !aBuffer.<a href="#" onMouseOver="link('_member','AtEnd3760282006',this); ">AtEnd</a>(); i++)
+                {
+                    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aKey = WStringToSexyStringFast(aBuffer.<a href="#" onMouseOver="link('_member','ReadUTF8String3760282006',this); ">ReadUTF8String</a>());
+                    int aValue = aBuffer.<a href="#" onMouseOver="link('_member','ReadLong3760282006',this); ">ReadLong</a>();
+
+                    <a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>-&gt;<a href="#" onMouseOver="link('_member','SetInteger926274180',this); ">SetInteger</a>(aKey, aValue);
+                }
+                break;
+            case SexyProperties::BOOL_MAP_META_TAG:
+                aCount = aBuffer.<a href="#" onMouseOver="link('_member','ReadLong3760282006',this); ">ReadLong</a>();
+                for (int i = 0; i &lt; aCount &amp;&amp; !aBuffer.<a href="#" onMouseOver="link('_member','AtEnd3760282006',this); ">AtEnd</a>(); i++)
+                {
+                    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aKey = WStringToSexyStringFast(aBuffer.<a href="#" onMouseOver="link('_member','ReadUTF8String3760282006',this); ">ReadUTF8String</a>());
+                    bool aValue = aBuffer.<a href="#" onMouseOver="link('_member','ReadBoolean3760282006',this); ">ReadBoolean</a>();
+
+                    <a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>-&gt;SetBoolean(aKey, aValue);
+                }
+                break;
+            case SexyProperties::DOUBLE_MAP_META_TAG:
+                aCount = aBuffer.<a href="#" onMouseOver="link('_member','ReadLong3760282006',this); ">ReadLong</a>();
+                for (int i = 0; i &lt; aCount &amp;&amp; !aBuffer.<a href="#" onMouseOver="link('_member','AtEnd3760282006',this); ">AtEnd</a>(); i++)
+                {
+                    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aKey = WStringToSexyStringFast(aBuffer.<a href="#" onMouseOver="link('_member','ReadUTF8String3760282006',this); ">ReadUTF8String</a>());
+                    double aValue = 0.0;
+                    aBuffer.<a href="#" onMouseOver="link('_member','ReadBytes435762512',this); ">ReadBytes</a>((unsigned char *)&amp;aValue, sizeof(double));
+                    <a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>-&gt;SetDouble(aKey, aValue);
+                }
+                break;
+            case SexyProperties::STRING_MAP_META_TAG:
+                aCount = aBuffer.<a href="#" onMouseOver="link('_member','ReadLong3760282006',this); ">ReadLong</a>();
+                for (int i = 0; i &lt; aCount &amp;&amp; !aBuffer.<a href="#" onMouseOver="link('_member','AtEnd3760282006',this); ">AtEnd</a>(); i++)
+                {
+                    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aKey = WStringToSexyStringFast(aBuffer.<a href="#" onMouseOver="link('_member','ReadUTF8String3760282006',this); ">ReadUTF8String</a>());
+                    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aValue = <a href="#" onMouseOver="link('_member','XMLDecodeString1908875876',this); ">XMLDecodeString</a>(WStringToSexyStringFast(aBuffer.<a href="#" onMouseOver="link('_member','ReadUTF8String3760282006',this); ">ReadUTF8String</a>()));
+
+                    <a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>-&gt;SetString(aKey, aValue);
+                }
+                break;
+            case SexyProperties::STRING_VECTOR_MAP_META_TAG:
+                aCount = aBuffer.<a href="#" onMouseOver="link('_member','ReadLong3760282006',this); ">ReadLong</a>();
+                for (int i = 0; i &lt; aCount &amp;&amp; !aBuffer.<a href="#" onMouseOver="link('_member','AtEnd3760282006',this); ">AtEnd</a>(); i++)
+                {
+                    <a href="#" onMouseOver="link('_member','SexyString0',this); ">SexyString</a> aKey = WStringToSexyStringFast(aBuffer.<a href="#" onMouseOver="link('_member','ReadUTF8String3760282006',this); ">ReadUTF8String</a>());
+                    int aVectorSize = aBuffer.<a href="#" onMouseOver="link('_member','ReadLong3760282006',this); ">ReadLong</a>();
+                    <a href="#" onMouseOver="link('_member','StringVector0',this); ">StringVector</a> aVector;
+
+                    for (int j = 0; j &lt; aVectorSize &amp;&amp; !aBuffer.<a href="#" onMouseOver="link('_member','AtEnd3760282006',this); ">AtEnd</a>(); j++)
+                    {
+                        aVector.push_back(WStringToSexyStringFast(aBuffer.<a href="#" onMouseOver="link('_member','ReadUTF8String3760282006',this); ">ReadUTF8String</a>()));
+                    }
+
+                    <a href="#" onMouseOver="link('_member','mProperties1464883425',this); ">mProperties</a>-&gt;SetStringVector(aKey, aVector);
+                }
+                break;
+            }
+        }
+
+        return true;
+    }
+    return false;
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

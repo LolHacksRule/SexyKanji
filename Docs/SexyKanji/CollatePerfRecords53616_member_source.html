@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>DefaultProjectName - CollatePerfRecords</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">CollatePerfRecords</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">CollatePerfRecords</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CollatePerfRecords53616','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','CollatePerfRecords53616','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','CollatePerfRecords53616','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 118</div>
+<pre class="codeExamples">
+void <a href="#" onMouseOver="link('_member','CollatePerfRecords53616',this); ">CollatePerfRecords</a>(void)
+{
+    unsigned long aTime1, aTime2;
+
+    aTime1 = <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;GetClock();
+
+    for (unsigned int i=0; i &lt; <a href="#" onMouseOver="link('_member','gPerfRecordTop0',this); ">gPerfRecordTop</a>; i++)
+    {
+        <a href="#" onMouseOver="link('_member','InsertPerfRecord170097911',this); ">InsertPerfRecord</a>(gPerfRecordVector[i]);
+    }
+
+    <a href="#" onMouseOver="link('_member','gPerfRecordTop0',this); ">gPerfRecordTop</a> = 0;
+
+    aTime2 = <a href="#" onMouseOver="link('_member','gSexyAppBase62745',this); ">gSexyAppBase</a>-&gt;GetClock();
+
+    <a href="#" onMouseOver="link('_member','gCollateTime0',this); ">gCollateTime</a> += (aTime2 - aTime1);
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

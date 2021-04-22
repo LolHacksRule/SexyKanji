@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ~SexyAppBase</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">~SexyAppBase</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','SexyAppBase809',this)" class="pathLink">SexyAppBase</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">~SexyAppBase</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ti_SexyAppBase417534590','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ti_SexyAppBase417534590','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 177</div>
+<pre class="codeExamples">
+virtual <a href="#" onMouseOver="link('_member','ti_SexyAppBase417534590',this); ">Sexy::SexyAppBase::~SexyAppBase</a>()
+{
+    delete <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a>;
+    <a href="#" onMouseOver="link('_member','mKWindow414388462',this); ">mKWindow</a> = NULL;
+
+    delete <a href="#" onMouseOver="link('_member','mGraphics414388462',this); ">mGraphics</a>;
+    <a href="#" onMouseOver="link('_member','mGraphics414388462',this); ">mGraphics</a> = NULL;
+
+    delete <a href="#" onMouseOver="link('_member','gScreenGraphic0',this); ">gScreenGraphic</a>;
+    <a href="#" onMouseOver="link('_member','gScreenGraphic0',this); ">gScreenGraphic</a> = NULL;
+
+    delete <a href="#" onMouseOver="link('_member','gDebugFont0',this); ">gDebugFont</a>;
+    <a href="#" onMouseOver="link('_member','gDebugFont0',this); ">gDebugFont</a> = NULL;
+
+    delete <a href="#" onMouseOver="link('_member','gDebugGraphic0',this); ">gDebugGraphic</a>;
+    <a href="#" onMouseOver="link('_member','gDebugGraphic0',this); ">gDebugGraphic</a> = NULL;
+
+    delete <a href="#" onMouseOver="link('_member','mResourceManager414388462',this); ">mResourceManager</a>;
+    <a href="#" onMouseOver="link('_member','mResourceManager414388462',this); ">mResourceManager</a> = NULL;
+    delete <a href="#" onMouseOver="link('_member','mFontManager414388462',this); ">mFontManager</a>;
+    <a href="#" onMouseOver="link('_member','mFontManager414388462',this); ">mFontManager</a> = NULL;
+
+    delete <a href="#" onMouseOver="link('_member','mImageManager414388462',this); ">mImageManager</a>;
+    <a href="#" onMouseOver="link('_member','mImageManager414388462',this); ">mImageManager</a> = NULL;
+    delete <a href="#" onMouseOver="link('_member','mSoundManager414388462',this); ">mSoundManager</a>;
+    <a href="#" onMouseOver="link('_member','mSoundManager414388462',this); ">mSoundManager</a> = NULL;
+    delete <a href="#" onMouseOver="link('_member','mMusicManager414388462',this); ">mMusicManager</a>;
+    <a href="#" onMouseOver="link('_member','mMusicManager414388462',this); ">mMusicManager</a> = NULL;
+    delete <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a>;
+    <a href="#" onMouseOver="link('_member','mWidgetManager414388462',this); ">mWidgetManager</a> = NULL;
+
+    delete <a href="#" onMouseOver="link('_member','mLoadingThread414388462',this); ">mLoadingThread</a>;
+    <a href="#" onMouseOver="link('_member','mLoadingThread414388462',this); ">mLoadingThread</a> = NULL;
+
+    delete <a href="#" onMouseOver="link('_member','mProperties414388462',this); ">mProperties</a>;
+    <a href="#" onMouseOver="link('_member','mProperties414388462',this); ">mProperties</a> = NULL;
+    delete <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a>;
+    <a href="#" onMouseOver="link('_member','mSettings414388462',this); ">mSettings</a> = NULL;
+
+#ifdef K_WIN32
+    if(mDraggingCursor != NULL)
+        DestroyCursor(mDraggingCursor);
+    mDraggingCursor = NULL;
+#endif
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

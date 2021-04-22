@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - WStringToString</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">WStringToString</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">WStringToString</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','WStringToString351097544','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','WStringToString351097544','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActiveGrayout"><span class="tabLinkGrayout">Call Graph</span></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 325</div>
+<pre class="codeExamples">
+std::string <a href="#" onMouseOver="link('_member','WStringToString351097544',this); ">WStringToString</a>(const std::wstring &amp;theString)
+{
+    size_t aRequiredLength = wcstombs( NULL, theString.c_str(), 0 );
+    if (aRequiredLength &lt; 16384)
+    {
+        char aBuffer[16384];
+        wcstombs( aBuffer, theString.c_str(), 16384 );
+        return std::string(aBuffer);
+    }
+    else
+    {
+        //DBG_ASSERT(aRequiredLength != (size_t)-1);
+        if (aRequiredLength == (size_t)-1) return "";
+
+        char* aBuffer = new char[aRequiredLength+1];
+        wcstombs( aBuffer, theString.c_str(), aRequiredLength+1 );
+        std::string aStr = aBuffer;
+        delete[] aBuffer;
+        return aStr;
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

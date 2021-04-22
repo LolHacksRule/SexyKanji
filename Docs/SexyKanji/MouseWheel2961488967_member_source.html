@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - MouseWheel</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">MouseWheel</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ListWidget809',this)" class="pathLink">ListWidget</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">MouseWheel</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','MouseWheel2961488967','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','MouseWheel2961488967','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','MouseWheel2961488967','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 693</div>
+<pre class="codeExamples">
+virtual void <a href="#" onMouseOver="link('_member','MouseWheel2961488967',this); ">Sexy::ListWidget::MouseWheel</a>(int theDelta)
+{
+    if (<a href="#" onMouseOver="link('_member','mScrollbar1482078886',this); ">mScrollbar</a> != NULL)
+    {
+        int aScrollAmount = 5;
+        if (theDelta &gt; 0)
+        {
+            <a href="#" onMouseOver="link('_member','mScrollbar1482078886',this); ">mScrollbar</a>-&gt;SetValue(<a href="#" onMouseOver="link('_member','mScrollbar1482078886',this); ">mScrollbar</a>-&gt;mValue - aScrollAmount);
+//          mScrollbar-&gt;mUpdateMode = ScrollbarWidget::UPDATE_MODE_PGUP;
+//          mScrollbar-&gt;mUpdateAcc = 0;
+        }
+        else if (theDelta &lt; 0)
+        {
+            <a href="#" onMouseOver="link('_member','mScrollbar1482078886',this); ">mScrollbar</a>-&gt;SetValue(<a href="#" onMouseOver="link('_member','mScrollbar1482078886',this); ">mScrollbar</a>-&gt;mValue + aScrollAmount);
+//          mScrollbar-&gt;mUpdateMode = ScrollbarWidget::UPDATE_MODE_PGDN;
+//          mScrollbar-&gt;mUpdateAcc = 0;
+        }
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>

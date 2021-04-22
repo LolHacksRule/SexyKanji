@@ -1,0 +1,130 @@
+<HTML>
+<HEAD>
+<TITLE>SexyKanji - ParseResources</TITLE>
+<script type="text/javascript" src="../common/js.js" language="JavaScript"></script>
+<script type="text/javascript" src="leftmenu.js" language="JavaScript"></script>
+<script type="text/javascript">
+ var relPathToCommmon = "../common/";
+ var relPathToHelpDir = "../common/help/";
+ var toSearchPage     = "_search','../search";
+ Body1();
+</script>
+<div class="headerPage">ParseResources</div>
+<div class="path"><a href="#" OnMouseOver="link('','../index',this)" class="pathLink">Default mainpage</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_dir','SexyKanji0',this)" class="pathLink">SexyKanji</A><img src="../common/path-arrow.gif" class="path-arrow"><a href="#" OnMouseOver="link('_class','ResourceManager809',this)" class="pathLink">ResourceManager</A><img src="../common/path-arrow.gif" class="path-arrow"><span class="pathNonLink">ParseResources</span></div>
+<script type="text/javascript">
+ Body2();
+ BodyLeftMenuStart();
+WriteLeftMenu("","","","");
+ BodyLeftMenuEnd();
+ Body3();
+</script>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParseResources339024635','_description',this)" class="tabLinkInActive">Description</a></span>
+<span class="tabActive"><a href="#" OnMouseOver="linkTab('_member','ParseResources339024635','_source',this)" class="tabLinkActive">Source</a></span>
+<span class="tabInActive"><a href="#" OnMouseOver="linkTab('_member','ParseResources339024635','_callgraph',this)" class="tabLinkInActive">Call Graph</a></span>
+<script type="text/javascript">
+ Body4();
+</script>
+<div class="contentAirTop"></div>
+<div class="paragraph2NoTopPadding">Start Line: 856</div>
+<pre class="codeExamples">
+virtual bool <a href="#" onMouseOver="link('_member','ParseResources339024635',this); ">Sexy::ResourceManager::ParseResources</a>()
+{
+    for (;;)
+    {
+        XMLElement aXMLElement;
+        if (<a href="#" onMouseOver="link('_member','mXMLParser288852731',this); ">mXMLParser</a>-&gt;NextElement(&amp;aXMLElement) == false)
+            return false;
+        
+        if (aXMLElement.mType == XMLElement::TYPE_START)
+        {
+            if (<a href="#" onMouseOver="link('_member','CheckResourceAttributes448014696',this); ">CheckResourceAttributes</a>(aXMLElement) == false)
+                return false;
+
+            if (aXMLElement.mValue == _S("Image"))
+            {
+                if (<a href="#" onMouseOver="link('_member','ParseImageResource448014696',this); ">ParseImageResource</a>(aXMLElement) == false)
+                    return false;
+
+                if (<a href="#" onMouseOver="link('_member','mXMLParser288852731',this); ">mXMLParser</a>-&gt;NextElement(&amp;aXMLElement) == false)
+                    return false;
+
+                if (aXMLElement.mType != XMLElement::TYPE_END)
+                    return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseResources : ERROR : Unexpected element found '") + aXMLElement.mValue + _S("'."));
+            }
+            else if (aXMLElement.mValue == _S("Sound"))
+            {
+                if (<a href="#" onMouseOver="link('_member','ParseSoundResource448014696',this); ">ParseSoundResource</a>(aXMLElement) == false)
+                    return false;
+
+                if (<a href="#" onMouseOver="link('_member','mXMLParser288852731',this); ">mXMLParser</a>-&gt;NextElement(&amp;aXMLElement) == false)
+                    return false;
+
+                if (aXMLElement.mType != XMLElement::TYPE_END)
+                    return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseResources : ERROR : Unexpected element found '") + aXMLElement.mValue + _S("'."));
+            }
+            else if (aXMLElement.mValue == _S("Font"))
+            {
+                if (<a href="#" onMouseOver="link('_member','ParseFontResource448014696',this); ">ParseFontResource</a>(aXMLElement) == false)
+                    return false;
+
+                if (<a href="#" onMouseOver="link('_member','mXMLParser288852731',this); ">mXMLParser</a>-&gt;NextElement(&amp;aXMLElement) == false)
+                    return false;
+
+                if (aXMLElement.mType != XMLElement::TYPE_END)
+                    return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseResources : ERROR : Unexpected element found '") + aXMLElement.mValue + _S("'."));
+            }
+            else if (aXMLElement.mValue == _S("SetDefaults"))
+            {
+                if (<a href="#" onMouseOver="link('_member','ParseSetDefaults448014696',this); ">ParseSetDefaults</a>(aXMLElement) == false)
+                    return false;
+
+                if (<a href="#" onMouseOver="link('_member','mXMLParser288852731',this); ">mXMLParser</a>-&gt;NextElement(&amp;aXMLElement) == false)
+                    return false;
+
+                if (aXMLElement.mType != XMLElement::TYPE_END)
+                    return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseResources : ERROR : Unexpected element found '") + aXMLElement.mValue + _S("'."));
+            }
+            else if (aXMLElement.mValue == _S("Music"))
+            {
+                if (<a href="#" onMouseOver="link('_member','ParseMusicResource448014696',this); ">ParseMusicResource</a>(aXMLElement) == false)
+                    return false;
+
+                if (<a href="#" onMouseOver="link('_member','mXMLParser288852731',this); ">mXMLParser</a>-&gt;NextElement(&amp;aXMLElement) == false)
+                    return false;
+
+                if (aXMLElement.mType != XMLElement::TYPE_END)
+                    return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseResources : ERROR : Unexpected element found '") + aXMLElement.mValue + _S("'."));
+            }
+            else if (aXMLElement.mValue == _S("Movie"))
+            {
+                if (<a href="#" onMouseOver="link('_member','ParseMovieResource448014696',this); ">ParseMovieResource</a>(aXMLElement) == false)
+                    return false;
+
+                if (<a href="#" onMouseOver="link('_member','mXMLParser288852731',this); ">mXMLParser</a>-&gt;NextElement(&amp;aXMLElement) == false)
+                    return false;
+
+                if (aXMLElement.mType != XMLElement::TYPE_END)
+                    return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseResources : ERROR : Unexpected element found '") + aXMLElement.mValue + _S("'."));
+            }
+            else
+            {
+                return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseResources : ERROR : Invalid Section '") + aXMLElement.mValue + _S("'."));
+            }
+        }
+        else if (aXMLElement.mType == XMLElement::TYPE_ELEMENT)
+        {
+            return <a href="#" onMouseOver="link('_member','Fail473871590',this); ">Fail</a>(_S("Sexy::ResourceManager::ParseResources : ERROR : Element Not Expected '") + aXMLElement.mValue + _S("'."));
+        }       
+        else if (aXMLElement.mType == XMLElement::TYPE_END)
+        {
+            return true;
+        }
+    }
+}
+</pre><div class="contentAirBottom"></div>
+<script type="text/javascript">
+ Body5();
+Statistics("","","","","");
+ Body6();
+SetPageTab('_member','_source');
+</script>
